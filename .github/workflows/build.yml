@@ -25,7 +25,7 @@ jobs:
         tags: $IMAGE_NAME
         context: .
         file: Dockerfile
-        builder: biotech-builder
+        builder: my-builder
         load: false
 
     - name: Login to Azure
