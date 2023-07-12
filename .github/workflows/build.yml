@@ -4,6 +4,7 @@ on: push
 
 env:
   IMAGE_NAME: biotech-manager-web:latest
+  ACR_REGISTRY: ${{ secrets.ACR_REGISTRY }}
   ACR_USERNAME: ${{ secrets.ACR_USERNAME }}
   ACR_PASSWORD: ${{ secrets.ACR_PASSWORD }}
 
