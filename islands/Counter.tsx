@@ -11,6 +11,8 @@ export default function Counter(props: CounterProps) {
     <div class="flex gap-2 w-full">
       <p class="flex-grow-1 font-bold text-xl">{props.count}</p>
 
+      <div class="flex-grow"></div>
+
       <ActionGroup class="[&>*]:mx-1">
         <>
           <Action onClick={() => props.count.value -= 1}>
