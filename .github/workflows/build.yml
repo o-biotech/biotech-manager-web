@@ -3,7 +3,7 @@ name: Docker Build and Push
 on: push
 
 env:
-  IMAGE_NAME: o-biotech/biotech-manager-web:latest
+  IMAGE_NAME: biotech-manager-web:latest
   ACR_USERNAME: ${{ secrets.ACR_USERNAME }}
   ACR_PASSWORD: ${{ secrets.ACR_PASSWORD }}
 
