@@ -20,7 +20,7 @@ jobs:
         uses: docker/setup-buildx-action@v1
       - 
         name: Create a new builder instance
-        run: docker buildx create --name biotech-builder --use biotech-builder
+        run: docker buildx create --name biotech-builder
       - 
         name: Login to Azure
         uses: azure/docker-login@v1
