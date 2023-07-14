@@ -1,16 +1,18 @@
 import { Head } from "$fresh/runtime.ts";
 import { useSignal } from "@preact/signals";
 import Counter from "../islands/Counter.tsx";
-import { Action } from "$atomic/atoms/Action.tsx";
 import { Header, HeaderLogo } from "$atomic/organisms/Header.tsx";
 import { Footer } from "$atomic/organisms/Footer.tsx";
 
 import { AppProps } from "$fresh/server.ts";
+import { Action } from "$atomic/atoms/Action.tsx";
+import { factory } from "$atomic/utils/jsx.tsx";
+import ProfileMenu from "../islands/common/ProfileMenu.tsx";
 
 export default function App({ Component }: AppProps) {
-  const logo = Object.assign(new HeaderLogo(), {
+  const logo = factory(HeaderLogo, {
     LogoAlt: "Fathym Open BioTech",
-    LogoUrl: "/logo.svg",
+    LogoUrl: "/o-biotech-logo.svg",
     LogoHref: "/",
   });
 
@@ -22,19 +24,17 @@ export default function App({ Component }: AppProps) {
 
       <Header
         logo={logo}
-        nav={[{
-          class: "text-xl mx-1",
-          href: "/",
-          children: "Home",
-        }, {
-          class: "text-xl mx-1",
-          href: "/about",
-          children: "About",
-        }, {
-          class: "text-xl mx-1",
-          href: "/contact",
-          children: "Contact",
-        }]}
+        nav={
+          <>
+            <Action href="/" class="text-xl mx-1">Home</Action>
+
+            <Action href="/about" class="text-xl mx-1">About</Action>
+
+            <Action href="/contact" class="text-xl mx-1">Contact</Action>
+
+            <ProfileMenu />
+          </>
+        }
       />
 
       <main class="flex-grow" style={{ minHeight: "calc(100vh - 15vh)" }}>
@@ -44,6 +44,7 @@ export default function App({ Component }: AppProps) {
       <Footer
         companyName="Fathym OpenBioTech"
         companyDescription="Deliver BioTech applications with ease, share with the masses."
+        class="![&_a]:text-white"
         nav={[
           {
             href: "/",

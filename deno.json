@@ -5,7 +5,7 @@
     "update": "deno run -A -r https://fresh.deno.dev/update ."
   },
   "imports": {
-    "$atomic/": "https://deno.land/x/fathym_open_biotech_atomic@v0.0.6-integration75/src/",
+    "$atomic/": "https://deno.land/x/fathym_open_biotech_atomic@v0.0.6-integration127/src/",
     "$fresh/": "https://deno.land/x/fresh@1.2.0/",
     "preact": "https://esm.sh/preact@10.16.0",
     "preact/": "https://esm.sh/preact@10.16.0/",
@@ -13,8 +13,10 @@
     "@preact/signals": "https://esm.sh/*@preact/signals@1.1.3",
     "@preact/signals-core": "https://esm.sh/*@preact/signals-core@1.2.3",
     "twind": "https://esm.sh/@twind/core@1.1.3",
+    "twind/": "https://esm.sh/@twind/core@1.1.3/",
     "twind-preset-autoprefix": "https://esm.sh/@twind/preset-autoprefix@1.0.7",
     "twind-preset-tailwind": "https://esm.sh/@twind/preset-tailwind@1.1.4",
+    "twind/colors": "https://esm.sh/@twind/preset-tailwind@1.1.4/colors",
     "twind_fresh_plugin/": "https://deno.land/x/fresh_twindv1_plugin@v1.3.0/",
     "$std/": "https://deno.land/std@0.193.0/"
   },

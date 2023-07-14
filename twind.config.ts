@@ -9,4 +9,4 @@ export default {
     presets: [presetAutoPrefix(), presetTailWind()],
   }),
   selfURL: import.meta.url,
-} as Options;
+};// as Options;

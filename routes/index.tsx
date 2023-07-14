@@ -1,8 +1,7 @@
-import { Head } from "$fresh/runtime.ts";
 import { useSignal } from "@preact/signals";
 import Counter from "../islands/Counter.tsx";
-import { Action } from "$atomic/atoms/Action.tsx";
-import { Header, HeaderLogo } from "$atomic/organisms/Header.tsx";
+import { IconStyleTypes } from "$atomic/atoms/icons/Icon.tsx";
+import { UserIcon } from "$atomic/atoms/icons/UserIcon.tsx";
 
 export default function Home() {
   const count = useSignal(3);
