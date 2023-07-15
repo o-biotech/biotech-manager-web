@@ -5,7 +5,7 @@
     "update": "deno run -A -r https://fresh.deno.dev/update ."
   },
   "imports": {
-    "$atomic/": "https://deno.land/x/fathym_open_biotech_atomic@v0.0.6-integration177/src/",
+    "$atomic/": "https://deno.land/x/fathym_open_biotech_atomic@v0.0.6-integration187/src/",
     "$fresh/": "https://deno.land/x/fresh@1.2.0/",
     "preact": "https://esm.sh/preact@10.16.0",
     "preact/": "https://esm.sh/preact@10.16.0/",
