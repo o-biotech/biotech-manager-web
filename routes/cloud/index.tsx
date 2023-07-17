@@ -5,9 +5,11 @@ import { Hero, HeroStyleTypes } from "$atomic/organisms/Hero.tsx";
 import { ChevronRightIcon } from "$atomic/atoms/icons/ChevronRightIcon.tsx";
 import { IconStyleTypes } from "$atomic/atoms/icons/Icon.tsx";
 import CloudConnectHero from "../../components/organisms/heros/CloudConnectHero.tsx";
+import CloudStepsFeatures from "../../components/organisms/features/CloudStepsFeatures.tsx";
+import { CloudPhaseTypes } from "../../components/CloudPhaseTypes.tsx";
 
 interface CloudPageData {
-  hasCloud: boolean;
+  cloudPhase: CloudPhaseTypes;
 }
 
 export const handler: Handlers<CloudPageData | null> = {
@@ -20,7 +22,7 @@ export const handler: Handlers<CloudPageData | null> = {
     // }
 
     const data: CloudPageData = {
-      hasCloud: true,
+      cloudPhase: CloudPhaseTypes.Complete,
     };
 
     return ctx.render(data);
@@ -30,7 +32,9 @@ export const handler: Handlers<CloudPageData | null> = {
 export default function Cloud({ data }: PageProps<CloudPageData | null>) {
   return (
     <div>
-      <CloudConnectHero />
+      <CloudConnectHero hideAction />
+
+      <CloudStepsFeatures cloudPhase={data!.cloudPhase} />
     </div>
   );
 }

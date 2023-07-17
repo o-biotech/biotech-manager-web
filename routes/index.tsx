@@ -20,7 +20,7 @@ export const handler: Handlers<HomePageData | null> = {
     // }
 
     const data: HomePageData = {
-      setupPhase: SetupPhaseTypes.Complete,
+      setupPhase: SetupPhaseTypes.Cloud,
     };
 
     return ctx.render(data);

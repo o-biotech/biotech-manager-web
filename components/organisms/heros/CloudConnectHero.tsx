@@ -5,7 +5,11 @@ import { Hero, HeroProps, HeroStyleTypes } from "$atomic/organisms/Hero.tsx";
 import { ChevronRightIcon } from "$atomic/atoms/icons/ChevronRightIcon.tsx";
 import { IconStyleTypes } from "$atomic/atoms/icons/Icon.tsx";
 
-export default function CloudConnectHero(props: HeroProps) {
+export interface CloudConnectHeroProps extends HeroProps {
+  hideAction?: boolean;
+}
+
+export default function CloudConnectHero(props: CloudConnectHeroProps) {
   return (
     <Hero
       title="Connect to Cloud"
@@ -15,10 +19,12 @@ export default function CloudConnectHero(props: HeroProps) {
       displayStyle={DisplayStyleTypes.Center | DisplayStyleTypes.Large}
       {...props}
     >
-      <Action href="./cloud/connect" class="my-8 flex flex-row">
-        Connect Now
-        <ChevronRightIcon iconStyle={IconStyleTypes.Outline} />
-      </Action>
+      {!props.hideAction && (
+        <Action href="./cloud" class="my-8 flex flex-row">
+          Connect Now
+          <ChevronRightIcon iconStyle={IconStyleTypes.Outline} />
+        </Action>
+      )}
     </Hero>
   );
 }

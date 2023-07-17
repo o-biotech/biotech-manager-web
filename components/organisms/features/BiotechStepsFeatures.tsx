@@ -65,13 +65,11 @@ export interface BiotechStepsFeaturesProps extends FeaturesProps {
 }
 
 export default function BiotechStepsFeatures(props: BiotechStepsFeaturesProps) {
-  const applicationsComplete: boolean =
-    props.setupPhase === SetupPhaseTypes.Complete;
+  const cloudComplete: boolean = props.setupPhase as number > 0;
 
-  const cloudComplete: boolean = props.setupPhase !== SetupPhaseTypes.Cloud;
+  const devicesComplete: boolean = props.setupPhase as number > 1;
 
-  const devicesComplete: boolean = props.setupPhase !== SetupPhaseTypes.Cloud &&
-    props.setupPhase !== SetupPhaseTypes.Device;
+  const applicationsComplete: boolean = props.setupPhase as number > 2;
 
   let actionPath: string | undefined = undefined;
 
@@ -81,13 +79,13 @@ export default function BiotechStepsFeatures(props: BiotechStepsFeaturesProps) {
 
   switch (props.setupPhase) {
     case SetupPhaseTypes.Cloud:
-      actionPath = "./cloud/connect";
+      actionPath = "./cloud";
 
       actionText = "Connect Now";
       break;
 
     case SetupPhaseTypes.Device:
-      actionPath = "./devices/flows";
+      actionPath = "./devices";
 
       actionText = "Connect Devices";
       break;

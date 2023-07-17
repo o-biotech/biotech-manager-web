@@ -5,7 +5,13 @@ import { Hero, HeroProps, HeroStyleTypes } from "$atomic/organisms/Hero.tsx";
 import { ChevronRightIcon } from "$atomic/atoms/icons/ChevronRightIcon.tsx";
 import { IconStyleTypes } from "$atomic/atoms/icons/Icon.tsx";
 
-export default function CreateApplicationsHero(props: HeroProps) {
+export interface CreateApplicationsHeroProps extends HeroProps {
+  hideAction?: boolean;
+}
+
+export default function CreateApplicationsHero(
+  props: CreateApplicationsHeroProps,
+) {
   return (
     <Hero
       title="Create Applications"
@@ -15,10 +21,12 @@ export default function CreateApplicationsHero(props: HeroProps) {
       displayStyle={DisplayStyleTypes.Center | DisplayStyleTypes.Large}
       {...props}
     >
-      <Action href="/applications" class="my-8 flex flex-row">
-        Create App
-        <ChevronRightIcon iconStyle={IconStyleTypes.Outline} />
-      </Action>
+      {!props.hideAction && (
+        <Action href="/applications" class="my-8 flex flex-row">
+          Create App
+          <ChevronRightIcon iconStyle={IconStyleTypes.Outline} />
+        </Action>
+      )}
     </Hero>
   );
 }

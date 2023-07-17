@@ -5,9 +5,12 @@
 import * as $0 from "./routes/[name].tsx";
 import * as $1 from "./routes/_app.tsx";
 import * as $2 from "./routes/api/joke.ts";
-import * as $3 from "./routes/cloud/connect.tsx";
-import * as $4 from "./routes/cloud/index.tsx";
-import * as $5 from "./routes/index.tsx";
+import * as $3 from "./routes/cloud/calz.tsx";
+import * as $4 from "./routes/cloud/connect/existing.tsx";
+import * as $5 from "./routes/cloud/connect/managed.tsx";
+import * as $6 from "./routes/cloud/index.tsx";
+import * as $7 from "./routes/cloud/iot.tsx";
+import * as $8 from "./routes/index.tsx";
 import * as $$0 from "./islands/Counter.tsx";
 import * as $$1 from "./islands/common/ProfileMenu.tsx";
 
@@ -16,9 +19,12 @@ const manifest = {
     "./routes/[name].tsx": $0,
     "./routes/_app.tsx": $1,
     "./routes/api/joke.ts": $2,
-    "./routes/cloud/connect.tsx": $3,
-    "./routes/cloud/index.tsx": $4,
-    "./routes/index.tsx": $5,
+    "./routes/cloud/calz.tsx": $3,
+    "./routes/cloud/connect/existing.tsx": $4,
+    "./routes/cloud/connect/managed.tsx": $5,
+    "./routes/cloud/index.tsx": $6,
+    "./routes/cloud/iot.tsx": $7,
+    "./routes/index.tsx": $8,
   },
   islands: {
     "./islands/Counter.tsx": $$0,

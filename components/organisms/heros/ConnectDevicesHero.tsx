@@ -5,7 +5,11 @@ import { Hero, HeroProps, HeroStyleTypes } from "$atomic/organisms/Hero.tsx";
 import { ChevronRightIcon } from "$atomic/atoms/icons/ChevronRightIcon.tsx";
 import { IconStyleTypes } from "$atomic/atoms/icons/Icon.tsx";
 
-export default function ConnectDevicesHero(props: HeroProps) {
+export interface ConnectDevicesHeroProps extends HeroProps {
+  hideAction?: boolean;
+}
+
+export default function ConnectDevicesHero(props: ConnectDevicesHeroProps) {
   return (
     <Hero
       title="Connect Devices"
@@ -15,10 +19,12 @@ export default function ConnectDevicesHero(props: HeroProps) {
       displayStyle={DisplayStyleTypes.Center | DisplayStyleTypes.Large}
       {...props}
     >
-      <Action href="/devices/flows" class="my-8 flex flex-row">
-        Create Device Flow
-        <ChevronRightIcon iconStyle={IconStyleTypes.Outline} />
-      </Action>
+      {!props.hideAction && (
+        <Action href="/devices/flows" class="my-8 flex flex-row">
+          Create Device Flow
+          <ChevronRightIcon iconStyle={IconStyleTypes.Outline} />
+        </Action>
+      )}
     </Hero>
   );
 }
