@@ -27,11 +27,13 @@ export default function App({ Component }: AppProps) {
         logo={logo}
         nav={
           <>
-            <Action href="/" class="text-xl mx-1">Home</Action>
+            <Action href="/applications" class="text-xl mx-1">
+              Applications
+            </Action>
 
-            <Action href="/about" class="text-xl mx-1">About</Action>
+            <Action href="/devices" class="text-xl mx-1">Devices</Action>
 
-            <Action href="/contact" class="text-xl mx-1">Contact</Action>
+            <Action href="/cloud" class="text-xl mx-1">Cloud</Action>
 
             <ProfileMenu />
           </>
