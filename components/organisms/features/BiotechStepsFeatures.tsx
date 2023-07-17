@@ -6,6 +6,7 @@ import { ChevronRightIcon } from "$atomic/atoms/icons/ChevronRightIcon.tsx";
 import { IconStyleTypes } from "$atomic/atoms/icons/Icon.tsx";
 import { Features, FeaturesProps } from "$atomic/organisms/Features.tsx";
 import { classSet } from "$atomic/utils/jsx.tsx";
+import { SetupPhaseTypes } from "../../SetupPhaseTypes.tsx";
 
 export function buildTitle(
   step: number,
@@ -60,27 +61,55 @@ export function buildTitle(
 }
 
 export interface BiotechStepsFeaturesProps extends FeaturesProps {
-  applicationsComplete?: boolean;
-
-  cloudComplete?: boolean;
-
-  devicesComplete?: boolean;
-
-  callToActionHref: string;
-
-  callToActionText: string;
-
-  showCallToAction?: boolean;
+  setupPhase?: SetupPhaseTypes;
 }
 
 export default function BiotechStepsFeatures(props: BiotechStepsFeaturesProps) {
+  const applicationsComplete: boolean =
+    props.setupPhase === SetupPhaseTypes.Complete;
+
+  const cloudComplete: boolean = props.setupPhase !== SetupPhaseTypes.Cloud;
+
+  const devicesComplete: boolean = props.setupPhase !== SetupPhaseTypes.Cloud &&
+    props.setupPhase !== SetupPhaseTypes.Device;
+
+  let actionPath: string | undefined = undefined;
+
+  let actionText: string | undefined = undefined;
+
+  let showCallToAction = true;
+
+  switch (props.setupPhase) {
+    case SetupPhaseTypes.Cloud:
+      actionPath = "./cloud/connect";
+
+      actionText = "Connect Now";
+      break;
+
+    case SetupPhaseTypes.Device:
+      actionPath = "./devices/flows";
+
+      actionText = "Connect Devices";
+      break;
+
+    case SetupPhaseTypes.Application:
+      actionPath = "./applications";
+
+      actionText = "Create Application";
+      break;
+
+    case SetupPhaseTypes.Complete:
+      showCallToAction = false;
+      break;
+  }
+
   return (
     <Features
       class="m-8"
-      callToAction={props.showCallToAction && (
+      callToAction={showCallToAction && (
         <div class="flex justify-center">
           <Action
-            href={props.callToActionHref}
+            href={actionPath}
             class="mx-4 md:m-8 text-2xl text-center shadow-lg mx-auto max-w-[60%] w-full bg-gradient-to-r from-blue-500 to-purple-500/75 hover:(bg-gradient-to-r from-purple-500 to-blue-500/75)"
           >
             <ChevronRightIcon
@@ -88,14 +117,14 @@ export default function BiotechStepsFeatures(props: BiotechStepsFeaturesProps) {
               class="float-right mt-1"
             />
 
-            {props.callToActionText}
+            {actionText}
           </Action>
         </div>
       )}
       {...props}
     >
       {[{
-        title: buildTitle(1, "Connect to Cloud", props.cloudComplete === true),
+        title: buildTitle(1, "Connect to Cloud", cloudComplete === true),
         class: "shadow-lg p-4 m-4",
         displayStyle: DisplayStyleTypes.Center,
         children: (
@@ -105,7 +134,7 @@ export default function BiotechStepsFeatures(props: BiotechStepsFeaturesProps) {
           </p>
         ),
       }, {
-        title: buildTitle(2, "Connect Devices", props.devicesComplete === true),
+        title: buildTitle(2, "Connect Devices", devicesComplete === true),
         class: "shadow-lg p-4 m-4",
         displayStyle: DisplayStyleTypes.Center,
         children: (
@@ -118,7 +147,7 @@ export default function BiotechStepsFeatures(props: BiotechStepsFeaturesProps) {
         title: buildTitle(
           3,
           "Create Applications",
-          props.applicationsComplete === true,
+          applicationsComplete === true,
         ),
         class: "shadow-lg p-4 m-4",
         displayStyle: DisplayStyleTypes.Center,
