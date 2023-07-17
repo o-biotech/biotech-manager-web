@@ -23,6 +23,7 @@ export default function App({ Component }: AppProps) {
       </Head>
 
       <Header
+        class="bg-error-500"
         logo={logo}
         nav={
           <>

@@ -1,5 +1,5 @@
 import { useSignal } from "@preact/signals";
-import Counter from "../islands/Counter.tsx";
+import { Handlers, PageProps } from "$fresh/server.ts";
 import { DisplayProps, DisplayStyleTypes } from "$atomic/molecules/Display.tsx";
 import { Features } from "$atomic/organisms/Features.tsx";
 import { Hero, HeroStyleTypes } from "$atomic/organisms/Hero.tsx";
@@ -8,9 +8,35 @@ import { ChevronRightIcon } from "$atomic/atoms/icons/ChevronRightIcon.tsx";
 import { IconStyleTypes } from "$atomic/atoms/icons/Icon.tsx";
 import { ComponentChildren } from "preact";
 
-export default function Home() {
-  const count = useSignal(3);
+interface HomePageData {
+  setupPhase: SetupPhaseTypes;
+}
 
+enum SetupPhaseTypes {
+  Cloud = 0,
+  Device = 1,
+  Application = 2,
+  Complete = 3,
+}
+
+export const handler: Handlers<HomePageData | null> = {
+  async GET(_, ctx) {
+    // const {} = ctx.params;
+
+    // const resp = await fetch(`https://api.github.com/users/${username}`);
+    // if (resp.status === 404) {
+    //   return ctx.render(null);
+    // }
+
+    const data: HomePageData = {
+      setupPhase: SetupPhaseTypes.Complete,
+    };
+
+    return ctx.render(data);
+  },
+};
+
+export default function Home({ data }: PageProps<HomePageData | null>) {
   const buildTitle = (
     step: number,
     title: ComponentChildren,
@@ -26,26 +52,54 @@ export default function Home() {
     );
   };
 
-  const currentHero = {
-    title: "Get Started Now",
-    callToAction:
-      "You don't have any device flows created, let's get your first one setup.",
-    children: (
-      <Action href="/devices/flows" class="my-8 flex flex-row">
-        Create Device Flow{" "}
-        <ChevronRightIcon iconStyle={IconStyleTypes.Outline} />
-      </Action>
-    ),
-  };
+  const currentHero = data!.setupPhase === SetupPhaseTypes.Cloud
+    ? {
+      title: "Connecting to Cloud",
+      callToAction:
+        "You have not setup your Azure cloud connection, let's get started now.",
+      children: (
+        <Action href="./cloud-connect" class="my-8 flex flex-row">
+          Connect to Cloud
+          <ChevronRightIcon iconStyle={IconStyleTypes.Outline} />
+        </Action>
+      ),
+    }
+    : data!.setupPhase === SetupPhaseTypes.Device
+    ? {
+      title: "Connect Devices",
+      callToAction:
+        "You don't have any device flows created, let's get your first one setup.",
+      children: (
+        <Action href="/devices/flows" class="my-8 flex flex-row">
+          Create Device Flow
+          <ChevronRightIcon iconStyle={IconStyleTypes.Outline} />
+        </Action>
+      ),
+    }
+    : data!.setupPhase === SetupPhaseTypes.Application
+    ? {
+      title: "Create Applications",
+      callToAction:
+        "You don't have any applications for displaying your device data, let's deploy one now.",
+      children: (
+        <Action href="/devices/flows" class="my-8 flex flex-row">
+          Create Device Flow
+          <ChevronRightIcon iconStyle={IconStyleTypes.Outline} />
+        </Action>
+      ),
+    }
+    : undefined;
 
   return (
     <>
-      <Hero
-        {...currentHero}
-        class="[&_*]:mx-auto [&>*>*]:w-full bg-hero-pattern text-center"
-        heroStyle={HeroStyleTypes.None}
-        displayStyle={DisplayStyleTypes.Center | DisplayStyleTypes.Large}
-      />
+      {currentHero && (
+        <Hero
+          {...currentHero}
+          class="[&_*]:mx-auto [&>*>*]:w-full bg-hero-pattern text-center"
+          heroStyle={HeroStyleTypes.None}
+          displayStyle={DisplayStyleTypes.Center | DisplayStyleTypes.Large}
+        />
+      )}
 
       <Features
         class="m-8"
@@ -57,7 +111,7 @@ export default function Home() {
             >
               <ChevronRightIcon
                 iconStyle={IconStyleTypes.Outline}
-                class="float-right pt-2"
+                class="float-right mt-1"
               />
 
               Start Connecting Now
@@ -97,6 +151,19 @@ export default function Home() {
           ),
         }]}
       </Features>
+
+      <div>
+        {
+          /* <YouTubePlayer
+          width={640}
+          height={390}
+          videoId={"r9jwGansp1E"}
+          playerVars={{ mute: 1 }}
+          // playerHandler={playerHandler}
+          // onPlayerReady={onPlayerReady}
+        /> */
+        }
+      </div>
     </>
   );
 }
