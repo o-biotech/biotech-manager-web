@@ -9,6 +9,8 @@ export default function App({ Component }: AppProps) {
     <>
       <Head>
         <title>Fathym Open BioTech</title>
+
+        <link rel="icon" type="image/png" href="./thinky.png" />
       </Head>
 
       <BiotechHeader />
