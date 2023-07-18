@@ -8,8 +8,6 @@ export default function App({ Component }: AppProps) {
   return (
     <>
       <Head>
-        <base href="/dashboard/" />
-
         <title>Fathym Open BioTech</title>
 
         <link rel="icon" type="image/png" href="./thinky.png" />
