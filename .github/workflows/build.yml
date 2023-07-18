@@ -34,3 +34,8 @@ jobs:
           context: .
           file: Dockerfile
           load: false
+      -
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: 'biotech-manager-web'
+          images: ${{ env.ACR_REGISTRY }}/${{ env.IMAGE_NAME }}
