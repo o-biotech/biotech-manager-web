@@ -11,8 +11,8 @@ import * as $5 from "./routes/cloud/connect/managed.tsx";
 import * as $6 from "./routes/cloud/index.tsx";
 import * as $7 from "./routes/cloud/iot.tsx";
 import * as $8 from "./routes/index.tsx";
-import * as $$0 from "./islands/Counter.tsx";
-import * as $$1 from "./islands/common/ProfileMenu.tsx";
+import * as $$0 from "./islands/common/ProfileMenu.tsx";
+import * as $$1 from "./islands/molecules/InteractiveResponsiveSet.tsx";
 
 const manifest = {
   routes: {
@@ -27,8 +27,8 @@ const manifest = {
     "./routes/index.tsx": $8,
   },
   islands: {
-    "./islands/Counter.tsx": $$0,
-    "./islands/common/ProfileMenu.tsx": $$1,
+    "./islands/common/ProfileMenu.tsx": $$0,
+    "./islands/molecules/InteractiveResponsiveSet.tsx": $$1,
   },
   baseUrl: import.meta.url,
 };

@@ -19,12 +19,12 @@ export default function CloudStepsFeatures(props: CloudStepsFeaturesProps) {
 
   return (
     <Features
-      class="m-8"
+      class="m-2 md:m-8"
       {...props}
     >
       {[{
         title: buildTitle(1, "Connect to Azure", connectComplete === true),
-        class: "shadow-lg p-4 m-4 justify-start",
+        class: "shadow-lg p-4 m-4 justify-start sm:(p-1 m-1)",
         displayStyle: DisplayStyleTypes.Center,
         children: (
           <>
@@ -37,12 +37,13 @@ export default function CloudStepsFeatures(props: CloudStepsFeaturesProps) {
               (
                 <ActionGroup class="[&>*]:mx-1 my-2 mt-8">
                   <>
-                    <Action href="./cloud/connect/managed">
+                    <Action href="./cloud/connect/managed" class="m-2">
                       Managed Subscription
                     </Action>
 
                     <Action
                       href="./cloud/connect/existing"
+                      class="m-2"
                       actionStyle={ActionStyleTypes.Link |
                         ActionStyleTypes.Outline | ActionStyleTypes.Rounded}
                     >
@@ -55,7 +56,7 @@ export default function CloudStepsFeatures(props: CloudStepsFeaturesProps) {
         ),
       }, {
         title: buildTitle(2, "Cloud Landing Zone", calzComplete === true),
-        class: "shadow-lg p-4 m-4 justify-start",
+        class: "shadow-lg p-4 m-4 justify-start sm:(p-1 m-1)",
         displayStyle: DisplayStyleTypes.Center,
         children: (
           <>
@@ -68,7 +69,9 @@ export default function CloudStepsFeatures(props: CloudStepsFeaturesProps) {
               (
                 <ActionGroup class="[&>*]:mx-1 my-2 mt-8">
                   <>
-                    <Action href="./cloud/calz">Configure CALZ</Action>
+                    <Action href="./cloud/calz" class="m-2">
+                      Configure CALZ
+                    </Action>
                   </>
                 </ActionGroup>
               )}
@@ -80,13 +83,13 @@ export default function CloudStepsFeatures(props: CloudStepsFeaturesProps) {
           "IoT Infrastructure",
           iotComplete === true,
         ),
-        class: "shadow-lg p-4 m-4 justify-start",
+        class: "shadow-lg p-4 m-4 justify-start sm:(p-1 m-1)",
         displayStyle: DisplayStyleTypes.Center,
         children: (
           <>
             <p class="m-2">
               Establish the foundation of your IoT infrastructure for the
-              creation of device flows.
+              creation of device flows and data access.
             </p>
 
             {props.cloudPhase === CloudPhaseTypes.Infrastucture &&

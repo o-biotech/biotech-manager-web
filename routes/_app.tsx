@@ -1,44 +1,17 @@
 import { Head } from "$fresh/runtime.ts";
-import { useSignal } from "@preact/signals";
-import Counter from "../islands/Counter.tsx";
-import { Header, HeaderLogo } from "$atomic/organisms/Header.tsx";
 import { Footer } from "$atomic/organisms/Footer.tsx";
 
 import { AppProps } from "$fresh/server.ts";
-import { Action } from "$atomic/atoms/Action.tsx";
-import { factory } from "$atomic/utils/jsx.tsx";
-import ProfileMenu from "../islands/common/ProfileMenu.tsx";
+import BiotechHeader from "../components/organisms/BiotechHeader.tsx";
 
 export default function App({ Component }: AppProps) {
-  const logo = factory(HeaderLogo, {
-    LogoAlt: "Fathym Open BioTech",
-    LogoUrl: "/o-biotech-logo.svg",
-    LogoHref: "/",
-  });
-
   return (
     <>
       <Head>
         <title>Fathym Open BioTech</title>
       </Head>
 
-      <Header
-        class="bg-error-500"
-        logo={logo}
-        nav={
-          <>
-            <Action href="/applications" class="text-xl mx-1">
-              Applications
-            </Action>
-
-            <Action href="/devices" class="text-xl mx-1">Devices</Action>
-
-            <Action href="/cloud" class="text-xl mx-1">Cloud</Action>
-
-            <ProfileMenu />
-          </>
-        }
-      />
+      <BiotechHeader />
 
       <main class="flex-grow" style={{ minHeight: "calc(100vh - 15vh)" }}>
         <Component />

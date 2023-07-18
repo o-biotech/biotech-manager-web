@@ -103,12 +103,12 @@ export default function BiotechStepsFeatures(props: BiotechStepsFeaturesProps) {
 
   return (
     <Features
-      class="m-8"
+      class="m-2 md:m-8"
       callToAction={showCallToAction && (
         <div class="flex justify-center">
           <Action
             href={actionPath}
-            class="mx-4 md:m-8 text-2xl text-center shadow-lg mx-auto max-w-[60%] w-full bg-gradient-to-r from-blue-500 to-purple-500/75 hover:(bg-gradient-to-r from-purple-500 to-blue-500/75)"
+            class="mx-4 md:m-8 text-2xl text-center shadow-lg mx-auto md:max-w-[60%] w-full bg-gradient-to-r from-blue-500 to-purple-500/75 hover:(bg-gradient-to-r from-purple-500 to-blue-500/75)"
           >
             <ChevronRightIcon
               iconStyle={IconStyleTypes.Outline}

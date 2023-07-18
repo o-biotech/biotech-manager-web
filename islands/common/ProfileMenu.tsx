@@ -1,14 +1,17 @@
-import type { Signal } from "@preact/signals";
-import { Menu, MenuProps, MenuStyleTypes } from "$atomic/molecules/Menu.tsx";
+import {
+  MenuButton,
+  MenuButtonProps,
+  MenuButtonStyleTypes,
+} from "$atomic/molecules/MenuButton.tsx";
 import { Action, ActionStyleTypes } from "$atomic/atoms/Action.tsx";
 import { IconStyleTypes } from "$atomic/atoms/icons/Icon.tsx";
 import { ChevronDownIcon } from "$atomic/atoms/icons/ChevronDownIcon.tsx";
 import { UserIcon } from "$atomic/atoms/icons/UserIcon.tsx";
 
-export default function ProfileMenu(props: MenuProps) {
+export default function ProfileMenu(props: MenuButtonProps) {
   return (
-    <Menu
-      menuStyle={MenuStyleTypes.Responsive}
+    <MenuButton
+      menuStyle={MenuButtonStyleTypes.Responsive}
       toggleChildren={
         <>
           <UserIcon iconStyle={IconStyleTypes.Outline} />
@@ -42,6 +45,6 @@ export default function ProfileMenu(props: MenuProps) {
           Contact
         </Action>
       </>
-    </Menu>
+    </MenuButton>
   );
 }
