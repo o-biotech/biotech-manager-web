@@ -3,6 +3,7 @@ import { Footer } from "$atomic/organisms/Footer.tsx";
 
 import { AppProps } from "$fresh/server.ts";
 import BiotechHeader from "../components/organisms/BiotechHeader.tsx";
+import BiotechFooter from "../components/organisms/BiotechFooter.tsx";
 
 export default function App({ Component }: AppProps) {
   return (
@@ -19,38 +20,7 @@ export default function App({ Component }: AppProps) {
         <Component />
       </main>
 
-      <Footer
-        companyName="Fathym OpenBioTech"
-        companyDescription="Deliver BioTech applications with ease, share with the masses."
-        class="![&_a]:text-white"
-        nav={[
-          {
-            href: "/",
-            class: "px-2 py-1 text-gray-400 hover:text-white md:mx-2",
-            children: "Home",
-          },
-          {
-            href: "/products",
-            class: "px-2 py-1 text-gray-400 hover:text-white md:mx-2",
-            children: "Products",
-          },
-          {
-            href: "/services",
-            class: "px-2 py-1 text-gray-400 hover:text-white md:mx-2",
-            children: "Services",
-          },
-          {
-            href: "/about-us",
-            class: "px-2 py-1 text-gray-400 hover:text-white md:mx-2",
-            children: "About Us",
-          },
-          {
-            href: "/contact",
-            class: "px-2 py-1 text-gray-400 hover:text-white md:mx-2",
-            children: "Contact",
-          },
-        ]}
-      />
+      <BiotechFooter />
     </>
   );
 }
