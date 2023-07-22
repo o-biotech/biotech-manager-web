@@ -22,7 +22,7 @@ export const handler: Handlers<CloudPageData | null> = {
     // }
 
     const data: CloudPageData = {
-      cloudPhase: CloudPhaseTypes.Infrastucture,
+      cloudPhase: CloudPhaseTypes.Complete,
     };
 
     return ctx.render(data);

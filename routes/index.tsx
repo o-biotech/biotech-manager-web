@@ -5,6 +5,12 @@ import ConnectDevicesHero from "../components/organisms/heros/ConnectDevicesHero
 import CreateApplicationsHero from "../components/organisms/heros/CreateApplicationsHero.tsx";
 import BiotechStepsFeatures from "../components/organisms/features/BiotechStepsFeatures.tsx";
 import { SetupPhaseTypes } from "../components/SetupPhaseTypes.tsx";
+import { deep } from "../services/OpenBiotechAppStateFlowContext.ts";
+import { Action } from "$atomic/atoms/Action.tsx";
+// import {
+//   StateFlow,
+//   StateFlowContextService,
+// } from "$atomic/state-flow/StateFlowContext.tsx";
 
 interface HomePageData {
   setupPhase: SetupPhaseTypes;
@@ -20,14 +26,53 @@ export const handler: Handlers<HomePageData | null> = {
     // }
 
     const data: HomePageData = {
-      setupPhase: SetupPhaseTypes.Cloud,
+      setupPhase: SetupPhaseTypes.Complete,
     };
 
     return ctx.render(data);
   },
 };
 
+// interface TestState extends StateFlow {
+//   FirstName: string;
+
+//   get FullName(): string;
+
+//   LastName: string;
+// }
+
+// class TestStateFlowContextService extends StateFlowContextService<TestState> {
+//   constructor(initState: TestState) {
+//     super(initState);
+//   }
+
+//   public ChangeName(first: string, last: string): void {
+//     this.$Draft((draft) => {
+//       draft.FirstName = first;
+
+//       draft.LastName = last;
+//     });
+//   }
+// }
+
 export default function Home({ data }: PageProps<HomePageData | null>) {
+  // const OpenBiotechAppStateFlowContext =
+  //   new OpenBiotechAppStateFlowContextService({
+  //     FirstName: "",
+  //     LastName: "",
+  //     get FullName(): string {
+  //       return `${OpenBiotechAppStateFlowContext.State.FirstName} ${OpenBiotechAppStateFlowContext.State.LastName}`;
+  //     },
+  //   });
+
+  // const testCtxt = new TestStateFlowContextService({
+  //   FirstName: "",
+  //   LastName: "",
+  //   get FullName(): string {
+  //     return `${testCtxt.State.FirstName} ${testCtxt.State.LastName}`;
+  //   },
+  // });
+
   let currentHero: JSX.Element | undefined = undefined;
 
   switch (data!.setupPhase) {
@@ -35,11 +80,11 @@ export default function Home({ data }: PageProps<HomePageData | null>) {
       currentHero = <CloudConnectHero />;
       break;
 
-    case SetupPhaseTypes.Device:
+    case SetupPhaseTypes.Devices:
       currentHero = <ConnectDevicesHero />;
       break;
 
-    case SetupPhaseTypes.Application:
+    case SetupPhaseTypes.Applications:
       currentHero = <CreateApplicationsHero />;
       break;
 
@@ -54,6 +99,35 @@ export default function Home({ data }: PageProps<HomePageData | null>) {
       <BiotechStepsFeatures
         setupPhase={data!.setupPhase}
       />
+
+      <div>
+        {
+          /* {deep.FirstName} <br />
+        {deep.LastName} <br />
+        {deep.FullName} <br /> */
+        }
+
+        {
+          /* <Action
+          onClick={() =>
+            OpenBiotechAppStateFlowContext.ChangeName("Micheal", "Gearhardt")}
+        >
+          Michael Gearhardt
+        </Action>
+
+        <Action
+          onClick={() =>
+            OpenBiotechAppStateFlowContext.ChangeName("Pete", "Sanchez")}
+        >
+          Pete Sanchez
+        </Action> */
+        }
+      </div>
+      {
+        /* <Action>
+        Michael Gearhardt
+      </Action> */
+      }
 
       <div>
         {

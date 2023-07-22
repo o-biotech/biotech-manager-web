@@ -10,7 +10,8 @@ import * as $4 from "./routes/cloud/connect/existing.tsx";
 import * as $5 from "./routes/cloud/connect/managed.tsx";
 import * as $6 from "./routes/cloud/index.tsx";
 import * as $7 from "./routes/cloud/iot.tsx";
-import * as $8 from "./routes/index.tsx";
+import * as $8 from "./routes/devices/index.tsx";
+import * as $9 from "./routes/index.tsx";
 import * as $$0 from "./islands/common/ProfileMenu.tsx";
 import * as $$1 from "./islands/molecules/InteractiveResponsiveSet.tsx";
 
@@ -24,7 +25,8 @@ const manifest = {
     "./routes/cloud/connect/managed.tsx": $5,
     "./routes/cloud/index.tsx": $6,
     "./routes/cloud/iot.tsx": $7,
-    "./routes/index.tsx": $8,
+    "./routes/devices/index.tsx": $8,
+    "./routes/index.tsx": $9,
   },
   islands: {
     "./islands/common/ProfileMenu.tsx": $$0,
