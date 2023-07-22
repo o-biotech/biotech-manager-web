@@ -1,11 +1,11 @@
 import { Handlers, PageProps } from "$fresh/server.ts";
 import { DisplayStyleTypes } from "$atomic/molecules/Display.tsx";
 import { Hero, HeroStyleTypes } from "$atomic/organisms/Hero.tsx";
-import { DevicesPhaseTypes } from "../../components/DevicesPhaseTypes.tsx";
-import DevicesStepsFeatures from "../../components/organisms/features/DevicesStepsFeatures.tsx";
+import ApplicationsStepsFeatures from "../../components/organisms/features/ApplicationsStepsFeatures.tsx";
+import { ApplicationsPhaseTypes } from "../../components/ApplicationsPhaseTypes.tsx";
 
 interface DevicesPageData {
-  devicesPhase: DevicesPhaseTypes;
+  appsPhase: ApplicationsPhaseTypes;
 }
 
 export const handler: Handlers<DevicesPageData | null> = {
@@ -18,7 +18,7 @@ export const handler: Handlers<DevicesPageData | null> = {
     // }
 
     const data: DevicesPageData = {
-      devicesPhase: DevicesPhaseTypes.Connect,
+      appsPhase: ApplicationsPhaseTypes.GitHub,
     };
 
     return ctx.render(data);
@@ -29,14 +29,14 @@ export default function Devices({ data }: PageProps<DevicesPageData | null>) {
   return (
     <div>
       <Hero
-        title="Devices & Data Flows"
-        callToAction="Connect devices, define data flows and access your data."
+        title="Applications & Collaboration"
+        callToAction="Develop applications to share data, collaborate with colleagues or develop complete consumer applications."
         class="[&_*]:mx-auto [&>*>*]:w-full bg-hero-pattern text-center"
         heroStyle={HeroStyleTypes.None}
         displayStyle={DisplayStyleTypes.Center | DisplayStyleTypes.Large}
       />
 
-      <DevicesStepsFeatures devicesPhase={data!.devicesPhase} />
+      <ApplicationsStepsFeatures appsPhase={data!.appsPhase} />
     </div>
   );
 }

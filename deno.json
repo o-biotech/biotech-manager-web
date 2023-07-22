@@ -5,7 +5,7 @@
     "update": "deno run -A -r https://fresh.deno.dev/update ."
   },
   "imports": {
-    "$atomic/": "https://deno.land/x/fathym_open_biotech_atomic@v0.0.6-integration228/src/",
+    "$atomic/": "https://deno.land/x/fathym_open_biotech_atomic@v0.0.6-integration237/src/",
     "$deepsignal": "https://esm.sh/deepsignal@1.3.4",
     "$fresh/": "https://deno.land/x/fresh@1.2.0/",
     "immer": "https://cdn.skypack.dev/immer@8.0.1?dts",
