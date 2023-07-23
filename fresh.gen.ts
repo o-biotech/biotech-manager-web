@@ -6,15 +6,12 @@ import * as $0 from "./routes/[name].tsx";
 import * as $1 from "./routes/_app.tsx";
 import * as $2 from "./routes/api/joke.ts";
 import * as $3 from "./routes/applications/index.tsx";
-import * as $4 from "./routes/cloud/calz.tsx";
-import * as $5 from "./routes/cloud/connect/existing.tsx";
-import * as $6 from "./routes/cloud/connect/managed.tsx";
-import * as $7 from "./routes/cloud/index.tsx";
-import * as $8 from "./routes/cloud/iot.tsx";
-import * as $9 from "./routes/devices/index.tsx";
-import * as $10 from "./routes/index.tsx";
+import * as $4 from "./routes/cloud/index.tsx";
+import * as $5 from "./routes/devices/index.tsx";
+import * as $6 from "./routes/index.tsx";
 import * as $$0 from "./islands/common/ProfileMenu.tsx";
 import * as $$1 from "./islands/molecules/InteractiveResponsiveSet.tsx";
+import * as $$2 from "./islands/organisms/CloudConnectForms.tsx";
 
 const manifest = {
   routes: {
@@ -22,17 +19,14 @@ const manifest = {
     "./routes/_app.tsx": $1,
     "./routes/api/joke.ts": $2,
     "./routes/applications/index.tsx": $3,
-    "./routes/cloud/calz.tsx": $4,
-    "./routes/cloud/connect/existing.tsx": $5,
-    "./routes/cloud/connect/managed.tsx": $6,
-    "./routes/cloud/index.tsx": $7,
-    "./routes/cloud/iot.tsx": $8,
-    "./routes/devices/index.tsx": $9,
-    "./routes/index.tsx": $10,
+    "./routes/cloud/index.tsx": $4,
+    "./routes/devices/index.tsx": $5,
+    "./routes/index.tsx": $6,
   },
   islands: {
     "./islands/common/ProfileMenu.tsx": $$0,
     "./islands/molecules/InteractiveResponsiveSet.tsx": $$1,
+    "./islands/organisms/CloudConnectForms.tsx": $$2,
   },
   baseUrl: import.meta.url,
 };

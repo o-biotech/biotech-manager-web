@@ -9,7 +9,7 @@ interface DevicesPageData {
 }
 
 export const handler: Handlers<DevicesPageData | null> = {
-  async GET(_, ctx) {
+  GET(_, ctx) {
     // const {} = ctx.params;
 
     // const resp = await fetch(`https://api.github.com/users/${username}`);

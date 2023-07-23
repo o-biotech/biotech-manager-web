@@ -17,7 +17,7 @@ interface HomePageData {
 }
 
 export const handler: Handlers<HomePageData | null> = {
-  async GET(_, ctx) {
+  GET(_, ctx) {
     // const {} = ctx.params;
 
     // const resp = await fetch(`https://api.github.com/users/${username}`);
@@ -26,7 +26,7 @@ export const handler: Handlers<HomePageData | null> = {
     // }
 
     const data: HomePageData = {
-      setupPhase: SetupPhaseTypes.Complete,
+      setupPhase: SetupPhaseTypes.Cloud,
     };
 
     return ctx.render(data);

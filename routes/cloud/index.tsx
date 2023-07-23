@@ -1,11 +1,6 @@
 import { Handlers, PageProps } from "$fresh/server.ts";
-import { Action } from "$atomic/atoms/Action.tsx";
-import { DisplayStyleTypes } from "$atomic/molecules/Display.tsx";
-import { Hero, HeroStyleTypes } from "$atomic/organisms/Hero.tsx";
-import { ChevronRightIcon } from "$atomic/atoms/icons/ChevronRightIcon.tsx";
-import { IconStyleTypes } from "$atomic/atoms/icons/Icon.tsx";
 import CloudConnectHero from "../../components/organisms/heros/CloudConnectHero.tsx";
-import CloudStepsFeatures from "../../components/organisms/features/CloudStepsFeatures.tsx";
+import CloudStepsFeatures from "../../components/organisms/cloud/CloudStepsFeatures.tsx";
 import { CloudPhaseTypes } from "../../components/CloudPhaseTypes.tsx";
 
 interface CloudPageData {
@@ -13,7 +8,7 @@ interface CloudPageData {
 }
 
 export const handler: Handlers<CloudPageData | null> = {
-  async GET(_, ctx) {
+  GET(_, ctx) {
     // const {} = ctx.params;
 
     // const resp = await fetch(`https://api.github.com/users/${username}`);
@@ -22,7 +17,7 @@ export const handler: Handlers<CloudPageData | null> = {
     // }
 
     const data: CloudPageData = {
-      cloudPhase: CloudPhaseTypes.Complete,
+      cloudPhase: CloudPhaseTypes.Connect,
     };
 
     return ctx.render(data);

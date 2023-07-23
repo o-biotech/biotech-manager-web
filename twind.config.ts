@@ -1,4 +1,3 @@
-import { Options } from "twind_fresh_plugin/twind.ts";
 import { defineConfig } from "twind";
 import * as colors from "twind/colors";
 // twind preset
@@ -12,7 +11,8 @@ export default {
     theme: {
       extend: {
         backgroundImage: {
-          'hero-pattern': "linear-gradient(rgba(0, 0, 40, 0.85),rgba(0, 0, 40, 0.85)), url('https://fresh.deno.dev/gallery/hero-bg.webp')",
+          "hero-pattern":
+            "linear-gradient(rgba(0, 0, 40, 0.85),rgba(0, 0, 40, 0.85)), url('https://fresh.deno.dev/gallery/hero-bg.webp')",
         },
         color: {
           primary: "#4a918e",
@@ -22,11 +22,11 @@ export default {
           error: colors.red,
           warning: colors.yellow,
         },
-      }
-    }
+      },
+    },
   }),
   plugins: {
     // aspect: aspectRatio,
   },
   selfURL: import.meta.url,
-};// as Options;
+}; // as Options;
