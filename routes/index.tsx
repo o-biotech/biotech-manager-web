@@ -5,8 +5,7 @@ import ConnectDevicesHero from "../components/organisms/heros/ConnectDevicesHero
 import CreateApplicationsHero from "../components/organisms/heros/CreateApplicationsHero.tsx";
 import BiotechStepsFeatures from "../components/organisms/features/BiotechStepsFeatures.tsx";
 import { SetupPhaseTypes } from "../components/SetupPhaseTypes.tsx";
-import { deep } from "../services/OpenBiotechAppStateFlowContext.ts";
-import { Action } from "$atomic/atoms/Action.tsx";
+import { Icon } from "$atomic/icons";
 // import {
 //   StateFlow,
 //   StateFlowContextService,
@@ -128,6 +127,24 @@ export default function Home({ data }: PageProps<HomePageData | null>) {
         Michael Gearhardt
       </Action> */
       }
+
+      <Icon
+        src="./icons.sprite.svg"
+        icon="x-circle"
+        class="text-blue-500 w-[50px] h-[50px]"
+      />
+
+      <Icon
+        src="./icons.sprite.svg"
+        icon="check-circle"
+        class="text-blue-500 w-[50px] h-[50px]"
+      />
+
+      <Icon
+        src="./icons.sprite.svg"
+        icon="exclaim"
+        class="text-blue-500 w-[50px] h-[50px]"
+      />
 
       <div>
         {

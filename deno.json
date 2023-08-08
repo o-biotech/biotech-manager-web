@@ -1,11 +1,13 @@
 {
   "lock": false,
   "tasks": {
+    "icons": "deno run -A ./scripts/icons.atomic.ts",
     "start": "deno run -A --watch=static/,routes/ dev.ts",
     "update": "deno run -A -r https://fresh.deno.dev/update ."
   },
   "imports": {
     "$atomic/": "https://deno.land/x/fathym_open_biotech_atomic@v0.0.6-integration238/src/",
+    "$atomic/icons": "https://deno.land/x/fathym_atomic_icons@v0.0.1-integration10/mod.ts",
     "$deepsignal": "https://esm.sh/deepsignal@1.3.4",
     "$fresh/": "https://deno.land/x/fresh@1.3.1/",
     "immer": "https://cdn.skypack.dev/immer@8.0.1?dts",
