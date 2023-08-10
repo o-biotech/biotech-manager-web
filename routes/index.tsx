@@ -6,6 +6,7 @@ import CreateApplicationsHero from "../components/organisms/heros/CreateApplicat
 import BiotechStepsFeatures from "../components/organisms/features/BiotechStepsFeatures.tsx";
 import { SetupPhaseTypes } from "../components/SetupPhaseTypes.tsx";
 import { Icon } from "$atomic/icons";
+import { CheckCircleIcon, ExclaimIcon, XCircleIcon } from "$atomic/mycons";
 // import {
 //   StateFlow,
 //   StateFlowContextService,
@@ -129,22 +130,28 @@ export default function Home({ data }: PageProps<HomePageData | null>) {
       }
 
       <Icon
-        src="./icons.sprite.svg"
+        src="./iconset/icons"
         icon="x-circle"
         class="text-blue-500 w-[50px] h-[50px]"
       />
 
+      <XCircleIcon class="text-purple-500 w-[50px] h-[50px]" />
+
       <Icon
-        src="./icons.sprite.svg"
+        src="./iconset/icons"
         icon="check-circle"
         class="text-blue-500 w-[50px] h-[50px]"
       />
 
+      <CheckCircleIcon class="text-purple-500 w-[50px] h-[50px]" />
+
       <Icon
-        src="./icons.sprite.svg"
+        src="./iconset/icons"
         icon="exclaim"
         class="text-blue-500 w-[50px] h-[50px]"
       />
+
+      <ExclaimIcon class="text-purple-500 w-[50px] h-[50px]" />
 
       <div>
         {
