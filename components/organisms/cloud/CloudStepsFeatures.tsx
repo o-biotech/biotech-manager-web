@@ -1,9 +1,6 @@
 import { ComponentChildren, JSX } from "preact";
 import { CloudPhaseTypes } from "../../CloudPhaseTypes.tsx";
-import {
-  StepsFeatures,
-  StepsFeaturesProps,
-} from "$atomic/organisms/StepsFeatures.tsx";
+import { StepsFeatures, StepsFeaturesProps } from "@fathym/atomic";
 import CloudCALZForm from "./calz.form.tsx";
 import CloudConnectForms from "../../../islands/organisms/CloudConnectForms.tsx";
 import CloudIoTForm from "./iot.form.tsx";

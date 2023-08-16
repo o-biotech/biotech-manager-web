@@ -6,7 +6,7 @@
     "update": "deno run -A -r https://fresh.deno.dev/update ."
   },
   "imports": {
-    "$atomic/": "https://deno.land/x/fathym_open_biotech_atomic@v0.0.6-integration238/src/",
+    "@fathym/atomic": "https://deno.land/x/fathym_open_biotech_atomic@v0.0.6-integration248/mod.ts",
     "$atomic/icons": "https://deno.land/x/fathym_atomic_icons@v0.0.1-integration60/mod.ts",
     "$deepsignal": "https://esm.sh/deepsignal@1.3.4",
     "$fresh/": "https://deno.land/x/fresh@1.3.1/",
@@ -23,6 +23,7 @@
     "twind/colors": "https://esm.sh/@twind/preset-tailwind@1.1.4/colors",
     "twind_fresh_plugin/": "https://deno.land/x/fresh_twindv1_plugin@v1.3.0/",
     "$std/": "https://deno.land/std@0.193.0/",
+    "$fathym/atomic-icons": "./build/iconset/icons/_exports.ts",
     "$atomic/mycons": "./build/iconset/icons/_exports.ts"
   },
   "compilerOptions": {

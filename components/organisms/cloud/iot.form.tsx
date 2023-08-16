@@ -1,8 +1,6 @@
 import { JSX } from "preact";
-import { Action } from "$atomic/atoms/Action.tsx";
-import { ActionGroup } from "$atomic/molecules/ActionGroup.tsx";
+import { Action, ActionGroup, classSet } from "@fathym/atomic";
 import { callToActionStyles } from "../../styles/actions.tsx";
-import { classSet } from "$atomic/utils/jsx.tsx";
 
 export default function CloudIoTForm(
   props: JSX.HTMLAttributes<HTMLFormElement>,

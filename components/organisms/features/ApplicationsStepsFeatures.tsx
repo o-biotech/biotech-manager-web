@@ -1,14 +1,13 @@
 import { ComponentChildren } from "preact";
-import { Action, ActionStyleTypes } from "$atomic/atoms/Action.tsx";
-import { ActionGroup } from "$atomic/molecules/ActionGroup.tsx";
-import { DisplayStyleTypes } from "$atomic/molecules/Display.tsx";
-import { Features, FeaturesProps } from "$atomic/organisms/Features.tsx";
-import { classSet } from "$atomic/utils/jsx.tsx";
-import { ApplicationsPhaseTypes } from "../../ApplicationsPhaseTypes.tsx";
 import {
+  Action,
+  ActionGroup,
+  ActionStyleTypes,
+  classSet,
   StepsFeatures,
   StepsFeaturesProps,
-} from "$atomic/organisms/StepsFeatures.tsx";
+} from "@fathym/atomic";
+import { ApplicationsPhaseTypes } from "../../ApplicationsPhaseTypes.tsx";
 import { callToActionStyles } from "../../styles/actions.tsx";
 
 export interface ApplicationsStepsFeaturesProps extends StepsFeaturesProps {

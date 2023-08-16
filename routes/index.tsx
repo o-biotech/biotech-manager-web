@@ -5,12 +5,6 @@ import ConnectDevicesHero from "../components/organisms/heros/ConnectDevicesHero
 import CreateApplicationsHero from "../components/organisms/heros/CreateApplicationsHero.tsx";
 import BiotechStepsFeatures from "../components/organisms/features/BiotechStepsFeatures.tsx";
 import { SetupPhaseTypes } from "../components/SetupPhaseTypes.tsx";
-import { Icon } from "$atomic/icons";
-import { CheckCircleIcon, ExclaimIcon, XCircleIcon } from "$atomic/mycons";
-// import {
-//   StateFlow,
-//   StateFlowContextService,
-// } from "$atomic/state-flow/StateFlowContext.tsx";
 
 interface HomePageData {
   setupPhase: SetupPhaseTypes;
@@ -128,30 +122,6 @@ export default function Home({ data }: PageProps<HomePageData | null>) {
         Michael Gearhardt
       </Action> */
       }
-
-      <Icon
-        src="./iconset/icons"
-        icon="x-circle"
-        class="text-blue-500 w-[50px] h-[50px]"
-      />
-
-      <XCircleIcon class="text-purple-500 w-[50px] h-[50px]" />
-
-      <Icon
-        src="./iconset/icons"
-        icon="check-circle"
-        class="text-blue-500 w-[50px] h-[50px]"
-      />
-
-      <CheckCircleIcon class="text-purple-500 w-[50px] h-[50px]" />
-
-      <Icon
-        src="./iconset/icons"
-        icon="exclaim"
-        class="text-blue-500 w-[50px] h-[50px]"
-      />
-
-      <ExclaimIcon class="text-purple-500 w-[50px] h-[50px]" />
 
       <div>
         {

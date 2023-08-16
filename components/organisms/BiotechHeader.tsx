@@ -1,6 +1,11 @@
-import { Action } from "$atomic/atoms/Action.tsx";
-import { Header, HeaderLogo, HeaderProps } from "$atomic/organisms/Header.tsx";
-import { classSet, factory } from "$atomic/utils/jsx.tsx";
+import {
+  Action,
+  classSet,
+  factory,
+  Header,
+  HeaderLogo,
+  HeaderProps,
+} from "@fathym/atomic";
 import ProfileMenu from "../../islands/common/ProfileMenu.tsx";
 import InteractiveResponsiveSet from "../../islands/molecules/InteractiveResponsiveSet.tsx";
 

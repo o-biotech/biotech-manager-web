@@ -1,7 +1,5 @@
 import { JSX } from "preact";
-import { Action, ActionStyleTypes } from "$atomic/atoms/Action.tsx";
-import { ActionGroup } from "$atomic/molecules/ActionGroup.tsx";
-import { classSet } from "$atomic/utils/jsx.tsx";
+import { Action, ActionGroup, classSet } from "@fathym/atomic";
 import { callToActionStyles } from "../../../styles/actions.tsx";
 
 export default function CloudConnectManagedForm(

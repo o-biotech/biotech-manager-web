@@ -1,6 +1,5 @@
 import { Handlers, PageProps } from "$fresh/server.ts";
-import { DisplayStyleTypes } from "$atomic/molecules/Display.tsx";
-import { Hero, HeroStyleTypes } from "$atomic/organisms/Hero.tsx";
+import { DisplayStyleTypes, Hero, HeroStyleTypes } from "@fathym/atomic";
 import { DevicesPhaseTypes } from "../../components/DevicesPhaseTypes.tsx";
 import DevicesStepsFeatures from "../../components/organisms/features/DevicesStepsFeatures.tsx";
 

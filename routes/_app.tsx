@@ -1,5 +1,5 @@
 import { Head } from "$fresh/runtime.ts";
-import { Footer } from "$atomic/organisms/Footer.tsx";
+import { Footer } from "@fathym/atomic";
 
 import { AppProps } from "$fresh/server.ts";
 import BiotechHeader from "../components/organisms/BiotechHeader.tsx";

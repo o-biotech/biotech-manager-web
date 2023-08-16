@@ -1,18 +1,14 @@
 import { ComponentChildren } from "preact";
-import { Action } from "$atomic/atoms/Action.tsx";
-import { ActionGroup } from "$atomic/molecules/ActionGroup.tsx";
-import { CheckIcon } from "$atomic/atoms/icons/CheckIcon.tsx";
-import { ChevronRightIcon } from "$atomic/atoms/icons/ChevronRightIcon.tsx";
-import { IconStyleTypes } from "$atomic/atoms/icons/Icon.tsx";
-import { Features, FeaturesProps } from "$atomic/organisms/Features.tsx";
-import { classSet } from "$atomic/utils/jsx.tsx";
-import { SetupPhaseTypes } from "../../SetupPhaseTypes.tsx";
 import {
-  buildTitle,
+  Action,
+  ActionGroup,
+  classSet,
+  FeaturesProps,
   StepsFeatures,
-  StepsFeaturesProps,
-} from "$atomic/organisms/StepsFeatures.tsx";
+} from "@fathym/atomic";
+import { SetupPhaseTypes } from "../../SetupPhaseTypes.tsx";
 import { callToActionStyles } from "../../styles/actions.tsx";
+import { ChevronRightIcon } from "$fathym/atomic-icons";
 
 export interface BiotechStepsFeaturesProps extends FeaturesProps {
   setupPhase?: SetupPhaseTypes;
@@ -40,9 +36,7 @@ export default function BiotechStepsFeatures(props: BiotechStepsFeaturesProps) {
               >
                 Connect Now
 
-                <ChevronRightIcon
-                  iconStyle={IconStyleTypes.Outline}
-                />
+                <ChevronRightIcon class="w-[24px] h-[24px]" />
               </Action>
             </>
           </ActionGroup>
@@ -63,9 +57,7 @@ export default function BiotechStepsFeatures(props: BiotechStepsFeaturesProps) {
               >
                 Connect Devices
 
-                <ChevronRightIcon
-                  iconStyle={IconStyleTypes.Outline}
-                />
+                <ChevronRightIcon class="w-[24px] h-[24px]" />
               </Action>
             </>
           </ActionGroup>
@@ -86,9 +78,7 @@ export default function BiotechStepsFeatures(props: BiotechStepsFeaturesProps) {
               >
                 Create Application
 
-                <ChevronRightIcon
-                  iconStyle={IconStyleTypes.Outline}
-                />
+                <ChevronRightIcon class="w-[24px] h-[24px]" />
               </Action>
             </>
           </ActionGroup>
