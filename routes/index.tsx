@@ -6,8 +6,17 @@ import CreateApplicationsHero from "../components/organisms/heros/CreateApplicat
 import BiotechStepsFeatures from "../components/organisms/features/BiotechStepsFeatures.tsx";
 import { SetupPhaseTypes } from "../components/SetupPhaseTypes.tsx";
 import { IoTDisplay } from "@fathym/atomic-iot";
-import { DeviceIcon } from "$fathym/atomic-icons";
+import {
+  ConnectedDevicesIcon,
+  DeviceTelemetryIcon,
+  EmulatedDeviceIcon,
+} from "$fathym/atomic-icons";
 import InteractiveSlideToggle from "../islands/atoms/InteractiveSlideToggle.tsx";
+import { Action, Input } from "@fathym/atomic";
+import snakeCase from "https://deno.land/x/case@2.1.1/snakeCase.ts";
+import EmulatedDevices from "../components/organisms/devices/EmulatedDevices.tsx";
+import ConnectedDevices from "../components/organisms/devices/ConnectedDevices.tsx";
+import DevicesTelemetry from "../components/organisms/devices/DevicesTelemetry.tsx";
 
 interface HomePageData {
   setupPhase: SetupPhaseTypes;
@@ -97,23 +106,15 @@ export default function Home({ data }: PageProps<HomePageData | null>) {
         setupPhase={data!.setupPhase}
       />
 
-      <IoTDisplay
-        title={<h2 class="text-2xl font-bold">Emulated Devices</h2>}
-        icon={<DeviceIcon class="ml-4 mr-2 w-[36px] h-[36px] text-blue-500" />}
-        controls={
-          <>
-            <InteractiveSlideToggle checked={true} />
-          </>
-        }
-      >
-        <p>
-          To see the dashboard in action without connecting a device, enable the
-          emulated device data. When enabled, emulated data will be provided in
-          your data queries. The emulated device we are showing here is for
-          smart room detection and provides data on the temperature, humidity
-          and occupancy of a room.
-        </p>
-      </IoTDisplay>
+      <div class="p-2 md:p-4">
+        <EmulatedDevices class="mb-8 md:mb-16" />
+
+        <div class="flex flex-col md:flex-row mt-2 gap-8 md:gap-16">
+          <ConnectedDevices class="w-full md:w-1/3" />
+
+          <DevicesTelemetry class="w-full md:w-2/3" />
+        </div>
+      </div>
 
       <div>
         {
