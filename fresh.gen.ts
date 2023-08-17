@@ -9,9 +9,10 @@ import * as $3 from "./routes/cloud/index.tsx";
 import * as $4 from "./routes/devices/[name].tsx";
 import * as $5 from "./routes/devices/index.tsx";
 import * as $6 from "./routes/index.tsx";
-import * as $$0 from "./islands/common/ProfileMenu.tsx";
-import * as $$1 from "./islands/molecules/InteractiveResponsiveSet.tsx";
-import * as $$2 from "./islands/organisms/CloudConnectForms.tsx";
+import * as $$0 from "./islands/atoms/InteractiveSlideToggle.tsx";
+import * as $$1 from "./islands/common/ProfileMenu.tsx";
+import * as $$2 from "./islands/molecules/InteractiveResponsiveSet.tsx";
+import * as $$3 from "./islands/organisms/CloudConnectForms.tsx";
 
 const manifest = {
   routes: {
@@ -24,9 +25,10 @@ const manifest = {
     "./routes/index.tsx": $6,
   },
   islands: {
-    "./islands/common/ProfileMenu.tsx": $$0,
-    "./islands/molecules/InteractiveResponsiveSet.tsx": $$1,
-    "./islands/organisms/CloudConnectForms.tsx": $$2,
+    "./islands/atoms/InteractiveSlideToggle.tsx": $$0,
+    "./islands/common/ProfileMenu.tsx": $$1,
+    "./islands/molecules/InteractiveResponsiveSet.tsx": $$2,
+    "./islands/organisms/CloudConnectForms.tsx": $$3,
   },
   baseUrl: import.meta.url,
 };

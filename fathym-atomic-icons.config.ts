@@ -5,6 +5,8 @@ export const curIconSetConfig: IconSetConfig = {
     'chevron-right':
       'https://api.iconify.design/material-symbols:chevron-right-rounded.svg',
     'chevron-down': 'https://api.iconify.design/mdi:chevron-down.svg',
+    device:
+      'https://api.iconify.design/material-symbols:android-find-my-device-outline.svg',
     user: 'https://api.iconify.design/material-symbols:account-circle-full.svg',
   },
 };

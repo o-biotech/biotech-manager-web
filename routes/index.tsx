@@ -5,6 +5,9 @@ import ConnectDevicesHero from "../components/organisms/heros/ConnectDevicesHero
 import CreateApplicationsHero from "../components/organisms/heros/CreateApplicationsHero.tsx";
 import BiotechStepsFeatures from "../components/organisms/features/BiotechStepsFeatures.tsx";
 import { SetupPhaseTypes } from "../components/SetupPhaseTypes.tsx";
+import { IoTDisplay } from "@fathym/atomic-iot";
+import { DeviceIcon } from "$fathym/atomic-icons";
+import InteractiveSlideToggle from "../islands/atoms/InteractiveSlideToggle.tsx";
 
 interface HomePageData {
   setupPhase: SetupPhaseTypes;
@@ -94,34 +97,23 @@ export default function Home({ data }: PageProps<HomePageData | null>) {
         setupPhase={data!.setupPhase}
       />
 
-      <div>
-        {
-          /* {deep.FirstName} <br />
-        {deep.LastName} <br />
-        {deep.FullName} <br /> */
+      <IoTDisplay
+        title={<h2 class="text-2xl font-bold">Emulated Devices</h2>}
+        icon={<DeviceIcon class="ml-4 mr-2 w-[36px] h-[36px] text-blue-500" />}
+        controls={
+          <>
+            <InteractiveSlideToggle checked={true} />
+          </>
         }
-
-        {
-          /* <Action
-          onClick={() =>
-            OpenBiotechAppStateFlowContext.ChangeName("Micheal", "Gearhardt")}
-        >
-          Michael Gearhardt
-        </Action>
-
-        <Action
-          onClick={() =>
-            OpenBiotechAppStateFlowContext.ChangeName("Pete", "Sanchez")}
-        >
-          Pete Sanchez
-        </Action> */
-        }
-      </div>
-      {
-        /* <Action>
-        Michael Gearhardt
-      </Action> */
-      }
+      >
+        <p>
+          To see the dashboard in action without connecting a device, enable the
+          emulated device data. When enabled, emulated data will be provided in
+          your data queries. The emulated device we are showing here is for
+          smart room detection and provides data on the temperature, humidity
+          and occupancy of a room.
+        </p>
+      </IoTDisplay>
 
       <div>
         {
