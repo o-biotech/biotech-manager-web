@@ -11,7 +11,6 @@ import {
   DeviceTelemetryIcon,
   EmulatedDeviceIcon,
 } from "$fathym/atomic-icons";
-import InteractiveSlideToggle from "../islands/atoms/InteractiveSlideToggle.tsx";
 import { Action, Input } from "@fathym/atomic";
 import snakeCase from "https://deno.land/x/case@2.1.1/snakeCase.ts";
 import EmulatedDevices from "../components/organisms/devices/EmulatedDevices.tsx";

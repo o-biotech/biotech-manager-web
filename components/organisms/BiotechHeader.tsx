@@ -5,26 +5,35 @@ import {
   Header,
   HeaderLogo,
   HeaderProps,
+  ResponsiveSet,
 } from "@fathym/atomic";
 import ProfileMenu from "../../islands/common/ProfileMenu.tsx";
 import InteractiveResponsiveSet from "../../islands/molecules/InteractiveResponsiveSet.tsx";
+import InteractiveMenuIcon from "../../islands/atoms/InteractiveMenuIcon.tsx";
+import { MenuIcon } from "$fathym/atomic-icons";
 
 export default function BiotechHeader(props: HeaderProps) {
-  const logo = factory(HeaderLogo, {
+  const logo = {
     LogoAlt: "Fathym Open BioTech",
     LogoUrl: "/o-biotech-logo.svg",
     LogoHref: "/",
-  });
+  };
 
   return (
     <Header
-      class={classSet(props, "bg-blue-500")}
+      class={classSet(undefined, "bg-blue-500")}
       logo={logo}
       nav={
-        <InteractiveResponsiveSet>
-          <Action href="/cloud" class="text-xl mx-1">Cloud</Action>
+        <InteractiveResponsiveSet
+          toggleChildren={<MenuIcon class="w-[24px] h-[24px]" />}
+        >
+          <Action href="/cloud" class="text-xl mx-1">
+            Cloud
+          </Action>
 
-          <Action href="/devices" class="text-xl mx-1">Devices</Action>
+          <Action href="/devices" class="text-xl mx-1">
+            Devices
+          </Action>
 
           <Action href="/applications" class="text-xl mx-1">
             Applications

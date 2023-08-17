@@ -11,6 +11,7 @@ export const curIconSetConfig: IconSetConfig = {
       'https://api.iconify.design/material-symbols:cast-connected-outline.svg',
     'device-telemetry':
       'https://api.iconify.design/material-symbols:query-stats.svg',
+    menu: 'https://api.iconify.design/ci:hamburger.svg',
     user: 'https://api.iconify.design/material-symbols:account-circle-full.svg',
   },
 };

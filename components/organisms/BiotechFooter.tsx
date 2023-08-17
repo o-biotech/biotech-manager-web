@@ -1,6 +1,4 @@
 import { classSet, Footer, FooterProps } from "@fathym/atomic";
-import ProfileMenu from "../../islands/common/ProfileMenu.tsx";
-import InteractiveResponsiveSet from "../../islands/molecules/InteractiveResponsiveSet.tsx";
 
 export default function BiotechFooter(props: FooterProps) {
   return (

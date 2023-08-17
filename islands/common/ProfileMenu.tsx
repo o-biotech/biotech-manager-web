@@ -1,3 +1,4 @@
+import { ComponentChildren } from "preact";
 import {
   Action,
   ActionStyleTypes,
@@ -7,7 +8,11 @@ import {
 } from "@fathym/atomic";
 import { ChevronDownIcon, UserIcon } from "$fathym/atomic-icons";
 
-export default function ProfileMenu(props: MenuButtonProps) {
+export type ProfileMenuProps = Omit<MenuButtonProps, "toggleChildren"> & {
+  toggleChildren?: ComponentChildren | undefined;
+};
+
+export default function ProfileMenu(props: ProfileMenuProps) {
   return (
     <MenuButton
       menuStyle={MenuButtonStyleTypes.Responsive}

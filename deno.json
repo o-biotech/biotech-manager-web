@@ -6,7 +6,7 @@
     "update": "deno run -A -r https://fresh.deno.dev/update ."
   },
   "imports": {
-    "@fathym/atomic": "https://deno.land/x/fathym_open_biotech_atomic@v0.0.6-integration254/mod.ts",
+    "@fathym/atomic": "https://deno.land/x/fathym_open_biotech_atomic@v0.0.6-integration270/mod.ts",
     "$fathym/atomic-icons": "./build/iconset/icons/_exports.ts",
     "@fathym/atomic-iot": "https://deno.land/x/fathym_atomic_iot@v0.0.21-integration/mod.ts",
     "$atomic/icons": "https://deno.land/x/fathym_atomic_icons@v0.0.3-integration1/mod.ts",
