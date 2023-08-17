@@ -24,9 +24,7 @@ export default function BiotechHeader(props: HeaderProps) {
       class={classSet(undefined, "bg-blue-500")}
       logo={logo}
       nav={
-        <InteractiveResponsiveSet
-          toggleChildren={<MenuIcon class="w-[24px] h-[24px]" />}
-        >
+        <InteractiveResponsiveSet toggleChildren="☰">
           <Action href="/cloud" class="text-xl mx-1">
             Cloud
           </Action>
