@@ -10,9 +10,12 @@ import {
 } from "@fathym/atomic";
 import ProfileMenu from "../../islands/common/ProfileMenu.tsx";
 import InteractiveResponsiveSet from "../../islands/molecules/InteractiveResponsiveSet.tsx";
+import { SetupPhaseTypes } from "../../src/SetupPhaseTypes.tsx";
 
 export type BiotechHeaderProps = HeaderProps & {
   currentUrl: URL;
+
+  setupPhase: SetupPhaseTypes;
 };
 
 export function BiotechHeader(props: BiotechHeaderProps) {
@@ -49,10 +52,13 @@ export function BiotechHeader(props: BiotechHeaderProps) {
             actionStyle={ActionStyleTypes.Link}
             class={classSet(
               undefined,
-              "text-xl mx-1 text-white",
+              "text-xl mx-1",
               props.currentUrl.pathname.startsWith("/devices")
                 ? active.props.class
                 : "",
+              props.setupPhase > 0
+                ? "text-white"
+                : "pointer-events-none text-slate-400",
             )}
           >
             Devices
@@ -63,10 +69,13 @@ export function BiotechHeader(props: BiotechHeaderProps) {
             actionStyle={ActionStyleTypes.Link}
             class={classSet(
               undefined,
-              "text-xl mx-1 text-white",
+              "text-xl mx-1",
               props.currentUrl.pathname.startsWith("/data")
                 ? active.props.class
                 : "",
+              props.setupPhase > 1
+                ? "text-white"
+                : "pointer-events-none text-slate-400",
             )}
           >
             Data
@@ -77,10 +86,13 @@ export function BiotechHeader(props: BiotechHeaderProps) {
             actionStyle={ActionStyleTypes.Link}
             class={classSet(
               undefined,
-              "text-xl mx-1 text-white",
+              "text-xl mx-1",
               props.currentUrl.pathname.startsWith("/applications")
                 ? active.props.class
                 : "",
+              props.setupPhase > 2
+                ? "text-white"
+                : "pointer-events-none text-slate-400",
             )}
           >
             Applications

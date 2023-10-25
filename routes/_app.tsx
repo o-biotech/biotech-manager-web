@@ -4,8 +4,12 @@ import { BasicLayout } from "@fathym/atomic";
 import { AppProps } from "$fresh/server.ts";
 import { BiotechHeader } from "../components/organisms/BiotechHeader.tsx";
 import { BiotechFooter } from "../components/organisms/BiotechFooter.tsx";
+import { OpenBiotechManagerState } from "../src/OpenBiotechManagerState.tsx";
 
-export default function DashboardLayout({ Component, url }: AppProps) {
+export default function App(
+  // deno-lint-ignore no-explicit-any
+  { Component, url, state }: AppProps<any, OpenBiotechManagerState>,
+) {
   return (
     <>
       <Head>
@@ -15,7 +19,9 @@ export default function DashboardLayout({ Component, url }: AppProps) {
       </Head>
 
       <BasicLayout
-        header={<BiotechHeader currentUrl={url} />}
+        header={
+          <BiotechHeader currentUrl={url} setupPhase={state.SetupPhase} />
+        }
         footer={<BiotechFooter />}
       >
         <Component />

@@ -101,10 +101,7 @@ export default function Home(
 
       <BiotechStepsFeatures setupPhase={data!.setupPhase} />
 
-      {state.SetupPhase != SetupPhaseTypes.Cloud &&
-          state.SetupPhase != SetupPhaseTypes.Devices
-        ? <BiotechDashboard />
-        : <></>}
+      {state.SetupPhase > 1 ? <BiotechDashboard /> : <></>}
     </>
   );
 }
