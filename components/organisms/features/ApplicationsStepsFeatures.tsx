@@ -14,7 +14,7 @@ export interface ApplicationsStepsFeaturesProps extends StepsFeaturesProps {
   appsPhase?: ApplicationsPhaseTypes;
 }
 
-export default function ApplicationsStepsFeatures(
+export function ApplicationsStepsFeatures(
   props: ApplicationsStepsFeaturesProps,
 ) {
   return (

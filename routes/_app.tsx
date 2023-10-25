@@ -5,7 +5,7 @@ import { AppProps } from "$fresh/server.ts";
 import BiotechHeader from "../components/organisms/BiotechHeader.tsx";
 import BiotechFooter from "../components/organisms/BiotechFooter.tsx";
 
-export default function App({ Component }: AppProps) {
+export default function DashboardLayout({ Component }: AppProps) {
   const header = <BiotechHeader />;
 
   const footer = <BiotechFooter />;

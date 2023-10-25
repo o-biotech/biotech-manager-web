@@ -14,7 +14,7 @@ export interface DevicesStepsFeaturesProps extends StepsFeaturesProps {
   devicesPhase?: DevicesPhaseTypes;
 }
 
-export default function DevicesStepsFeatures(props: DevicesStepsFeaturesProps) {
+export function DevicesStepsFeatures(props: DevicesStepsFeaturesProps) {
   return (
     <StepsFeatures
       {...props}

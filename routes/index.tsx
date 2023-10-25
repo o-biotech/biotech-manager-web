@@ -2,17 +2,10 @@ import { JSX } from "preact";
 import { Handlers, PageProps } from "$fresh/server.ts";
 import CloudConnectHero from "../components/organisms/heros/CloudConnectHero.tsx";
 import ConnectDevicesHero from "../components/organisms/heros/ConnectDevicesHero.tsx";
+import SetupDataHero from "../components/organisms/heros/SetupDataHero.tsx";
 import CreateApplicationsHero from "../components/organisms/heros/CreateApplicationsHero.tsx";
-import BiotechStepsFeatures from "../components/organisms/features/BiotechStepsFeatures.tsx";
+import { BiotechStepsFeatures } from "../components/organisms/features/BiotechStepsFeatures.tsx";
 import { SetupPhaseTypes } from "../components/SetupPhaseTypes.tsx";
-import { IoTDisplay } from "@fathym/atomic-iot";
-import {
-  ConnectedDevicesIcon,
-  DeviceTelemetryIcon,
-  EmulatedDeviceIcon,
-} from "$fathym/atomic-icons";
-import { Action, Input } from "@fathym/atomic";
-import snakeCase from "https://deno.land/x/case@2.1.1/snakeCase.ts";
 import EmulatedDevices from "../components/organisms/devices/EmulatedDevices.tsx";
 import ConnectedDevices from "../components/organisms/devices/ConnectedDevices.tsx";
 import DevicesTelemetry from "../components/organisms/devices/DevicesTelemetry.tsx";
@@ -89,6 +82,10 @@ export default function Home({ data }: PageProps<HomePageData | null>) {
       currentHero = <ConnectDevicesHero />;
       break;
 
+    case SetupPhaseTypes.Data:
+      currentHero = <SetupDataHero />;
+      break;
+
     case SetupPhaseTypes.Applications:
       currentHero = <CreateApplicationsHero />;
       break;
@@ -101,9 +98,7 @@ export default function Home({ data }: PageProps<HomePageData | null>) {
     <>
       {currentHero}
 
-      <BiotechStepsFeatures
-        setupPhase={data!.setupPhase}
-      />
+      <BiotechStepsFeatures setupPhase={data!.setupPhase} />
 
       <div class="p-2 md:p-4">
         <EmulatedDevices class="mb-8 md:mb-16" />

@@ -29,4 +29,5 @@ export default {
     // aspect: aspectRatio,
   },
   selfURL: import.meta.url,
-}; // as Options;
+  // deno-lint-ignore no-explicit-any
+} as any; // as Options;

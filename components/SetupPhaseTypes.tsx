@@ -1,6 +1,7 @@
 export enum SetupPhaseTypes {
   Cloud = 0,
   Devices = 1,
-  Applications = 2,
-  Complete = 3,
+  Data = 2,
+  Applications = 3,
+  Complete = 4,
 }

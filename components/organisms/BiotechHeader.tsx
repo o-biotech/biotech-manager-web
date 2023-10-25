@@ -25,15 +25,19 @@ export default function BiotechHeader(props: HeaderProps) {
       logo={logo}
       nav={
         <InteractiveResponsiveSet toggleChildren="☰">
-          <Action href="/cloud" class="text-xl mx-1">
+          <Action href="./cloud" class="text-xl mx-1">
             Cloud
           </Action>
 
-          <Action href="/devices" class="text-xl mx-1">
+          <Action href="./devices" class="text-xl mx-1">
             Devices
           </Action>
 
-          <Action href="/applications" class="text-xl mx-1">
+          <Action href="./data" class="text-xl mx-1">
+            Data
+          </Action>
+
+          <Action href="./applications" class="text-xl mx-1">
             Applications
           </Action>
 

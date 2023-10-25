@@ -1,7 +1,7 @@
 import { Handlers, PageProps } from "$fresh/server.ts";
 import { DisplayStyleTypes, Hero, HeroStyleTypes } from "@fathym/atomic";
 import { DevicesPhaseTypes } from "../../components/DevicesPhaseTypes.tsx";
-import DevicesStepsFeatures from "../../components/organisms/features/DevicesStepsFeatures.tsx";
+import { DevicesStepsFeatures } from "../../components/organisms/features/DevicesStepsFeatures.tsx";
 
 interface DevicesPageData {
   devicesPhase: DevicesPhaseTypes;

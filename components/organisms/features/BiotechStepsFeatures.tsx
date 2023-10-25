@@ -14,7 +14,7 @@ export interface BiotechStepsFeaturesProps extends FeaturesProps {
   setupPhase?: SetupPhaseTypes;
 }
 
-export default function BiotechStepsFeatures(props: BiotechStepsFeaturesProps) {
+export function BiotechStepsFeatures(props: BiotechStepsFeaturesProps) {
   return (
     <StepsFeatures
       {...props}
@@ -56,6 +56,27 @@ export default function BiotechStepsFeatures(props: BiotechStepsFeaturesProps) {
                 )}
               >
                 Connect Devices
+
+                <ChevronRightIcon class="w-[24px] h-[24px]" />
+              </Action>
+            </>
+          </ActionGroup>
+        ),
+      }, {
+        title: "Setup Data",
+        description:
+          "Collect and consume your device data anywhere you need it.",
+        children: (
+          <ActionGroup class="[&>*]:mx-1 my-2 mt-8">
+            <>
+              <Action
+                href="./data"
+                class={classSet(
+                  callToActionStyles.props,
+                  "flex flex-row",
+                )}
+              >
+                Setup Data
 
                 <ChevronRightIcon class="w-[24px] h-[24px]" />
               </Action>
