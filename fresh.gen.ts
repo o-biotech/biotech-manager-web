@@ -15,6 +15,7 @@ import * as $$1 from "./islands/atoms/InteractiveSlideToggle.tsx";
 import * as $$2 from "./islands/common/ProfileMenu.tsx";
 import * as $$3 from "./islands/molecules/InteractiveResponsiveSet.tsx";
 import * as $$4 from "./islands/organisms/CloudConnectForms.tsx";
+import * as $$5 from "./islands/organisms/ConnectAzure.tsx";
 
 const manifest = {
   routes: {
@@ -33,6 +34,7 @@ const manifest = {
     "./islands/common/ProfileMenu.tsx": $$2,
     "./islands/molecules/InteractiveResponsiveSet.tsx": $$3,
     "./islands/organisms/CloudConnectForms.tsx": $$4,
+    "./islands/organisms/ConnectAzure.tsx": $$5,
   },
   baseUrl: import.meta.url,
 };

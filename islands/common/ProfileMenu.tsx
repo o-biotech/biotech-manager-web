@@ -26,27 +26,11 @@ export default function ProfileMenu(props: ProfileMenuProps) {
     >
       <>
         <Action
-          onClick={() => alert("Hey")}
+          onClick={() => alert("Sign out")}
           actionStyle={ActionStyleTypes.Outline | ActionStyleTypes.Solid}
           class="w-full"
         >
-          Contact
-        </Action>
-
-        <Action
-          onClick={() => alert("Hey")}
-          actionStyle={ActionStyleTypes.Outline | ActionStyleTypes.Solid}
-          class="w-full"
-        >
-          Contact
-        </Action>
-
-        <Action
-          onClick={() => alert("Hey")}
-          actionStyle={ActionStyleTypes.Outline | ActionStyleTypes.Solid}
-          class="w-full"
-        >
-          Contact
+          Sign Out
         </Action>
       </>
     </MenuButton>

@@ -5,8 +5,8 @@ import { AppProps } from "$fresh/server.ts";
 import BiotechHeader from "../components/organisms/BiotechHeader.tsx";
 import BiotechFooter from "../components/organisms/BiotechFooter.tsx";
 
-export default function DashboardLayout({ Component }: AppProps) {
-  const header = <BiotechHeader />;
+export default function DashboardLayout({ Component, url }: AppProps) {
+  const header = <BiotechHeader currentUrl={url} />;
 
   const footer = <BiotechFooter />;
 

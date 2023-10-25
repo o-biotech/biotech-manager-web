@@ -18,7 +18,7 @@ export default function CloudConnectExistingForm(
       <div class="flex flex-wrap -mx-3 mb-4">
         <div class="w-full px-3">
           <label
-            for="subscription-name"
+            for="subscription-plan"
             class="block uppercase tracking-wide font-bold mb-2 text-xl"
           >
             Existing Subscription
