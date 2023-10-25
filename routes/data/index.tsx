@@ -2,12 +2,13 @@ import { Handlers, PageProps } from "$fresh/server.ts";
 import { DisplayStyleTypes, Hero, HeroStyleTypes } from "@fathym/atomic";
 import { DataStepsFeatures } from "../../components/organisms/features/DataStepsFeatures.tsx";
 import { DataPhaseTypes } from "../../src/DataPhaseTypes.tsx";
+import { OpenBiotechManagerState } from "../../src/OpenBiotechManagerState.tsx";
 
 interface DataPageData {
   dataPhase: DataPhaseTypes;
 }
 
-export const handler: Handlers<DataPageData | null> = {
+export const handler: Handlers<DataPageData | null, OpenBiotechManagerState> = {
   GET(_, ctx) {
     // const {} = ctx.params;
 
@@ -15,6 +16,17 @@ export const handler: Handlers<DataPageData | null> = {
     // if (resp.status === 404) {
     //   return ctx.render(null);
     // }
+
+    if (ctx.state.SetupPhase < 2) {
+      const headers = new Headers();
+
+      headers.set("location", "/");
+
+      return new Response(null, {
+        status: 303, // See Other
+        headers,
+      });
+    }
 
     const data: DataPageData = {
       dataPhase: DataPhaseTypes.Cold,
@@ -24,7 +36,9 @@ export const handler: Handlers<DataPageData | null> = {
   },
 };
 
-export default function Devices({ data }: PageProps<DataPageData | null>) {
+export default function Devices(
+  { data }: PageProps<DataPageData | null, OpenBiotechManagerState>,
+) {
   return (
     <div>
       <Hero

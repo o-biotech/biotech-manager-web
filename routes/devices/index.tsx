@@ -2,12 +2,16 @@ import { Handlers, PageProps } from "$fresh/server.ts";
 import { DisplayStyleTypes, Hero, HeroStyleTypes } from "@fathym/atomic";
 import { DevicesPhaseTypes } from "../../src/DevicesPhaseTypes.tsx";
 import { DevicesStepsFeatures } from "../../components/organisms/features/DevicesStepsFeatures.tsx";
+import { OpenBiotechManagerState } from "../../src/OpenBiotechManagerState.tsx";
 
 interface DevicesPageData {
   devicesPhase: DevicesPhaseTypes;
 }
 
-export const handler: Handlers<DevicesPageData | null> = {
+export const handler: Handlers<
+  DevicesPageData | null,
+  OpenBiotechManagerState
+> = {
   GET(_, ctx) {
     // const {} = ctx.params;
 
@@ -15,6 +19,17 @@ export const handler: Handlers<DevicesPageData | null> = {
     // if (resp.status === 404) {
     //   return ctx.render(null);
     // }
+
+    if (ctx.state.SetupPhase < 1) {
+      const headers = new Headers();
+
+      headers.set("location", "/");
+
+      return new Response(null, {
+        status: 303, // See Other
+        headers,
+      });
+    }
 
     const data: DevicesPageData = {
       devicesPhase: DevicesPhaseTypes.Connect,
@@ -24,7 +39,9 @@ export const handler: Handlers<DevicesPageData | null> = {
   },
 };
 
-export default function Devices({ data }: PageProps<DevicesPageData | null>) {
+export default function Devices(
+  { data }: PageProps<DevicesPageData | null, OpenBiotechManagerState>,
+) {
   return (
     <div>
       <Hero
