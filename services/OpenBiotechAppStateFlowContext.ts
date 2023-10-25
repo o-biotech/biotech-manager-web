@@ -3,7 +3,7 @@ import {
   StateFlowContextService,
 } from "$atomic/state-flow/StateFlowContext.tsx";
 import { deepSignal } from "https://esm.sh/deepsignal@1.3.4";
-import { SetupPhaseTypes } from "../components/SetupPhaseTypes.tsx";
+import { SetupPhaseTypes } from "../src/SetupPhaseTypes.tsx";
 
 export interface OpenBiotechAppStateFlow extends StateFlow {
   FirstName?: string;

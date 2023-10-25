@@ -1,6 +1,6 @@
 import { classSet, Footer, FooterProps } from "@fathym/atomic";
 
-export default function BiotechFooter(props: FooterProps) {
+export function BiotechFooter(props: FooterProps) {
   return (
     <Footer
       companyName="Fathym OpenBioTech"

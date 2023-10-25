@@ -1,7 +1,7 @@
 import { Handlers, PageProps } from "$fresh/server.ts";
 import CloudConnectHero from "../../components/organisms/heros/CloudConnectHero.tsx";
 import CloudStepsFeatures from "../../components/organisms/cloud/CloudStepsFeatures.tsx";
-import { CloudPhaseTypes } from "../../components/CloudPhaseTypes.tsx";
+import { CloudPhaseTypes } from "../../src/CloudPhaseTypes.tsx";
 
 interface CloudPageData {
   cloudPhase: CloudPhaseTypes;

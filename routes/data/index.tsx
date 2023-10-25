@@ -1,7 +1,7 @@
 import { Handlers, PageProps } from "$fresh/server.ts";
 import { DisplayStyleTypes, Hero, HeroStyleTypes } from "@fathym/atomic";
 import { DataStepsFeatures } from "../../components/organisms/features/DataStepsFeatures.tsx";
-import { DataPhaseTypes } from "../../components/DataPhaseTypes.tsx";
+import { DataPhaseTypes } from "../../src/DataPhaseTypes.tsx";
 
 interface DataPageData {
   dataPhase: DataPhaseTypes;

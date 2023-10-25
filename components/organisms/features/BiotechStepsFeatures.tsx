@@ -6,7 +6,7 @@ import {
   FeaturesProps,
   StepsFeatures,
 } from "@fathym/atomic";
-import { SetupPhaseTypes } from "../../SetupPhaseTypes.tsx";
+import { SetupPhaseTypes } from "../../../src/SetupPhaseTypes.tsx";
 import { callToActionStyles } from "../../styles/actions.tsx";
 import { ChevronRightIcon } from "$fathym/atomic-icons";
 

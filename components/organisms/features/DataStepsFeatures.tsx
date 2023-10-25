@@ -7,7 +7,7 @@ import {
   StepsFeatures,
   StepsFeaturesProps,
 } from "@fathym/atomic";
-import { DataPhaseTypes } from "../../DataPhaseTypes.tsx";
+import { DataPhaseTypes } from "../../../src/DataPhaseTypes.tsx";
 import { callToActionStyles } from "../../styles/actions.tsx";
 
 export interface DataStepsFeaturesProps extends StepsFeaturesProps {

@@ -5,16 +5,15 @@ import ConnectDevicesHero from "../components/organisms/heros/ConnectDevicesHero
 import SetupDataHero from "../components/organisms/heros/SetupDataHero.tsx";
 import CreateApplicationsHero from "../components/organisms/heros/CreateApplicationsHero.tsx";
 import { BiotechStepsFeatures } from "../components/organisms/features/BiotechStepsFeatures.tsx";
-import { SetupPhaseTypes } from "../components/SetupPhaseTypes.tsx";
-import EmulatedDevices from "../components/organisms/devices/EmulatedDevices.tsx";
-import ConnectedDevices from "../components/organisms/devices/ConnectedDevices.tsx";
-import DevicesTelemetry from "../components/organisms/devices/DevicesTelemetry.tsx";
+import { SetupPhaseTypes } from "../src/SetupPhaseTypes.tsx";
+import { OpenBiotechManagerState } from "../src/OpenBiotechManagerState.tsx";
+import { BiotechDashboard } from "../components/organisms/BiotechDashboard.tsx";
 
 interface HomePageData {
   setupPhase: SetupPhaseTypes;
 }
 
-export const handler: Handlers<HomePageData | null> = {
+export const handler: Handlers<HomePageData | null, OpenBiotechManagerState> = {
   GET(_, ctx) {
     // const {} = ctx.params;
 
@@ -24,7 +23,7 @@ export const handler: Handlers<HomePageData | null> = {
     // }
 
     const data: HomePageData = {
-      setupPhase: SetupPhaseTypes.Cloud,
+      setupPhase: ctx.state.SetupPhase,
     };
 
     return ctx.render(data);
@@ -53,7 +52,9 @@ export const handler: Handlers<HomePageData | null> = {
 //   }
 // }
 
-export default function Home({ data }: PageProps<HomePageData | null>) {
+export default function Home(
+  { data, state }: PageProps<HomePageData | null, OpenBiotechManagerState>,
+) {
   // const OpenBiotechAppStateFlowContext =
   //   new OpenBiotechAppStateFlowContextService({
   //     FirstName: "",
@@ -100,28 +101,10 @@ export default function Home({ data }: PageProps<HomePageData | null>) {
 
       <BiotechStepsFeatures setupPhase={data!.setupPhase} />
 
-      <div class="p-2 md:p-4">
-        <EmulatedDevices class="mb-8 md:mb-16" />
-
-        <div class="flex flex-col md:flex-row mt-2 gap-8 md:gap-16">
-          <ConnectedDevices class="w-full md:w-1/3" />
-
-          <DevicesTelemetry class="w-full md:w-2/3" />
-        </div>
-      </div>
-
-      <div>
-        {
-          /* <YouTubePlayer
-          width={640}
-          height={390}
-          videoId={"r9jwGansp1E"}
-          playerVars={{ mute: 1 }}
-          // playerHandler={playerHandler}
-          // onPlayerReady={onPlayerReady}
-        /> */
-        }
-      </div>
+      {state.SetupPhase != SetupPhaseTypes.Cloud &&
+          state.SetupPhase != SetupPhaseTypes.Devices
+        ? <BiotechDashboard />
+        : <></>}
     </>
   );
 }

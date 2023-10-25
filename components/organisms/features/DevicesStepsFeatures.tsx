@@ -7,7 +7,7 @@ import {
   StepsFeatures,
   StepsFeaturesProps,
 } from "@fathym/atomic";
-import { DevicesPhaseTypes } from "../../DevicesPhaseTypes.tsx";
+import { DevicesPhaseTypes } from "../../../src/DevicesPhaseTypes.tsx";
 import { callToActionStyles } from "../../styles/actions.tsx";
 
 export interface DevicesStepsFeaturesProps extends StepsFeaturesProps {

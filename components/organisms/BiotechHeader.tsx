@@ -1,5 +1,6 @@
 import {
   Action,
+  ActionStyleTypes,
   classSet,
   factory,
   Header,
@@ -9,33 +10,32 @@ import {
 } from "@fathym/atomic";
 import ProfileMenu from "../../islands/common/ProfileMenu.tsx";
 import InteractiveResponsiveSet from "../../islands/molecules/InteractiveResponsiveSet.tsx";
-import InteractiveMenuIcon from "../../islands/atoms/InteractiveMenuIcon.tsx";
-import { MenuIcon } from "$fathym/atomic-icons";
 
 export type BiotechHeaderProps = HeaderProps & {
   currentUrl: URL;
 };
 
-export default function BiotechHeader(props: BiotechHeaderProps) {
+export function BiotechHeader(props: BiotechHeaderProps) {
   const logo = {
     LogoAlt: "Fathym Open BioTech",
     LogoUrl: "/o-biotech-logo.svg",
     LogoHref: "/",
   };
 
-  const active = <span class="bg-blue-700 bg-opacity-80 text-white"></span>;
+  const active = <span class="bg-sky-700 bg-opacity-80 text-white"></span>;
 
   return (
     <Header
-      class={classSet(undefined, "bg-blue-500 sticky top-0")}
+      class={classSet(undefined, "bg-sky-500 sticky top-0")}
       logo={logo}
       nav={
         <InteractiveResponsiveSet toggleChildren="☰">
           <Action
             href="./cloud"
+            actionStyle={ActionStyleTypes.Link}
             class={classSet(
               undefined,
-              "text-xl mx-1",
+              "text-xl mx-1 text-white",
               props.currentUrl.pathname.startsWith("/cloud")
                 ? active.props.class
                 : "",
@@ -46,9 +46,10 @@ export default function BiotechHeader(props: BiotechHeaderProps) {
 
           <Action
             href="./devices"
+            actionStyle={ActionStyleTypes.Link}
             class={classSet(
               undefined,
-              "text-xl mx-1",
+              "text-xl mx-1 text-white",
               props.currentUrl.pathname.startsWith("/devices")
                 ? active.props.class
                 : "",
@@ -59,9 +60,10 @@ export default function BiotechHeader(props: BiotechHeaderProps) {
 
           <Action
             href="./data"
+            actionStyle={ActionStyleTypes.Link}
             class={classSet(
               undefined,
-              "text-xl mx-1",
+              "text-xl mx-1 text-white",
               props.currentUrl.pathname.startsWith("/data")
                 ? active.props.class
                 : "",
@@ -72,9 +74,10 @@ export default function BiotechHeader(props: BiotechHeaderProps) {
 
           <Action
             href="./applications"
+            actionStyle={ActionStyleTypes.Link}
             class={classSet(
               undefined,
-              "text-xl mx-1",
+              "text-xl mx-1 text-white",
               props.currentUrl.pathname.startsWith("/applications")
                 ? active.props.class
                 : "",
