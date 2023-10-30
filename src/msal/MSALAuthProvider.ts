@@ -11,6 +11,8 @@ import { MSALSignInOptions } from "./MSALSignInOptions.ts";
 import { MSALSignOutOptions } from "./MSALSignOutOptions.ts";
 import { MSALAuthSession } from "./MSALAuthSession.ts";
 
+// From: https://learn.microsoft.com/en-us/entra/identity-platform/tutorial-v2-nodejs-webapp-msal
+
 export class MSALAuthProvider {
   constructor(
     protected msalConfig: Configuration,
