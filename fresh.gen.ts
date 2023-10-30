@@ -28,7 +28,7 @@ const manifest = {
     "./routes/api/joke.ts": $2,
     "./routes/applications/index.tsx": $3,
     "./routes/cloud/azure/auth/acquireToken.ts": $4,
-    "./routes/cloud/azure/auth/signin copy.ts": $5,
+    "./routes/cloud/azure/auth/redirect.ts": $5,
     "./routes/cloud/azure/auth/signin.ts": $6,
     "./routes/cloud/azure/auth/signout.ts": $7,
     "./routes/cloud/index.tsx": $8,

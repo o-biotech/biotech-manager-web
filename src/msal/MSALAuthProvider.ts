@@ -202,6 +202,7 @@ export class MSALAuthProvider {
     return redirectRequest(logoutUri);
   }
   //#endregion
+
   //#region Helpers
   protected async getAuthorityMetadata() {
     const endpoint =
@@ -289,4 +290,5 @@ export class MSALAuthProvider {
       throw error;
     }
   }
+  //#endregion
 }
