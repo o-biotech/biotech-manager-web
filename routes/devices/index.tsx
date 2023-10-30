@@ -3,6 +3,7 @@ import { DisplayStyleTypes, Hero, HeroStyleTypes } from "@fathym/atomic";
 import { DevicesPhaseTypes } from "../../src/DevicesPhaseTypes.tsx";
 import { DevicesStepsFeatures } from "../../components/organisms/features/DevicesStepsFeatures.tsx";
 import { OpenBiotechManagerState } from "../../src/OpenBiotechManagerState.tsx";
+import { redirectRequest } from "../../src/utils/request.helpers.ts";
 
 interface DevicesPageData {
   devicesPhase: DevicesPhaseTypes;
@@ -20,15 +21,8 @@ export const handler: Handlers<
     //   return ctx.render(null);
     // }
 
-    if (ctx.state.SetupPhase < 1) {
-      const headers = new Headers();
-
-      headers.set("location", "/");
-
-      return new Response(null, {
-        status: 303, // See Other
-        headers,
-      });
+    if (ctx.state.Phase < 1) {
+      return redirectRequest("/");
     }
 
     const data: DevicesPageData = {

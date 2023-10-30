@@ -1,5 +1,5 @@
-import { IoTDisplay, IoTDisplayProps } from "@fathym/atomic-iot";
 import { EmulatedDeviceIcon } from "$fathym/atomic-icons";
+import { IoTDisplay, IoTDisplayProps } from "@fathym/atomic";
 import InteractiveSlideToggle from "../../../islands/atoms/InteractiveSlideToggle.tsx";
 
 export default function EmulatedDevices(

@@ -1,7 +1,10 @@
 import { getCookies } from "$std/http/cookie.ts";
+import { cookieSession } from "$fresh/session";
 import { MiddlewareHandlerContext } from "$fresh/server.ts";
 import { OpenBiotechManagerState } from "../src/OpenBiotechManagerState.tsx";
 import { SetupPhaseTypes } from "../src/SetupPhaseTypes.tsx";
+import { CloudPhaseTypes } from "../src/CloudPhaseTypes.tsx";
+import { redirectRequest } from "../src/utils/request.helpers.ts";
 
 function loggedInCheck(
   req: Request,
@@ -12,14 +15,7 @@ function loggedInCheck(
   const userCookie = cookies["user"];
 
   if (!userCookie) {
-    const headers = new Headers();
-
-    headers.set("location", "http://openbiotech.co");
-
-    return new Response(null, {
-      status: 303, // See Other
-      headers,
-    });
+    return redirectRequest("/");
   }
 
   return ctx.next();
@@ -31,7 +27,12 @@ function currentState(
 ) {
   // Call to get state
   const state: OpenBiotechManagerState = {
-    SetupPhase: SetupPhaseTypes.Cloud,
+    ...ctx.state,
+    Phase: SetupPhaseTypes.Cloud,
+    Cloud: {
+      IsConnected: false,
+      Phase: CloudPhaseTypes.Connect,
+    },
   };
 
   ctx.state = state;
@@ -39,7 +40,17 @@ function currentState(
   return ctx.next();
 }
 
+function userSession(
+  req: Request,
+  ctx: MiddlewareHandlerContext<OpenBiotechManagerState>,
+) {
+  return session(req, ctx);
+}
+
+const session = cookieSession();
+
 export const handler = [
   // loggedInCheck,
+  userSession,
   currentState,
 ];

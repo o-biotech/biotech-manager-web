@@ -1,6 +1,5 @@
-import { IoTDisplay, IoTDisplayProps } from "@fathym/atomic-iot";
 import { ConnectedDevicesIcon } from "$fathym/atomic-icons";
-import { Action, Input } from "@fathym/atomic";
+import { Action, Input, IoTDisplay, IoTDisplayProps } from "@fathym/atomic";
 import { snakeCase } from "$case";
 
 export default function ConnectedDevices(

@@ -19,9 +19,7 @@ export default function App(
       </Head>
 
       <BasicLayout
-        header={
-          <BiotechHeader currentUrl={url} setupPhase={state.SetupPhase} />
-        }
+        header={<BiotechHeader currentUrl={url} setupPhase={state.Phase} />}
         footer={<BiotechFooter />}
       >
         <Component />

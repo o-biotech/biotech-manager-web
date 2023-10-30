@@ -23,7 +23,7 @@ export const handler: Handlers<HomePageData | null, OpenBiotechManagerState> = {
     // }
 
     const data: HomePageData = {
-      setupPhase: ctx.state.SetupPhase,
+      setupPhase: ctx.state.Phase,
     };
 
     return ctx.render(data);

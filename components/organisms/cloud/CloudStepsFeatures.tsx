@@ -4,17 +4,22 @@ import { StepsFeatures, StepsFeaturesProps } from "@fathym/atomic";
 import CloudCALZForm from "./calz.form.tsx";
 import CloudConnectForms from "../../../islands/organisms/CloudConnectForms.tsx";
 import CloudIoTForm from "./iot.form.tsx";
+import ConnectAzure from "./ConnectAzure.tsx";
 
-export interface CloudStepsFeaturesProps extends StepsFeaturesProps {
-  cloudPhase?: CloudPhaseTypes;
-}
+export type CloudStepsFeaturesProps = StepsFeaturesProps & {
+  cloudPhase: CloudPhaseTypes;
+
+  isConnected: boolean;
+};
 
 export default function CloudStepsFeatures(props: CloudStepsFeaturesProps) {
   let currentForm: ComponentChildren = undefined;
 
   switch (props.cloudPhase) {
     case CloudPhaseTypes.Connect:
-      currentForm = <CloudConnectForms class="px-4" />;
+      currentForm = (
+        <ConnectAzure isConnected={props.isConnected} class="px-4" />
+      );
       break;
 
     case CloudPhaseTypes.CALZ:

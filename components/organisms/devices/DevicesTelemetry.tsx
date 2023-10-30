@@ -1,7 +1,6 @@
-import { IoTDisplay, IoTDisplayProps } from "@fathym/atomic-iot";
 import { DeviceTelemetryIcon } from "$fathym/atomic-icons";
 import InteractiveSlideToggle from "../../../islands/atoms/InteractiveSlideToggle.tsx";
-import { classSet } from "@fathym/atomic";
+import { IoTDisplay, IoTDisplayProps } from "@fathym/atomic";
 
 export default function DevicesTelemetry(
   props: IoTDisplayProps,

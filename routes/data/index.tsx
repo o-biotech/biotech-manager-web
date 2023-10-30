@@ -3,6 +3,7 @@ import { DisplayStyleTypes, Hero, HeroStyleTypes } from "@fathym/atomic";
 import { DataStepsFeatures } from "../../components/organisms/features/DataStepsFeatures.tsx";
 import { DataPhaseTypes } from "../../src/DataPhaseTypes.tsx";
 import { OpenBiotechManagerState } from "../../src/OpenBiotechManagerState.tsx";
+import { redirectRequest } from "../../src/utils/request.helpers.ts";
 
 interface DataPageData {
   dataPhase: DataPhaseTypes;
@@ -17,15 +18,8 @@ export const handler: Handlers<DataPageData | null, OpenBiotechManagerState> = {
     //   return ctx.render(null);
     // }
 
-    if (ctx.state.SetupPhase < 2) {
-      const headers = new Headers();
-
-      headers.set("location", "/");
-
-      return new Response(null, {
-        status: 303, // See Other
-        headers,
-      });
+    if (ctx.state.Phase < 2) {
+      return redirectRequest("/");
     }
 
     const data: DataPageData = {
