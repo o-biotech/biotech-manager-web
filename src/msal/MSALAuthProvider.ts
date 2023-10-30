@@ -1,10 +1,10 @@
-import * as msal from "npm:@azure/msal-node";
+import * as msal from "npm:@azure/msal-node@2.1.0";
 import {
   AuthorizationCodePayload,
   AuthorizationCodeRequest,
   AuthorizationUrlRequest,
   Configuration,
-} from "npm:@azure/msal-node";
+} from "npm:@azure/msal-node@2.1.0";
 import { redirectRequest } from "../utils/request.helpers.ts";
 import { MSALAcquireTokenOptions } from "./MSALAcquireTokenOptions.ts";
 import { MSALSignInOptions } from "./MSALSignInOptions.ts";
@@ -33,9 +33,7 @@ export class MSALAuthProvider {
        * https://github.com/AzureAD/microsoft-authentication-library-for-js/blob/dev/lib/msal-node/docs/caching.md
        */
       if (session.has("tokenCache")) {
-        msalInstance
-          .getTokenCache()
-          .deserialize(session.get("tokenCache"));
+        msalInstance.getTokenCache().deserialize(session.get("tokenCache"));
       }
 
       const tokenResponse = await msalInstance.acquireTokenSilent({
@@ -84,9 +82,7 @@ export class MSALAuthProvider {
       const msalInstance = this.getMsalInstance();
 
       if (session.has("tokenCache")) {
-        msalInstance
-          .getTokenCache()
-          .deserialize(session.get("tokenCache"));
+        msalInstance.getTokenCache().deserialize(session.get("tokenCache"));
       }
 
       const tokenResponse = await msalInstance.acquireTokenByCode(
@@ -221,7 +217,7 @@ export class MSALAuthProvider {
 
   protected async getCloudDiscoveryMetadata() {
     const endpoint =
-      "https://login.microsoftonline.com/common/discovery/instance";
+      `https://login.microsoftonline.com/common/discovery/instance`;
 
     try {
       const response = await fetch(endpoint, {
@@ -233,7 +229,13 @@ export class MSALAuthProvider {
         },
       });
 
-      return await response.json();
+      const metadata = await response.json();
+
+      if (metadata.error) {
+        throw new Error(metadata.error_description);
+      }
+
+      return metadata;
     } catch (error) {
       throw error;
     }

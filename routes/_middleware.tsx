@@ -25,12 +25,14 @@ function currentState(
   req: Request,
   ctx: MiddlewareHandlerContext<OpenBiotechManagerState>,
 ) {
+  const isAuthenticated = ctx.state.session.get("isAuthenticated");
+
   // Call to get state
   const state: OpenBiotechManagerState = {
     ...ctx.state,
     Phase: SetupPhaseTypes.Cloud,
     Cloud: {
-      IsConnected: false,
+      IsConnected: isAuthenticated,
       Phase: CloudPhaseTypes.Connect,
     },
   };

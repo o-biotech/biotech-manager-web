@@ -3,6 +3,7 @@ import CloudConnectHero from "../../components/organisms/heros/CloudConnectHero.
 import CloudStepsFeatures from "../../components/organisms/cloud/CloudStepsFeatures.tsx";
 import { CloudPhaseTypes } from "../../src/CloudPhaseTypes.tsx";
 import { OpenBiotechManagerState } from "../../src/OpenBiotechManagerState.tsx";
+import { redirectRequest } from "../../src/utils/request.helpers.ts";
 
 interface CloudPageData {
   cloudPhase: CloudPhaseTypes;
@@ -20,12 +21,19 @@ export const handler: Handlers<CloudPageData | null, OpenBiotechManagerState> =
       //   return ctx.render(null);
       // }
 
+      // ctx.state.session.set("isAuthenticated", false);
+
       const data: CloudPageData = {
         cloudPhase: ctx.state.Cloud.Phase,
         isConnected: ctx.state.Cloud.IsConnected,
       };
 
       return ctx.render(data);
+    },
+    POST(_req, ctx) {
+      ctx.state.session.set("isAuthenticated", true);
+
+      return redirectRequest("/cloud");
     },
   };
 
