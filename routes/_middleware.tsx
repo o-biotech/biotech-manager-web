@@ -43,18 +43,6 @@ function currentState(
   return ctx.next();
 }
 
-const denoKvPath = null;
-// Deno.env.get("DENO_KV_PATH") || null;
-
-const redis = await connect({
-  hostname: "fathym-cloud-prd.redis.cache.windows.net",
-  port: 6380,
-  username: "",
-  password: "di2BAVpyNFGxGyKS5mFplIsS0aVSH5z683jN3GDLJr8=",
-  tls: true,
-});
-
-// const session = redisSession(redis as any);
 const session = cookieSession();
 
 function userSession(
