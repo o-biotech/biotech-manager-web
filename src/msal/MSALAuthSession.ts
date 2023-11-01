@@ -1,9 +1,12 @@
-export type MSALAuthSession = {
-  clear(): any;
+import { Session } from "$fresh/session";
 
-  get(key: string): any;
+export type MSALAuthSession = Session;
+//  {
+//   clear(): any;
 
-  has(key: string): boolean;
+//   get(key: string): any;
 
-  set(key: string, value: any): any;
-};
+//   has(key: string): boolean;
+
+//   set(key: string, value: any): any;
+// };

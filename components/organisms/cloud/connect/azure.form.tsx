@@ -10,9 +10,9 @@ export default function CloudConnectAzureForm(
 ) {
   return (
     <form
-      // actionk="/cloud/azure/auth/signin"
-      method="POST"
-      {...props}
+      action="/cloud/azure/auth/signin"
+      {// method="POST"
+      ...props}
       class={classSet(props, "w-full max-w-sm md:max-w-md mx-auto py-3 mt-8")}
     >
       <div class="flex flex-wrap -mx-3 mb-4">

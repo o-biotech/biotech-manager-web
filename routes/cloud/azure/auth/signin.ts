@@ -11,7 +11,7 @@ export const handler: Handlers<any, OpenBiotechManagerState> = {
     return msalAuthProvider.SignIn(ctx.state.session, {
       Scopes: [],
       RedirectURI: MSAL_REDIRECT_URI,
-      SuccessRedirect: "/",
+      SuccessRedirect: "/cloud",
     });
   },
 };

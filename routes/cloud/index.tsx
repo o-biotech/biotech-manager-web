@@ -1,9 +1,11 @@
 import { Handlers, PageProps } from "$fresh/server.ts";
+import * as ArmResource from "npm:@azure/arm-subscriptions";
 import CloudConnectHero from "../../components/organisms/heros/CloudConnectHero.tsx";
 import CloudStepsFeatures from "../../components/organisms/cloud/CloudStepsFeatures.tsx";
 import { CloudPhaseTypes } from "../../src/CloudPhaseTypes.tsx";
 import { OpenBiotechManagerState } from "../../src/OpenBiotechManagerState.tsx";
 import { redirectRequest } from "../../src/utils/request.helpers.ts";
+import { msalAuthProvider } from "../../configs/msal.config.ts";
 
 interface CloudPageData {
   cloudPhase: CloudPhaseTypes;
@@ -21,19 +23,27 @@ export const handler: Handlers<CloudPageData | null, OpenBiotechManagerState> =
       //   return ctx.render(null);
       // }
 
-      // ctx.state.session.set("isAuthenticated", false);
+      ctx.state.session.set("isMsalAuthenticated", false);
+
+      const test = ctx.state.session.get("test");
 
       const data: CloudPageData = {
         cloudPhase: ctx.state.Cloud.Phase,
         isConnected: ctx.state.Cloud.IsConnected,
       };
 
-      return ctx.render(data);
-    },
-    POST(_req, ctx) {
-      ctx.state.session.set("isAuthenticated", true);
+      if (data.isConnected) {
+        // const subClient = new ArmResource.SubscriptionClient({
+        //   // getToken: () => {
+        //   //   ctx.state.session.
+        //   // }
+        // });
+        // subClient.subscriptions.list().then((subs) => {
+        //   console.log(subs);
+        // });
+      }
 
-      return redirectRequest("/cloud");
+      return ctx.render(data);
     },
   };
 

@@ -15,6 +15,8 @@ import * as $9 from "./routes/data/index.tsx";
 import * as $10 from "./routes/devices/[name].tsx";
 import * as $11 from "./routes/devices/index.tsx";
 import * as $12 from "./routes/index.tsx";
+import * as $13 from "./routes/test-redirect.ts";
+import * as $14 from "./routes/test.tsx";
 import * as $$0 from "./islands/atoms/InteractiveMenuIcon.tsx";
 import * as $$1 from "./islands/atoms/InteractiveSlideToggle.tsx";
 import * as $$2 from "./islands/common/ProfileMenu.tsx";
@@ -36,6 +38,8 @@ const manifest = {
     "./routes/devices/[name].tsx": $10,
     "./routes/devices/index.tsx": $11,
     "./routes/index.tsx": $12,
+    "./routes/test-redirect.ts": $13,
+    "./routes/test.tsx": $14,
   },
   islands: {
     "./islands/atoms/InteractiveMenuIcon.tsx": $$0,
