@@ -1,6 +1,7 @@
 import { ComponentChildren, JSX } from "preact";
-import { CloudPhaseTypes } from "../../../src/CloudPhaseTypes.tsx";
+import * as ArmResource from "npm:@azure/arm-subscriptions";
 import { StepsFeatures, StepsFeaturesProps } from "@fathym/atomic";
+import { CloudPhaseTypes } from "../../../src/CloudPhaseTypes.tsx";
 import CloudCALZForm from "./calz.form.tsx";
 import CloudConnectForms from "../../../islands/organisms/CloudConnectForms.tsx";
 import CloudIoTForm from "./iot.form.tsx";
@@ -10,6 +11,8 @@ export type CloudStepsFeaturesProps = StepsFeaturesProps & {
   cloudPhase: CloudPhaseTypes;
 
   isConnected: boolean;
+
+  subs: ArmResource.Subscription[];
 };
 
 export default function CloudStepsFeatures(props: CloudStepsFeaturesProps) {
@@ -18,7 +21,11 @@ export default function CloudStepsFeatures(props: CloudStepsFeaturesProps) {
   switch (props.cloudPhase) {
     case CloudPhaseTypes.Connect:
       currentForm = (
-        <ConnectAzure isConnected={props.isConnected} class="px-4" />
+        <ConnectAzure
+          isConnected={props.isConnected}
+          subs={props.subs}
+          class="px-4"
+        />
       );
       break;
 

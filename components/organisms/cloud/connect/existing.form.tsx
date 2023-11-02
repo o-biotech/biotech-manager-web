@@ -1,11 +1,13 @@
 import { JSX } from "preact";
+import * as ArmResource from "npm:@azure/arm-subscriptions";
 import { Action, ActionGroup, classSet } from "@fathym/atomic";
 import { callToActionStyles } from "../../../styles/actions.tsx";
 
-export interface CloudConnectExistingFormProps
-  extends JSX.HTMLAttributes<HTMLFormElement> {
-  subscriptions?: { [key: string]: string };
-}
+export type CloudConnectExistingFormProps =
+  & JSX.HTMLAttributes<HTMLFormElement>
+  & {
+    subs: ArmResource.Subscription[];
+  };
 
 export default function CloudConnectExistingForm(
   props: CloudConnectExistingFormProps,
@@ -30,15 +32,15 @@ export default function CloudConnectExistingForm(
             required
             class="appearance-none block w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 rounded-lg shadow-sm focus:outline-none focus:shadow-lg focus:border-blue-500 placeholder-gray-500"
           >
-            <option value="">Select an existing subscription</option>
+            <option value="">-- Select an existing subscription --</option>
 
-            <option value="00000000-0000-0000-0000-000000000000">
-              Fathym
-            </option>
-
-            <option value="00000000-0000-0000-0000-000000000000">
-              Fathym R&D
-            </option>
+            {props.subs.map((sub) => {
+              return (
+                <option value={sub.subscriptionId}>
+                  {sub.displayName}
+                </option>
+              );
+            })}
           </select>
         </div>
       </div>

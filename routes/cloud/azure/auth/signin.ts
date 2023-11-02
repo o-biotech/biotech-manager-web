@@ -9,7 +9,7 @@ import { OpenBiotechManagerState } from "../../../../src/OpenBiotechManagerState
 export const handler: Handlers<any, OpenBiotechManagerState> = {
   GET(_req, ctx) {
     return msalAuthProvider.SignIn(ctx.state.session, {
-      Scopes: [],
+      Scopes: ["https://management.core.windows.net//user_impersonation"], //"https://database.windows.net//.default"],//,"https://management.core.windows.net//user_impersonation"],
       RedirectURI: MSAL_REDIRECT_URI,
       SuccessRedirect: "/cloud",
     });

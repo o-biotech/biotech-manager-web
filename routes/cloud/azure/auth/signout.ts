@@ -7,8 +7,8 @@ import { OpenBiotechManagerState } from "../../../../src/OpenBiotechManagerState
 
 // deno-lint-ignore no-explicit-any
 export const handler: Handlers<any, OpenBiotechManagerState> = {
-  GET(_req, ctx) {
-    return msalAuthProvider.SignOut(ctx.state.session, {
+  async GET(_req, ctx) {
+    return await msalAuthProvider.SignOut(ctx.state.session, {
       ClearSession: false,
       PostLogoutRedirectUri: MSAL_POST_LOGOUT_REDIRECT_URI,
     });

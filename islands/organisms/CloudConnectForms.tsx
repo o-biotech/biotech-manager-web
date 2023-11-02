@@ -1,13 +1,18 @@
 import { JSX } from "preact";
 import { useState } from "preact/hooks";
+import * as ArmResource from "npm:@azure/arm-subscriptions";
 import { Action, ActionGroup, ActionStyleTypes } from "@fathym/atomic";
 import CloudConnectExistingForm from "../../components/organisms/cloud/connect/existing.form.tsx";
 import CloudConnectManagedForm from "../../components/organisms/cloud/connect/managed.form.tsx";
 
+export type CloudConnectFormsProps = JSX.HTMLAttributes<HTMLFormElement> & {
+  subs: ArmResource.Subscription[];
+};
+
 export default function CloudConnectForms(
-  props: JSX.HTMLAttributes<HTMLFormElement>,
+  props: CloudConnectFormsProps,
 ) {
-  const [isManaged, setIsManaged] = useState(true);
+  const [isManaged, setIsManaged] = useState(false);
 
   const switchOnClick = () => {
     setIsManaged(!isManaged);

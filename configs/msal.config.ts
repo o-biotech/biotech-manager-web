@@ -1,6 +1,7 @@
 import * as msal from "npm:@azure/msal-node@2.1.0";
 import { Configuration } from "npm:@azure/msal-node@2.1.0";
 import { MSALAuthProvider } from "../src/msal/MSALAuthProvider.ts";
+import { denoKv } from "./deno-kv.config.ts";
 
 export const msalCryptoProvider = new msal.CryptoProvider();
 
@@ -32,4 +33,5 @@ export const MSAL_POST_LOGOUT_REDIRECT_URI = Deno.env.get(
 export const msalAuthProvider = new MSALAuthProvider(
   msalConfig,
   msalCryptoProvider,
+  denoKv,
 );

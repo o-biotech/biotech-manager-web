@@ -1,5 +1,7 @@
+// deno-lint-ignore-file no-explicit-any
 import { Handlers, PageProps } from "$fresh/server.ts";
 import * as ArmResource from "npm:@azure/arm-subscriptions";
+import { AccessToken } from "npm:@azure/identity";
 import CloudConnectHero from "../../components/organisms/heros/CloudConnectHero.tsx";
 import CloudStepsFeatures from "../../components/organisms/cloud/CloudStepsFeatures.tsx";
 import { CloudPhaseTypes } from "../../src/CloudPhaseTypes.tsx";
@@ -11,11 +13,13 @@ interface CloudPageData {
   cloudPhase: CloudPhaseTypes;
 
   isConnected: boolean;
+
+  subs: ArmResource.Subscription[];
 }
 
 export const handler: Handlers<CloudPageData | null, OpenBiotechManagerState> =
   {
-    GET(_, ctx) {
+    async GET(_, ctx) {
       // const {} = ctx.params;
 
       // const resp = await fetch(`https://api.github.com/users/${username}`);
@@ -23,23 +27,36 @@ export const handler: Handlers<CloudPageData | null, OpenBiotechManagerState> =
       //   return ctx.render(null);
       // }
 
-      ctx.state.session.set("isMsalAuthenticated", false);
+      // ctx.state.session.set("isMsalAuthenticated", false);
 
       const test = ctx.state.session.get("test");
 
       const data: CloudPageData = {
         cloudPhase: ctx.state.Cloud.Phase,
         isConnected: ctx.state.Cloud.IsConnected,
+        subs: [],
       };
 
       if (data.isConnected) {
-        // const subClient = new ArmResource.SubscriptionClient({
-        //   // getToken: () => {
-        //   //   ctx.state.session.
-        //   // }
-        // });
-        // subClient.subscriptions.list().then((subs) => {
-        //   console.log(subs);
+        const subClient = new ArmResource.SubscriptionClient({
+          getToken: async () => {
+            const token = await msalAuthProvider.GetAccessToken(
+              ctx.state.session,
+            );
+
+            return {
+              token,
+            } as AccessToken;
+          },
+        });
+
+        const subsList = subClient.subscriptions.list();
+
+        for await (const sub of subsList) {
+          data!.subs.push(sub);
+          console.log(sub)
+        }
+        // .then((subs) => {
         // });
       }
 
@@ -57,6 +74,7 @@ export default function Cloud({
       <CloudStepsFeatures
         cloudPhase={data!.cloudPhase}
         isConnected={data!.isConnected}
+        subs={data!.subs}
       />
     </div>
   );

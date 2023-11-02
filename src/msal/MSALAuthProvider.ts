@@ -1,5 +1,6 @@
 import * as msal from "npm:@azure/msal-node@2.1.0";
 import {
+  AccountInfo,
   AuthorizationCodePayload,
   AuthorizationCodeRequest,
   AuthorizationUrlRequest,
@@ -13,10 +14,13 @@ import { MSALAuthSession } from "./MSALAuthSession.ts";
 
 // From: https://learn.microsoft.com/en-us/entra/identity-platform/tutorial-v2-nodejs-webapp-msal
 
+// TODO: encrypt/decrypt keys
+
 export class MSALAuthProvider {
   constructor(
     protected msalConfig: Configuration,
     protected cryptoProvider: msal.CryptoProvider,
+    protected denoKv: Deno.Kv,
   ) {}
 
   //#region API Methods
@@ -32,27 +36,54 @@ export class MSALAuthProvider {
        * cache for the new MSAL CCA instance. For more, see:
        * https://github.com/AzureAD/microsoft-authentication-library-for-js/blob/dev/lib/msal-node/docs/caching.md
        */
-      if (session.has("tokenCache")) {
-        msalInstance.getTokenCache().deserialize(session.get("tokenCache"));
+      const tokenCache = (
+        await this.denoKv.get([
+          "UserData",
+          session.get("idToken"),
+          "TokenCache",
+        ])
+      ).value as string;
+
+      if (tokenCache) {
+        msalInstance.getTokenCache().deserialize(tokenCache);
       }
 
       const tokenResponse = await msalInstance.acquireTokenSilent({
-        account: session.get("account"),
+        account: (
+          await this.denoKv.get([
+            "UserData",
+            session.get("idToken"),
+            "AccessToken",
+          ])
+        ).value as AccountInfo,
         scopes: options.Scopes || [],
       });
+
+      session.set("idToken", tokenResponse.idToken);
 
       /**
        * On successful token acquisition, write the updated token
        * cache back to the session. For more, see:
        * https://github.com/AzureAD/microsoft-authentication-library-for-js/blob/dev/lib/msal-node/docs/caching.md
        */
-      session.set("tokenCache", msalInstance.getTokenCache().serialize());
+      await this.denoKv.set(
+        ["UserData", session.get("idToken"), "TokenCache"],
+        msalInstance.getTokenCache().serialize(),
+      );
 
-      session.set("accessToken", tokenResponse.accessToken);
+      await this.denoKv.set(
+        ["UserData", session.get("idToken"), "Account"],
+        tokenResponse.account,
+      );
 
-      session.set("idToken", tokenResponse.idToken);
+      await this.denoKv.set(
+        ["UserData", session.get("idToken"), "AccessToken"],
+        tokenResponse.accessToken,
+      );
 
-      session.set("account", tokenResponse.account);
+      // session.set('accessToken', tokenResponse.accessToken);
+
+      // session.set('account', tokenResponse.account);
 
       return redirectRequest(options.SuccessRedirect);
     } catch (error) {
@@ -62,6 +93,14 @@ export class MSALAuthProvider {
 
       throw error;
     }
+  }
+
+  public async GetAccessToken(
+    session: MSALAuthSession,
+  ): Promise<string> {
+    return (await this.denoKv.get(
+      ["UserData", session.get("idToken"), "AccessToken"],
+    )).value as string;
   }
 
   public async HandleRedirect(
@@ -81,8 +120,16 @@ export class MSALAuthProvider {
     try {
       const msalInstance = this.getMsalInstance();
 
-      if (session.has("tokenCache")) {
-        msalInstance.getTokenCache().deserialize(session.get("tokenCache"));
+      const tokenCache = (
+        await this.denoKv.get([
+          "UserData",
+          session.get("idToken"),
+          "TokenCache",
+        ])
+      ).value as string;
+
+      if (tokenCache) {
+        msalInstance.getTokenCache().deserialize(tokenCache);
       }
 
       const tokenResponse = await msalInstance.acquireTokenByCode(
@@ -92,15 +139,24 @@ export class MSALAuthProvider {
 
       session.set("test", new Date().toString());
 
-      // session.set("tokenCache", msalInstance.getTokenCache().serialize());
-      // session.set(
-      //   "tokenCache",
-      //   "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-      // );
-
-      session.set("accessToken", tokenResponse.accessToken.substring(0, 10));
-
       session.set("idToken", tokenResponse.idToken);
+
+      await this.denoKv.set(
+        ["UserData", session.get("idToken"), "TokenCache"],
+        msalInstance.getTokenCache().serialize(),
+      );
+
+      await this.denoKv.set(
+        ["UserData", session.get("idToken"), "Account"],
+        tokenResponse.account,
+      );
+
+      await this.denoKv.set(
+        ["UserData", session.get("idToken"), "AccessToken"],
+        tokenResponse.accessToken,
+      );
+
+      // session.set("tokenCache", msalInstance.getTokenCache().serialize());
 
       // session.set("account", tokenResponse.account);
 
@@ -187,10 +243,10 @@ export class MSALAuthProvider {
     );
   }
 
-  public SignOut(
+  public async SignOut(
     session: MSALAuthSession,
     options: MSALSignOutOptions,
-  ): Response {
+  ): Promise<Response> {
     /**
      * Construct a logout URI and redirect the user to end the
      * session with Azure AD. For more information, visit:
@@ -204,6 +260,11 @@ export class MSALAuthProvider {
     }
 
     session.clear();
+
+    await this.denoKv.delete([
+      "UserData",
+      session.get("idToken"),
+    ]);
 
     return redirectRequest(logoutUri);
   }
