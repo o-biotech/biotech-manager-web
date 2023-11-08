@@ -39,7 +39,7 @@ export const msalAuthProvider = new MSALAuthProvider(
 export const msalPluginConfig: MSALPluginConfiguration = {
   MSALAuthProvider: msalAuthProvider,
   MSALSignInOptions: {
-    Scopes: ["https://management.core.windows.net//user_impersonation"], //"https://database.windows.net//.default"],//,"https://management.core.windows.net//user_impersonation"],
+    Scopes: ["https://management.core.windows.net//user_impersonation"],
     RedirectURI: MSAL_REDIRECT_URI,
     SuccessRedirect: "/cloud",
   },
