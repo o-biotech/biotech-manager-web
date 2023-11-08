@@ -6,8 +6,9 @@ import CloudConnectHero from "../../components/organisms/heros/CloudConnectHero.
 import CloudStepsFeatures from "../../components/organisms/cloud/CloudStepsFeatures.tsx";
 import { CloudPhaseTypes } from "../../src/CloudPhaseTypes.tsx";
 import { OpenBiotechManagerState } from "../../src/OpenBiotechManagerState.tsx";
-import { redirectRequest } from "../../src/utils/request.helpers.ts";
+import { redirectRequest } from "@fathym/common";
 import { msalAuthProvider } from "../../configs/msal.config.ts";
+import { OpenBiotechEaC } from "../../src/eac/OpenBiotechEaC.ts";
 
 interface CloudPageData {
   cloudPhase: CloudPhaseTypes;
@@ -28,6 +29,8 @@ export const handler: Handlers<CloudPageData | null, OpenBiotechManagerState> =
       // }
 
       // ctx.state.session.set("isMsalAuthenticated", false);
+
+      const eac: OpenBiotechEaC = {};
 
       const test = ctx.state.session.get("test");
 
@@ -52,9 +55,12 @@ export const handler: Handlers<CloudPageData | null, OpenBiotechManagerState> =
 
         const subsList = subClient.subscriptions.list();
 
-        for await (const sub of subsList) {
-          data!.subs.push(sub);
-          console.log(sub)
+        try {
+          for await (const sub of subsList) {
+            data!.subs.push(sub);
+          }
+        } catch (err) {
+          console.log(err);
         }
         // .then((subs) => {
         // });

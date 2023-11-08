@@ -6,7 +6,7 @@ import {
   AuthorizationUrlRequest,
   Configuration,
 } from "npm:@azure/msal-node@2.1.0";
-import { redirectRequest } from "../utils/request.helpers.ts";
+import { redirectRequest } from "@fathym/common";
 import { MSALAcquireTokenOptions } from "./MSALAcquireTokenOptions.ts";
 import { MSALSignInOptions } from "./MSALSignInOptions.ts";
 import { MSALSignOutOptions } from "./MSALSignOutOptions.ts";
@@ -14,7 +14,7 @@ import { MSALAuthSession } from "./MSALAuthSession.ts";
 
 // From: https://learn.microsoft.com/en-us/entra/identity-platform/tutorial-v2-nodejs-webapp-msal
 
-// TODO: encrypt/decrypt keys
+// TODO: encrypt/decrypt keys... use crypto.subtle.*
 
 export class MSALAuthProvider {
   constructor(

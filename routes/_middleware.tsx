@@ -5,7 +5,7 @@ import { connect } from "redis";
 import { OpenBiotechManagerState } from "../src/OpenBiotechManagerState.tsx";
 import { SetupPhaseTypes } from "../src/SetupPhaseTypes.tsx";
 import { CloudPhaseTypes } from "../src/CloudPhaseTypes.tsx";
-import { redirectRequest } from "../src/utils/request.helpers.ts";
+import { redirectRequest } from "@fathym/common";
 
 function loggedInCheck(
   req: Request,

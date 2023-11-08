@@ -3,7 +3,7 @@ import { DisplayStyleTypes, Hero, HeroStyleTypes } from "@fathym/atomic";
 import { ApplicationsStepsFeatures } from "../../components/organisms/features/ApplicationsStepsFeatures.tsx";
 import { ApplicationsPhaseTypes } from "../../src/ApplicationsPhaseTypes.tsx";
 import { OpenBiotechManagerState } from "../../src/OpenBiotechManagerState.tsx";
-import { redirectRequest } from "../../src/utils/request.helpers.ts";
+import { redirectRequest } from "@fathym/common";
 
 interface DevicesPageData {
   appsPhase: ApplicationsPhaseTypes;
