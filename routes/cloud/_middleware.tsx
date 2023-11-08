@@ -4,7 +4,7 @@ import { OpenBiotechManagerState } from "../../src/OpenBiotechManagerState.tsx";
 import { msalAuthProvider } from "../../configs/msal.config.ts";
 import { AccessToken } from "npm:@azure/identity";
 
-async function currentState(
+async function isConnectedCheck(
   req: Request,
   ctx: MiddlewareHandlerContext<OpenBiotechManagerState>,
 ) {
@@ -36,5 +36,5 @@ async function currentState(
 }
 
 export const handler = [
-  currentState,
+  isConnectedCheck,
 ];

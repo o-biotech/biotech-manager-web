@@ -1,6 +1,6 @@
 import * as msal from "npm:@azure/msal-node@2.1.0";
 import { Configuration } from "npm:@azure/msal-node@2.1.0";
-import { MSALAuthProvider } from "../src/msal/MSALAuthProvider.ts";
+import { MSALAuthProvider, MSALPluginConfiguration } from "@fathym/msal";
 import { denoKv } from "./deno-kv.config.ts";
 
 export const msalCryptoProvider = new msal.CryptoProvider();
@@ -35,3 +35,17 @@ export const msalAuthProvider = new MSALAuthProvider(
   msalCryptoProvider,
   denoKv,
 );
+
+export const msalPluginConfig: MSALPluginConfiguration = {
+  MSALAuthProvider: msalAuthProvider,
+  MSALSignInOptions: {
+    Scopes: ["https://management.core.windows.net//user_impersonation"], //"https://database.windows.net//.default"],//,"https://management.core.windows.net//user_impersonation"],
+    RedirectURI: MSAL_REDIRECT_URI,
+    SuccessRedirect: "/cloud",
+  },
+  MSALSignOutOptions: {
+    ClearSession: false,
+    PostLogoutRedirectUri: MSAL_POST_LOGOUT_REDIRECT_URI,
+  },
+  RootPath: "cloud/azure/auth",
+};
