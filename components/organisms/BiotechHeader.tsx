@@ -15,6 +15,8 @@ import { SetupPhaseTypes } from "../../src/SetupPhaseTypes.tsx";
 export type BiotechHeaderProps = HeaderProps & {
   currentUrl: URL;
 
+  hasEaC: boolean;
+
   setupPhase: SetupPhaseTypes;
 };
 
@@ -38,10 +40,13 @@ export function BiotechHeader(props: BiotechHeaderProps) {
             actionStyle={ActionStyleTypes.Link}
             class={classSet(
               undefined,
-              "text-xl mx-1 text-white",
+              "text-xl mx-1",
               props.currentUrl.pathname.startsWith("/cloud")
                 ? active.props.class
                 : "",
+              props.hasEaC
+                ? "text-white"
+                : "pointer-events-none text-slate-400",
             )}
           >
             Cloud

@@ -4,6 +4,7 @@ import * as ArmResource from "npm:@azure/arm-subscriptions";
 import { Action, ActionGroup, ActionStyleTypes } from "@fathym/atomic";
 import CloudConnectExistingForm from "../../components/organisms/cloud/connect/existing.form.tsx";
 import CloudConnectManagedForm from "../../components/organisms/cloud/connect/managed.form.tsx";
+import { CloudConnectForm } from "../../components/organisms/cloud/connect/connect.form.tsx";
 
 export type CloudConnectFormsProps = JSX.HTMLAttributes<HTMLFormElement> & {
   subs: ArmResource.Subscription[];
@@ -12,19 +13,23 @@ export type CloudConnectFormsProps = JSX.HTMLAttributes<HTMLFormElement> & {
 export default function CloudConnectForms(
   props: CloudConnectFormsProps,
 ) {
-  const [isManaged, setIsManaged] = useState(false);
+  // const [isManaged, setIsManaged] = useState(false);
 
-  const switchOnClick = () => {
-    setIsManaged(!isManaged);
-  };
+  // const switchOnClick = () => {
+  //   setIsManaged(!isManaged);
+  // };
 
   return (
     <div class="flex flex-col justify-center">
-      {isManaged
+      <CloudConnectForm {...props} />
+      {
+        /* {isManaged
         ? <CloudConnectManagedForm {...props} />
-        : <CloudConnectExistingForm {...props} />}
+        : <CloudConnectExistingForm {...props} />} */
+      }
 
-      <ActionGroup class="flex justify-center">
+      {
+        /* <ActionGroup class="flex justify-center">
         <>
           <Action
             onClick={switchOnClick}
@@ -34,7 +39,8 @@ export default function CloudConnectForms(
             {isManaged ? "Use Existing" : "Create Managed"}
           </Action>
         </>
-      </ActionGroup>
+      </ActionGroup> */
+      }
     </div>
   );
 }

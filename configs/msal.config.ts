@@ -27,8 +27,6 @@ export const MSAL_REDIRECT_URI = Deno.env.get("MSAL_REDIRECT_URI")!;
 export const MSAL_POST_LOGOUT_REDIRECT_URI = Deno.env.get(
   "MSAL_POST_LOGOUT_REDIRECT_URI",
 )!;
-// export const MSAL_GRAPH_ME_ENDPOINT = Deno.env.get("MSAL_GRAPH_API_ENDPOINT")! +
-//   "v1.0/me";
 
 export const msalAuthProvider = new MSALAuthProvider(
   msalConfig,
@@ -39,7 +37,8 @@ export const msalAuthProvider = new MSALAuthProvider(
 export const msalPluginConfig: MSALPluginConfiguration = {
   MSALAuthProvider: msalAuthProvider,
   MSALSignInOptions: {
-    Scopes: ["https://management.core.windows.net//user_impersonation"],
+    Scopes: ["https://management.core.windows.net//.default"],
+    // Scopes: ["https://management.core.windows.net//user_impersonation"],
     RedirectURI: MSAL_REDIRECT_URI,
     SuccessRedirect: "/cloud",
   },

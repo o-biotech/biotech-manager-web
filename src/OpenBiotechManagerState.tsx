@@ -1,12 +1,23 @@
 import { WithSession } from "$fresh/session";
+import { UserEaCRecord } from "@fathym/eac";
 import { CloudPhaseTypes } from "./CloudPhaseTypes.tsx";
 import { SetupPhaseTypes } from "./SetupPhaseTypes.tsx";
+import { OpenBiotechEaC } from "./eac/OpenBiotechEaC.ts";
 
-export type OpenBiotechManagerState = {
-  Cloud: OpenBiotechCloudState;
+export type OpenBiotechManagerState =
+  & {
+    Cloud: OpenBiotechCloudState;
 
-  Phase: SetupPhaseTypes;
-} & WithSession;
+    EaC?: OpenBiotechEaC;
+
+    Phase: SetupPhaseTypes;
+
+    UserEaCs?: UserEaCRecord[];
+
+    Username: string;
+  }
+  & WithSession
+  & Record<string, unknown>;
 
 export type OpenBiotechCloudState = {
   IsConnected: boolean;

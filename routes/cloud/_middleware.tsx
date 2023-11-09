@@ -1,40 +1,14 @@
-import * as ArmResource from "npm:@azure/arm-subscriptions";
-import { MiddlewareHandlerContext } from "$fresh/server.ts";
+import { msalPluginConfig } from "../../configs/msal.config.ts";
+import { buildIsConnectedCheckMiddleware } from "@fathym/msal";
 import { OpenBiotechManagerState } from "../../src/OpenBiotechManagerState.tsx";
-import { msalAuthProvider } from "../../configs/msal.config.ts";
-import { AccessToken } from "npm:@azure/identity";
-
-async function isConnectedCheck(
-  req: Request,
-  ctx: MiddlewareHandlerContext<OpenBiotechManagerState>,
-) {
-  if (ctx.state.Cloud.IsConnected) {
-    const subClient = new ArmResource.SubscriptionClient({
-      getToken: async () => {
-        const token = await msalAuthProvider.GetAccessToken(
-          ctx.state.session,
-        );
-
-        return {
-          token,
-        } as AccessToken;
-      },
-    });
-
-    const subsList = subClient.subscriptions.list();
-
-    try {
-      for await (const sub of subsList) {
-        break;
-      }
-    } catch (err) {
-      ctx.state.Cloud.IsConnected = false;
-    }
-  }
-
-  return ctx.next();
-}
 
 export const handler = [
-  isConnectedCheck,
+  buildIsConnectedCheckMiddleware<OpenBiotechManagerState>(
+    msalPluginConfig,
+    (ctx, err) => {
+      ctx.state.Cloud.IsConnected = false;
+
+      return Promise.resolve();
+    },
+  ),
 ];

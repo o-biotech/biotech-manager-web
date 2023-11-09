@@ -8,6 +8,12 @@ import { BiotechStepsFeatures } from "../components/organisms/features/BiotechSt
 import { SetupPhaseTypes } from "../src/SetupPhaseTypes.tsx";
 import { OpenBiotechManagerState } from "../src/OpenBiotechManagerState.tsx";
 import { BiotechDashboard } from "../components/organisms/BiotechDashboard.tsx";
+import { redirectRequest } from "@fathym/common";
+import { OpenBiotechEaC } from "../src/eac/OpenBiotechEaC.ts";
+import { eacSvc } from "../services/eac.ts";
+import CreateEaCHero from "../components/organisms/heros/CreateEaCHero.tsx";
+import { EaCCreateForm } from "../components/organisms/eac/create.form.tsx";
+import { EaCStatus, EaCStatusProcessingTypes, sleep } from "@fathym/eac";
 
 interface HomePageData {
   setupPhase: SetupPhaseTypes;
@@ -52,56 +58,50 @@ export const handler: Handlers<HomePageData | null, OpenBiotechManagerState> = {
 //   }
 // }
 
-export default function Home(
-  { data, state }: PageProps<HomePageData | null, OpenBiotechManagerState>,
-) {
-  // const OpenBiotechAppStateFlowContext =
-  //   new OpenBiotechAppStateFlowContextService({
-  //     FirstName: "",
-  //     LastName: "",
-  //     get FullName(): string {
-  //       return `${OpenBiotechAppStateFlowContext.State.FirstName} ${OpenBiotechAppStateFlowContext.State.LastName}`;
-  //     },
-  //   });
-
-  // const testCtxt = new TestStateFlowContextService({
-  //   FirstName: "",
-  //   LastName: "",
-  //   get FullName(): string {
-  //     return `${testCtxt.State.FirstName} ${testCtxt.State.LastName}`;
-  //   },
-  // });
-
+export default function Home({
+  data,
+  state,
+}: PageProps<HomePageData | null, OpenBiotechManagerState>) {
   let currentHero: JSX.Element | undefined = undefined;
 
-  switch (data!.setupPhase) {
-    case SetupPhaseTypes.Cloud:
-      currentHero = <CloudConnectHero />;
-      break;
+  let initialSteps: JSX.Element | undefined = undefined;
 
-    case SetupPhaseTypes.Devices:
-      currentHero = <ConnectDevicesHero />;
-      break;
+  if (!state.EaC) {
+    currentHero = <CreateEaCHero isFirst={state.UserEaCs!.length > 0} />;
 
-    case SetupPhaseTypes.Data:
-      currentHero = <SetupDataHero />;
-      break;
+    initialSteps = <EaCCreateForm />;
+  } else {
+    initialSteps = <BiotechStepsFeatures setupPhase={data!.setupPhase} />;
 
-    case SetupPhaseTypes.Applications:
-      currentHero = <CreateApplicationsHero />;
-      break;
+    switch (data!.setupPhase) {
+      case SetupPhaseTypes.Cloud:
+        currentHero = <CloudConnectHero />;
+        break;
 
-    case SetupPhaseTypes.Complete:
-      break;
+      case SetupPhaseTypes.Devices:
+        currentHero = <ConnectDevicesHero />;
+        break;
+
+      case SetupPhaseTypes.Data:
+        currentHero = <SetupDataHero />;
+        break;
+
+      case SetupPhaseTypes.Applications:
+        currentHero = <CreateApplicationsHero />;
+        break;
+
+      case SetupPhaseTypes.Complete:
+        break;
+    }
   }
 
   return (
     <>
       {currentHero}
 
-      <BiotechStepsFeatures setupPhase={data!.setupPhase} />
+      {initialSteps}
 
-      {state.SetupPhase > 1 ? <BiotechDashboard /> : <></>}
+      {state.Phase > 1 ? <BiotechDashboard /> : <></>}
     </>
   );
 }

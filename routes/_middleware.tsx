@@ -6,23 +6,59 @@ import { OpenBiotechManagerState } from "../src/OpenBiotechManagerState.tsx";
 import { SetupPhaseTypes } from "../src/SetupPhaseTypes.tsx";
 import { CloudPhaseTypes } from "../src/CloudPhaseTypes.tsx";
 import { redirectRequest } from "@fathym/common";
+import { OpenBiotechEaC } from "../src/eac/OpenBiotechEaC.ts";
+import { denoKv } from "../configs/deno-kv.config.ts";
+import { eacSvc } from "../services/eac.ts";
 
 function loggedInCheck(
   req: Request,
   ctx: MiddlewareHandlerContext<OpenBiotechManagerState>,
 ) {
-  const cookies = getCookies(req.headers);
+  // const cookies = getCookies(req.headers);
 
-  const userCookie = cookies["user"];
+  // const userCookie = cookies["user"];
 
-  if (!userCookie) {
-    return redirectRequest("/");
-  }
+  // if (!userCookie) {
+  //   return redirectRequest("/");
+  // }
+
+  ctx.state.Username = "michael.gearhardt@fathym.com";
 
   return ctx.next();
 }
 
-function currentState(
+async function currentEaC(
+  req: Request,
+  ctx: MiddlewareHandlerContext<OpenBiotechManagerState>,
+) {
+  const currentEaC = await denoKv.get<string>([
+    "User",
+    ctx.state.Username,
+    "Current",
+    "EaC",
+  ]);
+
+  let eac: OpenBiotechEaC | undefined = undefined;
+
+  if (currentEaC?.value) {
+    eac = await eacSvc.Get(currentEaC.value!);
+  }
+
+  const userEaCs = await eacSvc.ListForUser();
+
+  // Call to get state
+  const state: OpenBiotechManagerState = {
+    ...ctx.state,
+    EaC: eac,
+    UserEaCs: userEaCs || [],
+  };
+
+  ctx.state = state;
+
+  return await ctx.next();
+}
+
+async function currentState(
   req: Request,
   ctx: MiddlewareHandlerContext<OpenBiotechManagerState>,
 ) {
@@ -40,7 +76,7 @@ function currentState(
 
   ctx.state = state;
 
-  return ctx.next();
+  return await ctx.next();
 }
 
 const session = cookieSession();
@@ -53,7 +89,8 @@ function userSession(
 }
 
 export const handler = [
-  // loggedInCheck,
+  loggedInCheck,
   userSession,
+  currentEaC,
   currentState,
 ];

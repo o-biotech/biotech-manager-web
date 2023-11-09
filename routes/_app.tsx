@@ -19,7 +19,13 @@ export default function App(
       </Head>
 
       <BasicLayout
-        header={<BiotechHeader currentUrl={url} setupPhase={state.Phase} />}
+        header={
+          <BiotechHeader
+            currentUrl={url}
+            setupPhase={state.Phase}
+            hasEaC={!!state.EaC}
+          />
+        }
         footer={<BiotechFooter />}
       >
         <Component />

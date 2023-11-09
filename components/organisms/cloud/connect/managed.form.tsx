@@ -1,5 +1,5 @@
 import { JSX } from "preact";
-import { Action, ActionGroup, classSet } from "@fathym/atomic";
+import { Action, ActionGroup, classSet, Input } from "@fathym/atomic";
 import { callToActionStyles } from "../../../styles/actions.tsx";
 
 export default function CloudConnectManagedForm(
@@ -19,7 +19,7 @@ export default function CloudConnectManagedForm(
             New Subscription Name
           </label>
 
-          <input
+          <Input
             id="subscription-name"
             name="subscription-name"
             type="text"

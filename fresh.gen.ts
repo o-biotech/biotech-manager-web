@@ -4,14 +4,15 @@
 
 import * as $0 from "./routes/_app.tsx";
 import * as $1 from "./routes/_middleware.tsx";
-import * as $2 from "./routes/api/joke.ts";
+import * as $2 from "./routes/api/eac/index.ts";
 import * as $3 from "./routes/applications/index.tsx";
 import * as $4 from "./routes/cloud/_middleware.tsx";
 import * as $5 from "./routes/cloud/index.tsx";
 import * as $6 from "./routes/data/index.tsx";
 import * as $7 from "./routes/devices/[name].tsx";
 import * as $8 from "./routes/devices/index.tsx";
-import * as $9 from "./routes/index.tsx";
+import * as $9 from "./routes/enterprises.tsx";
+import * as $10 from "./routes/index.tsx";
 import * as $$0 from "./islands/atoms/InteractiveMenuIcon.tsx";
 import * as $$1 from "./islands/atoms/InteractiveSlideToggle.tsx";
 import * as $$2 from "./islands/common/ProfileMenu.tsx";
@@ -22,14 +23,15 @@ const manifest = {
   routes: {
     "./routes/_app.tsx": $0,
     "./routes/_middleware.tsx": $1,
-    "./routes/api/joke.ts": $2,
+    "./routes/api/eac/index.ts": $2,
     "./routes/applications/index.tsx": $3,
     "./routes/cloud/_middleware.tsx": $4,
     "./routes/cloud/index.tsx": $5,
     "./routes/data/index.tsx": $6,
     "./routes/devices/[name].tsx": $7,
     "./routes/devices/index.tsx": $8,
-    "./routes/index.tsx": $9,
+    "./routes/enterprises.tsx": $9,
+    "./routes/index.tsx": $10,
   },
   islands: {
     "./islands/atoms/InteractiveMenuIcon.tsx": $$0,
