@@ -22,7 +22,9 @@ export const handler: Handlers<any, OpenBiotechManagerState> = {
     const resLookup = (formData.get("resLookup") as string) ||
       `${resGroupLookup}-iot-flow`;
 
-    const resGroupLocation = formData.get("location") as string;
+    const resGroupLocation =
+      ctx.state.EaC!.Clouds![cloudLookup].ResourceGroups![resGroupLookup]
+        .Details!.Location;
 
     const storageFlowCold = !!(formData.get("storageFlowCold") as string);
 
@@ -72,6 +74,7 @@ export const handler: Handlers<any, OpenBiotechManagerState> = {
               "https://raw.githubusercontent.com/lowcodeunit/infrastructure/master/templates/azure/iot/ref-arch/warm/parameters.jsonc",
           },
           Data: {
+            CloudLookup: cloudLookup,
             Location: resGroupLocation,
             PrincipalID: "", // TODO: Pass in user email (email used to login to OpenBiotech must match one used for Azure)
             ResourceLookup: resLookup,
@@ -121,6 +124,7 @@ export const handler: Handlers<any, OpenBiotechManagerState> = {
                         "https://raw.githubusercontent.com/lowcodeunit/infrastructure/master/templates/azure/iot/ref-arch/parameters.jsonc",
                     },
                     Data: {
+                      CloudLookup: cloudLookup,
                       Location: resGroupLocation,
                       Name: resGroupLookup,
                       PrincipalID: "", // TODO: Pass in actual principal ID (maybe retrievable from MSAL account record?)

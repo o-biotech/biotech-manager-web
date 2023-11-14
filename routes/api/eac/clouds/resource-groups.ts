@@ -23,6 +23,7 @@ export const handler: Handlers<any, OpenBiotechManagerState> = {
               Details: {
                 Name: resGroupLookup,
                 Description: formData.get("description") as string,
+                Location: formData.get("description") as string,
                 Order: 1,
               },
             },

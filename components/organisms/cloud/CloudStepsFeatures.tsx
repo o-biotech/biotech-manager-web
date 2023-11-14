@@ -28,7 +28,11 @@ export default function CloudStepsFeatures(props: CloudStepsFeaturesProps) {
 
     case CloudPhaseTypes.CALZ:
       currentForm = (
-        <CloudCALZForm class="px-4" cloudLookup={props.cloudLookup!} />
+        <CloudCALZForm
+          class="px-4"
+          cloudLookup={props.cloudLookup!}
+          locations={props.locations}
+        />
       );
       break;
 
@@ -37,7 +41,6 @@ export default function CloudStepsFeatures(props: CloudStepsFeaturesProps) {
         <CloudIoTForm
           class="px-4"
           cloudLookup={props.cloudLookup!}
-          locations={props.locations}
           resGroupLookup={props.resGroupLookup!}
         />
       );

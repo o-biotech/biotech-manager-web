@@ -1,12 +1,10 @@
-import { JSX } from 'preact';
-import { Action, ActionGroup, classSet, Input } from '@fathym/atomic';
-import * as ArmSubscriptions from 'npm:@azure/arm-subscriptions';
-import { callToActionStyles } from '../../styles/actions.tsx';
+import { JSX } from "preact";
+import { Action, ActionGroup, classSet, Input } from "@fathym/atomic";
+import { Location } from "npm:@azure/arm-subscriptions";
+import { callToActionStyles } from "../../styles/actions.tsx";
 
 export type CloudIoTFormProps = JSX.HTMLAttributes<HTMLFormElement> & {
   cloudLookup: string;
-
-  locations: ArmSubscriptions.Location[];
 
   resGroupLookup: string;
 
@@ -19,7 +17,7 @@ export default function CloudIoTForm(props: CloudIoTFormProps) {
       method="post"
       action="/api/eac/clouds/iot-infrastructure"
       {...props}
-      class={classSet(props, 'w-full max-w-sm md:max-w-md mx-auto p-3 mt-8')}
+      class={classSet(props, "w-full max-w-sm md:max-w-md mx-auto p-3 mt-8")}
     >
       <div class="flex flex-wrap -mx-3 mb-4 text-left">
         <Input
@@ -42,32 +40,6 @@ export default function CloudIoTForm(props: CloudIoTFormProps) {
           type="hidden"
           value={props.resLookup}
         />
-
-        <div class="w-full px-3">
-          <label
-            for="location"
-            class="block uppercase tracking-wide font-bold mb-2 text-xl"
-          >
-            Location
-          </label>
-
-          <select
-            id="location"
-            name="location"
-            required
-            class="appearance-none block w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 rounded-lg shadow-sm focus:outline-none focus:shadow-lg focus:border-blue-500 placeholder-gray-500"
-          >
-            <option value="">-- Select a location --</option>
-
-            {props.locations.map((location) => {
-              return (
-                <option value={location.name}>
-                  {location.displayName}
-                </option>
-              );
-            })}
-          </select>
-        </div>
 
         <div class="w-full p-3">
           <label class="block uppercase tracking-wide font-bold mb-2 text-xl">
@@ -121,7 +93,7 @@ export default function CloudIoTForm(props: CloudIoTFormProps) {
             type="submit"
             class={classSet(
               callToActionStyles.props,
-              'w-full md:w-auto text-white font-bold m-1 py-2 px-4 rounded focus:outline-none shadow-lg'
+              "w-full md:w-auto text-white font-bold m-1 py-2 px-4 rounded focus:outline-none shadow-lg",
             )}
           >
             Establish IoT Infrastructure

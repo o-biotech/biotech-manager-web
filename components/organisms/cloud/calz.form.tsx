@@ -1,9 +1,12 @@
 import { JSX } from "preact";
 import { Action, ActionGroup, classSet, Input } from "@fathym/atomic";
+import { Location } from "npm:@azure/arm-subscriptions";
 import { callToActionStyles } from "../../styles/actions.tsx";
 
 export type CloudCALZFormProps = JSX.HTMLAttributes<HTMLFormElement> & {
   cloudLookup: string;
+
+  locations: Location[];
 
   resGroupLookup?: string;
 };
@@ -60,6 +63,32 @@ export default function CloudCALZForm(props: CloudCALZFormProps) {
             placeholder="Enter new resource group description"
             class="appearance-none block w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 rounded leading-tight focus:outline-none focus:border-blue-500"
           />
+        </div>
+
+        <div class="w-full px-3">
+          <label
+            for="location"
+            class="block uppercase tracking-wide font-bold mb-2 text-xl"
+          >
+            Location
+          </label>
+
+          <select
+            id="location"
+            name="location"
+            required
+            class="appearance-none block w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 rounded-lg shadow-sm focus:outline-none focus:shadow-lg focus:border-blue-500 placeholder-gray-500"
+          >
+            <option value="">-- Select a location --</option>
+
+            {props.locations.map((location) => {
+              return (
+                <option value={location.name}>
+                  {location.displayName}
+                </option>
+              );
+            })}
+          </select>
         </div>
       </div>
 
