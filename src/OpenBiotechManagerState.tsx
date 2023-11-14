@@ -22,5 +22,9 @@ export type OpenBiotechManagerState =
 export type OpenBiotechCloudState = {
   IsConnected: boolean;
 
+  CloudLookup?: string;
+
   Phase: CloudPhaseTypes;
+
+  ResourceGroupLookup?: string;
 };

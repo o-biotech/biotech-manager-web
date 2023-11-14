@@ -69,10 +69,30 @@ async function currentState(
     ...ctx.state,
     Phase: SetupPhaseTypes.Cloud,
     Cloud: {
-      IsConnected: isAuthenticated,
+      IsConnected: true, //isAuthenticated,
       Phase: CloudPhaseTypes.Connect,
     },
   };
+
+  if (ctx.state.EaC) {
+    const clouds = Object.keys(ctx.state.EaC.Clouds || {});
+
+    if (clouds.length > 0) {
+      state.Cloud.CloudLookup = clouds[0];
+
+      state.Cloud.Phase = CloudPhaseTypes.CALZ;
+
+      const resGroups = Object.keys(
+        ctx.state.EaC!.Clouds![state.Cloud.CloudLookup].ResourceGroups || {},
+      );
+
+      if (resGroups.length > 0) {
+        state.Cloud.ResourceGroupLookup = resGroups[0];
+
+        state.Cloud.Phase = CloudPhaseTypes.Infrastucture;
+      }
+    }
+  }
 
   ctx.state = state;
 
@@ -88,9 +108,4 @@ function userSession(
   return session(req, ctx);
 }
 
-export const handler = [
-  loggedInCheck,
-  userSession,
-  currentEaC,
-  currentState,
-];
+export const handler = [loggedInCheck, userSession, currentEaC, currentState];

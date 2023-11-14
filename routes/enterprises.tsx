@@ -4,8 +4,7 @@ import { OpenBiotechManagerState } from "../src/OpenBiotechManagerState.tsx";
 import CreateEaCHero from "../components/organisms/heros/CreateEaCHero.tsx";
 import { EaCCreateForm } from "../components/organisms/eac/create.form.tsx";
 
-interface EnterprisesPageData {
-}
+export type EnterprisesPageData = {};
 
 export const handler: Handlers<
   EnterprisesPageData | null,

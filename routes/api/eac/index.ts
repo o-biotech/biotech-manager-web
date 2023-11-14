@@ -1,6 +1,12 @@
-import { HandlerContext, Handlers } from "$fresh/server.ts";
+// deno-lint-ignore-file no-explicit-any
+import { Handlers } from "$fresh/server.ts";
 import { redirectRequest } from "@fathym/common";
-import { EaCStatus, EaCStatusProcessingTypes, sleep } from "@fathym/eac";
+import {
+  EaCStatus,
+  EaCStatusProcessingTypes,
+  sleep,
+  waitForStatus,
+} from "@fathym/eac";
 import { eacSvc } from "../../../services/eac.ts";
 import { OpenBiotechEaC } from "../../../src/eac/OpenBiotechEaC.ts";
 import { OpenBiotechManagerState } from "../../../src/OpenBiotechManagerState.tsx";
@@ -19,29 +25,18 @@ export const handler: Handlers<any, OpenBiotechManagerState> = {
 
     const createResp = await eacSvc.Create<OpenBiotechEaC>(newEaC);
 
-    let status: EaCStatus | null = null;
-
-    do {
-      status = await eacSvc.Status(
-        createResp.EnterpriseLookup,
-        createResp.CommitID,
-      );
-
-      await sleep(500);
-    } while (
-      status?.Processing != EaCStatusProcessingTypes.COMPLETE &&
-      status?.Processing != EaCStatusProcessingTypes.ERROR
+    const status = await waitForStatus(
+      eacSvc,
+      createResp.EnterpriseLookup,
+      createResp.CommitID,
     );
 
     if (status.Processing == EaCStatusProcessingTypes.COMPLETE) {
       if (!ctx.state.EaC) {
-        await denoKv.set([
-          "User",
-          ctx.state.Username,
-          "Current",
-          "EaC",
-        ], createResp.EnterpriseLookup);
-      
+        await denoKv.set(
+          ["User", ctx.state.Username, "Current", "EaC"],
+          createResp.EnterpriseLookup,
+        );
       }
 
       return redirectRequest("/");

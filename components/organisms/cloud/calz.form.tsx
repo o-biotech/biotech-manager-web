@@ -1,30 +1,63 @@
 import { JSX } from "preact";
-import { Action, ActionGroup, classSet } from "@fathym/atomic";
+import { Action, ActionGroup, classSet, Input } from "@fathym/atomic";
 import { callToActionStyles } from "../../styles/actions.tsx";
 
-export default function CloudCALZForm(
-  props: JSX.HTMLAttributes<HTMLFormElement>,
-) {
+export type CloudCALZFormProps = JSX.HTMLAttributes<HTMLFormElement> & {
+  cloudLookup: string;
+
+  resGroupLookup?: string;
+};
+
+export default function CloudCALZForm(props: CloudCALZFormProps) {
   return (
     <form
+      method="post"
+      action="/api/eac/clouds/resource-groups"
       {...props}
       class={classSet(props, "w-full max-w-sm md:max-w-md mx-auto p-3 mt-8")}
     >
-      <div class="flex flex-wrap -mx-3 mb-4">
+      <div class="flex flex-wrap -mx-3 mb-4 text-left">
+        <Input
+          id="cloudLookup"
+          name="cloudLookup"
+          type="hidden"
+          value={props.cloudLookup}
+        />
+
         <div class="w-full px-3">
           <label
-            for="subscription-name"
+            for="resGroupLookup"
             class="block uppercase tracking-wide font-bold mb-2 text-xl"
           >
-            Resource Group Name
+            Resource Group Lookup
           </label>
 
-          <input
-            id="resource-group-name"
-            name="resource-group-name"
+          <Input
+            id="resGroupLookup"
+            name="resGroupLookup"
             type="text"
             required
-            placeholder="Enter new resource group name"
+            disabled={!!props.resGroupLookup}
+            placeholder="Enter new resource group lookup"
+            class="appearance-none block w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 rounded leading-tight focus:outline-none focus:border-blue-500"
+          />
+        </div>
+
+        <div class="w-full p-3">
+          <label
+            for="description"
+            class="block uppercase tracking-wide font-bold mb-2 text-xl"
+          >
+            Description
+          </label>
+
+          <Input
+            id="description"
+            name="description"
+            type="text"
+            required
+            multiline
+            placeholder="Enter new resource group description"
             class="appearance-none block w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 rounded leading-tight focus:outline-none focus:border-blue-500"
           />
         </div>

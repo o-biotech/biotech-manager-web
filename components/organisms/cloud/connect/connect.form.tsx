@@ -3,11 +3,15 @@ import * as ArmResource from "npm:@azure/arm-subscriptions";
 import { Action, ActionGroup, classSet, Input } from "@fathym/atomic";
 import { callToActionStyles } from "../../../styles/actions.tsx";
 
-export type CloudConnectFormProps = JSX.HTMLAttributes<HTMLFormElement>;
+export type CloudConnectFormProps = JSX.HTMLAttributes<HTMLFormElement> & {
+  cloudLookup?: string;
+};
 
 export function CloudConnectForm(props: CloudConnectFormProps) {
   return (
     <form
+      method="post"
+      action="/api/eac/clouds"
       {...props}
       class={classSet(props, "w-full max-w-sm md:max-w-md mx-auto py-3 mt-8")}
     >
@@ -23,10 +27,56 @@ export function CloudConnectForm(props: CloudConnectFormProps) {
           <p class="block text-md mb-8">
             Use the Fathym CLI to easily create and configure an Azure cloud
             connection with a new managed subscription or existing subscription
-            from your account. Using NPM, call the `npx fathym eac env clouds
-            azure generate` command and then copy in the values displayed to
-            this form.
+            from your account. Using NPM, call the{" "}
+            <span class="font-bold bg-slate-300 px-1">
+              npx fathym eac env clouds azure generate
+            </span>{" "}
+            command and then copy in the values displayed to this form.
           </p>
+
+          <Input
+            id="cloudLookup"
+            name="cloudLookup"
+            type="hidden"
+            value={props.cloudLookup}
+          />
+
+          <div class="w-full p-3">
+            <label
+              for="name"
+              class="block uppercase tracking-wide font-bold mb-2 text-lg text-left"
+            >
+              Name
+            </label>
+
+            <Input
+              id="name"
+              name="name"
+              type="text"
+              required
+              placeholder="Enter cloud name"
+              class="appearance-none block w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 rounded leading-tight focus:outline-none focus:border-blue-500"
+            />
+          </div>
+
+          <div class="w-full p-3">
+            <label
+              for="description"
+              class="block uppercase tracking-wide font-bold mb-2 text-lg text-left"
+            >
+              Description
+            </label>
+
+            <Input
+              id="description"
+              name="description"
+              type="text"
+              multiline
+              required
+              placeholder="Enter cloud description"
+              class="appearance-none block w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 rounded leading-tight focus:outline-none focus:border-blue-500"
+            />
+          </div>
 
           <div class="w-full p-3">
             <label
@@ -84,15 +134,15 @@ export function CloudConnectForm(props: CloudConnectFormProps) {
 
           <div class="w-full p-3">
             <label
-              for="application-key"
+              for="auth-key"
               class="block uppercase tracking-wide font-bold mb-2 text-lg text-left"
             >
               Application Auth Key
             </label>
 
             <Input
-              id="application-key"
-              name="application-key"
+              id="auth-key"
+              name="auth-key"
               type="text"
               required
               placeholder="Enter application auth key"

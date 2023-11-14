@@ -1,3 +1,3 @@
-import { EverythingAsCode, EverythingAsCodeEnvironments } from "@fathym/eac";
+import { EverythingAsCode, EverythingAsCodeClouds } from "@fathym/eac";
 
-export type OpenBiotechEaC = EverythingAsCode & EverythingAsCodeEnvironments;
+export type OpenBiotechEaC = EverythingAsCode & EverythingAsCodeClouds;
