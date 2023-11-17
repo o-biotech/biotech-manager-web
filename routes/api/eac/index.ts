@@ -23,7 +23,7 @@ export const handler: Handlers<any, OpenBiotechManagerState> = {
       },
     };
 
-    const createResp = await eacSvc.Create<OpenBiotechEaC>(newEaC);
+    const createResp = await eacSvc.Create<OpenBiotechEaC>(newEaC, 60);
 
     const status = await waitForStatus(
       eacSvc,
@@ -42,7 +42,11 @@ export const handler: Handlers<any, OpenBiotechManagerState> = {
       return redirectRequest("/");
     } else {
       return redirectRequest(
-        `/?error=${encodeURIComponent(status.Messages["Error"])}`,
+        `/?error=${
+          encodeURIComponent(
+            status.Messages["Error"] as string,
+          )
+        }&commitId=${createResp.CommitID}`,
       );
     }
   },

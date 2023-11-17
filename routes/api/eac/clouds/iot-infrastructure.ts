@@ -19,8 +19,7 @@ export const handler: Handlers<any, OpenBiotechManagerState> = {
 
     const resGroupLookup = formData.get("resGroupLookup") as string;
 
-    const resLookup = (formData.get("resLookup") as string) ||
-      `${resGroupLookup}-iot-flow`;
+    const resLookup = (formData.get("resLookup") as string) || `iot-flow`;
 
     const resGroupLocation =
       ctx.state.EaC!.Clouds![cloudLookup].ResourceGroups![resGroupLookup]
@@ -76,6 +75,7 @@ export const handler: Handlers<any, OpenBiotechManagerState> = {
           Data: {
             CloudLookup: cloudLookup,
             Location: resGroupLocation,
+            Name: resGroupLookup,
             PrincipalID: "", // TODO: Pass in user email (email used to login to OpenBiotech must match one used for Azure)
             ResourceLookup: resLookup,
             ShortName: shortName,
@@ -141,7 +141,7 @@ export const handler: Handlers<any, OpenBiotechManagerState> = {
       },
     };
 
-    const commitResp = await eacSvc.Commit<OpenBiotechEaC>(eac);
+    const commitResp = await eacSvc.Commit<OpenBiotechEaC>(eac, 60 * 30);
 
     const status = await waitForStatus(
       eacSvc,
@@ -153,7 +153,11 @@ export const handler: Handlers<any, OpenBiotechManagerState> = {
       return redirectRequest("/cloud");
     } else {
       return redirectRequest(
-        `/cloud?error=${encodeURIComponent(status.Messages["Error"])}`,
+        `/cloud?error=${
+          encodeURIComponent(
+            status.Messages["Error"] as string,
+          )
+        }&commitId=${commitResp.CommitID}`,
       );
     }
   },
