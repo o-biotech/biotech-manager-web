@@ -40,23 +40,31 @@ export const handler: Handlers<any, OpenBiotechManagerState> = {
       [key: string]: EaCCloudResourceAsCode;
     } = {};
 
-    // if (storageFlowCold) {
-    //   iotResources[`${resLookup}-cold`] = {
-    //     Type: "Format",
-    //     Details: {
-    //       Name: "IoT Infrastructure - Cold Flow",
-    //       Description:
-    //         "The cold flow IoT Infrastructure to use for the enterprise.",
-    //       Order: 1,
-    //       Template: {
-    //         Content: "",
-    //         Parameters: "",
-    //       },
-    //       Data: {},
-    //       Outputs: {},
-    //     } as EaCCloudResourceFormatDetails,
-    //   };
-    // }
+    if (storageFlowCold) {
+      iotResources[`${resLookup}-cold`] = {
+        Type: "Format",
+        Details: {
+          Name: "IoT Infrastructure - Cold Flow",
+          Description:
+            "The cold flow IoT Infrastructure to use for the enterprise.",
+          Order: 1,
+          Template: {
+            Content:
+              "https://raw.githubusercontent.com/lowcodeunit/infrastructure/master/templates/azure/iot/ref-arch/cold/template.jsonc",
+            Parameters:
+              "https://raw.githubusercontent.com/lowcodeunit/infrastructure/master/templates/azure/iot/ref-arch/cold/parameters.jsonc",
+          },
+          Data: {
+            CloudLookup: cloudLookup,
+            Location: resGroupLocation,
+            Name: resGroupLookup,
+            ResourceLookup: resLookup,
+            ShortName: shortName,
+          },
+          Outputs: {},
+        } as EaCCloudResourceFormatDetails,
+      };
+    }
 
     if (storageFlowWarm) {
       iotResources[`${resLookup}-warm`] = {
@@ -150,7 +158,7 @@ export const handler: Handlers<any, OpenBiotechManagerState> = {
     );
 
     if (status.Processing == EaCStatusProcessingTypes.COMPLETE) {
-      return redirectRequest("/devices");
+      return redirectRequest("/");
     } else {
       return redirectRequest(
         `/cloud?error=${

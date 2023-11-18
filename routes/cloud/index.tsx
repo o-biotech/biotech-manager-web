@@ -45,6 +45,8 @@ export const handler: Handlers<CloudPageData | null, OpenBiotechManagerState> =
       if (data.cloudLookup) {
         const serviceFiles = [
           "https://raw.githubusercontent.com/lowcodeunit/infrastructure/master/templates/azure/iot/ref-arch/services.jsonc",
+          "https://raw.githubusercontent.com/lowcodeunit/infrastructure/master/templates/azure/iot/ref-arch/cold/services.jsonc",
+          // "https://raw.githubusercontent.com/lowcodeunit/infrastructure/master/templates/azure/iot/ref-arch/hot/services.jsonc",
           "https://raw.githubusercontent.com/lowcodeunit/infrastructure/master/templates/azure/iot/ref-arch/warm/services.jsonc",
         ];
 

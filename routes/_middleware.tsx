@@ -96,7 +96,7 @@ async function currentState(
           "iot-flow" in
             (resGroups[state.Cloud.ResourceGroupLookup!].Resources || {})
         ) {
-          state.Cloud.Phase = CloudPhaseTypes.Complete;
+          // state.Cloud.Phase = CloudPhaseTypes.Complete;
 
           state.Phase = SetupPhaseTypes.Devices;
         }
