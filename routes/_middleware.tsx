@@ -82,14 +82,24 @@ async function currentState(
 
       state.Cloud.Phase = CloudPhaseTypes.CALZ;
 
-      const resGroups = Object.keys(
-        ctx.state.EaC!.Clouds![state.Cloud.CloudLookup].ResourceGroups || {},
-      );
+      const resGroups =
+        ctx.state.EaC!.Clouds![state.Cloud.CloudLookup].ResourceGroups || {};
 
-      if (resGroups.length > 0) {
-        state.Cloud.ResourceGroupLookup = resGroups[0];
+      const resGroupLookupss = Object.keys(resGroups);
+
+      if (resGroupLookupss.length > 0) {
+        state.Cloud.ResourceGroupLookup = resGroupLookupss[0];
 
         state.Cloud.Phase = CloudPhaseTypes.Infrastucture;
+
+        if (
+          "iot-flow" in
+            (resGroups[state.Cloud.ResourceGroupLookup!].Resources || {})
+        ) {
+          state.Cloud.Phase = CloudPhaseTypes.Complete;
+
+          state.Phase = SetupPhaseTypes.Devices;
+        }
       }
     }
   }

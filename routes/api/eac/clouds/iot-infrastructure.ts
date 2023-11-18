@@ -150,7 +150,7 @@ export const handler: Handlers<any, OpenBiotechManagerState> = {
     );
 
     if (status.Processing == EaCStatusProcessingTypes.COMPLETE) {
-      return redirectRequest("/cloud");
+      return redirectRequest("/devices");
     } else {
       return redirectRequest(
         `/cloud?error=${
