@@ -93,23 +93,31 @@ export const handler: Handlers<any, OpenBiotechManagerState> = {
       };
     }
 
-    // if (storageFlowHot) {
-    //   iotResources[`${resLookup}-hot`] = {
-    //     Type: "Format",
-    //     Details: {
-    //       Name: "IoT Infrastructure - Hot Flow",
-    //       Description:
-    //         "The hot flow IoT Infrastructure to use for the enterprise.",
-    //       Order: 1,
-    //       Template: {
-    //         Content: "",
-    //         Parameters: "",
-    //       },
-    //       Data: {},
-    //       Outputs: {},
-    //     } as EaCCloudResourceFormatDetails,
-    //   };
-    // }
+    if (storageFlowHot) {
+      iotResources[`${resLookup}-hot`] = {
+        Type: "Format",
+        Details: {
+          Name: "IoT Infrastructure - Hot Flow",
+          Description:
+            "The hot flow IoT Infrastructure to use for the enterprise.",
+          Order: 1,
+          Template: {
+            Content:
+              "https://raw.githubusercontent.com/lowcodeunit/infrastructure/master/templates/azure/iot/ref-arch/hot/template.jsonc",
+            Parameters:
+              "https://raw.githubusercontent.com/lowcodeunit/infrastructure/master/templates/azure/iot/ref-arch/hot/parameters.jsonc",
+          },
+          Data: {
+            CloudLookup: cloudLookup,
+            Location: resGroupLocation,
+            Name: resGroupLookup,
+            ResourceLookup: resLookup,
+            ShortName: shortName,
+          },
+          Outputs: {},
+        } as EaCCloudResourceFormatDetails,
+      };
+    }
 
     const eac: OpenBiotechEaC = {
       EnterpriseLookup: ctx.state.EaC!.EnterpriseLookup,
@@ -137,6 +145,7 @@ export const handler: Handlers<any, OpenBiotechManagerState> = {
                       Name: resGroupLookup,
                       PrincipalID: "", // TODO: Pass in actual principal ID (maybe retrievable from MSAL account record?)
                       ResourceLookup: resLookup,
+                      ShortName: shortName,
                     },
                     Outputs: {},
                   } as EaCCloudResourceFormatDetails,
