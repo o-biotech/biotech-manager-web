@@ -53,10 +53,10 @@ export const handler: Handlers<any, OpenBiotechManagerState> = {
     );
 
     if (status.Processing == EaCStatusProcessingTypes.COMPLETE) {
-      return redirectRequest("/");
+      return redirectRequest("/devices");
     } else {
       return redirectRequest(
-        `/cloud?error=${
+        `/devices?error=${
           encodeURIComponent(
             status.Messages["Error"] as string,
           )

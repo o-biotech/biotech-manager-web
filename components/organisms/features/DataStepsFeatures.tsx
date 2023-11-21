@@ -23,40 +23,9 @@ export function DataStepsFeatures(
       step={props.dataPhase}
     >
       {[{
-        title: "Setup Cold, Warm, and Hot Storage",
+        title: "Confirm Data Flowing",
         description:
-          "Collect and consume your cold, warm and hot storage data.",
-        children: (
-          <ActionGroup class="[&>*]:mx-1 my-2 mt-8">
-            <>
-              <Action
-                href="./"
-                class={classSet(callToActionStyles.props, "m-2")}
-              >
-                Setup
-              </Action>
-            </>
-          </ActionGroup>
-        ),
-      }, {
-        title: "Configure Data APIs",
-        description: "Get familiar with and control access to your data APIs.",
-        children: (
-          <ActionGroup class="[&>*]:mx-1 my-2 mt-8">
-            <>
-              <Action
-                href="./"
-                class={classSet(callToActionStyles.props, "m-2")}
-              >
-                Configure
-              </Action>
-            </>
-          </ActionGroup>
-        ),
-      }, {
-        title: "Setup Data Dashboards",
-        description:
-          "Collect and consume your device data in pre-configured dashboards.",
+          "We'll make sure that you can get data flowing to your created devices using a device simulator or your real physical devices.",
         children: (
           <ActionGroup class="[&>*]:mx-1 my-2 mt-8">
             <>

@@ -80,30 +80,37 @@ export function DevicesStepsFeatures(props: DevicesStepsFeaturesProps) {
           children: smCurrentForm,
         },
         {
-          title: "Device Data Flows",
+          title: "Configure Data APIs",
           description:
-            "Configure your device data flows with no code tooling, high code access, and low code configurations.",
+            "Get familiar with and control access to your data APIs.",
           children: (
             <ActionGroup class="[&>*]:mx-1 my-2 mt-8">
               <>
                 <Action
-                  href="./cloud/calz"
+                  href="./"
                   class={classSet(callToActionStyles.props, "m-2")}
                 >
-                  Configure Flows
+                  Configure
                 </Action>
               </>
             </ActionGroup>
           ),
         },
         {
-          title: "Access Data",
+          title: "Setup Data Dashboards",
           description:
-            "Access your data from a wide array of APIs for cold, warm, and hot data flows.",
+            "Collect and consume your device data with pre-configured dashboards.",
           children: (
-            <div class="m-4 font-bold">
-              Waiting for first data access, see connection details below...
-            </div>
+            <ActionGroup class="[&>*]:mx-1 my-2 mt-8">
+              <>
+                <Action
+                  href="./"
+                  class={classSet(callToActionStyles.props, "m-2")}
+                >
+                  Setup
+                </Action>
+              </>
+            </ActionGroup>
           ),
         },
       ]}
