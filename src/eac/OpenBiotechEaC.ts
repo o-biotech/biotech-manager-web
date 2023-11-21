@@ -1,3 +1,10 @@
-import { EverythingAsCode, EverythingAsCodeClouds } from "@fathym/eac";
+import {
+  EverythingAsCode,
+  EverythingAsCodeClouds,
+  EverythingAsCodeIoT,
+} from "@fathym/eac";
 
-export type OpenBiotechEaC = EverythingAsCode & EverythingAsCodeClouds;
+export type OpenBiotechEaC =
+  & EverythingAsCode
+  & EverythingAsCodeClouds
+  & EverythingAsCodeIoT;

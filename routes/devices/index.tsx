@@ -6,7 +6,13 @@ import { OpenBiotechManagerState } from "../../src/OpenBiotechManagerState.tsx";
 import { redirectRequest } from "@fathym/common";
 
 interface DevicesPageData {
+  cloudLookup: string;
+
   devicesPhase: DevicesPhaseTypes;
+
+  iotLookup: string;
+
+  resGroupLookup: string;
 }
 
 export const handler: Handlers<
@@ -26,16 +32,19 @@ export const handler: Handlers<
     }
 
     const data: DevicesPageData = {
-      devicesPhase: DevicesPhaseTypes.Connect,
+      cloudLookup: ctx.state.Cloud.CloudLookup!,
+      devicesPhase: ctx.state.Devices.Phase,
+      iotLookup: ctx.state.Devices.IoTLookup!,
+      resGroupLookup: ctx.state.Cloud.ResourceGroupLookup!,
     };
 
     return ctx.render(data);
   },
 };
 
-export default function Devices(
-  { data }: PageProps<DevicesPageData | null, OpenBiotechManagerState>,
-) {
+export default function Devices({
+  data,
+}: PageProps<DevicesPageData | null, OpenBiotechManagerState>) {
   return (
     <div>
       <Hero
@@ -46,7 +55,12 @@ export default function Devices(
         displayStyle={DisplayStyleTypes.Center | DisplayStyleTypes.Large}
       />
 
-      <DevicesStepsFeatures devicesPhase={data!.devicesPhase} />
+      <DevicesStepsFeatures
+        cloudLookup={data!.cloudLookup}
+        iotLookup={data!.iotLookup}
+        resGroupLookup={data!.resGroupLookup}
+        devicesPhase={data!.devicesPhase}
+      />
     </div>
   );
 }

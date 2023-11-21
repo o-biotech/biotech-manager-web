@@ -8,9 +8,9 @@ import * as $2 from "./routes/api/eac/clouds/index.ts";
 import * as $3 from "./routes/api/eac/clouds/iot-infrastructure.ts";
 import * as $4 from "./routes/api/eac/clouds/resource-groups.ts";
 import * as $5 from "./routes/api/eac/index.ts";
-import * as $6 from "./routes/applications/index.tsx";
-import * as $7 from "./routes/cloud/_middleware.tsx";
-import * as $8 from "./routes/cloud/handler.tsx";
+import * as $6 from "./routes/api/eac/iot/devices/ensure.ts";
+import * as $7 from "./routes/applications/index.tsx";
+import * as $8 from "./routes/cloud/_middleware.tsx";
 import * as $9 from "./routes/cloud/index.tsx";
 import * as $10 from "./routes/data/index.tsx";
 import * as $11 from "./routes/devices/index.tsx";
@@ -29,9 +29,9 @@ const manifest = {
     "./routes/api/eac/clouds/iot-infrastructure.ts": $3,
     "./routes/api/eac/clouds/resource-groups.ts": $4,
     "./routes/api/eac/index.ts": $5,
-    "./routes/applications/index.tsx": $6,
-    "./routes/cloud/_middleware.tsx": $7,
-    "./routes/cloud/handler.tsx": $8,
+    "./routes/api/eac/iot/devices/ensure.ts": $6,
+    "./routes/applications/index.tsx": $7,
+    "./routes/cloud/_middleware.tsx": $8,
     "./routes/cloud/index.tsx": $9,
     "./routes/data/index.tsx": $10,
     "./routes/devices/index.tsx": $11,

@@ -9,6 +9,7 @@ import { redirectRequest } from "@fathym/common";
 import { OpenBiotechEaC } from "../src/eac/OpenBiotechEaC.ts";
 import { denoKv } from "../configs/deno-kv.config.ts";
 import { eacSvc } from "../services/eac.ts";
+import { DevicesPhaseTypes } from "../src/DevicesPhaseTypes.tsx";
 
 function loggedInCheck(
   req: Request,
@@ -72,6 +73,9 @@ async function currentState(
       IsConnected: true, //isAuthenticated,
       Phase: CloudPhaseTypes.Connect,
     },
+    Devices: {
+      Phase: DevicesPhaseTypes.Connect,
+    },
   };
 
   if (ctx.state.EaC) {
@@ -85,10 +89,10 @@ async function currentState(
       const resGroups =
         ctx.state.EaC!.Clouds![state.Cloud.CloudLookup].ResourceGroups || {};
 
-      const resGroupLookupss = Object.keys(resGroups);
+      const resGroupLookups = Object.keys(resGroups);
 
-      if (resGroupLookupss.length > 0) {
-        state.Cloud.ResourceGroupLookup = resGroupLookupss[0];
+      if (resGroupLookups.length > 0) {
+        state.Cloud.ResourceGroupLookup = resGroupLookups[0];
 
         state.Cloud.Phase = CloudPhaseTypes.Infrastucture;
 
@@ -101,6 +105,25 @@ async function currentState(
           state.Phase = SetupPhaseTypes.Devices;
         }
       }
+    }
+
+    const iots = Object.keys(ctx.state.EaC.IoT || {});
+
+    if (iots.length > 0) {
+      state.Devices.IoTLookup = iots[0];
+
+      state.Devices.Phase = DevicesPhaseTypes.Connect;
+
+      const devices = ctx.state.EaC!.IoT![state.Devices.IoTLookup!].Devices ||
+        {};
+
+      const deviceLookups = Object.keys(devices);
+
+      if (deviceLookups.length > 0) {
+        state.Devices.Phase = DevicesPhaseTypes.Flows;
+      }
+    } else {
+      state.Devices.IoTLookup = "iot-flow";
     }
   }
 
