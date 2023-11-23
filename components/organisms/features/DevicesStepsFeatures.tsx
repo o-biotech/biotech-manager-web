@@ -10,6 +10,7 @@ import {
 import { DevicesPhaseTypes } from "../../../src/DevicesPhaseTypes.tsx";
 import { callToActionStyles } from "../../styles/actions.tsx";
 import { DeviceForm } from "../devices/device.form.tsx";
+import { APIsForm } from "../devices/apis.form.tsx";
 
 export interface DevicesStepsFeaturesProps extends StepsFeaturesProps {
   cloudLookup: string;
@@ -39,17 +40,17 @@ export function DevicesStepsFeatures(props: DevicesStepsFeaturesProps) {
       );
       break;
 
-    case DevicesPhaseTypes.Flows:
-      // currentForm = (
-      //   <CloudCALZForm
-      //     class="px-4"
-      //     cloudLookup={props.cloudLookup!}
-      //     locations={props.locations}
-      //   />
-      // );
+    case DevicesPhaseTypes.APIs:
+      currentForm = (
+        <APIsForm
+          class="px-4"
+          cloudLookup={props.cloudLookup}
+          resGroupLookup={props.resGroupLookup}
+        />
+      );
       break;
 
-    case DevicesPhaseTypes.Access:
+    case DevicesPhaseTypes.Dashboards:
       // currentForm = (
       //   <CloudIoTForm
       //     class="px-4"
@@ -83,35 +84,13 @@ export function DevicesStepsFeatures(props: DevicesStepsFeaturesProps) {
           title: "Configure Data APIs",
           description:
             "Get familiar with and control access to your data APIs.",
-          children: (
-            <ActionGroup class="[&>*]:mx-1 my-2 mt-8">
-              <>
-                <Action
-                  href="./"
-                  class={classSet(callToActionStyles.props, "m-2")}
-                >
-                  Configure
-                </Action>
-              </>
-            </ActionGroup>
-          ),
+          children: smCurrentForm,
         },
         {
           title: "Setup Data Dashboards",
           description:
             "Collect and consume your device data with pre-configured dashboards.",
-          children: (
-            <ActionGroup class="[&>*]:mx-1 my-2 mt-8">
-              <>
-                <Action
-                  href="./"
-                  class={classSet(callToActionStyles.props, "m-2")}
-                >
-                  Setup
-                </Action>
-              </>
-            </ActionGroup>
-          ),
+          children: smCurrentForm,
         },
       ]}
     </StepsFeatures>

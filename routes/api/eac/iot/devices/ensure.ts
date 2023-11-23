@@ -1,12 +1,7 @@
 // deno-lint-ignore-file no-explicit-any
 import { Handlers } from "$fresh/server.ts";
 import { redirectRequest } from "@fathym/common";
-import {
-  EaCCloudResourceAsCode,
-  EaCCloudResourceFormatDetails,
-  EaCStatusProcessingTypes,
-  waitForStatus,
-} from "@fathym/eac";
+import { EaCStatusProcessingTypes, waitForStatus } from "@fathym/eac";
 import { OpenBiotechManagerState } from "../../../../../src/OpenBiotechManagerState.tsx";
 import { OpenBiotechEaC } from "../../../../../src/eac/OpenBiotechEaC.ts";
 import { eacSvc } from "../../../../../services/eac.ts";

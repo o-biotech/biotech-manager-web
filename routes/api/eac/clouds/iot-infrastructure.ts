@@ -2,6 +2,7 @@
 import { Handlers } from "$fresh/server.ts";
 import { redirectRequest } from "@fathym/common";
 import {
+  EaCCloudAzureDetails,
   EaCCloudResourceAsCode,
   EaCCloudResourceFormatDetails,
   EaCStatusProcessingTypes,
@@ -67,6 +68,11 @@ export const handler: Handlers<any, OpenBiotechManagerState> = {
     }
 
     if (storageFlowWarm) {
+      const details = ctx.state.EaC!.Clouds![cloudLookup]
+        .Details as EaCCloudAzureDetails;
+
+      const servicePrincipalId = details!.ID;
+
       iotResources[`${resLookup}-warm`] = {
         Type: "Format",
         Details: {
@@ -86,6 +92,7 @@ export const handler: Handlers<any, OpenBiotechManagerState> = {
             Name: resGroupLookup,
             PrincipalID: "", // TODO: Pass in user email (email used to login to OpenBiotech must match one used for Azure)
             ResourceLookup: resLookup,
+            ServicePrincipalID: servicePrincipalId,
             ShortName: shortName,
           },
           Outputs: {},

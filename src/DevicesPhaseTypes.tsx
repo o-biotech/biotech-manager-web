@@ -1,6 +1,6 @@
 export enum DevicesPhaseTypes {
   Connect = 0,
-  Flows = 1,
-  Access = 2,
+  APIs = 1,
+  Dashboards = 2,
   Complete = 3,
 }

@@ -120,7 +120,7 @@ async function currentState(
       const deviceLookups = Object.keys(devices);
 
       if (deviceLookups.length > 0) {
-        state.Devices.Phase = DevicesPhaseTypes.Flows;
+        state.Devices.Phase = DevicesPhaseTypes.APIs;
       }
     } else {
       state.Devices.IoTLookup = "iot-flow";
