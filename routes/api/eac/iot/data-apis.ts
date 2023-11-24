@@ -19,7 +19,7 @@ export const handler: Handlers<any, OpenBiotechManagerState> = {
 
     const resGroupLookup = formData.get("resGroupLookup") as string;
 
-    const resLookup = (formData.get("resLookup") as string) || `data-apis`;
+    const resLookup = (formData.get("resLookup") as string) || "data-apis";
 
     const resGroupLocation =
       ctx.state.EaC!.Clouds![cloudLookup].ResourceGroups![resGroupLookup]
@@ -45,30 +45,34 @@ export const handler: Handlers<any, OpenBiotechManagerState> = {
           ResourceGroups: {
             [resGroupLookup]: {
               Resources: {
-                [resLookup]: {
-                  Type: "Format",
-                  Details: {
-                    Name: "Data APIs",
-                    Description: "The Data APIs to use for the enterprise.",
-                    Order: 1,
-                    Template: {
-                      Content:
-                        "https://raw.githubusercontent.com/lowcodeunit/infrastructure/master/templates/azure/iot/ref-arch/api/template.jsonc",
-                      Parameters:
-                        "https://raw.githubusercontent.com/lowcodeunit/infrastructure/master/templates/azure/iot/ref-arch/api/parameters.jsonc",
+                "iot-flow": {
+                  Resources: {
+                    [resLookup]: {
+                      Type: "Format",
+                      Details: {
+                        Name: "Data APIs",
+                        Description: "The Data APIs to use for the enterprise.",
+                        Order: 1,
+                        Template: {
+                          Content:
+                            "https://raw.githubusercontent.com/lowcodeunit/infrastructure/master/templates/azure/iot/ref-arch/api/template.jsonc",
+                          Parameters:
+                            "https://raw.githubusercontent.com/lowcodeunit/infrastructure/master/templates/azure/iot/ref-arch/api/parameters.jsonc",
+                        },
+                        Data: {
+                          CloudLookup: cloudLookup,
+                          Location: resGroupLocation,
+                          Name: resGroupLookup,
+                          OrganizationName: orgName,
+                          PrincipalID: ctx.state.Username,
+                          ResourceLookup: resLookup,
+                          ShortName: shortName,
+                        },
+                        Outputs: {},
+                      } as EaCCloudResourceFormatDetails,
+                      Resources: iotResources,
                     },
-                    Data: {
-                      CloudLookup: cloudLookup,
-                      Location: resGroupLocation,
-                      Name: resGroupLookup,
-                      OrganizationName: orgName,
-                      PrincipalID: ctx.state.Username,
-                      ResourceLookup: resLookup,
-                      ShortName: shortName,
-                    },
-                    Outputs: {},
-                  } as EaCCloudResourceFormatDetails,
-                  Resources: iotResources,
+                  },
                 },
               },
             },
