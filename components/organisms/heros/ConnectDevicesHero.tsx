@@ -1,9 +1,12 @@
 import { Handlers, PageProps } from "$fresh/server.ts";
-import { Action } from "$atomic/atoms/Action.tsx";
-import { DisplayStyleTypes } from "$atomic/molecules/Display.tsx";
-import { Hero, HeroProps, HeroStyleTypes } from "$atomic/organisms/Hero.tsx";
-import { ChevronRightIcon } from "$atomic/atoms/icons/ChevronRightIcon.tsx";
-import { IconStyleTypes } from "$atomic/atoms/icons/Icon.tsx";
+import {
+  Action,
+  DisplayStyleTypes,
+  Hero,
+  HeroProps,
+  HeroStyleTypes,
+} from "@fathym/atomic";
+import { ChevronRightIcon } from "$fathym/atomic-icons";
 
 export interface ConnectDevicesHeroProps extends HeroProps {
   hideAction?: boolean;
@@ -22,7 +25,7 @@ export default function ConnectDevicesHero(props: ConnectDevicesHeroProps) {
       {!props.hideAction && (
         <Action href="/devices/flows" class="my-8 flex flex-row">
           Create Device Flow
-          <ChevronRightIcon iconStyle={IconStyleTypes.Outline} />
+          <ChevronRightIcon class="w-[24px] h-[24px]" />
         </Action>
       )}
     </Hero>

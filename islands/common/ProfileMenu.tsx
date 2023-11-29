@@ -1,48 +1,36 @@
+import { ComponentChildren } from "preact";
 import {
+  Action,
+  ActionStyleTypes,
   MenuButton,
   MenuButtonProps,
   MenuButtonStyleTypes,
-} from "$atomic/molecules/MenuButton.tsx";
-import { Action, ActionStyleTypes } from "$atomic/atoms/Action.tsx";
-import { IconStyleTypes } from "$atomic/atoms/icons/Icon.tsx";
-import { ChevronDownIcon } from "$atomic/atoms/icons/ChevronDownIcon.tsx";
-import { UserIcon } from "$atomic/atoms/icons/UserIcon.tsx";
+} from "@fathym/atomic";
+import { ChevronDownIcon, UserIcon } from "$fathym/atomic-icons";
 
-export default function ProfileMenu(props: MenuButtonProps) {
+export type ProfileMenuProps = Omit<MenuButtonProps, "toggleChildren"> & {
+  toggleChildren?: ComponentChildren | undefined;
+};
+
+export default function ProfileMenu(props: ProfileMenuProps) {
   return (
     <MenuButton
       menuStyle={MenuButtonStyleTypes.Responsive}
       toggleChildren={
         <>
-          <UserIcon iconStyle={IconStyleTypes.Outline} />
+          <UserIcon class="w-[24px] h-[24px]" />
 
-          <ChevronDownIcon iconStyle={IconStyleTypes.Outline} />
+          <ChevronDownIcon class="w-[24px] h-[24px]" />
         </>
       }
     >
       <>
         <Action
-          onClick={() => alert("Hey")}
+          onClick={() => alert("Sign out")}
           actionStyle={ActionStyleTypes.Outline | ActionStyleTypes.Solid}
           class="w-full"
         >
-          Contact
-        </Action>
-
-        <Action
-          onClick={() => alert("Hey")}
-          actionStyle={ActionStyleTypes.Outline | ActionStyleTypes.Solid}
-          class="w-full"
-        >
-          Contact
-        </Action>
-
-        <Action
-          onClick={() => alert("Hey")}
-          actionStyle={ActionStyleTypes.Outline | ActionStyleTypes.Solid}
-          class="w-full"
-        >
-          Contact
+          Sign Out
         </Action>
       </>
     </MenuButton>
