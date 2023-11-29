@@ -11,6 +11,7 @@ import { OpenBiotechEaC } from "../src/eac/OpenBiotechEaC.ts";
 import { denoKv } from "../configs/deno-kv.config.ts";
 import { eacSvc } from "../services/eac.ts";
 import { DevicesPhaseTypes } from "../src/DevicesPhaseTypes.tsx";
+import { jwtConfig } from "../configs/jwt.config.ts";
 
 const { signIn, handleCallback, signOut, getSessionId } = createHelpers(
   createGitHubOAuthConfig({
@@ -203,8 +204,15 @@ async function currentState(
 
                 state.Devices.JWT = currentJwt.value;
               } else {
+                const jwt = await jwtConfig.Create({
+                  EnterpriseLookup: state.EaC!.EnterpriseLookup!,
+                  CloudLookup: state.Cloud.CloudLookup!,
+                  ResourceGroupLookup: state.Cloud.ResourceGroupLookup!,
+                  Username: state.Username,
+                });
+
                 //  TODO: Generate new JWT
-                state.Devices.JWT = `THE_NEW_JWT_${Date.now()}`;
+                state.Devices.JWT = jwt;
               }
             }
           } else {

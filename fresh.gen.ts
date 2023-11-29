@@ -7,18 +7,19 @@ import * as $1 from "./routes/_middleware.tsx";
 import * as $2 from "./routes/api/eac/clouds/index.ts";
 import * as $3 from "./routes/api/eac/clouds/iot-infrastructure.ts";
 import * as $4 from "./routes/api/eac/clouds/resource-groups.ts";
-import * as $5 from "./routes/api/eac/data/warm/explorer.ts";
-import * as $6 from "./routes/api/eac/index.ts";
-import * as $7 from "./routes/api/eac/iot/data-apis-jwt.ts";
-import * as $8 from "./routes/api/eac/iot/data-apis.ts";
-import * as $9 from "./routes/api/eac/iot/devices/ensure.ts";
-import * as $10 from "./routes/applications/index.tsx";
-import * as $11 from "./routes/cloud/_middleware.tsx";
-import * as $12 from "./routes/cloud/index.tsx";
-import * as $13 from "./routes/data/index.tsx";
-import * as $14 from "./routes/devices/index.tsx";
-import * as $15 from "./routes/enterprises.tsx";
-import * as $16 from "./routes/index.tsx";
+import * as $5 from "./routes/api/eac/data/_middleware.ts";
+import * as $6 from "./routes/api/eac/data/warm/explorer.ts";
+import * as $7 from "./routes/api/eac/index.ts";
+import * as $8 from "./routes/api/eac/iot/data-apis-jwt.ts";
+import * as $9 from "./routes/api/eac/iot/data-apis.ts";
+import * as $10 from "./routes/api/eac/iot/devices/ensure.ts";
+import * as $11 from "./routes/applications/index.tsx";
+import * as $12 from "./routes/cloud/_middleware.tsx";
+import * as $13 from "./routes/cloud/index.tsx";
+import * as $14 from "./routes/data/index.tsx";
+import * as $15 from "./routes/devices/index.tsx";
+import * as $16 from "./routes/enterprises.tsx";
+import * as $17 from "./routes/index.tsx";
 import * as $$0 from "./islands/atoms/InteractiveMenuIcon.tsx";
 import * as $$1 from "./islands/atoms/InteractiveSlideToggle.tsx";
 import * as $$2 from "./islands/common/ProfileMenu.tsx";
@@ -31,18 +32,19 @@ const manifest = {
     "./routes/api/eac/clouds/index.ts": $2,
     "./routes/api/eac/clouds/iot-infrastructure.ts": $3,
     "./routes/api/eac/clouds/resource-groups.ts": $4,
-    "./routes/api/eac/data/warm/explorer.ts": $5,
-    "./routes/api/eac/index.ts": $6,
-    "./routes/api/eac/iot/data-apis-jwt.ts": $7,
-    "./routes/api/eac/iot/data-apis.ts": $8,
-    "./routes/api/eac/iot/devices/ensure.ts": $9,
-    "./routes/applications/index.tsx": $10,
-    "./routes/cloud/_middleware.tsx": $11,
-    "./routes/cloud/index.tsx": $12,
-    "./routes/data/index.tsx": $13,
-    "./routes/devices/index.tsx": $14,
-    "./routes/enterprises.tsx": $15,
-    "./routes/index.tsx": $16,
+    "./routes/api/eac/data/_middleware.ts": $5,
+    "./routes/api/eac/data/warm/explorer.ts": $6,
+    "./routes/api/eac/index.ts": $7,
+    "./routes/api/eac/iot/data-apis-jwt.ts": $8,
+    "./routes/api/eac/iot/data-apis.ts": $9,
+    "./routes/api/eac/iot/devices/ensure.ts": $10,
+    "./routes/applications/index.tsx": $11,
+    "./routes/cloud/_middleware.tsx": $12,
+    "./routes/cloud/index.tsx": $13,
+    "./routes/data/index.tsx": $14,
+    "./routes/devices/index.tsx": $15,
+    "./routes/enterprises.tsx": $16,
+    "./routes/index.tsx": $17,
   },
   islands: {
     "./islands/atoms/InteractiveMenuIcon.tsx": $$0,

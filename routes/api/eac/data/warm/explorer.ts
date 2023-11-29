@@ -1,19 +1,19 @@
 // deno-lint-ignore-file no-explicit-any
 import { Handlers } from "$fresh/server.ts";
-import { redirectRequest, respond } from "@fathym/common";
+import { respond } from "@fathym/common";
 import { ExplorerRequest } from "@fathym/eac";
-import { OpenBiotechManagerState } from "../../../../../src/OpenBiotechManagerState.tsx";
 import { eacExplorerSvc } from "../../../../../services/eac.ts";
+import { OpenBiotechManagerAPIState } from "../../../../../src/api/OpenBiotechManagerAPIState.ts";
 
-export const handler: Handlers<any, OpenBiotechManagerState> = {
+export const handler: Handlers<any, OpenBiotechManagerAPIState> = {
   async GET(req, ctx) {
     // const formData = await req.formData();
 
-    const entLookup = ctx.state.EaC!.EnterpriseLookup!;
+    const entLookup = ctx.state.EnterpriseLookup;
 
-    const cloudLookup = ctx.state.Cloud.CloudLookup!;
+    const cloudLookup = ctx.state.CloudLookup;
 
-    const resGroupLookup = ctx.state.Cloud.ResourceGroupLookup!;
+    const resGroupLookup = ctx.state.ResourceGroupLookup;
 
     const resLookups = ["iot-flow", "iot-flow-warm"];
 
