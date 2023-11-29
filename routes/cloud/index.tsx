@@ -9,7 +9,6 @@ import { CloudPhaseTypes } from "../../src/CloudPhaseTypes.tsx";
 import { OpenBiotechManagerState } from "../../src/OpenBiotechManagerState.tsx";
 import { msalAuthProvider } from "../../configs/msal.config.ts";
 import { OpenBiotechEaC } from "../../src/eac/OpenBiotechEaC.ts";
-import { EaCCloudAzureDetails } from "../../../../fathym-deno/everything-as-code/src/eac/modules/clouds/EaCCloudAzureDetails.ts";
 import { eacAzureSvc } from "../../services/eac.ts";
 
 interface CloudPageData {
