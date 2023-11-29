@@ -1,4 +1,5 @@
 import { create, decode, getNumericDate, verify } from "@djwt";
+import { JWTConfig } from "@fathym/eac";
 
 export const jwtConfig: JWTConfig = {
   Algorithm: { name: "HMAC", hash: "SHA-512" } as AlgorithmIdentifier,
