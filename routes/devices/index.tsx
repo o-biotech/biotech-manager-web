@@ -12,6 +12,8 @@ interface DevicesPageData {
 
   iotLookup: string;
 
+  jwt: string;
+
   resGroupLookup: string;
 }
 
@@ -35,6 +37,7 @@ export const handler: Handlers<
       cloudLookup: ctx.state.Cloud.CloudLookup!,
       devicesPhase: ctx.state.Devices.Phase,
       iotLookup: ctx.state.Devices.IoTLookup!,
+      jwt: ctx.state.Devices.JWT!,
       resGroupLookup: ctx.state.Cloud.ResourceGroupLookup!,
     };
 
@@ -58,6 +61,7 @@ export default function Devices({
       <DevicesStepsFeatures
         cloudLookup={data!.cloudLookup}
         iotLookup={data!.iotLookup}
+        jwt={data!.jwt}
         resGroupLookup={data!.resGroupLookup}
         devicesPhase={data!.devicesPhase}
       />

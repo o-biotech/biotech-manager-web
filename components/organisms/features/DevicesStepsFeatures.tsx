@@ -1,16 +1,8 @@
 import { ComponentChildren } from "preact";
-import {
-  Action,
-  ActionGroup,
-  ActionStyleTypes,
-  classSet,
-  StepsFeatures,
-  StepsFeaturesProps,
-} from "@fathym/atomic";
+import { StepsFeatures, StepsFeaturesProps } from "@fathym/atomic";
 import { DevicesPhaseTypes } from "../../../src/DevicesPhaseTypes.tsx";
-import { callToActionStyles } from "../../styles/actions.tsx";
 import { DeviceForm } from "../devices/device.form.tsx";
-import { APIsForm } from "../devices/apis.form.tsx";
+import { APIJWTForm } from "../devices/api-jwt.form.tsx";
 
 export interface DevicesStepsFeaturesProps extends StepsFeaturesProps {
   cloudLookup: string;
@@ -20,6 +12,8 @@ export interface DevicesStepsFeaturesProps extends StepsFeaturesProps {
   devicesPhase?: DevicesPhaseTypes;
 
   iotLookup: string;
+
+  jwt: string;
 
   resGroupLookup: string;
 }
@@ -41,13 +35,7 @@ export function DevicesStepsFeatures(props: DevicesStepsFeaturesProps) {
       break;
 
     case DevicesPhaseTypes.APIs:
-      currentForm = (
-        <APIsForm
-          class="px-4"
-          cloudLookup={props.cloudLookup}
-          resGroupLookup={props.resGroupLookup}
-        />
-      );
+      currentForm = <APIJWTForm class="px-4" jwt={props.jwt} />;
       break;
 
     case DevicesPhaseTypes.Dashboards:

@@ -35,5 +35,7 @@ export type OpenBiotechCloudState = {
 export type OpenBiotechDevicesState = {
   IoTLookup?: string;
 
+  JWT: string;
+
   Phase: DevicesPhaseTypes;
 };
