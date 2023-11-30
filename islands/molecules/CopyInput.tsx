@@ -1,0 +1,32 @@
+import { JSX } from "preact";
+import { useRef } from "preact/hooks";
+import { MdContentCopy } from "react-icons/md";
+
+export function CopyInput(props: JSX.HTMLAttributes<HTMLInputElement>) {
+  const copyRef = useRef<HTMLInputElement>(null);
+
+  const copyToClipboard = (e: JSX.TargetedMouseEvent<HTMLButtonElement>) => {
+    navigator.clipboard.writeText(props.value!.toString());
+  };
+
+  return (
+    <>
+      <input
+        class="inline-block appearance-none w-[80%] bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 rounded leading-tight focus:outline-none focus:border-blue-500"
+        {...props}
+        disabled
+        ref={copyRef}
+      />
+
+      <input {...props} type="hidden"  />
+
+      <button
+        type="button"
+        class="inline-block ml-2 text-lg"
+        onClick={copyToClipboard}
+      >
+        <MdContentCopy />
+      </button>
+    </>
+  );
+}

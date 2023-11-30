@@ -16,14 +16,17 @@ import * as $10 from "./routes/api/eac/iot/devices/ensure.ts";
 import * as $11 from "./routes/applications/index.tsx";
 import * as $12 from "./routes/cloud/_middleware.tsx";
 import * as $13 from "./routes/cloud/index.tsx";
-import * as $14 from "./routes/data/index.tsx";
-import * as $15 from "./routes/devices/index.tsx";
-import * as $16 from "./routes/enterprises.tsx";
-import * as $17 from "./routes/index.tsx";
+import * as $14 from "./routes/commit/[commitId]/status.tsx";
+import * as $15 from "./routes/data/index.tsx";
+import * as $16 from "./routes/devices/index.tsx";
+import * as $17 from "./routes/enterprises.tsx";
+import * as $18 from "./routes/index.tsx";
 import * as $$0 from "./islands/atoms/InteractiveMenuIcon.tsx";
 import * as $$1 from "./islands/atoms/InteractiveSlideToggle.tsx";
-import * as $$2 from "./islands/common/ProfileMenu.tsx";
-import * as $$3 from "./islands/molecules/InteractiveResponsiveSet.tsx";
+import * as $$2 from "./islands/atoms/Redirect.tsx";
+import * as $$3 from "./islands/common/ProfileMenu.tsx";
+import * as $$4 from "./islands/molecules/CopyInput.tsx";
+import * as $$5 from "./islands/molecules/InteractiveResponsiveSet.tsx";
 
 const manifest = {
   routes: {
@@ -41,16 +44,19 @@ const manifest = {
     "./routes/applications/index.tsx": $11,
     "./routes/cloud/_middleware.tsx": $12,
     "./routes/cloud/index.tsx": $13,
-    "./routes/data/index.tsx": $14,
-    "./routes/devices/index.tsx": $15,
-    "./routes/enterprises.tsx": $16,
-    "./routes/index.tsx": $17,
+    "./routes/commit/[commitId]/status.tsx": $14,
+    "./routes/data/index.tsx": $15,
+    "./routes/devices/index.tsx": $16,
+    "./routes/enterprises.tsx": $17,
+    "./routes/index.tsx": $18,
   },
   islands: {
     "./islands/atoms/InteractiveMenuIcon.tsx": $$0,
     "./islands/atoms/InteractiveSlideToggle.tsx": $$1,
-    "./islands/common/ProfileMenu.tsx": $$2,
-    "./islands/molecules/InteractiveResponsiveSet.tsx": $$3,
+    "./islands/atoms/Redirect.tsx": $$2,
+    "./islands/common/ProfileMenu.tsx": $$3,
+    "./islands/molecules/CopyInput.tsx": $$4,
+    "./islands/molecules/InteractiveResponsiveSet.tsx": $$5,
   },
   baseUrl: import.meta.url,
 };
