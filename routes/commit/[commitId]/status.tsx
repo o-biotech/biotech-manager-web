@@ -12,6 +12,12 @@ import { formatDistanceToNow, intlFormatDistance } from "npm:date-fns";
 import { OpenBiotechManagerState } from "../../../src/OpenBiotechManagerState.tsx";
 import { eacSvc } from "../../../services/eac.ts";
 import { Redirect } from "../../../islands/atoms/Redirect.tsx";
+import {
+  CheckIcon,
+  ErrorIcon,
+  LoadingIcon,
+  RenewIcon,
+} from "$fathym/atomic-icons";
 
 interface CommitStatusPageData {
   complete: boolean;
@@ -73,18 +79,18 @@ export default function CommitStatus({
 
   const classyPrint = (key: string, data: any, level: number) => {
     if (typeof data === "object") {
-      // const statusIcon = data.State === "Succeeded"
-      //   ? <MdCheckCircle class="text-green-500 inline-block" />
-      //   : data.State === "Error"
-      //   ? <MdError class="text-red-500 inline-block" />
-      //   : <MdAutorenew class="text-blue-500 animate-spin inline-block" />;
+      const statusIcon = data.State === "Succeeded"
+        ? <CheckIcon class="text-green-500 inline-block" />
+        : data.State === "Error"
+        ? <ErrorIcon class="text-red-500 inline-block" />
+        : <RenewIcon class="text-blue-500 animate-spin inline-block" />;
       return (
         <details
           open={data.State !== "Succeeded"}
           class={`text-lg my-2 mt-3 ml-${2 * level}`}
         >
           <summary class="font-bold">
-            {/* {statusIcon} */}
+            {statusIcon}
             {key}
           </summary>
 
@@ -125,7 +131,7 @@ export default function CommitStatus({
       <p class="text-lg my-2">
         <span class="font-bold">Status:</span>{" "}
         {EaCStatusProcessingTypes[data!.status.Processing]}
-        {/* <MdAutoMode class="text-2xl animate-spin inline-block ml-4" /> */}
+        <LoadingIcon class="text-2xl animate-spin inline-block ml-4" />
       </p>
 
       <p class="text-lg my-2">
@@ -157,13 +163,6 @@ export default function CommitStatus({
 
         {Object.keys(data!.status.Messages || {}).map((messageKey) => {
           return classyPrint(messageKey, data!.status.Messages[messageKey], 1);
-          // return (
-          //   <p class="text-lg my-2">
-          //     <span class="font-bold">{messageKey}:</span> <pre>
-          //       {JSON.stringify(data!.status.Messages[messageKey], null, 2)}
-          //     </pre>
-          //   </p>
-          // );
         })}
       </div>
 
