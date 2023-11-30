@@ -3,6 +3,7 @@ import { StepsFeatures, StepsFeaturesProps } from "@fathym/atomic";
 import { DevicesPhaseTypes } from "../../../src/DevicesPhaseTypes.tsx";
 import { DeviceForm } from "../devices/device.form.tsx";
 import { APIJWTForm } from "../devices/api-jwt.form.tsx";
+import DevicesDashboardForm from "../devices/dashboards.form.tsx";
 
 export interface DevicesStepsFeaturesProps extends StepsFeaturesProps {
   cloudLookup: string;
@@ -39,13 +40,14 @@ export function DevicesStepsFeatures(props: DevicesStepsFeaturesProps) {
       break;
 
     case DevicesPhaseTypes.Dashboards:
-      // currentForm = (
-      //   <CloudIoTForm
-      //     class="px-4"
-      //     cloudLookup={props.cloudLookup!}
-      //     resGroupLookup={props.resGroupLookup!}
-      //   />
-      // );
+      currentForm = (
+        <DevicesDashboardForm
+          class="px-4"
+          cloudLookup={props.cloudLookup!}
+          iotLookup={props.iotLookup}
+          resGroupLookup={props.resGroupLookup!}
+        />
+      );
       break;
   }
 

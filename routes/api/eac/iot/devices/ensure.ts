@@ -16,7 +16,7 @@ export const handler: Handlers<any, OpenBiotechManagerState> = {
 
     const iotLookup = formData.get("iotLookup") as string;
 
-    const deviceLookup = (formData.get("deviceLookup") as string) || `iot-flow`;
+    const deviceLookup = formData.get("deviceLookup") as string;
 
     const isIoTEdge = !!(formData.get("isIoTEdge") as string);
 
