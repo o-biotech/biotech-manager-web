@@ -2,9 +2,8 @@
 import { Handlers } from "$fresh/server.ts";
 import { redirectRequest } from "@fathym/common";
 import {
-  EaCCloudAzureDetails,
-  EaCCloudResourceAsCode,
-  EaCCloudResourceFormatDetails,
+  EaCDashboardAsCode,
+  EaCIoTAsCode,
   EaCStatusProcessingTypes,
 } from "@fathym/eac";
 import { OpenBiotechManagerState } from "../../../../src/OpenBiotechManagerState.tsx";
@@ -15,155 +14,45 @@ export const handler: Handlers<any, OpenBiotechManagerState> = {
   async POST(req, ctx) {
     const formData = await req.formData();
 
-    const cloudLookup = formData.get("cloudLookup") as string;
-
-    const resGroupLookup = formData.get("resGroupLookup") as string;
-
     const iotLookup = formData.get("iotLookup") as string;
 
-    const resLookup = (formData.get("resLookup") as string) || `dashboards`;
+    const dataExplorer = !!(formData.get("dataExplorer") as string);
 
-    const resGroupLocation =
-      ctx.state.EaC!.Clouds![cloudLookup].ResourceGroups![resGroupLookup]
-        .Details!.Location;
-
-    const powerBI = !!(formData.get("powerBI") as string);
-
-    const fathymDataDashboard =
-      !!(formData.get("fathymDataDashboard") as string);
+    // const fathymDataDashboard =
+    //   !!(formData.get("fathymDataDashboard") as string);
 
     const freeboard = !!(formData.get("freeboard") as string);
 
-    const shortName = resGroupLookup
-      .split("-")
-      .map((p) => p.charAt(0))
-      .join("");
-
-    const iotResources: {
-      [key: string]: EaCCloudResourceAsCode;
+    const iotDashboards: {
+      [key: string]: EaCDashboardAsCode;
     } = {};
 
-    // if (storageFlowCold) {
-    //   iotResources[`${resLookup}-cold`] = {
-    //     Type: "Format",
-    //     Details: {
-    //       Name: "IoT Infrastructure - Cold Flow",
-    //       Description:
-    //         "The cold flow IoT Infrastructure to use for the enterprise.",
-    //       Order: 1,
-    //       Template: {
-    //         Content:
-    //           "https://raw.githubusercontent.com/lowcodeunit/infrastructure/master/templates/azure/iot/ref-arch/cold/template.jsonc",
-    //         Parameters:
-    //           "https://raw.githubusercontent.com/lowcodeunit/infrastructure/master/templates/azure/iot/ref-arch/cold/parameters.jsonc",
-    //       },
-    //       Data: {
-    //         CloudLookup: cloudLookup,
-    //         Location: resGroupLocation,
-    //         Name: resGroupLookup,
-    //         ResourceLookup: resLookup,
-    //         ShortName: shortName,
-    //       },
-    //       Outputs: {},
-    //     } as EaCCloudResourceFormatDetails,
-    //   };
-    // }
+    if (dataExplorer) {
+      iotDashboards[`azure-data-explorer`] = {
+        Details: {
+          Name: "Azure Data Explorer",
+          Description: "The embeded instance of azure data explorer.",
+          Type: "AzureDataExplorer",
+        },
+      };
+    }
 
-    // if (storageFlowWarm) {
-    //   const details = ctx.state.EaC!.Clouds![cloudLookup]
-    //     .Details as EaCCloudAzureDetails;
-
-    //   const servicePrincipalId = details!.ID;
-
-    //   iotResources[`${resLookup}-warm`] = {
-    //     Type: "Format",
-    //     Details: {
-    //       Name: "IoT Infrastructure - Warm Flow",
-    //       Description:
-    //         "The warm flow IoT Infrastructure to use for the enterprise.",
-    //       Order: 1,
-    //       Template: {
-    //         Content:
-    //           "https://raw.githubusercontent.com/lowcodeunit/infrastructure/master/templates/azure/iot/ref-arch/warm/template.jsonc",
-    //         Parameters:
-    //           "https://raw.githubusercontent.com/lowcodeunit/infrastructure/master/templates/azure/iot/ref-arch/warm/parameters.jsonc",
-    //       },
-    //       Data: {
-    //         CloudLookup: cloudLookup,
-    //         Location: resGroupLocation,
-    //         Name: resGroupLookup,
-    //         PrincipalID: "", // TODO: Pass in user email (email used to login to OpenBiotech must match one used for Azure)
-    //         ResourceLookup: resLookup,
-    //         ServicePrincipalID: servicePrincipalId,
-    //         ShortName: shortName,
-    //       },
-    //       Outputs: {},
-    //     } as EaCCloudResourceFormatDetails,
-    //   };
-    // }
-
-    // if (storageFlowHot) {
-    //   iotResources[`${resLookup}-hot`] = {
-    //     Type: "Format",
-    //     Details: {
-    //       Name: "IoT Infrastructure - Hot Flow",
-    //       Description:
-    //         "The hot flow IoT Infrastructure to use for the enterprise.",
-    //       Order: 1,
-    //       Template: {
-    //         Content:
-    //           "https://raw.githubusercontent.com/lowcodeunit/infrastructure/master/templates/azure/iot/ref-arch/hot/template.jsonc",
-    //         Parameters:
-    //           "https://raw.githubusercontent.com/lowcodeunit/infrastructure/master/templates/azure/iot/ref-arch/hot/parameters.jsonc",
-    //       },
-    //       Data: {
-    //         CloudLookup: cloudLookup,
-    //         Location: resGroupLocation,
-    //         Name: resGroupLookup,
-    //         ResourceLookup: resLookup,
-    //         ShortName: shortName,
-    //       },
-    //       Outputs: {},
-    //     } as EaCCloudResourceFormatDetails,
-    //   };
-    // }
+    if (freeboard) {
+      iotDashboards[`freeboard`] = {
+        Details: {
+          Name: "Freeboard",
+          Description: "The embeded instance of freeboard.",
+          Type: "Freeboard",
+        },
+      };
+    }
 
     const eac: OpenBiotechEaC = {
       EnterpriseLookup: ctx.state.EaC!.EnterpriseLookup,
-      Clouds: {
-        [cloudLookup]: {
-          ResourceGroups: {
-            [resGroupLookup]: {
-              // Resources: {
-              //   [resLookup]: {
-              //     Type: "Format",
-              //     Details: {
-              //       Name: "DataDashboards",
-              //       Description:
-              //         "The IoT Infrastructure to use for the enterprise.",
-              //       Order: 1,
-              //       Template: {
-              //         Content:
-              //           "https://raw.githubusercontent.com/lowcodeunit/infrastructure/master/templates/azure/iot/ref-arch/template.jsonc",
-              //         Parameters:
-              //           "https://raw.githubusercontent.com/lowcodeunit/infrastructure/master/templates/azure/iot/ref-arch/parameters.jsonc",
-              //       },
-              //       Data: {
-              //         CloudLookup: cloudLookup,
-              //         Location: resGroupLocation,
-              //         Name: resGroupLookup,
-              //         PrincipalID: "", // TODO: Pass in actual principal ID (maybe retrievable from MSAL account record? I think can just be the email?)
-              //         ResourceLookup: resLookup,
-              //         ShortName: shortName,
-              //       },
-              //       Outputs: {},
-              //     } as EaCCloudResourceFormatDetails,
-              //     Resources: iotResources,
-              //   },
-              // },
-            },
-          },
-        },
+      IoT: {
+        [iotLookup]: {
+          Dashboards: iotDashboards,
+        } as EaCIoTAsCode,
       },
     };
 

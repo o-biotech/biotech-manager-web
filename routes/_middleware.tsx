@@ -183,8 +183,9 @@ async function currentState(
 
             state.Devices.Phase = DevicesPhaseTypes.Connect;
 
-            const devices =
-              ctx.state.EaC!.IoT![state.Devices.IoTLookup!].Devices || {};
+            const iot = ctx.state.EaC!.IoT![state.Devices.IoTLookup!];
+
+            const devices = iot.Devices || {};
 
             const deviceLookups = Object.keys(devices);
 
@@ -207,6 +208,16 @@ async function currentState(
                 state.Devices.Phase = DevicesPhaseTypes.Dashboards;
 
                 state.Devices.JWT = currentJwt.value;
+
+                const dashboards = iot.Dashboards || {};
+
+                const dashboardLookups = Object.keys(dashboards);
+
+                if (dashboardLookups.length > 0) {
+                  state.Devices.Phase = DevicesPhaseTypes.Complete;
+
+                  state.Phase = SetupPhaseTypes.Data;
+                }
               } else {
                 const jwt = await jwtConfig.Create({
                   EnterpriseLookup: state.EaC!.EnterpriseLookup!,
@@ -215,7 +226,6 @@ async function currentState(
                   Username: state.Username,
                 });
 
-                //  TODO: Generate new JWT
                 state.Devices.JWT = jwt;
               }
             }
