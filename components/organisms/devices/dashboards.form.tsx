@@ -3,19 +3,21 @@ import { Action, ActionGroup, classSet, Input } from "@fathym/atomic";
 import { Location } from "npm:@azure/arm-subscriptions";
 import { callToActionStyles } from "../../styles/actions.tsx";
 
-export type CloudIoTFormProps = JSX.HTMLAttributes<HTMLFormElement> & {
+export type DevicesDashboardFormProps = JSX.HTMLAttributes<HTMLFormElement> & {
   cloudLookup: string;
+
+  iotLookup: string;
 
   resGroupLookup: string;
 
   resLookup?: string;
 };
 
-export default function CloudIoTForm(props: CloudIoTFormProps) {
+export default function DevicesDashboardForm(props: DevicesDashboardFormProps) {
   return (
     <form
       method="post"
-      action="/api/eac/clouds/iot-infrastructure"
+      action="/api/eac/iot/dashboards"
       {...props}
       class={classSet(props, "w-full max-w-sm md:max-w-md mx-auto p-3 mt-8")}
     >
@@ -35,6 +37,13 @@ export default function CloudIoTForm(props: CloudIoTFormProps) {
         />
 
         <Input
+          id="iotLookup"
+          name="iotLookup"
+          type="hidden"
+          value={props.iotLookup}
+        />
+
+        <Input
           id="resLookup"
           name="resLookup"
           type="hidden"
@@ -43,53 +52,54 @@ export default function CloudIoTForm(props: CloudIoTFormProps) {
 
         <div class="w-full p-3">
           <label class="block uppercase tracking-wide font-bold mb-2 text-xl">
-            Storage Flows
+            Data Dashboards
           </label>
 
           <p class="block text-md mb-8">
-            Your storage flows determine how your data can be accessed. Cold
-            flows allow for long term storage with slower querying performance.
-            Warm flows allow for shorter term storage with better querying
-            performance. Hot flows provide data immediately with no storage; you
-            manage the storage.
+            Configuring default data dashboards will help you get started
+            quickly visualizing your data so you know what it is and can
+            brainstorm what to do with it.
           </p>
 
           <div class="flex items-center mb-2">
             <Input
-              id="storageFlowCold"
-              name="storageFlowCold"
+              id="powerBI"
+              name="powerBI"
               type="checkbox"
-              value="cold"
+              value="powerBI"
               class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
             />
-            <label for="storageFlowCold" class="ms-2 text-sm font-medium pl-3">
-              Cold Storage
+            <label for="powerBI" class="ms-2 text-sm font-medium pl-3">
+              Power BI
             </label>
           </div>
 
           <div class="flex items-center mb-2">
             <Input
-              id="storageFlowWarm"
-              name="storageFlowWarm"
+              id="fathymDataDashboard"
+              name="fathymDataDashboard"
               type="checkbox"
-              value="warm"
+              value="fathymDataDashboard"
               class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
             />
-            <label for="storageFlowWarm" class="ms-2 text-sm font-medium pl-3">
-              Warm Storage
+            <label
+              for="fathymDataDashboard"
+              class="ms-2 text-sm font-medium pl-3"
+            >
+              Fathym Data Dashboard
             </label>
           </div>
 
           <div class="flex items-center mb-2">
             <Input
-              id="storageFlowHot"
-              name="storageFlowHot"
+              id="freeboard"
+              name="freeboard"
               type="checkbox"
-              value="hot"
+              value="freeboard"
               class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
             />
-            <label for="storageFlowHot" class="ms-2 text-sm font-medium pl-3">
-              Hot Storage
+            <label for="freeboard" class="ms-2 text-sm font-medium pl-3">
+              Freeboard
             </label>
           </div>
         </div>
@@ -104,7 +114,7 @@ export default function CloudIoTForm(props: CloudIoTFormProps) {
               "w-full md:w-auto text-white font-bold m-1 py-2 px-4 rounded focus:outline-none shadow-lg",
             )}
           >
-            Establish IoT Infrastructure
+            Establish Dashboards
           </Action>
         </>
       </ActionGroup>

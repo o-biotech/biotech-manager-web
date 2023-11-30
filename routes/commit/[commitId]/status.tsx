@@ -14,6 +14,10 @@ import { eacSvc } from "../../../services/eac.ts";
 import { Redirect } from "../../../islands/atoms/Redirect.tsx";
 
 interface CommitStatusPageData {
+  complete: boolean;
+
+  redirect: string;
+
   status: EaCStatus;
 }
 
@@ -30,16 +34,23 @@ export const handler: Handlers<
 
     const status: EaCStatus = await eacSvc.Status(entLookup, commitId);
 
-    if (status.Processing === EaCStatusProcessingTypes.COMPLETE) {
-      const successRedirect = url.searchParams.get("successRedirect") as string;
+    const complete = (url.searchParams.get("complete") as string) === "true";
 
+    const successRedirect = url.searchParams.get("successRedirect") as string;
+
+    const errorRedirect = url.searchParams.get("errorRedirect") as string;
+
+    if (complete) {
       return redirectRequest(successRedirect);
     } else if (status.Processing === EaCStatusProcessingTypes.ERROR) {
-      const errorRedirect = url.searchParams.get("errorRedirect") as string;
-
       return redirectRequest(`${errorRedirect}?commitId=${commitId}`);
     } else {
       const data: CommitStatusPageData = {
+        complete: status.Processing === EaCStatusProcessingTypes.COMPLETE,
+        redirect:
+          `/commit/${commitId}/status?successRedirect=${successRedirect}&errorRedirect=${errorRedirect}&complete=${
+            status.Processing === EaCStatusProcessingTypes.COMPLETE
+          }`,
         status,
       };
 
@@ -56,15 +67,17 @@ export default function CommitStatus({
     new Date(),
   );
 
-  const interval = Math.floor(Math.random() * (5000 - 2000 + 1)) + 2000;
+  const interval = data!.complete
+    ? 30000
+    : Math.floor(Math.random() * (5000 - 2000 + 1)) + 2000;
 
   const classyPrint = (key: string, data: any, level: number) => {
     if (typeof data === "object") {
       const statusIcon = data.State === "Succeeded"
-        ? <MdCheckCircle class="color-green-500 inline-block" />
+        ? <MdCheckCircle class="text-green-500 inline-block" />
         : data.State === "Error"
-        ? <MdError class="color-red-500 inline-block" />
-        : <MdAutorenew class="color-blue-500 animate-spin inline-block" />;
+        ? <MdError class="text-red-500 inline-block" />
+        : <MdAutorenew class="text-blue-500 animate-spin inline-block" />;
       return (
         <details
           open={data.State !== "Succeeded"}
@@ -72,7 +85,7 @@ export default function CommitStatus({
         >
           <summary class="font-bold">
             {statusIcon}
-            {key}:
+            {key}
           </summary>
 
           {Object.keys(data).map((k) => {
@@ -129,7 +142,18 @@ export default function CommitStatus({
       </p>
 
       <div open class="text-2xl my-2 mt-6">
-        <span class="font-bold">Messages:</span>
+        <span class="font-bold">Messages</span>
+
+        {data!.complete && (
+          <p class="text-lg my-2">
+            <span class="font-bold">Complete:</span> Redirecting in 30 seconds,
+            {" "}
+            <a href={data!.redirect} class="text-blue-500 underline">
+              click here
+            </a>{" "}
+            to redirect now.
+          </p>
+        )}
 
         {Object.keys(data!.status.Messages || {}).map((messageKey) => {
           return classyPrint(messageKey, data!.status.Messages[messageKey], 1);
@@ -143,7 +167,7 @@ export default function CommitStatus({
         })}
       </div>
 
-      <Redirect interval={interval} />
+      <Redirect interval={interval} redirect={data!.redirect} />
     </div>
   );
 }
