@@ -41,12 +41,7 @@ export function DevicesStepsFeatures(props: DevicesStepsFeaturesProps) {
 
     case DevicesPhaseTypes.Dashboards:
       currentForm = (
-        <DevicesDashboardForm
-          class="px-4"
-          cloudLookup={props.cloudLookup!}
-          iotLookup={props.iotLookup}
-          resGroupLookup={props.resGroupLookup!}
-        />
+        <DevicesDashboardForm class="px-4" iotLookup={props.iotLookup} />
       );
       break;
   }

@@ -10,6 +10,7 @@ export const curIconSetConfig: IconSetConfig = {
       "https://api.iconify.design/material-symbols:android-find-my-device-outline.svg",
     "connected-devices":
       "https://api.iconify.design/material-symbols:cast-connected-outline.svg",
+    copy: "https://api.iconify.design/solar:copy-outline.svg",
     "device-telemetry":
       "https://api.iconify.design/material-symbols:query-stats.svg",
     error: "https://api.iconify.design/material-symbols:error.svg",

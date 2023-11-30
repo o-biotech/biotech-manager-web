@@ -14,15 +14,14 @@ import * as $8 from "./routes/api/eac/iot/dashboards.ts";
 import * as $9 from "./routes/api/eac/iot/data-apis-jwt.ts";
 import * as $10 from "./routes/api/eac/iot/data-apis.ts";
 import * as $11 from "./routes/api/eac/iot/devices/ensure.ts";
-import * as $12 from "./routes/api/eac/iot/handler.ts";
-import * as $13 from "./routes/applications/index.tsx";
-import * as $14 from "./routes/cloud/_middleware.tsx";
-import * as $15 from "./routes/cloud/index.tsx";
-import * as $16 from "./routes/commit/[commitId]/status.tsx";
-import * as $17 from "./routes/data/index.tsx";
-import * as $18 from "./routes/devices/index.tsx";
-import * as $19 from "./routes/enterprises.tsx";
-import * as $20 from "./routes/index.tsx";
+import * as $12 from "./routes/applications/index.tsx";
+import * as $13 from "./routes/cloud/_middleware.tsx";
+import * as $14 from "./routes/cloud/index.tsx";
+import * as $15 from "./routes/commit/[commitId]/status.tsx";
+import * as $16 from "./routes/data/index.tsx";
+import * as $17 from "./routes/devices/index.tsx";
+import * as $18 from "./routes/enterprises.tsx";
+import * as $19 from "./routes/index.tsx";
 import * as $$0 from "./islands/atoms/InteractiveMenuIcon.tsx";
 import * as $$1 from "./islands/atoms/InteractiveSlideToggle.tsx";
 import * as $$2 from "./islands/atoms/Redirect.tsx";
@@ -44,15 +43,14 @@ const manifest = {
     "./routes/api/eac/iot/data-apis-jwt.ts": $9,
     "./routes/api/eac/iot/data-apis.ts": $10,
     "./routes/api/eac/iot/devices/ensure.ts": $11,
-    "./routes/api/eac/iot/handler.ts": $12,
-    "./routes/applications/index.tsx": $13,
-    "./routes/cloud/_middleware.tsx": $14,
-    "./routes/cloud/index.tsx": $15,
-    "./routes/commit/[commitId]/status.tsx": $16,
-    "./routes/data/index.tsx": $17,
-    "./routes/devices/index.tsx": $18,
-    "./routes/enterprises.tsx": $19,
-    "./routes/index.tsx": $20,
+    "./routes/applications/index.tsx": $12,
+    "./routes/cloud/_middleware.tsx": $13,
+    "./routes/cloud/index.tsx": $14,
+    "./routes/commit/[commitId]/status.tsx": $15,
+    "./routes/data/index.tsx": $16,
+    "./routes/devices/index.tsx": $17,
+    "./routes/enterprises.tsx": $18,
+    "./routes/index.tsx": $19,
   },
   islands: {
     "./islands/atoms/InteractiveMenuIcon.tsx": $$0,

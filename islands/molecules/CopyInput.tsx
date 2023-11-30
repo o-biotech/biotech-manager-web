@@ -1,6 +1,6 @@
 import { JSX } from "preact";
 import { useRef } from "preact/hooks";
-import { MdContentCopy } from "react-icons/md";
+import { CopyIcon } from "$fathym/atomic-icons";
 
 export function CopyInput(props: JSX.HTMLAttributes<HTMLInputElement>) {
   const copyRef = useRef<HTMLInputElement>(null);
@@ -18,14 +18,14 @@ export function CopyInput(props: JSX.HTMLAttributes<HTMLInputElement>) {
         ref={copyRef}
       />
 
-      <input {...props} type="hidden"  />
+      <input {...props} type="hidden" />
 
       <button
         type="button"
         class="inline-block ml-2 text-lg"
         onClick={copyToClipboard}
       >
-        <MdContentCopy />
+        <CopyIcon class="w-6 h-6" />
       </button>
     </>
   );

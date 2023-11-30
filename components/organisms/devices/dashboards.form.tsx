@@ -4,13 +4,7 @@ import { Location } from "npm:@azure/arm-subscriptions";
 import { callToActionStyles } from "../../styles/actions.tsx";
 
 export type DevicesDashboardFormProps = JSX.HTMLAttributes<HTMLFormElement> & {
-  cloudLookup: string;
-
   iotLookup: string;
-
-  resGroupLookup: string;
-
-  resLookup?: string;
 };
 
 export default function DevicesDashboardForm(props: DevicesDashboardFormProps) {
@@ -23,31 +17,10 @@ export default function DevicesDashboardForm(props: DevicesDashboardFormProps) {
     >
       <div class="flex flex-wrap -mx-3 mb-4 text-left">
         <Input
-          id="cloudLookup"
-          name="cloudLookup"
-          type="hidden"
-          value={props.cloudLookup}
-        />
-
-        <Input
-          id="resGroupLookup"
-          name="resGroupLookup"
-          type="hidden"
-          value={props.resGroupLookup}
-        />
-
-        <Input
           id="iotLookup"
           name="iotLookup"
           type="hidden"
           value={props.iotLookup}
-        />
-
-        <Input
-          id="resLookup"
-          name="resLookup"
-          type="hidden"
-          value={props.resLookup}
         />
 
         <div class="w-full p-3">
@@ -63,18 +36,19 @@ export default function DevicesDashboardForm(props: DevicesDashboardFormProps) {
 
           <div class="flex items-center mb-2">
             <Input
-              id="powerBI"
-              name="powerBI"
+              id="dataExplorer"
+              name="dataExplorer"
               type="checkbox"
-              value="powerBI"
+              value="dataExplorer"
               class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
             />
-            <label for="powerBI" class="ms-2 text-sm font-medium pl-3">
-              Power BI
+            <label for="dataExplorer" class="ms-2 text-sm font-medium pl-3">
+              Azure Data Explorer
             </label>
           </div>
 
-          <div class="flex items-center mb-2">
+          {
+            /* <div class="flex items-center mb-2">
             <Input
               id="fathymDataDashboard"
               name="fathymDataDashboard"
@@ -88,7 +62,8 @@ export default function DevicesDashboardForm(props: DevicesDashboardFormProps) {
             >
               Fathym Data Dashboard
             </label>
-          </div>
+          </div> */
+          }
 
           <div class="flex items-center mb-2">
             <Input
