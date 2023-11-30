@@ -3,12 +3,12 @@ import { Handlers, PageProps } from "$fresh/server.ts";
 import { redirectRequest } from "@fathym/common";
 import { EaCStatus, EaCStatusProcessingTypes } from "@fathym/eac";
 import { formatDistanceToNow, intlFormatDistance } from "npm:date-fns";
-import {
-  MdAutoMode,
-  MdAutorenew,
-  MdCheckCircle,
-  MdError,
-} from "react-icons/md";
+// import {
+//   MdAutoMode,
+//   MdAutorenew,
+//   MdCheckCircle,
+//   MdError,
+// } from "react-icons/md";
 import { OpenBiotechManagerState } from "../../../src/OpenBiotechManagerState.tsx";
 import { eacSvc } from "../../../services/eac.ts";
 import { Redirect } from "../../../islands/atoms/Redirect.tsx";
@@ -73,18 +73,18 @@ export default function CommitStatus({
 
   const classyPrint = (key: string, data: any, level: number) => {
     if (typeof data === "object") {
-      const statusIcon = data.State === "Succeeded"
-        ? <MdCheckCircle class="text-green-500 inline-block" />
-        : data.State === "Error"
-        ? <MdError class="text-red-500 inline-block" />
-        : <MdAutorenew class="text-blue-500 animate-spin inline-block" />;
+      // const statusIcon = data.State === "Succeeded"
+      //   ? <MdCheckCircle class="text-green-500 inline-block" />
+      //   : data.State === "Error"
+      //   ? <MdError class="text-red-500 inline-block" />
+      //   : <MdAutorenew class="text-blue-500 animate-spin inline-block" />;
       return (
         <details
           open={data.State !== "Succeeded"}
           class={`text-lg my-2 mt-3 ml-${2 * level}`}
         >
           <summary class="font-bold">
-            {statusIcon}
+            {/* {statusIcon} */}
             {key}
           </summary>
 
@@ -125,7 +125,7 @@ export default function CommitStatus({
       <p class="text-lg my-2">
         <span class="font-bold">Status:</span>{" "}
         {EaCStatusProcessingTypes[data!.status.Processing]}
-        <MdAutoMode class="text-2xl animate-spin inline-block ml-4" />
+        {/* <MdAutoMode class="text-2xl animate-spin inline-block ml-4" /> */}
       </p>
 
       <p class="text-lg my-2">
