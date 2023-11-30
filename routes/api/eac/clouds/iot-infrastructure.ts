@@ -167,14 +167,24 @@ export const handler: Handlers<any, OpenBiotechManagerState> = {
 
     const commitResp = await eacSvc.Commit<OpenBiotechEaC>(eac, 60 * 30);
 
-    const status = await waitForStatus(
-      eacSvc,
+    // const status = await waitForStatus(
+    //   eacSvc,
+    //   commitResp.EnterpriseLookup,
+    //   commitResp.CommitID,
+    // );
+
+    const status = await eacSvc.Status(
       commitResp.EnterpriseLookup,
       commitResp.CommitID,
     );
 
-    if (status.Processing == EaCStatusProcessingTypes.COMPLETE) {
-      return redirectRequest("/");
+    if (
+      status.Processing == EaCStatusProcessingTypes.PROCESSING ||
+      status.Processing == EaCStatusProcessingTypes.QUEUED
+    ) {
+      return redirectRequest(
+        `/commit/${commitResp.CommitID}/status?successRedirect=/&errorRedirect=/cloud`,
+      );
     } else {
       return redirectRequest(
         `/cloud?error=${

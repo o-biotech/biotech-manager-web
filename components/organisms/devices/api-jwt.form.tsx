@@ -8,6 +8,7 @@ import {
 } from "@fathym/atomic";
 import { Location } from "npm:@azure/arm-subscriptions";
 import { callToActionStyles } from "../../styles/actions.tsx";
+import { CopyInput } from "../../../islands/molecules/CopyInput.tsx";
 
 export type APIJWTFormProps = JSX.HTMLAttributes<HTMLFormElement> & {
   jwt: string;
@@ -22,8 +23,6 @@ export function APIJWTForm(props: APIJWTFormProps) {
       class={classSet(props, "w-full max-w-sm md:max-w-md mx-auto p-3 mt-8")}
     >
       <div class="flex flex-wrap -mx-3 mb-4 text-left">
-        <Input id="jwt" name="jwt" type="hidden" value={props.jwt} />
-
         <div class="w-full px-3">
           <label
             for="device"
@@ -37,7 +36,7 @@ export function APIJWTForm(props: APIJWTFormProps) {
             call your data APIs.
           </p>
 
-          <p class="block text-lg font-bold mb-8">{props.jwt}</p>
+          <CopyInput id="jwt" name="jwt" type="text" value={props.jwt} />
         </div>
       </div>
 

@@ -36,7 +36,7 @@ export function BiotechHeader(props: BiotechHeaderProps) {
       nav={
         <InteractiveResponsiveSet toggleChildren="☰">
           <Action
-            href="./cloud"
+            href="/cloud"
             actionStyle={ActionStyleTypes.Link}
             class={classSet(
               undefined,
@@ -53,7 +53,7 @@ export function BiotechHeader(props: BiotechHeaderProps) {
           </Action>
 
           <Action
-            href="./devices"
+            href="/devices"
             actionStyle={ActionStyleTypes.Link}
             class={classSet(
               undefined,
@@ -70,7 +70,7 @@ export function BiotechHeader(props: BiotechHeaderProps) {
           </Action>
 
           <Action
-            href="./data"
+            href="/data"
             actionStyle={ActionStyleTypes.Link}
             class={classSet(
               undefined,
@@ -87,7 +87,7 @@ export function BiotechHeader(props: BiotechHeaderProps) {
           </Action>
 
           <Action
-            href="./applications"
+            href="/applications"
             actionStyle={ActionStyleTypes.Link}
             class={classSet(
               undefined,

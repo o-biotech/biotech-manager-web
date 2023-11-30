@@ -71,20 +71,6 @@ export const handler: Handlers<CloudPageData | null, OpenBiotechManagerState> =
         );
 
         data.locations = locationsResp.Locations;
-
-        if (data.isConnected) {
-          // const subClient = new ArmSubscriptions.SubscriptionClient(creds);
-          // const subsList = subClient.subscriptions.list();
-          // try {
-          //   for await (const sub of subsList) {
-          //     data!.subs.push(sub);
-          //   }
-          // } catch (err) {
-          //   console.log(err);
-          // }
-          // .then((subs) => {
-          // });
-        }
       }
 
       return ctx.render(data);
