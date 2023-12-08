@@ -59,7 +59,8 @@ export const handler: Handlers<any, OpenBiotechManagerState> = {
             CloudLookup: cloudLookup,
             Location: resGroupLocation,
             Name: resGroupLookup,
-            ResourceLookup: resLookup,
+            ParentResourceLookup: `${resLookup}`,
+            ResourceLookup: `${resLookup}-cold`,
             ShortName: shortName,
           },
           Outputs: {},
@@ -91,7 +92,7 @@ export const handler: Handlers<any, OpenBiotechManagerState> = {
             Location: resGroupLocation,
             Name: resGroupLookup,
             PrincipalID: "", // TODO: Pass in user email (email used to login to OpenBiotech must match one used for Azure)
-            ResourceLookup: resLookup,
+            ResourceLookup: `${resLookup}-warm`,
             ServicePrincipalID: servicePrincipalId,
             ShortName: shortName,
           },
@@ -115,10 +116,13 @@ export const handler: Handlers<any, OpenBiotechManagerState> = {
               "https://raw.githubusercontent.com/lowcodeunit/infrastructure/master/templates/azure/iot/ref-arch/hot/parameters.jsonc",
           },
           Data: {
+            Branch: "main",
             CloudLookup: cloudLookup,
             Location: resGroupLocation,
             Name: resGroupLookup,
-            ResourceLookup: resLookup,
+            RepositoryURL:
+              "https://github.com/fathym-deno/iot-ensemble-device-data",
+            ResourceLookup: `${resLookup}-hot`,
             ShortName: shortName,
           },
           Outputs: {},

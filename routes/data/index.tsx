@@ -4,35 +4,124 @@ import { DataStepsFeatures } from "../../components/organisms/features/DataSteps
 import { DataPhaseTypes } from "../../src/DataPhaseTypes.tsx";
 import { OpenBiotechManagerState } from "../../src/OpenBiotechManagerState.tsx";
 import { redirectRequest } from "@fathym/common";
+import { eacSvc } from "../../services/eac.ts";
+import { OpenBiotechEaC } from "../../src/eac/OpenBiotechEaC.ts";
 
 interface DataPageData {
+  apiBase: string;
+
+  dashboardTypes: string[];
+
   dataPhase: DataPhaseTypes;
+
+  deviceKeys: Record<string, string>;
+
+  iotHubKeys: Record<string, string>;
+
+  jwt: string;
+
+  kustoCluster: string;
+
+  kustoLocation: string;
+
+  resGroupLookup: string;
 }
 
 export const handler: Handlers<DataPageData | null, OpenBiotechManagerState> = {
-  GET(_, ctx) {
-    // const {} = ctx.params;
-
-    // const resp = await fetch(`https://api.github.com/users/${username}`);
-    // if (resp.status === 404) {
-    //   return ctx.render(null);
-    // }
-
+  async GET(_, ctx) {
     if (ctx.state.Phase < 2) {
       return redirectRequest("/");
     }
 
+    const eacConnections = await eacSvc.Connections<OpenBiotechEaC>({
+      EnterpriseLookup: ctx.state.EaC!.EnterpriseLookup!,
+      Clouds: {
+        [ctx.state.Cloud.CloudLookup!]: {
+          ResourceGroups: {
+            [ctx.state.Cloud.ResourceGroupLookup!]: {
+              Resources: {
+                ["iot-flow"]: {
+                  Resources: {},
+                },
+              },
+            },
+          },
+        },
+      },
+      IoT: {
+        ["iot-flow"]: {
+          Devices: {},
+        },
+      },
+    });
+
+    const iotFlowResource =
+      eacConnections.Clouds![ctx.state.Cloud.CloudLookup!].ResourceGroups![
+        ctx.state.Cloud.ResourceGroupLookup!
+      ].Resources!["iot-flow"];
+
+    const resKeys = iotFlowResource.Keys as Record<string, unknown>;
+
+    const iotHubKeys = resKeys[
+      `Microsoft.Devices/IotHubs/${ctx.state.Cloud
+        .ResourceGroupLookup!}-iot-hub`
+    ] as Record<string, string>;
+
+    const deviceLookups = Object.keys(
+      eacConnections.IoT!["iot-flow"].Devices || {},
+    );
+
+    const deviceKeys = deviceLookups.reduce((prev, deviceLookup) => {
+      const keys = eacConnections.IoT!["iot-flow"].Devices![deviceLookup]
+        .Keys as Record<string, string>;
+
+      prev[deviceLookup] = keys.primaryKey;
+
+      return prev;
+    }, {} as Record<string, string>);
+
+    const resLocations = iotFlowResource.Resources!["iot-flow-warm"]
+      .Locations as Record<string, string>;
+
+    const shortName = ctx.state.Cloud.ResourceGroupLookup!.split("-")
+      .map((p) => p.charAt(0))
+      .join("");
+
+    const kustoCluster = `${shortName}-data-explorer`;
+
+    const kustoLocation =
+      resLocations[`Microsoft.Kusto/clusters/${kustoCluster}`];
+
+    const dashboardLookups = Object.keys(
+      ctx.state.EaC!.IoT!["iot-flow"].Dashboards || {},
+    );
+
+    const dashboardTypes = dashboardLookups.map((dashboardLookup) => {
+      const dashboard =
+        ctx.state.EaC!.IoT!["iot-flow"].Dashboards![dashboardLookup];
+
+      return dashboard.Details!.Type!;
+    });
+
     const data: DataPageData = {
-      dataPhase: DataPhaseTypes.Cold,
+      apiBase: Deno.env.get("LOCAL_API_BASE")!,
+      dashboardTypes: dashboardTypes,
+      dataPhase: ctx.state.Data.Phase,
+      deviceKeys: deviceKeys,
+      iotHubKeys: iotHubKeys,
+      jwt: ctx.state.Devices.JWT,
+      kustoCluster: kustoCluster,
+      kustoLocation: kustoLocation,
+      resGroupLookup: ctx.state.Cloud.ResourceGroupLookup!,
     };
 
     return ctx.render(data);
   },
 };
 
-export default function Devices(
-  { data }: PageProps<DataPageData | null, OpenBiotechManagerState>,
-) {
+export default function Devices({
+  data,
+}: PageProps<DataPageData | null, OpenBiotechManagerState>) {
   return (
     <div>
       <Hero
@@ -43,7 +132,17 @@ export default function Devices(
         displayStyle={DisplayStyleTypes.Center | DisplayStyleTypes.Large}
       />
 
-      <DataStepsFeatures dataPhase={data!.dataPhase} />
+      <DataStepsFeatures
+        apiBase={data!.apiBase}
+        dashboardTypes={data!.dashboardTypes}
+        dataPhase={data!.dataPhase}
+        deviceKeys={data!.deviceKeys}
+        iotHubKeys={data!.iotHubKeys}
+        jwt={data!.jwt}
+        kustoCluster={data!.kustoCluster}
+        kustoLocation={data!.kustoLocation}
+        resGroupLookup={data!.resGroupLookup}
+      />
     </div>
   );
 }

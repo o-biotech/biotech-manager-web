@@ -4,6 +4,8 @@ import { DevicesPhaseTypes } from "../../src/DevicesPhaseTypes.tsx";
 import { DevicesStepsFeatures } from "../../components/organisms/features/DevicesStepsFeatures.tsx";
 import { OpenBiotechManagerState } from "../../src/OpenBiotechManagerState.tsx";
 import { redirectRequest } from "@fathym/common";
+import { eacSvc } from "../../services/eac.ts";
+import { OpenBiotechEaC } from "../../src/eac/OpenBiotechEaC.ts";
 
 interface DevicesPageData {
   cloudLookup: string;
@@ -21,7 +23,7 @@ export const handler: Handlers<
   DevicesPageData | null,
   OpenBiotechManagerState
 > = {
-  GET(_, ctx) {
+  async GET(_, ctx) {
     // const {} = ctx.params;
 
     // const resp = await fetch(`https://api.github.com/users/${username}`);

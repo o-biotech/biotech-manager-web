@@ -64,7 +64,7 @@ export default function CommitStatus({
 
   const interval = data!.complete
     ? 30000
-    : Math.floor(Math.random() * (5000 - 2000 + 1)) + 2000;
+    : Math.floor(Math.random() * (15000 - 5000 + 1)) + 5000;
 
   const classyPrint = (key: string, data: any, level: number) => {
     if (typeof data === "object") {
