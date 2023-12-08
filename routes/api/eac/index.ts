@@ -1,6 +1,6 @@
 // deno-lint-ignore-file no-explicit-any
 import { Handlers } from "$fresh/server.ts";
-import { redirectRequest } from "@fathym/common";
+import { redirectRequest, respond } from "@fathym/common";
 import {
   EaCStatus,
   EaCStatusProcessingTypes,
@@ -13,6 +13,10 @@ import { OpenBiotechManagerState } from "../../../src/OpenBiotechManagerState.ts
 import { denoKv } from "../../../configs/deno-kv.config.ts";
 
 export const handler: Handlers<any, OpenBiotechManagerState> = {
+  async GET(req, ctx) {
+    return respond(ctx.state.EaC || {});
+  },
+
   async POST(req, ctx) {
     const formData = await req.formData();
 

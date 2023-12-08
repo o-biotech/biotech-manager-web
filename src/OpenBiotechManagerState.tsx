@@ -4,10 +4,13 @@ import { CloudPhaseTypes } from "./CloudPhaseTypes.tsx";
 import { SetupPhaseTypes } from "./SetupPhaseTypes.tsx";
 import { OpenBiotechEaC } from "./eac/OpenBiotechEaC.ts";
 import { DevicesPhaseTypes } from "./DevicesPhaseTypes.tsx";
+import { DataPhaseTypes } from "./DataPhaseTypes.tsx";
 
 export type OpenBiotechManagerState =
   & {
     Cloud: OpenBiotechCloudState;
+
+    Data: OpenBiotechDataState;
 
     Devices: OpenBiotechDevicesState;
 
@@ -38,4 +41,8 @@ export type OpenBiotechDevicesState = {
   JWT: string;
 
   Phase: DevicesPhaseTypes;
+};
+
+export type OpenBiotechDataState = {
+  Phase: DataPhaseTypes;
 };

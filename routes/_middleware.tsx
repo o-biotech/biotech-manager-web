@@ -12,6 +12,7 @@ import { denoKv } from "../configs/deno-kv.config.ts";
 import { eacSvc } from "../services/eac.ts";
 import { DevicesPhaseTypes } from "../src/DevicesPhaseTypes.tsx";
 import { jwtConfig } from "../configs/jwt.config.ts";
+import { DataPhaseTypes } from "../src/DataPhaseTypes.tsx";
 
 const { signIn, handleCallback, signOut, getSessionId } = createHelpers(
   createGitHubOAuthConfig({
@@ -27,7 +28,7 @@ async function loggedInCheck(
 
   const { pathname } = url;
 
-  if (pathname.startsWith("/api/eac/data/")) {
+  if (pathname.startsWith("/api/data/")) {
     return ctx.next();
   }
 
@@ -100,6 +101,14 @@ async function currentEaC(
   req: Request,
   ctx: MiddlewareHandlerContext<OpenBiotechManagerState>,
 ) {
+  const url = new URL(req.url);
+
+  const { pathname } = url;
+
+  if (pathname.startsWith("/api/data/")) {
+    return ctx.next();
+  }
+
   const currentEaC = await denoKv.get<string>([
     "User",
     ctx.state.Username,
@@ -144,6 +153,9 @@ async function currentState(
     Devices: {
       JWT: "",
       Phase: DevicesPhaseTypes.Connect,
+    },
+    Data: {
+      Phase: DataPhaseTypes.Flow,
     },
   };
 
@@ -217,6 +229,28 @@ async function currentState(
                   state.Devices.Phase = DevicesPhaseTypes.Complete;
 
                   state.Phase = SetupPhaseTypes.Data;
+
+                  const currentFlowing = await denoKv.get<boolean>([
+                    "EaC",
+                    entLookup,
+                    "Current",
+                    "Flowing",
+                  ]);
+
+                  if (currentFlowing.value) {
+                    state.Data.Phase = DataPhaseTypes.Explore;
+
+                    const currentExplored = await denoKv.get<boolean>([
+                      "EaC",
+                      entLookup,
+                      "Current",
+                      "Explored",
+                    ]);
+
+                    if (currentExplored.value) {
+                      state.Data.Phase = DataPhaseTypes.Develop;
+                    }
+                  }
                 }
               } else {
                 const jwt = await jwtConfig.Create({

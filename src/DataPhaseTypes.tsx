@@ -1,6 +1,6 @@
 export enum DataPhaseTypes {
-  Cold = 0,
-  Warm = 1,
-  Hot = 2,
+  Flow = 0,
+  Explore = 1,
+  Develop = 2,
   Complete = 3,
 }

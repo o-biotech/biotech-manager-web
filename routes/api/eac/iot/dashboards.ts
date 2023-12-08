@@ -5,6 +5,7 @@ import {
   EaCDashboardAsCode,
   EaCIoTAsCode,
   EaCStatusProcessingTypes,
+  waitForStatus,
 } from "@fathym/eac";
 import { OpenBiotechManagerState } from "../../../../src/OpenBiotechManagerState.tsx";
 import { OpenBiotechEaC } from "../../../../src/eac/OpenBiotechEaC.ts";
@@ -58,24 +59,14 @@ export const handler: Handlers<any, OpenBiotechManagerState> = {
 
     const commitResp = await eacSvc.Commit<OpenBiotechEaC>(eac, 60 * 30);
 
-    // const status = await waitForStatus(
-    //   eacSvc,
-    //   commitResp.EnterpriseLookup,
-    //   commitResp.CommitID,
-    // );
-
-    const status = await eacSvc.Status(
+    const status = await waitForStatus(
+      eacSvc,
       commitResp.EnterpriseLookup,
       commitResp.CommitID,
     );
 
-    if (
-      status.Processing == EaCStatusProcessingTypes.PROCESSING ||
-      status.Processing == EaCStatusProcessingTypes.QUEUED
-    ) {
-      return redirectRequest(
-        `/commit/${commitResp.CommitID}/status?successRedirect=/&errorRedirect=/devices`,
-      );
+    if (status.Processing == EaCStatusProcessingTypes.COMPLETE) {
+      return redirectRequest(`/`);
     } else {
       return redirectRequest(
         `/devices?error=${
