@@ -48,8 +48,6 @@ export function DeviceDataFlowing(props: DeviceDataFlowingProps) {
 
       const data = await response.json();
 
-      console.log(data);
-
       const primaryResult = data.tables.find(
         (t: any) => t.name === "PrimaryResult",
       ).data;

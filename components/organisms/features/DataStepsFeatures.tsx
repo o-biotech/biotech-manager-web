@@ -10,10 +10,12 @@ import {
 import { DataPhaseTypes } from "../../../src/DataPhaseTypes.tsx";
 import { callToActionStyles } from "../../styles/actions.tsx";
 import { DataFlowForm } from "../data/flow.form.tsx";
-import { DataExploreForm } from "../data/explore.form.tsx";
+import { DataExploreForm } from "../../../islands/organisms/data/explore-form.tsx";
 
 export interface DataStepsFeaturesProps extends StepsFeaturesProps {
   apiBase: string;
+
+  dashboardTypes: string[];
 
   dataPhase?: DataPhaseTypes;
 
@@ -22,6 +24,10 @@ export interface DataStepsFeaturesProps extends StepsFeaturesProps {
   iotHubKeys: Record<string, string>;
 
   jwt: string;
+
+  kustoCluster: string;
+
+  kustoLocation: string;
 
   resGroupLookup: string;
 }
@@ -44,7 +50,15 @@ export function DataStepsFeatures(props: DataStepsFeaturesProps) {
       break;
 
     case DataPhaseTypes.Explore:
-      currentForm = <DataExploreForm class="px-4" />;
+      currentForm = (
+        <DataExploreForm
+          dashboardTypes={props.dashboardTypes}
+          jwt={props.jwt}
+          kustoCluster={props.kustoCluster}
+          kustoLocation={props.kustoLocation}
+          class="px-4"
+        />
+      );
       break;
 
     case DataPhaseTypes.Develop:

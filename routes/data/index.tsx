@@ -10,6 +10,8 @@ import { OpenBiotechEaC } from "../../src/eac/OpenBiotechEaC.ts";
 interface DataPageData {
   apiBase: string;
 
+  dashboardTypes: string[];
+
   dataPhase: DataPhaseTypes;
 
   deviceKeys: Record<string, string>;
@@ -17,6 +19,10 @@ interface DataPageData {
   iotHubKeys: Record<string, string>;
 
   jwt: string;
+
+  kustoCluster: string;
+
+  kustoLocation: string;
 
   resGroupLookup: string;
 }
@@ -49,10 +55,12 @@ export const handler: Handlers<DataPageData | null, OpenBiotechManagerState> = {
       },
     });
 
-    const resKeys = eacConnections.Clouds![ctx.state.Cloud.CloudLookup!]
-      .ResourceGroups![ctx.state.Cloud.ResourceGroupLookup!].Resources![
-        "iot-flow"
-      ].Keys as Record<string, unknown>;
+    const iotFlowResource =
+      eacConnections.Clouds![ctx.state.Cloud.CloudLookup!].ResourceGroups![
+        ctx.state.Cloud.ResourceGroupLookup!
+      ].Resources!["iot-flow"];
+
+    const resKeys = iotFlowResource.Keys as Record<string, unknown>;
 
     const iotHubKeys = resKeys[
       `Microsoft.Devices/IotHubs/${ctx.state.Cloud
@@ -72,12 +80,38 @@ export const handler: Handlers<DataPageData | null, OpenBiotechManagerState> = {
       return prev;
     }, {} as Record<string, string>);
 
+    const resLocations = iotFlowResource.Resources!["iot-flow-warm"]
+      .Locations as Record<string, string>;
+
+    const shortName = ctx.state.Cloud.ResourceGroupLookup!.split("-")
+      .map((p) => p.charAt(0))
+      .join("");
+
+    const kustoCluster = `${shortName}-data-explorer`;
+
+    const kustoLocation =
+      resLocations[`Microsoft.Kusto/clusters/${kustoCluster}`];
+
+    const dashboardLookups = Object.keys(
+      ctx.state.EaC!.IoT!["iot-flow"].Dashboards || {},
+    );
+
+    const dashboardTypes = dashboardLookups.map((dashboardLookup) => {
+      const dashboard =
+        ctx.state.EaC!.IoT!["iot-flow"].Dashboards![dashboardLookup];
+
+      return dashboard.Details!.Type!;
+    });
+
     const data: DataPageData = {
       apiBase: Deno.env.get("LOCAL_API_BASE")!,
+      dashboardTypes: dashboardTypes,
       dataPhase: ctx.state.Data.Phase,
       deviceKeys: deviceKeys,
       iotHubKeys: iotHubKeys,
       jwt: ctx.state.Devices.JWT,
+      kustoCluster: kustoCluster,
+      kustoLocation: kustoLocation,
       resGroupLookup: ctx.state.Cloud.ResourceGroupLookup!,
     };
 
@@ -100,10 +134,13 @@ export default function Devices({
 
       <DataStepsFeatures
         apiBase={data!.apiBase}
+        dashboardTypes={data!.dashboardTypes}
         dataPhase={data!.dataPhase}
         deviceKeys={data!.deviceKeys}
         iotHubKeys={data!.iotHubKeys}
         jwt={data!.jwt}
+        kustoCluster={data!.kustoCluster}
+        kustoLocation={data!.kustoLocation}
         resGroupLookup={data!.resGroupLookup}
       />
     </div>
