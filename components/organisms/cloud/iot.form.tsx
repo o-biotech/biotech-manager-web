@@ -2,9 +2,12 @@ import { JSX } from "preact";
 import { Action, ActionGroup, classSet, Input } from "@fathym/atomic";
 import { Location } from "npm:@azure/arm-subscriptions";
 import { callToActionStyles } from "../../styles/actions.tsx";
+import { HotFlowInput } from "../../../islands/organisms/cloud/iot/hot-flow-input.tsx";
 
 export type CloudIoTFormProps = JSX.HTMLAttributes<HTMLFormElement> & {
   cloudLookup: string;
+
+  organizations?: string[];
 
   resGroupLookup: string;
 
@@ -62,6 +65,7 @@ export default function CloudIoTForm(props: CloudIoTFormProps) {
               value="cold"
               class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
             />
+
             <label for="storageFlowCold" class="ms-2 text-sm font-medium pl-3">
               Cold Storage
             </label>
@@ -75,22 +79,24 @@ export default function CloudIoTForm(props: CloudIoTFormProps) {
               value="warm"
               class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
             />
+
             <label for="storageFlowWarm" class="ms-2 text-sm font-medium pl-3">
               Warm Storage
             </label>
           </div>
 
           <div class="flex items-center mb-2">
-            <Input
+            <HotFlowInput
               id="storageFlowHot"
               name="storageFlowHot"
-              type="checkbox"
               value="hot"
+              organizations={props.organizations}
               class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-            />
-            <label for="storageFlowHot" class="ms-2 text-sm font-medium pl-3">
-              Hot Storage
-            </label>
+            >
+              <label for="storageFlowHot" class="ms-2 text-sm font-medium pl-3">
+                Hot Storage
+              </label>
+            </HotFlowInput>
           </div>
         </div>
       </div>

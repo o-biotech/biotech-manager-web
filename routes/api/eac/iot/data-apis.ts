@@ -48,16 +48,16 @@ export const handler: Handlers<any, OpenBiotechManagerState> = {
                 "iot-flow": {
                   Resources: {
                     [resLookup]: {
-                      Type: "Format",
                       Details: {
+                        Type: "Format",
                         Name: "Data APIs",
                         Description: "The Data APIs to use for the enterprise.",
                         Order: 1,
                         Template: {
                           Content:
-                            "https://raw.githubusercontent.com/lowcodeunit/infrastructure/master/templates/azure/iot/ref-arch/api/template.jsonc",
+                            "https://raw.githubusercontent.com/lowcodeunit/infrastructure/master/templates/o-biotech/iot/ref-arch/api/template.jsonc",
                           Parameters:
-                            "https://raw.githubusercontent.com/lowcodeunit/infrastructure/master/templates/azure/iot/ref-arch/api/parameters.jsonc",
+                            "https://raw.githubusercontent.com/lowcodeunit/infrastructure/master/templates/o-biotech/iot/ref-arch/api/parameters.jsonc",
                         },
                         Data: {
                           CloudLookup: cloudLookup,

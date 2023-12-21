@@ -1,8 +1,8 @@
 import { JSX } from "preact";
 import { Handlers, PageProps } from "$fresh/server.ts";
+import { EaCCreateForm } from "@fathym/atomic";
 import { OpenBiotechManagerState } from "../src/OpenBiotechManagerState.tsx";
 import CreateEaCHero from "../components/organisms/heros/CreateEaCHero.tsx";
-import { EaCCreateForm } from "../components/organisms/eac/create.form.tsx";
 
 export type EnterprisesPageData = {};
 

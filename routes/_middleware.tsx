@@ -1,24 +1,24 @@
 import { getCookies, setCookie } from "$std/http/cookie.ts";
 import { cookieSession, redisSession } from "$fresh/session";
 import { MiddlewareHandlerContext } from "$fresh/server.ts";
-import { createGitHubOAuthConfig, createHelpers } from "$fresh/oauth";
+import { redirectRequest } from "@fathym/common";
+import { UserGitHubConnection } from "@fathym/eac";
 import { connect } from "redis";
 import { OpenBiotechManagerState } from "../src/OpenBiotechManagerState.tsx";
 import { SetupPhaseTypes } from "../src/SetupPhaseTypes.tsx";
 import { CloudPhaseTypes } from "../src/CloudPhaseTypes.tsx";
-import { redirectRequest } from "@fathym/common";
 import { OpenBiotechEaC } from "../src/eac/OpenBiotechEaC.ts";
 import { denoKv } from "../configs/deno-kv.config.ts";
 import { eacSvc } from "../services/eac.ts";
 import { DevicesPhaseTypes } from "../src/DevicesPhaseTypes.tsx";
 import { jwtConfig } from "../configs/jwt.config.ts";
 import { DataPhaseTypes } from "../src/DataPhaseTypes.tsx";
-
-const { signIn, handleCallback, signOut, getSessionId } = createHelpers(
-  createGitHubOAuthConfig({
-    scope: ["user:email"],
-  }),
-);
+import { gitHubOAuth } from "../services/github.ts";
+import {
+  EaCSourceConnectionDetails,
+  loadMainOctokit,
+  waitForStatus,
+} from "@fathym/eac";
 
 async function loggedInCheck(
   req: Request,
@@ -26,7 +26,11 @@ async function loggedInCheck(
 ) {
   const url = new URL(req.url);
 
-  const { pathname } = url;
+  const { origin, pathname, search, searchParams } = url;
+
+  if (origin.endsWith("ngrok-free.app")) {
+    return redirectRequest(`http://localhost:8000${pathname}${search}`);
+  }
 
   if (pathname.startsWith("/api/data/")) {
     return ctx.next();
@@ -34,27 +38,29 @@ async function loggedInCheck(
 
   switch (pathname) {
     case "/signin": {
-      return await signIn(req);
+      return await gitHubOAuth.signIn(req);
     }
 
     case "/signin/callback": {
-      const { response, tokens, sessionId } = await handleCallback(req);
+      const { response, tokens, sessionId } = await gitHubOAuth.handleCallback(
+        req,
+      );
 
-      const { accessToken } = tokens;
+      const { accessToken, refreshToken } = tokens;
 
-      const resp = await fetch(`https://api.github.com/user/emails`, {
-        headers: {
-          Accept: "application/vnd.github+json",
-          Authorization: `Bearer ${accessToken}`,
-          "X-GitHub-Api-Version": "2022-11-28",
-        },
-      });
+      const octokit = await loadMainOctokit({
+        Token: accessToken,
+      } as EaCSourceConnectionDetails);
 
-      const emails: { primary: boolean; email: string }[] = await resp.json();
+      const { data: { login } } = await octokit.rest.users
+        .getAuthenticated();
 
-      const primaryEmail = emails.find((e) => e.primary);
+      const { data } = await octokit.rest.users
+        .listEmailsForAuthenticatedUser();
 
-      const oldSessionId = await getSessionId(req);
+      const primaryEmail = data.find((e) => e.primary);
+
+      const oldSessionId = await gitHubOAuth.getSessionId(req);
 
       if (oldSessionId) {
         await denoKv.delete(["User", "Session", oldSessionId!, "Username"]);
@@ -65,15 +71,24 @@ async function loggedInCheck(
         primaryEmail!.email,
       );
 
+      await denoKv.set(
+        ["User", "Session", sessionId!, "GitHub", "GitHubConnection"],
+        {
+          RefreshToken: refreshToken,
+          Token: accessToken,
+          Username: login,
+        } as UserGitHubConnection,
+      );
+
       return response;
     }
 
     case "/signout": {
-      return await signOut(req);
+      return await gitHubOAuth.signOut(req);
     }
 
     default: {
-      const sessionId = await getSessionId(req);
+      const sessionId = await gitHubOAuth.getSessionId(req);
 
       if (sessionId === undefined) {
         return redirectRequest(`/signin?success_url=${pathname}`);
@@ -118,8 +133,55 @@ async function currentEaC(
 
   let eac: OpenBiotechEaC | undefined = undefined;
 
-  if (currentEaC?.value) {
+  if (currentEaC.value) {
     eac = await eacSvc.Get(currentEaC.value!);
+  }
+
+  const sessionId = await gitHubOAuth.getSessionId(req);
+
+  const currentConn = await denoKv.get<UserGitHubConnection>([
+    "User",
+    "Session",
+    sessionId!,
+    "GitHub",
+    "GitHubConnection",
+  ]);
+
+  const srcConnLookup = `GITHUB://${currentConn.value!.Username}`;
+
+  if (currentConn.value!) {
+    const url = new URL(req.url);
+
+    if (
+      url.pathname == "/" &&
+      eac?.SourceConnections &&
+      eac.SourceConnections[srcConnLookup] &&
+      eac.SourceConnections[srcConnLookup].Details!.Token !==
+        currentConn.value.Token
+    ) {
+      const commitResp = await eacSvc.Commit(
+        {
+          EnterpriseLookup: eac.EnterpriseLookup,
+          SourceConnections: {
+            [srcConnLookup]: {
+              Details: {
+                ...eac.SourceConnections[srcConnLookup].Details!,
+                Token: currentConn.value.Token,
+              },
+            },
+          },
+        },
+        5,
+      );
+
+      await waitForStatus(
+        eacSvc,
+        commitResp.EnterpriseLookup,
+        commitResp.CommitID,
+      );
+
+      eac = await eacSvc.Get(currentEaC.value!);
+    }
   }
 
   const userEaCs = await eacSvc.ListForUser();
@@ -160,6 +222,10 @@ async function currentState(
   };
 
   if (ctx.state.EaC) {
+    const entLookup = ctx.state.EaC!.EnterpriseLookup!;
+
+    const username = ctx.state.Username;
+
     const clouds = Object.keys(ctx.state.EaC.Clouds || {});
 
     if (clouds.length > 0) {
@@ -203,10 +269,6 @@ async function currentState(
 
             if (deviceLookups.length > 0) {
               state.Devices.Phase = DevicesPhaseTypes.APIs;
-
-              const entLookup = ctx.state.EaC!.EnterpriseLookup!;
-
-              const username = ctx.state.Username;
 
               const currentJwt = await denoKv.get<string>([
                 "User",
@@ -269,6 +331,22 @@ async function currentState(
         }
       }
     }
+  }
+
+  const sessionId = await gitHubOAuth.getSessionId(req);
+
+  const currentConn = await denoKv.get<UserGitHubConnection>([
+    "User",
+    "Session",
+    sessionId!,
+    "GitHub",
+    "GitHubConnection",
+  ]);
+
+  if (currentConn.value!) {
+    state.GitHub = {
+      Username: currentConn.value.Username,
+    };
   }
 
   ctx.state = state;

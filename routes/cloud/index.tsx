@@ -1,6 +1,6 @@
 // deno-lint-ignore-file no-explicit-any
 import { Handlers, PageProps } from "$fresh/server.ts";
-import * as ArmSubscriptions from "npm:@azure/arm-subscriptions";
+import { Location, Subscription } from "npm:@azure/arm-subscriptions";
 import { mergeWithArrays, redirectRequest } from "@fathym/common";
 import { EaCServiceDefinitions } from "@fathym/eac";
 import CloudConnectHero from "../../components/organisms/heros/CloudConnectHero.tsx";
@@ -9,7 +9,7 @@ import { CloudPhaseTypes } from "../../src/CloudPhaseTypes.tsx";
 import { OpenBiotechManagerState } from "../../src/OpenBiotechManagerState.tsx";
 import { msalAuthProvider } from "../../configs/msal.config.ts";
 import { OpenBiotechEaC } from "../../src/eac/OpenBiotechEaC.ts";
-import { eacAzureSvc } from "../../services/eac.ts";
+import { eacAzureSvc, eacSvc } from "../../services/eac.ts";
 
 interface CloudPageData {
   cloudLookup?: string;
@@ -18,11 +18,13 @@ interface CloudPageData {
 
   isConnected: boolean;
 
-  locations: ArmSubscriptions.Location[];
+  locations: Location[];
+
+  organizations?: string[];
 
   resGroupLookup?: string;
 
-  subs: ArmSubscriptions.Subscription[];
+  subs: Subscription[];
 }
 
 export const handler: Handlers<CloudPageData | null, OpenBiotechManagerState> =
@@ -41,37 +43,66 @@ export const handler: Handlers<CloudPageData | null, OpenBiotechManagerState> =
         subs: [],
       };
 
+      const svcCalls: (() => Promise<void>)[] = [];
+
       if (data.cloudLookup) {
         const serviceFiles = [
-          "https://raw.githubusercontent.com/lowcodeunit/infrastructure/master/templates/azure/iot/ref-arch/services.jsonc",
-          "https://raw.githubusercontent.com/lowcodeunit/infrastructure/master/templates/azure/iot/ref-arch/api/services.jsonc",
-          "https://raw.githubusercontent.com/lowcodeunit/infrastructure/master/templates/azure/iot/ref-arch/cold/services.jsonc",
-          "https://raw.githubusercontent.com/lowcodeunit/infrastructure/master/templates/azure/iot/ref-arch/hot/services.jsonc",
-          "https://raw.githubusercontent.com/lowcodeunit/infrastructure/master/templates/azure/iot/ref-arch/warm/services.jsonc",
+          "https://raw.githubusercontent.com/lowcodeunit/infrastructure/master/templates/o-biotech/iot/ref-arch/services.jsonc",
+          "https://raw.githubusercontent.com/lowcodeunit/infrastructure/master/templates/o-biotech/iot/ref-arch/api/services.jsonc",
+          "https://raw.githubusercontent.com/lowcodeunit/infrastructure/master/templates/o-biotech/iot/ref-arch/cold/services.jsonc",
+          "https://raw.githubusercontent.com/lowcodeunit/infrastructure/master/templates/o-biotech/iot/ref-arch/hot/services.jsonc",
+          "https://raw.githubusercontent.com/lowcodeunit/infrastructure/master/templates/o-biotech/iot/ref-arch/warm/services.jsonc",
         ];
 
-        const svcFileCalls = serviceFiles.map(async (sf) => {
-          const resp = await fetch(sf);
-
-          // const text = await resp.text();
-
-          // return JSON.parse(text);
-
-          return await resp.json();
-        });
-
-        const svcDefs = await Promise.all<EaCServiceDefinitions>(svcFileCalls);
-
-        const svcDef = mergeWithArrays<EaCServiceDefinitions>(...svcDefs);
-
-        const locationsResp = await eacAzureSvc.CloudLocations(
-          ctx.state.EaC.EnterpriseLookup!,
-          data.cloudLookup!,
-          svcDef,
+        const svcFileCalls: Promise<EaCServiceDefinitions>[] = serviceFiles.map(
+          (sf) => {
+            return new Promise((resolve, reject) => {
+              fetch(sf).then((fileResp) => {
+                fileResp.json().then((response) => {
+                  resolve(response);
+                });
+              });
+            });
+          },
         );
 
-        data.locations = locationsResp.Locations;
+        svcCalls.push(async () => {
+          const svcDefs = await Promise.all<EaCServiceDefinitions>(
+            svcFileCalls,
+          );
+
+          const svcDef = mergeWithArrays<EaCServiceDefinitions>(...svcDefs);
+
+          const locationsResp = await eacAzureSvc.CloudLocations(
+            ctx.state.EaC!.EnterpriseLookup!,
+            data.cloudLookup!,
+            svcDef,
+          );
+
+          data.locations = locationsResp.Locations;
+        });
       }
+
+      svcCalls.push(async () => {
+        const sourceKey = `GITHUB://${ctx.state.GitHub!.Username}`;
+
+        const eacConnections = await eacSvc.Connections<OpenBiotechEaC>({
+          EnterpriseLookup: ctx.state.EaC!.EnterpriseLookup!,
+          SourceConnections: {
+            [sourceKey]: {},
+          },
+        });
+
+        data.organizations = Object.keys(
+          eacConnections.SourceConnections![sourceKey].Organizations || {},
+        );
+      });
+
+      await await Promise.all(
+        svcCalls.map(async (sc) => {
+          await sc();
+        }),
+      );
 
       return ctx.render(data);
     },
@@ -88,6 +119,7 @@ export default function Cloud({
         cloudLookup={data!.cloudLookup}
         cloudPhase={data!.cloudPhase}
         locations={data!.locations}
+        organizations={data!.organizations}
         resGroupLookup={data!.resGroupLookup}
         subs={data!.subs}
       />
