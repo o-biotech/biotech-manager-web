@@ -2,9 +2,9 @@ import { JSX } from "preact";
 import * as ArmResource from "npm:@azure/arm-subscriptions";
 import { CloudConnectForm } from "@fathym/atomic";
 
-export type CloudConnectFormsProps = JSX.HTMLAttributes<HTMLFormElement> & {
+export type CloudConnectFormsProps = {
   subs: ArmResource.Subscription[];
-};
+} & JSX.HTMLAttributes<HTMLFormElement>;
 
 export function CloudConnectForms(
   props: CloudConnectFormsProps,
