@@ -42,7 +42,6 @@ async function loggedInCheck(
     }
 
     case "/signin/callback": {
-      return respond({ hello: "Welcome" });
       try {
         const { response, tokens, sessionId } = await gitHubOAuth
           .handleCallback(
@@ -55,6 +54,7 @@ async function loggedInCheck(
           Token: accessToken,
         } as EaCSourceConnectionDetails);
 
+        return respond({ hello: "Welcome" });
         const { data: { login } } = await octokit.rest.users
           .getAuthenticated();
 
