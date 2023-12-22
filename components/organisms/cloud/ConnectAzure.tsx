@@ -1,19 +1,16 @@
 import { JSX } from "preact";
 import { useState } from "preact/hooks";
-import * as ArmResource from "npm:@azure/arm-subscriptions";
-import CloudConnectExistingForm from "./connect/existing.form.tsx";
-import CloudConnectAzureForm from "./connect/azure.form.tsx";
-import CloudConnectForms from "../../../islands/organisms/CloudConnectForms.tsx";
+import { Subscription } from "npm:@azure/arm-subscriptions";
+import { CloudConnectAzureForm } from "@fathym/atomic";
+import { CloudConnectForms } from "./CloudConnectForms.tsx";
 
 export type ConnectAzureProps = JSX.HTMLAttributes<HTMLFormElement> & {
   isConnected: boolean;
 
-  subs: ArmResource.Subscription[];
+  subs: Subscription[];
 };
 
-export default function ConnectAzure(
-  props: ConnectAzureProps,
-) {
+export default function ConnectAzure(props: ConnectAzureProps) {
   return (
     <div class="flex flex-col justify-center">
       {!props.isConnected
