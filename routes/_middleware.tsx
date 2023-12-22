@@ -60,8 +60,6 @@ async function loggedInCheck(
         const { data } = await octokit.rest.users
           .listEmailsForAuthenticatedUser();
 
-        return respond({ hello: "WelcomeEmails" });
-
         const primaryEmail = data.find((e) => e.primary);
 
         const oldSessionId = await gitHubOAuth.getSessionId(req);
