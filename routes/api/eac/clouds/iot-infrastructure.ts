@@ -5,6 +5,7 @@ import {
   EaCCloudAzureDetails,
   EaCCloudResourceAsCode,
   EaCCloudResourceFormatDetails,
+  EaCSourceAsCode,
   EaCStatusProcessingTypes,
   waitForStatus,
 } from "@fathym/eac";
@@ -41,19 +42,28 @@ export const handler: Handlers<any, OpenBiotechManagerState> = {
       [key: string]: EaCCloudResourceAsCode;
     } = {};
 
+    const sources: {
+      [key: string]: EaCSourceAsCode;
+    } = {};
+
+    const details = ctx.state.EaC!.Clouds![cloudLookup]
+      .Details as EaCCloudAzureDetails;
+
+    const servicePrincipalId = details!.ID;
+
     if (storageFlowCold) {
       iotResources[`${resLookup}-cold`] = {
-        Type: "Format",
         Details: {
+          Type: "Format",
           Name: "IoT Infrastructure - Cold Flow",
           Description:
             "The cold flow IoT Infrastructure to use for the enterprise.",
           Order: 1,
           Template: {
             Content:
-              "https://raw.githubusercontent.com/lowcodeunit/infrastructure/master/templates/azure/iot/ref-arch/cold/template.jsonc",
+              "https://raw.githubusercontent.com/lowcodeunit/infrastructure/master/templates/o-biotech/iot/ref-arch/cold/template.jsonc",
             Parameters:
-              "https://raw.githubusercontent.com/lowcodeunit/infrastructure/master/templates/azure/iot/ref-arch/cold/parameters.jsonc",
+              "https://raw.githubusercontent.com/lowcodeunit/infrastructure/master/templates/o-biotech/iot/ref-arch/cold/parameters.jsonc",
           },
           Data: {
             CloudLookup: cloudLookup,
@@ -69,23 +79,18 @@ export const handler: Handlers<any, OpenBiotechManagerState> = {
     }
 
     if (storageFlowWarm) {
-      const details = ctx.state.EaC!.Clouds![cloudLookup]
-        .Details as EaCCloudAzureDetails;
-
-      const servicePrincipalId = details!.ID;
-
       iotResources[`${resLookup}-warm`] = {
-        Type: "Format",
         Details: {
+          Type: "Format",
           Name: "IoT Infrastructure - Warm Flow",
           Description:
             "The warm flow IoT Infrastructure to use for the enterprise.",
           Order: 1,
           Template: {
             Content:
-              "https://raw.githubusercontent.com/lowcodeunit/infrastructure/master/templates/azure/iot/ref-arch/warm/template.jsonc",
+              "https://raw.githubusercontent.com/lowcodeunit/infrastructure/master/templates/o-biotech/iot/ref-arch/warm/template.jsonc",
             Parameters:
-              "https://raw.githubusercontent.com/lowcodeunit/infrastructure/master/templates/azure/iot/ref-arch/warm/parameters.jsonc",
+              "https://raw.githubusercontent.com/lowcodeunit/infrastructure/master/templates/o-biotech/iot/ref-arch/warm/parameters.jsonc",
           },
           Data: {
             CloudLookup: cloudLookup,
@@ -103,17 +108,17 @@ export const handler: Handlers<any, OpenBiotechManagerState> = {
 
     if (storageFlowHot) {
       iotResources[`${resLookup}-hot`] = {
-        Type: "Format",
         Details: {
+          Type: "Format",
           Name: "IoT Infrastructure - Hot Flow",
           Description:
             "The hot flow IoT Infrastructure to use for the enterprise.",
           Order: 1,
           Template: {
             Content:
-              "https://raw.githubusercontent.com/lowcodeunit/infrastructure/master/templates/azure/iot/ref-arch/hot/template.jsonc",
+              "https://raw.githubusercontent.com/lowcodeunit/infrastructure/master/templates/o-biotech/iot/ref-arch/hot/template.jsonc",
             Parameters:
-              "https://raw.githubusercontent.com/lowcodeunit/infrastructure/master/templates/azure/iot/ref-arch/hot/parameters.jsonc",
+              "https://raw.githubusercontent.com/lowcodeunit/infrastructure/master/templates/o-biotech/iot/ref-arch/hot/parameters.jsonc",
           },
           Data: {
             Branch: "main",
@@ -138,17 +143,17 @@ export const handler: Handlers<any, OpenBiotechManagerState> = {
             [resGroupLookup]: {
               Resources: {
                 [resLookup]: {
-                  Type: "Format",
                   Details: {
+                    Type: "Format",
                     Name: "IoT Infrastructure",
                     Description:
                       "The IoT Infrastructure to use for the enterprise.",
                     Order: 1,
                     Template: {
                       Content:
-                        "https://raw.githubusercontent.com/lowcodeunit/infrastructure/master/templates/azure/iot/ref-arch/template.jsonc",
+                        "https://raw.githubusercontent.com/lowcodeunit/infrastructure/master/templates/o-biotech/iot/ref-arch/template.jsonc",
                       Parameters:
-                        "https://raw.githubusercontent.com/lowcodeunit/infrastructure/master/templates/azure/iot/ref-arch/parameters.jsonc",
+                        "https://raw.githubusercontent.com/lowcodeunit/infrastructure/master/templates/o-biotech/iot/ref-arch/parameters.jsonc",
                     },
                     Data: {
                       CloudLookup: cloudLookup,
@@ -156,6 +161,7 @@ export const handler: Handlers<any, OpenBiotechManagerState> = {
                       Name: resGroupLookup,
                       PrincipalID: "", // TODO: Pass in actual principal ID (maybe retrievable from MSAL account record? I think can just be the email?)
                       ResourceLookup: resLookup,
+                      ServicePrincipalID: servicePrincipalId,
                       ShortName: shortName,
                     },
                     Outputs: {},
@@ -167,7 +173,30 @@ export const handler: Handlers<any, OpenBiotechManagerState> = {
           },
         },
       },
+      SourceConnections: {},
+      Sources: {},
     };
+
+    if (storageFlowHot) {
+      const gitHubOrg = formData.get("gitHubOrg") as string;
+
+      const gitHubRepo = formData.get("gitHubRepo") as string;
+
+      const gitHubUsername = ctx.state.GitHub?.Username;
+
+      eac.Sources![`template|GITHUB://fathym-deno/iot-ensemble-device-flow`] = {
+        Details: {
+          Type: "GITHUB",
+          Branches: ["main", "integration"],
+          MainBranch: "integration",
+          Name: "IoT Ensemble Device Data",
+          Description: "A hot flow to SignalR for device telemetry",
+          Organization: gitHubOrg,
+          Repository: gitHubRepo,
+          Username: gitHubUsername,
+        },
+      };
+    }
 
     const commitResp = await eacSvc.Commit<OpenBiotechEaC>(eac, 60 * 30);
 

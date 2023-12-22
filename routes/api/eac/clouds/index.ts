@@ -3,7 +3,6 @@ import { Handlers } from "$fresh/server.ts";
 import { redirectRequest } from "@fathym/common";
 import {
   EaCCloudAzureDetails,
-  EaCEnvironmentDetails,
   EaCStatusProcessingTypes,
   waitForStatus,
 } from "@fathym/eac";
@@ -29,13 +28,13 @@ export const handler: Handlers<any, OpenBiotechManagerState> = {
             AuthKey: formData.get("auth-key") as string,
             SubscriptionID: formData.get("subscription-id") as string,
             TenantID: formData.get("tenant-id") as string,
+            Type: "Azure",
           } as EaCCloudAzureDetails,
-          Type: "Azure",
         },
       },
     };
 
-    const commitResp = await eacSvc.Commit<OpenBiotechEaC>(eac, 60);
+    const commitResp = await eacSvc.Commit(eac, 60);
 
     const status = await waitForStatus(
       eacSvc,

@@ -1,5 +1,6 @@
 import { JSX } from "preact";
 import { Handlers, PageProps } from "$fresh/server.ts";
+import { EaCCreateForm } from "@fathym/atomic";
 import CloudConnectHero from "../components/organisms/heros/CloudConnectHero.tsx";
 import ConnectDevicesHero from "../components/organisms/heros/ConnectDevicesHero.tsx";
 import SetupDataHero from "../components/organisms/heros/SetupDataHero.tsx";
@@ -12,7 +13,6 @@ import { redirectRequest } from "@fathym/common";
 import { OpenBiotechEaC } from "../src/eac/OpenBiotechEaC.ts";
 import { eacSvc } from "../services/eac.ts";
 import CreateEaCHero from "../components/organisms/heros/CreateEaCHero.tsx";
-import { EaCCreateForm } from "../components/organisms/eac/create.form.tsx";
 import { EaCStatus, EaCStatusProcessingTypes, sleep } from "@fathym/eac";
 
 interface HomePageData {

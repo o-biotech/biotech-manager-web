@@ -16,6 +16,8 @@ export type OpenBiotechManagerState =
 
     EaC?: OpenBiotechEaC;
 
+    GitHub?: OpenBiotechGitHubState;
+
     Phase: SetupPhaseTypes;
 
     UserEaCs?: UserEaCRecord[];
@@ -45,4 +47,8 @@ export type OpenBiotechDevicesState = {
 
 export type OpenBiotechDataState = {
   Phase: DataPhaseTypes;
+};
+
+export type OpenBiotechGitHubState = {
+  Username: string;
 };

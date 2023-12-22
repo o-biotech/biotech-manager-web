@@ -1,8 +1,11 @@
 import { ComponentChildren, JSX } from "preact";
 import * as ArmSubscriptions from "npm:@azure/arm-subscriptions";
-import { StepsFeatures, StepsFeaturesProps } from "@fathym/atomic";
+import {
+  CloudCALZForm,
+  StepsFeatures,
+  StepsFeaturesProps,
+} from "@fathym/atomic";
 import { CloudPhaseTypes } from "../../../src/CloudPhaseTypes.tsx";
-import CloudCALZForm from "./calz.form.tsx";
 import CloudIoTForm from "./iot.form.tsx";
 import { CloudConnectForms } from "./CloudConnectForms.tsx";
 
@@ -12,6 +15,8 @@ export type CloudStepsFeaturesProps = StepsFeaturesProps & {
   cloudPhase: CloudPhaseTypes;
 
   locations: ArmSubscriptions.Location[];
+
+  organizations?: string[];
 
   resGroupLookup?: string;
 
@@ -41,6 +46,7 @@ export default function CloudStepsFeatures(props: CloudStepsFeaturesProps) {
         <CloudIoTForm
           class="px-4"
           cloudLookup={props.cloudLookup!}
+          organizations={props.organizations}
           resGroupLookup={props.resGroupLookup!}
         />
       );

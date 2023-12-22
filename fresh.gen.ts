@@ -13,30 +13,32 @@ import * as $7 from "./routes/api/eac/clouds/resource-groups.ts";
 import * as $8 from "./routes/api/eac/connections.ts";
 import * as $9 from "./routes/api/eac/data/explore.ts";
 import * as $10 from "./routes/api/eac/data/flow.ts";
-import * as $11 from "./routes/api/eac/index.ts";
-import * as $12 from "./routes/api/eac/iot/dashboards.ts";
-import * as $13 from "./routes/api/eac/iot/data-apis-jwt.ts";
-import * as $14 from "./routes/api/eac/iot/data-apis.ts";
-import * as $15 from "./routes/api/eac/iot/devices/ensure.ts";
-import * as $16 from "./routes/applications/index.tsx";
-import * as $17 from "./routes/cloud/_middleware.tsx";
-import * as $18 from "./routes/cloud/index.tsx";
-import * as $19 from "./routes/commit/[commitId]/status.tsx";
-import * as $20 from "./routes/data/index.tsx";
-import * as $21 from "./routes/devices/index.tsx";
-import * as $22 from "./routes/enterprises.tsx";
-import * as $23 from "./routes/index.tsx";
+import * as $11 from "./routes/api/eac/github/user.ts";
+import * as $12 from "./routes/api/eac/index.ts";
+import * as $13 from "./routes/api/eac/iot/dashboards.ts";
+import * as $14 from "./routes/api/eac/iot/data-apis-jwt.ts";
+import * as $15 from "./routes/api/eac/iot/data-apis.ts";
+import * as $16 from "./routes/api/eac/iot/devices/ensure.ts";
+import * as $17 from "./routes/applications/index.tsx";
+import * as $18 from "./routes/cloud/_middleware.tsx";
+import * as $19 from "./routes/cloud/index.tsx";
+import * as $20 from "./routes/commit/[commitId]/status.tsx";
+import * as $21 from "./routes/data/index.tsx";
+import * as $22 from "./routes/devices/index.tsx";
+import * as $23 from "./routes/enterprises.tsx";
+import * as $24 from "./routes/index.tsx";
 import * as $$0 from "./islands/atoms/InteractiveMenuIcon.tsx";
 import * as $$1 from "./islands/atoms/InteractiveSlideToggle.tsx";
 import * as $$2 from "./islands/atoms/Redirect.tsx";
 import * as $$3 from "./islands/common/ProfileMenu.tsx";
 import * as $$4 from "./islands/molecules/CopyInput.tsx";
 import * as $$5 from "./islands/molecules/InteractiveResponsiveSet.tsx";
-import * as $$6 from "./islands/organisms/data/explore-form.tsx";
-import * as $$7 from "./islands/organisms/iot/device-data-flowing.tsx";
-import * as $$8 from "./islands/organisms/iot/hub-device-connection.tsx";
-import * as $$9 from "./islands/organisms/iot/hub-key-connection.tsx";
-import * as $$10 from "./islands/organisms/iot/hub-key-simulator.tsx";
+import * as $$6 from "./islands/organisms/cloud/iot/hot-flow-input.tsx";
+import * as $$7 from "./islands/organisms/data/explore-form.tsx";
+import * as $$8 from "./islands/organisms/iot/device-data-flowing.tsx";
+import * as $$9 from "./islands/organisms/iot/hub-device-connection.tsx";
+import * as $$10 from "./islands/organisms/iot/hub-key-connection.tsx";
+import * as $$11 from "./islands/organisms/iot/hub-key-simulator.tsx";
 
 const manifest = {
   routes: {
@@ -51,19 +53,20 @@ const manifest = {
     "./routes/api/eac/connections.ts": $8,
     "./routes/api/eac/data/explore.ts": $9,
     "./routes/api/eac/data/flow.ts": $10,
-    "./routes/api/eac/index.ts": $11,
-    "./routes/api/eac/iot/dashboards.ts": $12,
-    "./routes/api/eac/iot/data-apis-jwt.ts": $13,
-    "./routes/api/eac/iot/data-apis.ts": $14,
-    "./routes/api/eac/iot/devices/ensure.ts": $15,
-    "./routes/applications/index.tsx": $16,
-    "./routes/cloud/_middleware.tsx": $17,
-    "./routes/cloud/index.tsx": $18,
-    "./routes/commit/[commitId]/status.tsx": $19,
-    "./routes/data/index.tsx": $20,
-    "./routes/devices/index.tsx": $21,
-    "./routes/enterprises.tsx": $22,
-    "./routes/index.tsx": $23,
+    "./routes/api/eac/github/user.ts": $11,
+    "./routes/api/eac/index.ts": $12,
+    "./routes/api/eac/iot/dashboards.ts": $13,
+    "./routes/api/eac/iot/data-apis-jwt.ts": $14,
+    "./routes/api/eac/iot/data-apis.ts": $15,
+    "./routes/api/eac/iot/devices/ensure.ts": $16,
+    "./routes/applications/index.tsx": $17,
+    "./routes/cloud/_middleware.tsx": $18,
+    "./routes/cloud/index.tsx": $19,
+    "./routes/commit/[commitId]/status.tsx": $20,
+    "./routes/data/index.tsx": $21,
+    "./routes/devices/index.tsx": $22,
+    "./routes/enterprises.tsx": $23,
+    "./routes/index.tsx": $24,
   },
   islands: {
     "./islands/atoms/InteractiveMenuIcon.tsx": $$0,
@@ -72,11 +75,12 @@ const manifest = {
     "./islands/common/ProfileMenu.tsx": $$3,
     "./islands/molecules/CopyInput.tsx": $$4,
     "./islands/molecules/InteractiveResponsiveSet.tsx": $$5,
-    "./islands/organisms/data/explore-form.tsx": $$6,
-    "./islands/organisms/iot/device-data-flowing.tsx": $$7,
-    "./islands/organisms/iot/hub-device-connection.tsx": $$8,
-    "./islands/organisms/iot/hub-key-connection.tsx": $$9,
-    "./islands/organisms/iot/hub-key-simulator.tsx": $$10,
+    "./islands/organisms/cloud/iot/hot-flow-input.tsx": $$6,
+    "./islands/organisms/data/explore-form.tsx": $$7,
+    "./islands/organisms/iot/device-data-flowing.tsx": $$8,
+    "./islands/organisms/iot/hub-device-connection.tsx": $$9,
+    "./islands/organisms/iot/hub-key-connection.tsx": $$10,
+    "./islands/organisms/iot/hub-key-simulator.tsx": $$11,
   },
   baseUrl: import.meta.url,
 };
