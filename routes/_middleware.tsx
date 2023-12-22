@@ -42,6 +42,7 @@ async function loggedInCheck(
     }
 
     case "/signin/callback": {
+      return respond({ hello: "Welcome" });
       try {
         const { response, tokens, sessionId } = await gitHubOAuth
           .handleCallback(
