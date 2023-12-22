@@ -54,10 +54,10 @@ async function loggedInCheck(
           Token: accessToken,
         } as EaCSourceConnectionDetails);
 
-        return respond({ hello: "Welcome" });
         const { data: { login } } = await octokit.rest.users
           .getAuthenticated();
 
+        return respond({ hello: "WelcomeUser" });
         const { data } = await octokit.rest.users
           .listEmailsForAuthenticatedUser();
 
