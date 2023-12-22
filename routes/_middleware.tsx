@@ -57,9 +57,10 @@ async function loggedInCheck(
         const { data: { login } } = await octokit.rest.users
           .getAuthenticated();
 
-        return respond({ hello: "WelcomeUser" });
         const { data } = await octokit.rest.users
           .listEmailsForAuthenticatedUser();
+
+        return respond({ hello: "WelcomeEmails" });
 
         const primaryEmail = data.find((e) => e.primary);
 
