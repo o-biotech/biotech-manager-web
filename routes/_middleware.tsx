@@ -1,7 +1,7 @@
 import { getCookies, setCookie } from "$std/http/cookie.ts";
 import { cookieSession, redisSession } from "$fresh/session";
 import { MiddlewareHandlerContext } from "$fresh/server.ts";
-import { redirectRequest } from "@fathym/common";
+import { redirectRequest, respond } from "@fathym/common";
 import { UserGitHubConnection } from "@fathym/eac";
 import { connect } from "redis";
 import { OpenBiotechManagerState } from "../src/OpenBiotechManagerState.tsx";
@@ -42,45 +42,50 @@ async function loggedInCheck(
     }
 
     case "/signin/callback": {
-      const { response, tokens, sessionId } = await gitHubOAuth.handleCallback(
-        req,
-      );
+      try {
+        const { response, tokens, sessionId } = await gitHubOAuth
+          .handleCallback(
+            req,
+          );
 
-      const { accessToken, refreshToken } = tokens;
+        const { accessToken, refreshToken } = tokens;
 
-      const octokit = await loadMainOctokit({
-        Token: accessToken,
-      } as EaCSourceConnectionDetails);
-
-      const { data: { login } } = await octokit.rest.users
-        .getAuthenticated();
-
-      const { data } = await octokit.rest.users
-        .listEmailsForAuthenticatedUser();
-
-      const primaryEmail = data.find((e) => e.primary);
-
-      const oldSessionId = await gitHubOAuth.getSessionId(req);
-
-      if (oldSessionId) {
-        await denoKv.delete(["User", "Session", oldSessionId!, "Username"]);
-      }
-
-      await denoKv.set(
-        ["User", "Session", sessionId!, "Username"],
-        primaryEmail!.email,
-      );
-
-      await denoKv.set(
-        ["User", "Session", sessionId!, "GitHub", "GitHubConnection"],
-        {
-          RefreshToken: refreshToken,
+        const octokit = await loadMainOctokit({
           Token: accessToken,
-          Username: login,
-        } as UserGitHubConnection,
-      );
+        } as EaCSourceConnectionDetails);
 
-      return response;
+        const { data: { login } } = await octokit.rest.users
+          .getAuthenticated();
+
+        const { data } = await octokit.rest.users
+          .listEmailsForAuthenticatedUser();
+
+        const primaryEmail = data.find((e) => e.primary);
+
+        const oldSessionId = await gitHubOAuth.getSessionId(req);
+
+        if (oldSessionId) {
+          await denoKv.delete(["User", "Session", oldSessionId!, "Username"]);
+        }
+
+        await denoKv.set(
+          ["User", "Session", sessionId!, "Username"],
+          primaryEmail!.email,
+        );
+
+        await denoKv.set(
+          ["User", "Session", sessionId!, "GitHub", "GitHubConnection"],
+          {
+            RefreshToken: refreshToken,
+            Token: accessToken,
+            Username: login,
+          } as UserGitHubConnection,
+        );
+
+        return response;
+      } catch (err) {
+        return respond({ err });
+      }
     }
 
     case "/signout": {
