@@ -5,12 +5,13 @@ import {
   EaCStatusProcessingTypes,
   UserGitHubConnection,
   waitForStatus,
+  waitForStatusWithFreshJwt,
 } from "@fathym/eac";
-import { eacSvc } from "../../../services/eac.ts";
 import { gitHubOAuth } from "../../../services/github.ts";
 import { OpenBiotechEaC } from "../../../src/eac/OpenBiotechEaC.ts";
 import { OpenBiotechManagerState } from "../../../src/OpenBiotechManagerState.tsx";
 import { denoKv } from "../../../configs/deno-kv.config.ts";
+import { loadEaCSvc } from "../../../configs/eac.ts";
 
 export const handler: Handlers<any, OpenBiotechManagerState> = {
   GET(_req, ctx) {
@@ -50,12 +51,15 @@ export const handler: Handlers<any, OpenBiotechManagerState> = {
       },
     };
 
-    const createResp = await eacSvc.Create<OpenBiotechEaC>(newEaC, 60);
+    const parentEaCSvc = await loadEaCSvc();
 
-    const status = await waitForStatus(
-      eacSvc,
+    const createResp = await parentEaCSvc.Create<OpenBiotechEaC>(newEaC, 60);
+
+    const status = await waitForStatusWithFreshJwt(
+      parentEaCSvc,
       createResp.EnterpriseLookup,
       createResp.CommitID,
+      ctx.state.Username,
     );
 
     if (status.Processing == EaCStatusProcessingTypes.COMPLETE) {

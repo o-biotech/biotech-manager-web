@@ -6,9 +6,9 @@ import {
   EaCStatusProcessingTypes,
   waitForStatus,
 } from "@fathym/eac";
-import { eacSvc } from "../../../../services/eac.ts";
 import { OpenBiotechEaC } from "../../../../src/eac/OpenBiotechEaC.ts";
 import { OpenBiotechManagerState } from "../../../../src/OpenBiotechManagerState.tsx";
+import { loadEaCSvc } from "../../../../configs/eac.ts";
 
 export const handler: Handlers<any, OpenBiotechManagerState> = {
   async POST(req, ctx) {
@@ -33,6 +33,8 @@ export const handler: Handlers<any, OpenBiotechManagerState> = {
         },
       },
     };
+
+    const eacSvc = await loadEaCSvc(ctx.state.EaCJWT!);
 
     const commitResp = await eacSvc.Commit(eac, 60);
 

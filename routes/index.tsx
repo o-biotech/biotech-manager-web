@@ -9,11 +9,7 @@ import { BiotechStepsFeatures } from "../components/organisms/features/BiotechSt
 import { SetupPhaseTypes } from "../src/SetupPhaseTypes.tsx";
 import { OpenBiotechManagerState } from "../src/OpenBiotechManagerState.tsx";
 import { BiotechDashboard } from "../components/organisms/BiotechDashboard.tsx";
-import { redirectRequest } from "@fathym/common";
-import { OpenBiotechEaC } from "../src/eac/OpenBiotechEaC.ts";
-import { eacSvc } from "../services/eac.ts";
 import CreateEaCHero from "../components/organisms/heros/CreateEaCHero.tsx";
-import { EaCStatus, EaCStatusProcessingTypes, sleep } from "@fathym/eac";
 
 interface HomePageData {
   setupPhase: SetupPhaseTypes;
@@ -21,13 +17,6 @@ interface HomePageData {
 
 export const handler: Handlers<HomePageData | null, OpenBiotechManagerState> = {
   GET(_, ctx) {
-    // const {} = ctx.params;
-
-    // const resp = await fetch(`https://api.github.com/users/${username}`);
-    // if (resp.status === 404) {
-    //   return ctx.render(null);
-    // }
-
     const data: HomePageData = {
       setupPhase: ctx.state.Phase,
     };
@@ -35,28 +24,6 @@ export const handler: Handlers<HomePageData | null, OpenBiotechManagerState> = {
     return ctx.render(data);
   },
 };
-
-// interface TestState extends StateFlow {
-//   FirstName: string;
-
-//   get FullName(): string;
-
-//   LastName: string;
-// }
-
-// class TestStateFlowContextService extends StateFlowContextService<TestState> {
-//   constructor(initState: TestState) {
-//     super(initState);
-//   }
-
-//   public ChangeName(first: string, last: string): void {
-//     this.$Draft((draft) => {
-//       draft.FirstName = first;
-
-//       draft.LastName = last;
-//     });
-//   }
-// }
 
 export default function Home({
   data,

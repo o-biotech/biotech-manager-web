@@ -9,7 +9,7 @@ import {
 } from "@fathym/eac";
 import { OpenBiotechManagerState } from "../../../../src/OpenBiotechManagerState.tsx";
 import { OpenBiotechEaC } from "../../../../src/eac/OpenBiotechEaC.ts";
-import { eacSvc } from "../../../../services/eac.ts";
+import { loadEaCSvc } from "../../../../configs/eac.ts";
 
 export const handler: Handlers<any, OpenBiotechManagerState> = {
   async POST(req, ctx) {
@@ -56,6 +56,8 @@ export const handler: Handlers<any, OpenBiotechManagerState> = {
         } as EaCIoTAsCode,
       },
     };
+
+    const eacSvc = await loadEaCSvc(ctx.state.EaCJWT!);
 
     const commitResp = await eacSvc.Commit<OpenBiotechEaC>(eac, 60 * 30);
 

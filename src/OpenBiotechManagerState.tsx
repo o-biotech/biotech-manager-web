@@ -16,6 +16,8 @@ export type OpenBiotechManagerState =
 
     EaC?: OpenBiotechEaC;
 
+    EaCJWT?: string;
+
     GitHub?: OpenBiotechGitHubState;
 
     Phase: SetupPhaseTypes;

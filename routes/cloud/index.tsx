@@ -9,7 +9,7 @@ import { CloudPhaseTypes } from "../../src/CloudPhaseTypes.tsx";
 import { OpenBiotechManagerState } from "../../src/OpenBiotechManagerState.tsx";
 import { msalAuthProvider } from "../../configs/msal.config.ts";
 import { OpenBiotechEaC } from "../../src/eac/OpenBiotechEaC.ts";
-import { eacAzureSvc, eacSvc } from "../../services/eac.ts";
+import { loadEaCAzureSvc, loadEaCSvc } from "../../configs/eac.ts";
 
 interface CloudPageData {
   cloudLookup?: string;
@@ -73,6 +73,8 @@ export const handler: Handlers<CloudPageData | null, OpenBiotechManagerState> =
 
           const svcDef = mergeWithArrays<EaCServiceDefinitions>(...svcDefs);
 
+          const eacAzureSvc = await loadEaCAzureSvc(ctx.state.EaCJWT!);
+
           const locationsResp = await eacAzureSvc.CloudLocations(
             ctx.state.EaC!.EnterpriseLookup!,
             data.cloudLookup!,
@@ -85,6 +87,8 @@ export const handler: Handlers<CloudPageData | null, OpenBiotechManagerState> =
 
       svcCalls.push(async () => {
         const sourceKey = `GITHUB://${ctx.state.GitHub!.Username}`;
+
+        const eacSvc = await loadEaCSvc(ctx.state.EaCJWT!);
 
         const eacConnections = await eacSvc.Connections<OpenBiotechEaC>({
           EnterpriseLookup: ctx.state.EaC!.EnterpriseLookup!,

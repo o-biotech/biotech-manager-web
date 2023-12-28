@@ -2,23 +2,23 @@ import { getCookies, setCookie } from "$std/http/cookie.ts";
 import { cookieSession, redisSession } from "$fresh/session";
 import { MiddlewareHandlerContext } from "$fresh/server.ts";
 import { redirectRequest, respond } from "@fathym/common";
-import { UserGitHubConnection } from "@fathym/eac";
+import {
+  EaCSourceConnectionDetails,
+  loadMainOctokit,
+  UserGitHubConnection,
+  waitForStatus,
+} from "@fathym/eac";
 import { connect } from "redis";
 import { OpenBiotechManagerState } from "../src/OpenBiotechManagerState.tsx";
 import { SetupPhaseTypes } from "../src/SetupPhaseTypes.tsx";
 import { CloudPhaseTypes } from "../src/CloudPhaseTypes.tsx";
 import { OpenBiotechEaC } from "../src/eac/OpenBiotechEaC.ts";
 import { denoKv } from "../configs/deno-kv.config.ts";
-import { eacSvc } from "../services/eac.ts";
 import { DevicesPhaseTypes } from "../src/DevicesPhaseTypes.tsx";
 import { jwtConfig } from "../configs/jwt.config.ts";
 import { DataPhaseTypes } from "../src/DataPhaseTypes.tsx";
 import { gitHubOAuth } from "../services/github.ts";
-import {
-  EaCSourceConnectionDetails,
-  loadMainOctokit,
-  waitForStatus,
-} from "@fathym/eac";
+import { loadEaCSvc } from "../configs/eac.ts";
 
 async function loggedInCheck(
   req: Request,
@@ -44,9 +44,7 @@ async function loggedInCheck(
     case "/signin/callback": {
       try {
         const { response, tokens, sessionId } = await gitHubOAuth
-          .handleCallback(
-            req,
-          );
+          .handleCallback(req);
 
         const { accessToken, refreshToken } = tokens;
 
@@ -54,8 +52,9 @@ async function loggedInCheck(
           Token: accessToken,
         } as EaCSourceConnectionDetails);
 
-        const { data: { login } } = await octokit.rest.users
-          .getAuthenticated();
+        const {
+          data: { login },
+        } = await octokit.rest.users.getAuthenticated();
 
         const { data } = await octokit.rest.users
           .listEmailsForAuthenticatedUser();
@@ -108,7 +107,7 @@ async function loggedInCheck(
         if (currentUsername.value) {
           ctx.state.Username = currentUsername.value!;
         } else {
-          throw new Error(`Invalid username`);
+          return redirectRequest(`/signin?success_url=${pathname}`);
         }
 
         return ctx.next();
@@ -136,69 +135,73 @@ async function currentEaC(
     "EaC",
   ]);
 
-  let eac: OpenBiotechEaC | undefined = undefined;
-
   if (currentEaC.value) {
-    eac = await eacSvc.Get(currentEaC.value!);
-  }
+    const parentEaCSvc = await loadEaCSvc();
 
-  const sessionId = await gitHubOAuth.getSessionId(req);
+    const jwtResp = await parentEaCSvc.JWT(
+      currentEaC.value,
+      ctx.state.Username,
+    );
 
-  const currentConn = await denoKv.get<UserGitHubConnection>([
-    "User",
-    "Session",
-    sessionId!,
-    "GitHub",
-    "GitHubConnection",
-  ]);
+    ctx.state.EaCJWT = jwtResp.Token;
 
-  const srcConnLookup = `GITHUB://${currentConn.value!.Username}`;
+    const eacSvc = await loadEaCSvc(ctx.state.EaCJWT);
 
-  if (currentConn.value!) {
-    const url = new URL(req.url);
+    const eac = await eacSvc.Get(currentEaC.value!);
 
-    if (
-      url.pathname == "/" &&
-      eac?.SourceConnections &&
-      eac.SourceConnections[srcConnLookup] &&
-      eac.SourceConnections[srcConnLookup].Details!.Token !==
-        currentConn.value.Token
-    ) {
-      const commitResp = await eacSvc.Commit(
-        {
-          EnterpriseLookup: eac.EnterpriseLookup,
-          SourceConnections: {
-            [srcConnLookup]: {
-              Details: {
-                ...eac.SourceConnections[srcConnLookup].Details!,
-                Token: currentConn.value.Token,
+    if (eac?.EnterpriseLookup) {
+      ctx.state.EaC = eac;
+
+      const sessionId = await gitHubOAuth.getSessionId(req);
+
+      const currentConn = await denoKv.get<UserGitHubConnection>([
+        "User",
+        "Session",
+        sessionId!,
+        "GitHub",
+        "GitHubConnection",
+      ]);
+
+      const srcConnLookup = `GITHUB://${currentConn.value!.Username}`;
+
+      if (currentConn.value!) {
+        const url = new URL(req.url);
+
+        if (
+          url.pathname == "/" &&
+          ctx.state.EaC?.SourceConnections &&
+          ctx.state.EaC.SourceConnections[srcConnLookup] &&
+          ctx.state.EaC.SourceConnections[srcConnLookup].Details!.Token !==
+            currentConn.value.Token
+        ) {
+          const commitResp = await eacSvc.Commit(
+            {
+              EnterpriseLookup: ctx.state.EaC.EnterpriseLookup,
+              SourceConnections: {
+                [srcConnLookup]: {
+                  Details: {
+                    ...ctx.state.EaC.SourceConnections[srcConnLookup].Details!,
+                    Token: currentConn.value.Token,
+                  },
+                },
               },
             },
-          },
-        },
-        5,
-      );
+            5,
+          );
 
-      await waitForStatus(
-        eacSvc,
-        commitResp.EnterpriseLookup,
-        commitResp.CommitID,
-      );
+          await waitForStatus(
+            eacSvc,
+            commitResp.EnterpriseLookup,
+            commitResp.CommitID,
+          );
 
-      eac = await eacSvc.Get(currentEaC.value!);
+          ctx.state.EaC = await eacSvc.Get(currentEaC.value!);
+        }
+      }
+
+      ctx.state.UserEaCs = await eacSvc.ListForUser();
     }
   }
-
-  const userEaCs = await eacSvc.ListForUser();
-
-  // Call to get state
-  const state: OpenBiotechManagerState = {
-    ...ctx.state,
-    EaC: eac,
-    UserEaCs: userEaCs || [],
-  };
-
-  ctx.state = state;
 
   return await ctx.next();
 }
@@ -211,6 +214,7 @@ async function currentState(
 
   // Call to get state
   const state: OpenBiotechManagerState = {
+    UserEaCs: [],
     ...ctx.state,
     Phase: SetupPhaseTypes.Cloud,
     Cloud: {
@@ -260,9 +264,6 @@ async function currentState(
 
           if (iots.length > 0) {
             state.Devices.IoTLookup = iots[0];
-
-            const iotFlowResource = iotResGroup
-              .Resources![state.Devices.IoTLookup]!;
 
             state.Devices.Phase = DevicesPhaseTypes.Connect;
 

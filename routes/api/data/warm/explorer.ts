@@ -2,14 +2,14 @@
 import { Handlers } from "$fresh/server.ts";
 import { respond } from "@fathym/common";
 import { ExplorerRequest } from "@fathym/eac";
-import { eacExplorerSvc } from "../../../../services/eac.ts";
 import { OpenBiotechManagerAPIState } from "../../../../src/api/OpenBiotechManagerAPIState.ts";
+import { loadEaCExplorerSvc } from "../../../../configs/eac.ts";
 
 export const handler: Handlers<any, OpenBiotechManagerAPIState> = {
-  async GET(req, ctx) {
-    // const formData = await req.formData();
-
+  async GET(EAC_API_BASE_URLreq, ctx) {
     const entLookup = ctx.state.EnterpriseLookup;
+
+    const username = ctx.state.Username;
 
     const cloudLookup = ctx.state.CloudLookup;
 
@@ -21,6 +21,8 @@ export const handler: Handlers<any, OpenBiotechManagerAPIState> = {
       Query: `Devices
       | where RawData != ""`,
     };
+
+    const eacExplorerSvc = await loadEaCExplorerSvc(ctx.state.EaCJWT!);
 
     const queryResp = await eacExplorerSvc.Query(
       entLookup,

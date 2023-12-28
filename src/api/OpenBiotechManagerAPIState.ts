@@ -1,3 +1,5 @@
 import { OpenBiotechAPIJWTPayload } from "./OpenBiotechAPIJWTPayload.ts";
 
-export type OpenBiotechManagerAPIState = OpenBiotechAPIJWTPayload;
+export type OpenBiotechManagerAPIState = {
+  EaCJWT?: string;
+} & OpenBiotechAPIJWTPayload;

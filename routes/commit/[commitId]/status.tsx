@@ -4,9 +4,9 @@ import { redirectRequest } from "@fathym/common";
 import { EaCStatus, EaCStatusProcessingTypes } from "@fathym/eac";
 import { formatDistanceToNow, intlFormatDistance } from "npm:date-fns";
 import { OpenBiotechManagerState } from "../../../src/OpenBiotechManagerState.tsx";
-import { eacSvc } from "../../../services/eac.ts";
 import { Redirect } from "../../../islands/atoms/Redirect.tsx";
 import { CheckIcon, ErrorIcon, RenewIcon } from "$fathym/atomic-icons";
+import { loadEaCSvc } from "../../../configs/eac.ts";
 
 interface CommitStatusPageData {
   complete: boolean;
@@ -26,6 +26,8 @@ export const handler: Handlers<
     const commitId: string = ctx.params.commitId;
 
     const url = new URL(req.url);
+
+    const eacSvc = await loadEaCSvc(ctx.state.EaCJWT!);
 
     const status: EaCStatus = await eacSvc.Status(entLookup, commitId);
 

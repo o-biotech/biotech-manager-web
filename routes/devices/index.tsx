@@ -4,8 +4,6 @@ import { DevicesPhaseTypes } from "../../src/DevicesPhaseTypes.tsx";
 import { DevicesStepsFeatures } from "../../components/organisms/features/DevicesStepsFeatures.tsx";
 import { OpenBiotechManagerState } from "../../src/OpenBiotechManagerState.tsx";
 import { redirectRequest } from "@fathym/common";
-import { eacSvc } from "../../services/eac.ts";
-import { OpenBiotechEaC } from "../../src/eac/OpenBiotechEaC.ts";
 
 interface DevicesPageData {
   cloudLookup: string;

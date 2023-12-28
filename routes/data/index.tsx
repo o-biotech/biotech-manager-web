@@ -4,8 +4,8 @@ import { DataStepsFeatures } from "../../components/organisms/features/DataSteps
 import { DataPhaseTypes } from "../../src/DataPhaseTypes.tsx";
 import { OpenBiotechManagerState } from "../../src/OpenBiotechManagerState.tsx";
 import { redirectRequest } from "@fathym/common";
-import { eacSvc } from "../../services/eac.ts";
 import { OpenBiotechEaC } from "../../src/eac/OpenBiotechEaC.ts";
+import { loadEaCSvc } from "../../configs/eac.ts";
 
 interface DataPageData {
   apiBase: string;
@@ -32,6 +32,8 @@ export const handler: Handlers<DataPageData | null, OpenBiotechManagerState> = {
     if (ctx.state.Phase < 2) {
       return redirectRequest("/");
     }
+
+    const eacSvc = await loadEaCSvc(ctx.state.EaCJWT!);
 
     const eacConnections = await eacSvc.Connections<OpenBiotechEaC>({
       EnterpriseLookup: ctx.state.EaC!.EnterpriseLookup!,

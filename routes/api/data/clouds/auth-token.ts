@@ -2,7 +2,7 @@
 import { Handlers } from "$fresh/server.ts";
 import { respond } from "@fathym/common";
 import { OpenBiotechManagerAPIState } from "../../../../src/api/OpenBiotechManagerAPIState.ts";
-import { eacAzureSvc } from "../../../../services/eac.ts";
+import { loadEaCAzureSvc } from "../../../../configs/eac.ts";
 
 export const handler: Handlers<any, OpenBiotechManagerAPIState> = {
   async GET(req, ctx) {
@@ -15,6 +15,8 @@ export const handler: Handlers<any, OpenBiotechManagerAPIState> = {
     const scopes: string[] = (url.searchParams.get("scope") as string).split(
       ",",
     );
+
+    const eacAzureSvc = await loadEaCAzureSvc(ctx.state.EaCJWT!);
 
     const authToken = await eacAzureSvc.CloudAuthToken(
       entLookup,
