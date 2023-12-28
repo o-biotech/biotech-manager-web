@@ -145,7 +145,7 @@ async function currentEaC(
 
     ctx.state.EaCJWT = jwtResp.Token;
 
-    const eacSvc = await loadEaCSvc(ctx.state.EaCJWT);
+    const eacSvc = await loadEaCSvc(ctx.state.EaCJWT!);
 
     const eac = await eacSvc.Get(currentEaC.value!);
 
