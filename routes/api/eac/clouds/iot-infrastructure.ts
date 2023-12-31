@@ -189,13 +189,16 @@ export const handler: Handlers<any, OpenBiotechManagerState> = {
           Type: "GITHUB",
           Branches: ["main", "integration"],
           MainBranch: "integration",
-          Name: "IoT Ensemble Device Data",
+          Name: "IoT Ensemble Device Flow",
           Description: "A hot flow to SignalR for device telemetry",
           Organization: gitHubOrg,
           Repository: gitHubRepo,
           Username: gitHubUsername,
         },
+        DevOpsActionTriggerLookups: [""],
       };
+
+      // eac.;
     }
 
     const eacSvc = await loadEaCSvc(ctx.state.EaCJWT!);

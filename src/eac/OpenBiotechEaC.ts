@@ -6,7 +6,7 @@ import {
 } from "@fathym/eac";
 
 export type OpenBiotechEaC =
-  & EverythingAsCode
   & EverythingAsCodeClouds
   & EverythingAsCodeIoT
-  & EverythingAsCodeSources;
+  & EverythingAsCodeSources
+  & EverythingAsCode;
