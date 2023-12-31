@@ -5,8 +5,7 @@
 .env.production.local
 .env.local
 # build/
-denoKv/
-!.gitkeep
+denoKv/o-biotech-deno.*
 # Fresh build directory
 _fresh/
 
