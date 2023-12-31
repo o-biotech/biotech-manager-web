@@ -6,7 +6,7 @@
 .env.local
 # build/
 denoKv/
-!**/.gitkeep
+!.gitkeep
 # Fresh build directory
 _fresh/
 
