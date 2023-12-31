@@ -1,7 +1,6 @@
 // deno-lint-ignore-file no-explicit-any
 import { Handlers } from "$fresh/server.ts";
 import { redirectRequest } from "@fathym/common";
-import { EaCStatusProcessingTypes } from "@fathym/eac";
 import { OpenBiotechManagerState } from "../../../../src/OpenBiotechManagerState.tsx";
 import { denoKv } from "../../../../configs/deno-kv.config.ts";
 
