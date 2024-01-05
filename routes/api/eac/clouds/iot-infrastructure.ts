@@ -137,42 +137,45 @@ export const handler: Handlers<any, OpenBiotechManagerState> = {
 
     const eac: OpenBiotechEaC = {
       EnterpriseLookup: ctx.state.EaC!.EnterpriseLookup,
-      Clouds: {
-        [cloudLookup]: {
-          ResourceGroups: {
-            [resGroupLookup]: {
-              Resources: {
-                [resLookup]: {
-                  Details: {
-                    Type: "Format",
-                    Name: "IoT Infrastructure",
-                    Description:
-                      "The IoT Infrastructure to use for the enterprise.",
-                    Order: 1,
-                    Template: {
-                      Content:
-                        "https://raw.githubusercontent.com/lowcodeunit/infrastructure/master/templates/o-biotech/iot/ref-arch/template.jsonc",
-                      Parameters:
-                        "https://raw.githubusercontent.com/lowcodeunit/infrastructure/master/templates/o-biotech/iot/ref-arch/parameters.jsonc",
-                    },
-                    Data: {
-                      CloudLookup: cloudLookup,
-                      Location: resGroupLocation,
-                      Name: resGroupLookup,
-                      PrincipalID: "", // TODO: Pass in actual principal ID (maybe retrievable from MSAL account record? I think can just be the email?)
-                      ResourceLookup: resLookup,
-                      ServicePrincipalID: servicePrincipalId,
-                      ShortName: shortName,
-                    },
-                    Outputs: {},
-                  } as EaCCloudResourceFormatDetails,
-                  Resources: iotResources,
-                },
-              },
-            },
-          },
-        },
-      },
+      // Clouds: {
+      //   [cloudLookup]: {
+      //     ResourceGroups: {
+      //       [resGroupLookup]: {
+      //         Resources: {
+      //           [resLookup]: {
+      //             Details: {
+      //               Type: "Format",
+      //               Name: "IoT Infrastructure",
+      //               Description:
+      //                 "The IoT Infrastructure to use for the enterprise.",
+      //               Order: 1,
+      //               Template: {
+      //                 Content:
+      //                   "https://raw.githubusercontent.com/lowcodeunit/infrastructure/master/templates/o-biotech/iot/ref-arch/template.jsonc",
+      //                 Parameters:
+      //                   "https://raw.githubusercontent.com/lowcodeunit/infrastructure/master/templates/o-biotech/iot/ref-arch/parameters.jsonc",
+      //               },
+      //               Data: {
+      //                 CloudLookup: cloudLookup,
+      //                 Location: resGroupLocation,
+      //                 Name: resGroupLookup,
+      //                 PrincipalID: "", // TODO: Pass in actual principal ID (maybe retrievable from MSAL account record? I think can just be the email?)
+      //                 ResourceLookup: resLookup,
+      //                 ServicePrincipalID: servicePrincipalId,
+      //                 ShortName: shortName,
+      //               },
+      //               Outputs: {},
+      //             } as EaCCloudResourceFormatDetails,
+      //             Resources: iotResources,
+      //           },
+      //         },
+      //       },
+      //     },
+      //   },
+      // },
+      Artifacts: {},
+      DevOpsActions: {},
+      Secrets: {},
       SourceConnections: {},
       Sources: {},
     };
@@ -183,6 +186,33 @@ export const handler: Handlers<any, OpenBiotechManagerState> = {
       const gitHubRepo = formData.get("gitHubRepo") as string;
 
       const gitHubUsername = ctx.state.GitHub?.Username;
+
+      const secretLookup = `${shortName}-iot-devices-flow-publish-profile`;
+
+      eac.Secrets![secretLookup] = {
+        Details: {
+          Value:
+            `$connections:$.eac.Clouds['${cloudLookup}'].ResourceGroups['${resGroupLookup}'].Resources['${resLookup}'].Resources['${resLookup}-hot'].Profiles['Microsoft.Web/sites/${shortName}-iot-devices-flow']['_']`,
+        },
+        CloudLookup: cloudLookup,
+        KeyVaultLookup: `${shortName}-key-vault`,
+      };
+
+      const doaLookup = "azure-function-deploy-nodejs";
+      eac.DevOpsActions![doaLookup] = {
+        Details: {
+          Name: "Azure Function Deploy - NodeJS",
+          Description:
+            "Automated deployments of NodeJS Azure Functions to Azure Web Apps",
+          Path: "build-and-deploy.yml",
+          Templates: [
+            "https://raw.githubusercontent.com/lowcodeunit/infrastructure/master/templates/github/nodejs/.hbs._header.yml",
+            "https://raw.githubusercontent.com/lowcodeunit/infrastructure/master/templates/github/nodejs/azure-function-deploy.yml",
+          ],
+        },
+      };
+
+      const iotDeviceFlowArtifactLookup = "iot-ensemble-device-flow";
 
       eac.Sources![`template|GITHUB://fathym-deno/iot-ensemble-device-flow`] = {
         Details: {
@@ -195,10 +225,24 @@ export const handler: Handlers<any, OpenBiotechManagerState> = {
           Repository: gitHubRepo,
           Username: gitHubUsername,
         },
-        DevOpsActionTriggerLookups: [""],
+        SecretLookups: {
+          AZURE_FUNCTIONAPP_PUBLISH_PROFILE: secretLookup,
+        },
+        Artifacts: {
+          [iotDeviceFlowArtifactLookup]: {
+            Details: {
+              Name: "IoT Ensemble Device Flow",
+              Description:
+                "Build & deployment configuration for the IoT Ensemble Device Flow",
+              FunctionAppName: `${shortName}-iot-devices-flow`,
+              // Branches: 'main',
+              // PackagePath: '.',
+              // NodeVersion: '18.x',
+            },
+            DevOpsActionTriggerLookup: doaLookup,
+          },
+        },
       };
-
-      // eac.;
     }
 
     const eacSvc = await loadEaCSvc(ctx.state.EaCJWT!);
