@@ -137,42 +137,42 @@ export const handler: Handlers<any, OpenBiotechManagerState> = {
 
     const eac: OpenBiotechEaC = {
       EnterpriseLookup: ctx.state.EaC!.EnterpriseLookup,
-      // Clouds: {
-      //   [cloudLookup]: {
-      //     ResourceGroups: {
-      //       [resGroupLookup]: {
-      //         Resources: {
-      //           [resLookup]: {
-      //             Details: {
-      //               Type: "Format",
-      //               Name: "IoT Infrastructure",
-      //               Description:
-      //                 "The IoT Infrastructure to use for the enterprise.",
-      //               Order: 1,
-      //               Template: {
-      //                 Content:
-      //                   "https://raw.githubusercontent.com/lowcodeunit/infrastructure/master/templates/o-biotech/iot/ref-arch/template.jsonc",
-      //                 Parameters:
-      //                   "https://raw.githubusercontent.com/lowcodeunit/infrastructure/master/templates/o-biotech/iot/ref-arch/parameters.jsonc",
-      //               },
-      //               Data: {
-      //                 CloudLookup: cloudLookup,
-      //                 Location: resGroupLocation,
-      //                 Name: resGroupLookup,
-      //                 PrincipalID: "", // TODO: Pass in actual principal ID (maybe retrievable from MSAL account record? I think can just be the email?)
-      //                 ResourceLookup: resLookup,
-      //                 ServicePrincipalID: servicePrincipalId,
-      //                 ShortName: shortName,
-      //               },
-      //               Outputs: {},
-      //             } as EaCCloudResourceFormatDetails,
-      //             Resources: iotResources,
-      //           },
-      //         },
-      //       },
-      //     },
-      //   },
-      // },
+      Clouds: {
+        [cloudLookup]: {
+          ResourceGroups: {
+            [resGroupLookup]: {
+              Resources: {
+                [resLookup]: {
+                  Details: {
+                    Type: "Format",
+                    Name: "IoT Infrastructure",
+                    Description:
+                      "The IoT Infrastructure to use for the enterprise.",
+                    Order: 1,
+                    Template: {
+                      Content:
+                        "https://raw.githubusercontent.com/lowcodeunit/infrastructure/master/templates/o-biotech/iot/ref-arch/template.jsonc",
+                      Parameters:
+                        "https://raw.githubusercontent.com/lowcodeunit/infrastructure/master/templates/o-biotech/iot/ref-arch/parameters.jsonc",
+                    },
+                    Data: {
+                      CloudLookup: cloudLookup,
+                      Location: resGroupLocation,
+                      Name: resGroupLookup,
+                      PrincipalID: "", // TODO: Pass in actual principal ID (maybe retrievable from MSAL account record? I think can just be the email?)
+                      ResourceLookup: resLookup,
+                      ServicePrincipalID: servicePrincipalId,
+                      ShortName: shortName,
+                    },
+                    Outputs: {},
+                  } as EaCCloudResourceFormatDetails,
+                  Resources: iotResources,
+                },
+              },
+            },
+          },
+        },
+      },
       DevOpsActions: {},
       Secrets: {},
       SourceConnections: {},
