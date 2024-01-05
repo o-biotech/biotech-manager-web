@@ -173,7 +173,6 @@ export const handler: Handlers<any, OpenBiotechManagerState> = {
       //     },
       //   },
       // },
-      Artifacts: {},
       DevOpsActions: {},
       Secrets: {},
       SourceConnections: {},
