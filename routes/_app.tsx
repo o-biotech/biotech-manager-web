@@ -16,6 +16,7 @@ export default function App(
         <title>Fathym Open BioTech</title>
 
         <link rel="icon" type="image/png" href="./thinky.png" />
+        <link rel="stylesheet" href="/styles.css" />
       </Head>
 
       <BasicLayout

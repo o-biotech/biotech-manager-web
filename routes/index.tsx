@@ -10,6 +10,7 @@ import { SetupPhaseTypes } from "../src/SetupPhaseTypes.tsx";
 import { OpenBiotechManagerState } from "../src/OpenBiotechManagerState.tsx";
 import { BiotechDashboard } from "../components/organisms/BiotechDashboard.tsx";
 import CreateEaCHero from "../components/organisms/heros/CreateEaCHero.tsx";
+import { classSet } from "../../../fathym-deno/atomic/mod.ts";
 
 interface HomePageData {
   setupPhase: SetupPhaseTypes;
@@ -69,6 +70,8 @@ export default function Home({
       {initialSteps}
 
       {state.Phase > 1 ? <BiotechDashboard /> : <></>}
+
+      <h1 class={classSet(undefined, "bg-zinc-600")}>This is a test</h1>
     </>
   );
 }

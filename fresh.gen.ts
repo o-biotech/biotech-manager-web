@@ -2,87 +2,96 @@
 // This file SHOULD be checked into source version control.
 // This file is automatically updated during development when running `dev.ts`.
 
-import * as $0 from "./routes/_app.tsx";
-import * as $1 from "./routes/_middleware.tsx";
-import * as $2 from "./routes/api/data/_middleware.ts";
-import * as $3 from "./routes/api/data/clouds/auth-token.ts";
-import * as $4 from "./routes/api/data/warm/explorer.ts";
-import * as $5 from "./routes/api/eac/clouds/index.ts";
-import * as $6 from "./routes/api/eac/clouds/iot-infrastructure.ts";
-import * as $7 from "./routes/api/eac/clouds/resource-groups.ts";
-import * as $8 from "./routes/api/eac/connections.ts";
-import * as $9 from "./routes/api/eac/data/explore.ts";
-import * as $10 from "./routes/api/eac/data/flow.ts";
-import * as $11 from "./routes/api/eac/github/user.ts";
-import * as $12 from "./routes/api/eac/index.ts";
-import * as $13 from "./routes/api/eac/iot/dashboards.ts";
-import * as $14 from "./routes/api/eac/iot/data-apis-jwt.ts";
-import * as $15 from "./routes/api/eac/iot/data-apis.ts";
-import * as $16 from "./routes/api/eac/iot/devices/ensure.ts";
-import * as $17 from "./routes/applications/index.tsx";
-import * as $18 from "./routes/cloud/_middleware.tsx";
-import * as $19 from "./routes/cloud/index.tsx";
-import * as $20 from "./routes/commit/[commitId]/status.tsx";
-import * as $21 from "./routes/data/index.tsx";
-import * as $22 from "./routes/devices/index.tsx";
-import * as $23 from "./routes/enterprises.tsx";
-import * as $24 from "./routes/index.tsx";
-import * as $$0 from "./islands/atoms/InteractiveMenuIcon.tsx";
-import * as $$1 from "./islands/atoms/InteractiveSlideToggle.tsx";
-import * as $$2 from "./islands/atoms/Redirect.tsx";
-import * as $$3 from "./islands/common/ProfileMenu.tsx";
-import * as $$4 from "./islands/molecules/CopyInput.tsx";
-import * as $$5 from "./islands/molecules/InteractiveResponsiveSet.tsx";
-import * as $$6 from "./islands/organisms/cloud/iot/hot-flow-input.tsx";
-import * as $$7 from "./islands/organisms/data/explore-form.tsx";
-import * as $$8 from "./islands/organisms/iot/device-data-flowing.tsx";
-import * as $$9 from "./islands/organisms/iot/hub-device-connection.tsx";
-import * as $$10 from "./islands/organisms/iot/hub-key-connection.tsx";
-import * as $$11 from "./islands/organisms/iot/hub-key-simulator.tsx";
+import * as $_app from "./routes/_app.tsx";
+import * as $_middleware from "./routes/_middleware.tsx";
+import * as $api_data_middleware from "./routes/api/data/_middleware.ts";
+import * as $api_data_clouds_auth_token from "./routes/api/data/clouds/auth-token.ts";
+import * as $api_data_warm_explorer from "./routes/api/data/warm/explorer.ts";
+import * as $api_eac_clouds_index from "./routes/api/eac/clouds/index.ts";
+import * as $api_eac_clouds_iot_infrastructure from "./routes/api/eac/clouds/iot-infrastructure.ts";
+import * as $api_eac_clouds_resource_groups from "./routes/api/eac/clouds/resource-groups.ts";
+import * as $api_eac_connections from "./routes/api/eac/connections.ts";
+import * as $api_eac_data_explore from "./routes/api/eac/data/explore.ts";
+import * as $api_eac_data_flow from "./routes/api/eac/data/flow.ts";
+import * as $api_eac_github_user from "./routes/api/eac/github/user.ts";
+import * as $api_eac_index from "./routes/api/eac/index.ts";
+import * as $api_eac_iot_dashboards from "./routes/api/eac/iot/dashboards.ts";
+import * as $api_eac_iot_data_apis_jwt from "./routes/api/eac/iot/data-apis-jwt.ts";
+import * as $api_eac_iot_data_apis from "./routes/api/eac/iot/data-apis.ts";
+import * as $api_eac_iot_devices_ensure from "./routes/api/eac/iot/devices/ensure.ts";
+import * as $applications_index from "./routes/applications/index.tsx";
+import * as $cloud_middleware from "./routes/cloud/_middleware.tsx";
+import * as $cloud_index from "./routes/cloud/index.tsx";
+import * as $commit_commitId_status from "./routes/commit/[commitId]/status.tsx";
+import * as $data_index from "./routes/data/index.tsx";
+import * as $devices_index from "./routes/devices/index.tsx";
+import * as $enterprises from "./routes/enterprises.tsx";
+import * as $index from "./routes/index.tsx";
+import * as $atoms_InteractiveMenuIcon from "./islands/atoms/InteractiveMenuIcon.tsx";
+import * as $atoms_InteractiveSlideToggle from "./islands/atoms/InteractiveSlideToggle.tsx";
+import * as $atoms_Redirect from "./islands/atoms/Redirect.tsx";
+import * as $common_ProfileMenu from "./islands/common/ProfileMenu.tsx";
+import * as $molecules_CopyInput from "./islands/molecules/CopyInput.tsx";
+import * as $molecules_InteractiveResponsiveSet from "./islands/molecules/InteractiveResponsiveSet.tsx";
+import * as $organisms_cloud_iot_hot_flow_input from "./islands/organisms/cloud/iot/hot-flow-input.tsx";
+import * as $organisms_data_explore_form from "./islands/organisms/data/explore-form.tsx";
+import * as $organisms_iot_device_data_flowing from "./islands/organisms/iot/device-data-flowing.tsx";
+import * as $organisms_iot_hub_device_connection from "./islands/organisms/iot/hub-device-connection.tsx";
+import * as $organisms_iot_hub_key_connection from "./islands/organisms/iot/hub-key-connection.tsx";
+import * as $organisms_iot_hub_key_simulator from "./islands/organisms/iot/hub-key-simulator.tsx";
+import { type Manifest } from "$fresh/server.ts";
 
 const manifest = {
   routes: {
-    "./routes/_app.tsx": $0,
-    "./routes/_middleware.tsx": $1,
-    "./routes/api/data/_middleware.ts": $2,
-    "./routes/api/data/clouds/auth-token.ts": $3,
-    "./routes/api/data/warm/explorer.ts": $4,
-    "./routes/api/eac/clouds/index.ts": $5,
-    "./routes/api/eac/clouds/iot-infrastructure.ts": $6,
-    "./routes/api/eac/clouds/resource-groups.ts": $7,
-    "./routes/api/eac/connections.ts": $8,
-    "./routes/api/eac/data/explore.ts": $9,
-    "./routes/api/eac/data/flow.ts": $10,
-    "./routes/api/eac/github/user.ts": $11,
-    "./routes/api/eac/index.ts": $12,
-    "./routes/api/eac/iot/dashboards.ts": $13,
-    "./routes/api/eac/iot/data-apis-jwt.ts": $14,
-    "./routes/api/eac/iot/data-apis.ts": $15,
-    "./routes/api/eac/iot/devices/ensure.ts": $16,
-    "./routes/applications/index.tsx": $17,
-    "./routes/cloud/_middleware.tsx": $18,
-    "./routes/cloud/index.tsx": $19,
-    "./routes/commit/[commitId]/status.tsx": $20,
-    "./routes/data/index.tsx": $21,
-    "./routes/devices/index.tsx": $22,
-    "./routes/enterprises.tsx": $23,
-    "./routes/index.tsx": $24,
+    "./routes/_app.tsx": $_app,
+    "./routes/_middleware.tsx": $_middleware,
+    "./routes/api/data/_middleware.ts": $api_data_middleware,
+    "./routes/api/data/clouds/auth-token.ts": $api_data_clouds_auth_token,
+    "./routes/api/data/warm/explorer.ts": $api_data_warm_explorer,
+    "./routes/api/eac/clouds/index.ts": $api_eac_clouds_index,
+    "./routes/api/eac/clouds/iot-infrastructure.ts":
+      $api_eac_clouds_iot_infrastructure,
+    "./routes/api/eac/clouds/resource-groups.ts":
+      $api_eac_clouds_resource_groups,
+    "./routes/api/eac/connections.ts": $api_eac_connections,
+    "./routes/api/eac/data/explore.ts": $api_eac_data_explore,
+    "./routes/api/eac/data/flow.ts": $api_eac_data_flow,
+    "./routes/api/eac/github/user.ts": $api_eac_github_user,
+    "./routes/api/eac/index.ts": $api_eac_index,
+    "./routes/api/eac/iot/dashboards.ts": $api_eac_iot_dashboards,
+    "./routes/api/eac/iot/data-apis-jwt.ts": $api_eac_iot_data_apis_jwt,
+    "./routes/api/eac/iot/data-apis.ts": $api_eac_iot_data_apis,
+    "./routes/api/eac/iot/devices/ensure.ts": $api_eac_iot_devices_ensure,
+    "./routes/applications/index.tsx": $applications_index,
+    "./routes/cloud/_middleware.tsx": $cloud_middleware,
+    "./routes/cloud/index.tsx": $cloud_index,
+    "./routes/commit/[commitId]/status.tsx": $commit_commitId_status,
+    "./routes/data/index.tsx": $data_index,
+    "./routes/devices/index.tsx": $devices_index,
+    "./routes/enterprises.tsx": $enterprises,
+    "./routes/index.tsx": $index,
   },
   islands: {
-    "./islands/atoms/InteractiveMenuIcon.tsx": $$0,
-    "./islands/atoms/InteractiveSlideToggle.tsx": $$1,
-    "./islands/atoms/Redirect.tsx": $$2,
-    "./islands/common/ProfileMenu.tsx": $$3,
-    "./islands/molecules/CopyInput.tsx": $$4,
-    "./islands/molecules/InteractiveResponsiveSet.tsx": $$5,
-    "./islands/organisms/cloud/iot/hot-flow-input.tsx": $$6,
-    "./islands/organisms/data/explore-form.tsx": $$7,
-    "./islands/organisms/iot/device-data-flowing.tsx": $$8,
-    "./islands/organisms/iot/hub-device-connection.tsx": $$9,
-    "./islands/organisms/iot/hub-key-connection.tsx": $$10,
-    "./islands/organisms/iot/hub-key-simulator.tsx": $$11,
+    "./islands/atoms/InteractiveMenuIcon.tsx": $atoms_InteractiveMenuIcon,
+    "./islands/atoms/InteractiveSlideToggle.tsx": $atoms_InteractiveSlideToggle,
+    "./islands/atoms/Redirect.tsx": $atoms_Redirect,
+    "./islands/common/ProfileMenu.tsx": $common_ProfileMenu,
+    "./islands/molecules/CopyInput.tsx": $molecules_CopyInput,
+    "./islands/molecules/InteractiveResponsiveSet.tsx":
+      $molecules_InteractiveResponsiveSet,
+    "./islands/organisms/cloud/iot/hot-flow-input.tsx":
+      $organisms_cloud_iot_hot_flow_input,
+    "./islands/organisms/data/explore-form.tsx": $organisms_data_explore_form,
+    "./islands/organisms/iot/device-data-flowing.tsx":
+      $organisms_iot_device_data_flowing,
+    "./islands/organisms/iot/hub-device-connection.tsx":
+      $organisms_iot_hub_device_connection,
+    "./islands/organisms/iot/hub-key-connection.tsx":
+      $organisms_iot_hub_key_connection,
+    "./islands/organisms/iot/hub-key-simulator.tsx":
+      $organisms_iot_hub_key_simulator,
   },
   baseUrl: import.meta.url,
-};
+} satisfies Manifest;
 
 export default manifest;
