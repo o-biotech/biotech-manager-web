@@ -71,7 +71,7 @@ export function DataStepsFeatures(props: DataStepsFeaturesProps) {
   const smCurrentForm = <div class="flex md:hidden">{{ ...currentForm }}</div>;
 
   const mdCurrentForm = (
-    <div class="hidden md:(flex justify-center)">{{ ...currentForm }}</div>
+    <div class="hidden md:flex md:justify-center">{{ ...currentForm }}</div>
   );
 
   return (
