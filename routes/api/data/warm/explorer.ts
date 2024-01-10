@@ -6,10 +6,10 @@ import { OpenBiotechManagerAPIState } from "../../../../src/api/OpenBiotechManag
 import { loadEaCExplorerSvc } from "../../../../configs/eac.ts";
 
 export const handler: Handlers<any, OpenBiotechManagerAPIState> = {
-  async GET(EAC_API_BASE_URLreq, ctx) {
+  async GET(_req, ctx) {
     const entLookup = ctx.state.EnterpriseLookup;
 
-    const username = ctx.state.Username;
+    const _username = ctx.state.Username;
 
     const cloudLookup = ctx.state.CloudLookup;
 

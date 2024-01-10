@@ -4,7 +4,6 @@ import { redirectRequest, respond } from "@fathym/common";
 import {
   EaCStatusProcessingTypes,
   UserGitHubConnection,
-  waitForStatus,
   waitForStatusWithFreshJwt,
 } from "@fathym/eac";
 import { gitHubOAuth } from "../../../services/github.ts";
