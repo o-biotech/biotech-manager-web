@@ -5,9 +5,7 @@ import {
   EaCCloudAzureDetails,
   EaCCloudResourceAsCode,
   EaCCloudResourceFormatDetails,
-  EaCSourceAsCode,
   EaCStatusProcessingTypes,
-  waitForStatus,
 } from "@fathym/eac";
 import { OpenBiotechManagerState } from "../../../../src/OpenBiotechManagerState.tsx";
 import { OpenBiotechEaC } from "../../../../src/eac/OpenBiotechEaC.ts";
@@ -40,10 +38,6 @@ export const handler: Handlers<any, OpenBiotechManagerState> = {
 
     const iotResources: {
       [key: string]: EaCCloudResourceAsCode;
-    } = {};
-
-    const sources: {
-      [key: string]: EaCSourceAsCode;
     } = {};
 
     const details = ctx.state.EaC!.Clouds![cloudLookup]
