@@ -6,7 +6,7 @@ import { OpenBiotechEaC } from "../../../src/eac/OpenBiotechEaC.ts";
 import { loadEaCSvc } from "../../../configs/eac.ts";
 
 export const handler: Handlers<any, OpenBiotechManagerState> = {
-  async GET(req, ctx) {
+  async GET(_req, ctx) {
     const eacSvc = await loadEaCSvc(ctx.state.EaCJWT!);
 
     const eacConnections = await eacSvc.Connections<OpenBiotechEaC>(
