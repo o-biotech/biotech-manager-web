@@ -29,6 +29,9 @@ jobs:
           deno-version: v1.x.x
 
       - name: Deno Build
+        run: deno cache --reload dev.ts
+  
+      - name: Deno Build
         run: deno task build
 
       - name: Login to Azure Container Registry
