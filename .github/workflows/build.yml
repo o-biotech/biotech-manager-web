@@ -45,9 +45,9 @@ jobs:
         with:
           deno-version: v1.x.x
   
-      - name: Deno Build
-        run: deno task build |
-          deno run -A --unstable main.ts build
+      # - name: Deno Build
+      #   run: deno cache --reload dev.ts | 
+      #     deno task build
   
       - name: Build the Docker image
         uses: docker/build-push-action@v2

@@ -6,7 +6,8 @@ ENV SECURE_API_SECRET=${INPUT_SECURE_API_SECRET}
 WORKDIR /app
 
 COPY . .
-RUN deno cache main.ts
+RUN deno task build \
+    deno cache main.ts
 
 EXPOSE 8000
 
