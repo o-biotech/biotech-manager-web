@@ -110,6 +110,8 @@ export function DataExploreForm(props: DataExploreFormProps) {
     >
       <div class="flex flex-wrap -mx-3 mb-4 text-left">
         <div class="w-full p-3">
+          <Input id="explored" name="explored" type="hidden" value="true" />
+
           <label class="block uppercase tracking-wide font-bold mb-2 text-xl">
             Explore Data
           </label>

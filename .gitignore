@@ -7,6 +7,5 @@
 # build/
 denoKv/o-biotech-deno.*
 # Fresh build directory
-_fresh/
-
+# _fresh/
 node_modules/

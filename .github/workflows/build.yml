@@ -17,17 +17,17 @@ jobs:
       - name: Checkout the repository
         uses: actions/checkout@v2
         
+      # - name: 'Create env file'
+      #   run: |
+      #     touch .env
+      #     echo ${{ secrets.ENV_FILE }} >> .env
+      #     cat .env
+      
       - name: Deno Setup
         uses: denoland/setup-deno@v1
         with:
           deno-version: v1.x.x
 
-      - name: 'Create env file'
-        run: |
-          touch .env
-          echo ${{ secrets.ENV_FILE }} >> .env
-          cat .env
-      
       # - name: Deno Build
       #   run: deno task build
 

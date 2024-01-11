@@ -4,6 +4,7 @@ import { MiddlewareHandlerContext } from "$fresh/server.ts";
 import { redirectRequest, respond } from "@fathym/common";
 import {
   EaCSourceConnectionDetails,
+  loadJwtConfig,
   loadMainOctokit,
   UserGitHubConnection,
   waitForStatus,
@@ -15,7 +16,6 @@ import { CloudPhaseTypes } from "../src/CloudPhaseTypes.tsx";
 import { OpenBiotechEaC } from "../src/eac/OpenBiotechEaC.ts";
 import { denoKv } from "../configs/deno-kv.config.ts";
 import { DevicesPhaseTypes } from "../src/DevicesPhaseTypes.tsx";
-import { jwtConfig } from "../configs/jwt.config.ts";
 import { DataPhaseTypes } from "../src/DataPhaseTypes.tsx";
 import { gitHubOAuth } from "../services/github.ts";
 import { loadEaCSvc } from "../configs/eac.ts";
@@ -321,7 +321,7 @@ async function currentState(
                   }
                 }
               } else {
-                const jwt = await jwtConfig.Create({
+                const jwt = await loadJwtConfig().Create({
                   EnterpriseLookup: state.EaC!.EnterpriseLookup!,
                   CloudLookup: state.Cloud.CloudLookup!,
                   ResourceGroupLookup: state.Cloud.ResourceGroupLookup!,

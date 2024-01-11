@@ -121,7 +121,7 @@ export const handler: Handlers<DataPageData | null, OpenBiotechManagerState> = {
   },
 };
 
-export default function Devices({
+export default function Data({
   data,
 }: PageProps<DataPageData | null, OpenBiotechManagerState>) {
   return (
