@@ -54,7 +54,7 @@ export const handler: Handlers<any, OpenBiotechManagerState> = {
 
     const createResp = await parentEaCSvc.Create<OpenBiotechEaC>(
       newEaC,
-      username,
+      ctx.state.Username,
       60,
     );
 
