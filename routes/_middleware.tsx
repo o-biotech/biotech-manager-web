@@ -135,9 +135,9 @@ async function currentEaC(
     "EaC",
   ]);
 
-  if (currentEaC.value) {
-    const parentEaCSvc = await loadEaCSvc();
+  const parentEaCSvc = await loadEaCSvc();
 
+  if (currentEaC.value) {
     const jwtResp = await parentEaCSvc.JWT(
       currentEaC.value,
       ctx.state.Username,
