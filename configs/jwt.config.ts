@@ -4,8 +4,6 @@ import { JWTConfig } from "@fathym/eac";
 
 const jwkEnv = Deno.env.get("SECURE_API_SECRET")!;
 
-console.log(jwkEnv);
-
 const jwkDecode = new TextDecoder().decode(
   decodeBase64(jwkEnv),
 );
