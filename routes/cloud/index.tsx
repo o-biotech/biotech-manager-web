@@ -80,6 +80,12 @@ export const handler: Handlers<CloudPageData | null, OpenBiotechManagerState> =
             svcDef,
           );
 
+          await eacAzureSvc.CloudEnsureProviders(
+            ctx.state.EaC!.EnterpriseLookup!,
+            data.cloudLookup!,
+            svcDef,
+          );
+
           data.locations = locationsResp.Locations;
         });
       }
