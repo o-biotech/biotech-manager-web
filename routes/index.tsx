@@ -68,7 +68,7 @@ export default function Home({
 
       {initialSteps}
 
-      {state.Phase > 1 ? <BiotechDashboard /> : <></>}
+      {/* {state.Phase > 1 ? <BiotechDashboard /> : <></>} */}
     </>
   );
 }
