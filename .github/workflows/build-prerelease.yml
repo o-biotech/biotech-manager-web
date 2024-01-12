@@ -28,9 +28,9 @@ jobs:
         with:
           deno-version: v1.x.x
 
-      - name: Deno Build
-        run: deno cache --reload dev.ts | 
-          deno task build
+      # - name: Deno Build
+      #   run: deno cache --reload dev.ts | 
+      #     deno task build
 
       - name: Login to Azure Container Registry
         uses: azure/docker-login@v1
