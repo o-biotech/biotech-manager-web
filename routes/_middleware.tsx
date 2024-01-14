@@ -17,7 +17,7 @@ import { OpenBiotechEaC } from "../src/eac/OpenBiotechEaC.ts";
 import { denoKv } from "../configs/deno-kv.config.ts";
 import { DevicesPhaseTypes } from "../src/DevicesPhaseTypes.tsx";
 import { DataPhaseTypes } from "../src/DataPhaseTypes.tsx";
-import { gitHubOAuth } from "../services/github.ts";
+import { azureOBiotechOAuth } from "../configs/oAuth.config.ts";
 import { loadEaCSvc } from "../configs/eac.ts";
 
 async function loggedInCheck(
@@ -38,28 +38,19 @@ async function loggedInCheck(
 
   switch (pathname) {
     case "/signin": {
-      return await gitHubOAuth.signIn(req);
+      return await azureOBiotechOAuth.signIn(req);
     }
 
     case "/signin/callback": {
       try {
-        const { response, tokens, sessionId } = await gitHubOAuth
+        const { response, tokens, sessionId } = await azureOBiotechOAuth
           .handleCallback(req);
 
         const { accessToken, refreshToken } = tokens;
 
-        const octokit = await loadMainOctokit({
-          Token: accessToken,
-        } as EaCSourceConnectionDetails);
+        const [header, payload, signature] = await decode(accessToken);
 
-        const {
-          data: { login },
-        } = await octokit.rest.users.getAuthenticated();
-
-        const { data } = await octokit.rest.users
-          .listEmailsForAuthenticatedUser();
-
-        const primaryEmail = data.find((e) => e.primary);
+        const primaryEmail = (payload as Record<string, string>).emails[0];
 
         const oldSessionId = await gitHubOAuth.getSessionId(req);
 
@@ -88,11 +79,11 @@ async function loggedInCheck(
     }
 
     case "/signout": {
-      return await gitHubOAuth.signOut(req);
+      return await azureOBiotechOAuth.signOut(req);
     }
 
     default: {
-      const sessionId = await gitHubOAuth.getSessionId(req);
+      const sessionId = await azureOBiotechOAuth.getSessionId(req);
 
       if (sessionId === undefined) {
         return redirectRequest(`/signin?success_url=${pathname}`);
