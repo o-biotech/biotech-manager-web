@@ -2,6 +2,7 @@
 // This file SHOULD be checked into source version control.
 // This file is automatically updated during development when running `dev.ts`.
 
+import * as $Github_oauth_middleware from "./routes/Github/oauth/_middleware.ts";
 import * as $_app from "./routes/_app.tsx";
 import * as $_middleware from "./routes/_middleware.tsx";
 import * as $api_data_middleware from "./routes/api/data/_middleware.ts";
@@ -43,6 +44,7 @@ import { type Manifest } from "$fresh/server.ts";
 
 const manifest = {
   routes: {
+    "./routes/Github/oauth/_middleware.ts": $Github_oauth_middleware,
     "./routes/_app.tsx": $_app,
     "./routes/_middleware.tsx": $_middleware,
     "./routes/api/data/_middleware.ts": $api_data_middleware,

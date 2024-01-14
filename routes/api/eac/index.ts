@@ -6,7 +6,7 @@ import {
   UserGitHubConnection,
   waitForStatusWithFreshJwt,
 } from "@fathym/eac";
-import { gitHubOAuth } from "../../../services/github.ts";
+import { azureOBiotechOAuth } from "../../../configs/oAuth.config.ts";
 import { OpenBiotechEaC } from "../../../src/eac/OpenBiotechEaC.ts";
 import { OpenBiotechManagerState } from "../../../src/OpenBiotechManagerState.tsx";
 import { denoKv } from "../../../configs/deno-kv.config.ts";
@@ -20,7 +20,7 @@ export const handler: Handlers<any, OpenBiotechManagerState> = {
   async POST(req, ctx) {
     const formData = await req.formData();
 
-    const sessionId = await gitHubOAuth.getSessionId(req);
+    const sessionId = await azureOBiotechOAuth.getSessionId(req);
 
     const currentConn = await denoKv.get<UserGitHubConnection>([
       "User",
