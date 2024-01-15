@@ -1,10 +1,12 @@
 import { createAzureOAuth, createGitHubOAuth } from "@fathym/eac";
 
+const baseUrl = Deno.env.get("BASE_URL")!;
+
 export const gitHubOAuth = createGitHubOAuth(["admin:org", "user:email"]);
 
 export const azureOBiotechOAuth = createAzureOAuth(
   "AZURE_O_BIOTECH",
-  "http://localhost:8000/signin/callback",
+  `${baseUrl}/signin/callback`,
   [
     "openid",
   ],
@@ -12,7 +14,7 @@ export const azureOBiotechOAuth = createAzureOAuth(
 
 export const azureOAuth = createAzureOAuth(
   "MSAL",
-  "http://localhost:8000/signin/callback",
+  `${baseUrl}/signin/callback`,
   [
     "https://management.core.windows.net//.default",
   ],

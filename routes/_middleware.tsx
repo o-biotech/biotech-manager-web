@@ -1,4 +1,4 @@
-import { getCookies, setCookie } from "$std/http/cookie.ts";
+import { decode } from "@djwt";
 import { cookieSession, redisSession } from "$fresh/session";
 import { MiddlewareHandlerContext } from "$fresh/server.ts";
 import { redirectRequest, respond } from "@fathym/common";
@@ -6,7 +6,8 @@ import {
   EaCSourceConnectionDetails,
   loadJwtConfig,
   loadMainOctokit,
-  UserGitHubConnection,
+  UserOAuthConnection,
+  userOAuthConnExpired,
   waitForStatus,
 } from "@fathym/eac";
 import { connect } from "redis";
@@ -42,40 +43,31 @@ async function loggedInCheck(
     }
 
     case "/signin/callback": {
-      try {
-        const { response, tokens, sessionId } = await azureOBiotechOAuth
-          .handleCallback(req);
+      const now = Date.now();
 
-        const { accessToken, refreshToken } = tokens;
+      const { response, tokens, sessionId } = await azureOBiotechOAuth
+        .handleCallback(req);
 
-        const [header, payload, signature] = await decode(accessToken);
+      const { accessToken, refreshToken, expiresIn } = tokens;
 
-        const primaryEmail = (payload as Record<string, string>).emails[0];
+      const [header, payload, signature] = await decode(accessToken);
 
-        const oldSessionId = await gitHubOAuth.getSessionId(req);
+      const primaryEmail = (payload as Record<string, string>).emails[0];
 
-        if (oldSessionId) {
-          await denoKv.delete(["User", "Session", oldSessionId!, "Username"]);
-        }
+      await denoKv.set(
+        ["User", "Current", "Username"],
+        {
+          Username: primaryEmail!,
+          ExpiresAt: now + (expiresIn! * 1000),
+          Token: accessToken,
+          RefreshToken: refreshToken,
+        } as UserOAuthConnection,
+        {
+          expireIn: expiresIn! * 1000,
+        },
+      );
 
-        await denoKv.set(
-          ["User", "Session", sessionId!, "Username"],
-          primaryEmail!.email,
-        );
-
-        await denoKv.set(
-          ["User", "Session", sessionId!, "GitHub", "GitHubConnection"],
-          {
-            RefreshToken: refreshToken,
-            Token: accessToken,
-            Username: login,
-          } as UserGitHubConnection,
-        );
-
-        return response;
-      } catch (err) {
-        return respond({ err });
-      }
+      return response;
     }
 
     case "/signout": {
@@ -83,26 +75,21 @@ async function loggedInCheck(
     }
 
     default: {
-      const sessionId = await azureOBiotechOAuth.getSessionId(req);
+      const currentUsername = await denoKv.get<UserOAuthConnection>([
+        "User",
+        "Current",
+        "Username",
+      ]);
 
-      if (sessionId === undefined) {
-        return redirectRequest(`/signin?success_url=${pathname}`);
+      if (!userOAuthConnExpired(currentUsername.value)) {
+        ctx.state.Username = currentUsername.value!.Username;
       } else {
-        const currentUsername = await denoKv.get<string>([
-          "User",
-          "Session",
-          sessionId,
-          "Username",
-        ]);
+        const successUrl = encodeURI(pathname + search);
 
-        if (currentUsername.value) {
-          ctx.state.Username = currentUsername.value!;
-        } else {
-          return redirectRequest(`/signin?success_url=${pathname}`);
-        }
-
-        return ctx.next();
+        return redirectRequest(`/signin?success_url=${successUrl}`);
       }
+
+      return ctx.next();
     }
   }
 }
@@ -142,53 +129,6 @@ async function currentEaC(
 
     if (eac?.EnterpriseLookup) {
       ctx.state.EaC = eac;
-
-      const sessionId = await gitHubOAuth.getSessionId(req);
-
-      const currentConn = await denoKv.get<UserGitHubConnection>([
-        "User",
-        "Session",
-        sessionId!,
-        "GitHub",
-        "GitHubConnection",
-      ]);
-
-      const srcConnLookup = `GITHUB://${currentConn.value!.Username}`;
-
-      if (currentConn.value!) {
-        const url = new URL(req.url);
-
-        if (
-          url.pathname == "/" &&
-          ctx.state.EaC?.SourceConnections &&
-          ctx.state.EaC.SourceConnections[srcConnLookup] &&
-          ctx.state.EaC.SourceConnections[srcConnLookup].Details!.Token !==
-            currentConn.value.Token
-        ) {
-          const commitResp = await eacSvc.Commit(
-            {
-              EnterpriseLookup: ctx.state.EaC.EnterpriseLookup,
-              SourceConnections: {
-                [srcConnLookup]: {
-                  Details: {
-                    ...ctx.state.EaC.SourceConnections[srcConnLookup].Details!,
-                    Token: currentConn.value.Token,
-                  },
-                },
-              },
-            },
-            5,
-          );
-
-          await waitForStatus(
-            eacSvc,
-            commitResp.EnterpriseLookup,
-            commitResp.CommitID,
-          );
-
-          ctx.state.EaC = await eacSvc.Get(currentEaC.value!);
-        }
-      }
 
       ctx.state.UserEaCs = await eacSvc.ListForUser();
     }
@@ -330,19 +270,18 @@ async function currentState(
     }
   }
 
-  const sessionId = await gitHubOAuth.getSessionId(req);
+  const sessionId = await azureOBiotechOAuth.getSessionId(req);
 
-  const currentConn = await denoKv.get<UserGitHubConnection>([
+  const currentConn = await denoKv.get<UserOAuthConnection>([
     "User",
-    "Session",
-    sessionId!,
+    "Current",
     "GitHub",
     "GitHubConnection",
   ]);
 
-  if (currentConn.value!) {
+  if (!userOAuthConnExpired(currentConn.value)) {
     state.GitHub = {
-      Username: currentConn.value.Username,
+      Username: currentConn.value!.Username,
     };
   }
 
