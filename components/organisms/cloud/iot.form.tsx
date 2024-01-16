@@ -7,6 +7,8 @@ import { HotFlowInput } from "../../../islands/organisms/cloud/iot/hot-flow-inpu
 export type CloudIoTFormProps = JSX.HTMLAttributes<HTMLFormElement> & {
   cloudLookup: string;
 
+  hasGitHubAuth: boolean;
+
   organizations?: string[];
 
   resGroupLookup: string;
@@ -90,6 +92,7 @@ export default function CloudIoTForm(props: CloudIoTFormProps) {
               id="storageFlowHot"
               name="storageFlowHot"
               value="hot"
+              hasGitHubAuth={props.hasGitHubAuth}
               organizations={props.organizations}
               class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
             >

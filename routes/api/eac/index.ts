@@ -3,10 +3,8 @@ import { Handlers } from "$fresh/server.ts";
 import { redirectRequest, respond } from "@fathym/common";
 import {
   EaCStatusProcessingTypes,
-  UserGitHubConnection,
   waitForStatusWithFreshJwt,
 } from "@fathym/eac";
-import { azureOBiotechOAuth } from "../../../configs/oAuth.config.ts";
 import { OpenBiotechEaC } from "../../../src/eac/OpenBiotechEaC.ts";
 import { OpenBiotechManagerState } from "../../../src/OpenBiotechManagerState.tsx";
 import { denoKv } from "../../../configs/deno-kv.config.ts";
@@ -20,33 +18,10 @@ export const handler: Handlers<any, OpenBiotechManagerState> = {
   async POST(req, ctx) {
     const formData = await req.formData();
 
-    const sessionId = await azureOBiotechOAuth.getSessionId(req);
-
-    const currentConn = await denoKv.get<UserGitHubConnection>([
-      "User",
-      "Session",
-      sessionId!,
-      "GitHub",
-      "GitHubConnection",
-    ]);
-
     const newEaC: OpenBiotechEaC = {
       Details: {
         Name: formData.get("name") as string,
         Description: formData.get("description") as string,
-      },
-      SourceConnections: {
-        [`GITHUB://${currentConn.value!.Username}`]: {
-          Details: {
-            Name: `${currentConn.value!.Username} GitHub Connection`,
-            Description: `The GitHub connection to use for user ${
-              currentConn.value!.Username
-            }.`,
-            RefreshToken: currentConn.value?.RefreshToken!,
-            Token: currentConn.value?.Token!,
-          },
-          GitHubAppLookup: Deno.env.get("GITHUB_APP_ID"),
-        },
       },
     };
 

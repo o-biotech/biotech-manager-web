@@ -14,6 +14,8 @@ export type CloudStepsFeaturesProps = StepsFeaturesProps & {
 
   cloudPhase: CloudPhaseTypes;
 
+  hasGitHubAuth: boolean;
+
   locations: ArmSubscriptions.Location[];
 
   organizations?: string[];
@@ -46,6 +48,7 @@ export default function CloudStepsFeatures(props: CloudStepsFeaturesProps) {
         <CloudIoTForm
           class="px-4"
           cloudLookup={props.cloudLookup!}
+          hasGitHubAuth={props.hasGitHubAuth}
           organizations={props.organizations}
           resGroupLookup={props.resGroupLookup!}
         />

@@ -33,6 +33,7 @@ import * as $atoms_InteractiveSlideToggle from "./islands/atoms/InteractiveSlide
 import * as $atoms_Redirect from "./islands/atoms/Redirect.tsx";
 import * as $common_ProfileMenu from "./islands/common/ProfileMenu.tsx";
 import * as $molecules_CopyInput from "./islands/molecules/CopyInput.tsx";
+import * as $molecules_GitHubAccessAction from "./islands/molecules/GitHubAccessAction.tsx";
 import * as $molecules_InteractiveResponsiveSet from "./islands/molecules/InteractiveResponsiveSet.tsx";
 import * as $organisms_cloud_iot_hot_flow_input from "./islands/organisms/cloud/iot/hot-flow-input.tsx";
 import * as $organisms_data_explore_form from "./islands/organisms/data/explore-form.tsx";
@@ -79,6 +80,7 @@ const manifest = {
     "./islands/atoms/Redirect.tsx": $atoms_Redirect,
     "./islands/common/ProfileMenu.tsx": $common_ProfileMenu,
     "./islands/molecules/CopyInput.tsx": $molecules_CopyInput,
+    "./islands/molecules/GitHubAccessAction.tsx": $molecules_GitHubAccessAction,
     "./islands/molecules/InteractiveResponsiveSet.tsx":
       $molecules_InteractiveResponsiveSet,
     "./islands/organisms/cloud/iot/hot-flow-input.tsx":

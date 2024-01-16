@@ -15,6 +15,8 @@ interface CloudPageData {
 
   cloudPhase: CloudPhaseTypes;
 
+  hasGitHubAuth: boolean;
+
   isConnected: boolean;
 
   locations: Location[];
@@ -36,6 +38,7 @@ export const handler: Handlers<CloudPageData | null, OpenBiotechManagerState> =
       const data: CloudPageData = {
         cloudLookup: ctx.state.Cloud.CloudLookup,
         cloudPhase: ctx.state.Cloud.Phase,
+        hasGitHubAuth: !!ctx.state.GitHub,
         isConnected: ctx.state.Cloud.IsConnected,
         resGroupLookup: ctx.state.Cloud.ResourceGroupLookup,
         locations: [],
@@ -90,22 +93,26 @@ export const handler: Handlers<CloudPageData | null, OpenBiotechManagerState> =
         });
       }
 
-      svcCalls.push(async () => {
-        const sourceKey = `GITHUB://${ctx.state.GitHub!.Username}`;
+      if (ctx.state.GitHub) {
+        svcCalls.push(async () => {
+          const sourceKey = `GITHUB://${ctx.state.GitHub!.Username}`;
 
-        const eacSvc = await loadEaCSvc(ctx.state.EaCJWT!);
+          const eacSvc = await loadEaCSvc(ctx.state.EaCJWT!);
 
-        const eacConnections = await eacSvc.Connections<OpenBiotechEaC>({
-          EnterpriseLookup: ctx.state.EaC!.EnterpriseLookup!,
-          SourceConnections: {
-            [sourceKey]: {},
-          },
+          const eacConnections = await eacSvc.Connections<OpenBiotechEaC>({
+            EnterpriseLookup: ctx.state.EaC!.EnterpriseLookup!,
+            SourceConnections: {
+              [sourceKey]: {},
+            },
+          });
+
+          if (eacConnections.SourceConnections) {
+            data.organizations = Object.keys(
+              eacConnections.SourceConnections[sourceKey].Organizations || {},
+            );
+          }
         });
-
-        data.organizations = Object.keys(
-          eacConnections.SourceConnections![sourceKey].Organizations || {},
-        );
-      });
+      }
 
       await await Promise.all(
         svcCalls.map(async (sc) => {
@@ -128,6 +135,7 @@ export default function Cloud({
         cloudLookup={data!.cloudLookup}
         cloudPhase={data!.cloudPhase}
         locations={data!.locations}
+        hasGitHubAuth={data!.hasGitHubAuth}
         organizations={data!.organizations}
         resGroupLookup={data!.resGroupLookup}
         subs={data!.subs}
