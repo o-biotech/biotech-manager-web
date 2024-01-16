@@ -285,23 +285,23 @@ async function currentState(
     }
   }
 
-  const sessionId = await azureOBiotechOAuth.getSessionId(req);
+  if (ctx.state.Username) {
+    const currentConn = await denoKv.get<UserOAuthConnection>([
+      "User",
+      ctx.state.Username!,
+      "Current",
+      "GitHub",
+      "GitHubConnection",
+    ]);
 
-  const currentConn = await denoKv.get<UserOAuthConnection>([
-    "User",
-    ctx.state.Username!,
-    "Current",
-    "GitHub",
-    "GitHubConnection",
-  ]);
-
-  if (
-    !userOAuthConnExpired(currentConn.value) &&
-    state.EaC!.SourceConnections![`GITHUB://${currentConn.value?.Username}`]
-  ) {
-    state.GitHub = {
-      Username: currentConn.value!.Username,
-    };
+    if (
+      !userOAuthConnExpired(currentConn.value) &&
+      state.EaC!.SourceConnections![`GITHUB://${currentConn.value?.Username}`]
+    ) {
+      state.GitHub = {
+        Username: currentConn.value!.Username,
+      };
+    }
   }
 
   ctx.state = state;
