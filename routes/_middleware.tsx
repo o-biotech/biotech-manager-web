@@ -70,12 +70,7 @@ async function loggedInCheck(
       );
 
       if (oldSessionId) {
-        await denoKv.delete([
-          "User",
-          oldSessionId,
-          "Current",
-          "Username",
-        ]);
+        await denoKv.delete(["User", oldSessionId, "Current", "Username"]);
       }
 
       return response;
@@ -294,12 +289,16 @@ async function currentState(
 
   const currentConn = await denoKv.get<UserOAuthConnection>([
     "User",
+    ctx.state.Username!,
     "Current",
     "GitHub",
     "GitHubConnection",
   ]);
 
-  if (!userOAuthConnExpired(currentConn.value)) {
+  if (
+    !userOAuthConnExpired(currentConn.value) &&
+    state.EaC!.SourceConnections![`GITHUB://${currentConn.value?.Username}`]
+  ) {
     state.GitHub = {
       Username: currentConn.value!.Username,
     };
