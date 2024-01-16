@@ -7,7 +7,7 @@
     "build:lint": "deno lint",
     "build:tailwind": "deno run -A --unstable tailwind.config.ts build",
     "check": "deno fmt --check && deno lint && deno check **/*.ts && deno check **/*.tsx",
-    "deploy": "deno task build && ftm git && npx rimraf _fresh",
+    "deploy": "deno task build && ftm git",
     "start": "deno run -A --unstable --watch=static/,routes/,configs/,services/,src/ dev.ts",
     "s_tart:relay": "smee -u https://smee.io/rWQwLhS8sehg9L2 -t http://127.0.0.1:8000/",
     "start:relay": "ngrok http 8000",
