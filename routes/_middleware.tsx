@@ -45,6 +45,8 @@ async function loggedInCheck(
     case "/signin/callback": {
       const now = Date.now();
 
+      const oldSessionId = await azureOBiotechOAuth.getSessionId(req);
+
       const { response, tokens, sessionId } = await azureOBiotechOAuth
         .handleCallback(req);
 
@@ -55,10 +57,10 @@ async function loggedInCheck(
       const primaryEmail = (payload as Record<string, string>).emails[0];
 
       await denoKv.set(
-        ["User", "Current", "Username"],
+        ["User", sessionId, "Current", "Username"],
         {
           Username: primaryEmail!,
-          ExpiresAt: now + (expiresIn! * 1000),
+          ExpiresAt: now + expiresIn! * 1000,
           Token: accessToken,
           RefreshToken: refreshToken,
         } as UserOAuthConnection,
@@ -66,6 +68,15 @@ async function loggedInCheck(
           expireIn: expiresIn! * 1000,
         },
       );
+
+      if (oldSessionId) {
+        await denoKv.delete([
+          "User",
+          oldSessionId,
+          "Current",
+          "Username",
+        ]);
+      }
 
       return response;
     }
@@ -75,18 +86,27 @@ async function loggedInCheck(
     }
 
     default: {
-      const currentUsername = await denoKv.get<UserOAuthConnection>([
-        "User",
-        "Current",
-        "Username",
-      ]);
+      const sessionId = await azureOBiotechOAuth.getSessionId(req);
 
-      if (!userOAuthConnExpired(currentUsername.value)) {
-        ctx.state.Username = currentUsername.value!.Username;
+      const successUrl = encodeURI(pathname + search);
+
+      const notSignedInRedirect = `/signin?success_url=${successUrl}`;
+
+      if (sessionId) {
+        const currentUsername = await denoKv.get<UserOAuthConnection>([
+          "User",
+          sessionId,
+          "Current",
+          "Username",
+        ]);
+
+        if (!userOAuthConnExpired(currentUsername.value)) {
+          ctx.state.Username = currentUsername.value!.Username;
+        } else {
+          return redirectRequest(notSignedInRedirect);
+        }
       } else {
-        const successUrl = encodeURI(pathname + search);
-
-        return redirectRequest(`/signin?success_url=${successUrl}`);
+        return redirectRequest(notSignedInRedirect);
       }
 
       return ctx.next();
