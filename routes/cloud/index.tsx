@@ -93,23 +93,25 @@ export const handler: Handlers<CloudPageData | null, OpenBiotechManagerState> =
         });
       }
 
-      if (ctx.state.GitHub) {
+      if (ctx.state.GitHub && ctx.state.EaC!.SourceConnections) {
         svcCalls.push(async () => {
           const sourceKey = `GITHUB://${ctx.state.GitHub!.Username}`;
 
-          const eacSvc = await loadEaCSvc(ctx.state.EaCJWT!);
+          if (ctx.state.EaC!.SourceConnections![sourceKey]) {
+            const eacSvc = await loadEaCSvc(ctx.state.EaCJWT!);
 
-          const eacConnections = await eacSvc.Connections<OpenBiotechEaC>({
-            EnterpriseLookup: ctx.state.EaC!.EnterpriseLookup!,
-            SourceConnections: {
-              [sourceKey]: {},
-            },
-          });
+            const eacConnections = await eacSvc.Connections<OpenBiotechEaC>({
+              EnterpriseLookup: ctx.state.EaC!.EnterpriseLookup!,
+              SourceConnections: {
+                [sourceKey]: {},
+              },
+            });
 
-          if (eacConnections.SourceConnections) {
-            data.organizations = Object.keys(
-              eacConnections.SourceConnections[sourceKey].Organizations || {},
-            );
+            if (eacConnections.SourceConnections) {
+              data.organizations = Object.keys(
+                eacConnections.SourceConnections[sourceKey].Organizations || {},
+              );
+            }
           }
         });
       }
