@@ -2,7 +2,6 @@
 // This file SHOULD be checked into source version control.
 // This file is automatically updated during development when running `dev.ts`.
 
-import * as $Github_oauth_middleware from "./routes/Github/oauth/_middleware.ts";
 import * as $_app from "./routes/_app.tsx";
 import * as $_middleware from "./routes/_middleware.tsx";
 import * as $api_data_middleware from "./routes/api/data/_middleware.ts";
@@ -24,6 +23,7 @@ import * as $applications_index from "./routes/applications/index.tsx";
 import * as $cloud_middleware from "./routes/cloud/_middleware.tsx";
 import * as $cloud_index from "./routes/cloud/index.tsx";
 import * as $commit_commitId_status from "./routes/commit/[commitId]/status.tsx";
+import * as $dashboard_index from "./routes/dashboard/index.ts";
 import * as $data_index from "./routes/data/index.tsx";
 import * as $devices_index from "./routes/devices/index.tsx";
 import * as $enterprises from "./routes/enterprises.tsx";
@@ -45,7 +45,6 @@ import { type Manifest } from "$fresh/server.ts";
 
 const manifest = {
   routes: {
-    "./routes/Github/oauth/_middleware.ts": $Github_oauth_middleware,
     "./routes/_app.tsx": $_app,
     "./routes/_middleware.tsx": $_middleware,
     "./routes/api/data/_middleware.ts": $api_data_middleware,
@@ -69,6 +68,7 @@ const manifest = {
     "./routes/cloud/_middleware.tsx": $cloud_middleware,
     "./routes/cloud/index.tsx": $cloud_index,
     "./routes/commit/[commitId]/status.tsx": $commit_commitId_status,
+    "./routes/dashboard/index.ts": $dashboard_index,
     "./routes/data/index.tsx": $data_index,
     "./routes/devices/index.tsx": $devices_index,
     "./routes/enterprises.tsx": $enterprises,

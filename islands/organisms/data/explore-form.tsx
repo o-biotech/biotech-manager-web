@@ -144,6 +144,17 @@ export function DataExploreForm(props: DataExploreFormProps) {
             }
           </ul>
 
+          <p>
+            If you receive an error about failure to read 'localStorage' visit
+            {" "}
+            <Action
+              href="https://www.chromium.org/for-testers/bug-reporting-guidelines/uncaught-securityerror-failed-to-read-the-localstorage-property-from-window-access-is-denied-for-this-document/#:~:text=This%20exception%20is%20thrown%20when,the%20fourth%20item%20under%20Cookies."
+              target="_blank"
+            >
+              this
+            </Action>{" "}
+            page to fix.
+          </p>
           {kustoIframe}
         </div>
       </div>
