@@ -62,7 +62,7 @@ export function DevicesStepsFeatures(props: DevicesStepsFeaturesProps) {
         {
           title: "Connect a Device",
           description:
-            "Bring your own device or select from a curated list of BioTech devices for your specific needs.",
+            "Bring your own device or select from a curated list of Biotech devices for your specific needs.",
           children: smCurrentForm,
         },
         {

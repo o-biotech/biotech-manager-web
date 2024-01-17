@@ -22,7 +22,7 @@ export type BiotechHeaderProps = HeaderProps & {
 
 export function BiotechHeader(props: BiotechHeaderProps) {
   const logo = {
-    LogoAlt: "Fathym Open BioTech",
+    LogoAlt: "Fathym Open Biotech",
     LogoUrl: "/o-biotech-logo.svg",
     LogoHref: "/",
   };
