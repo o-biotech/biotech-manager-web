@@ -90,7 +90,7 @@ export default function CloudIoTForm(props: CloudIoTFormProps) {
             />
 
             <label for="storageFlowWarm" class="ms-2 text-sm font-medium pl-3">
-              Warm Storage
+              Warm Storage (required)
             </label>
           </div>
 

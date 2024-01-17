@@ -36,14 +36,22 @@ export default function DevicesDashboardForm(props: DevicesDashboardFormProps) {
 
           <div class="flex items-center mb-2">
             <Input
-              id="dataExplorer"
-              name="dataExplorer"
               type="checkbox"
+              checked
+              disabled
               value="dataExplorer"
               class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
             />
+
+            <Input
+              type="hidden"
+              id="dataExplorer"
+              name="dataExplorer"
+              value="dataExplorer"
+            />
+
             <label for="dataExplorer" class="ms-2 text-sm font-medium pl-3">
-              Azure Data Explorer
+              Azure Data Explorer (required)
             </label>
           </div>
 
