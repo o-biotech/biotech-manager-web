@@ -296,7 +296,8 @@ async function currentState(
 
     if (
       !userOAuthConnExpired(currentConn.value) &&
-      state.EaC!.SourceConnections![`GITHUB://${currentConn.value?.Username}`]
+      state.EaC?.SourceConnections &&
+      state.EaC?.SourceConnections![`GITHUB://${currentConn.value?.Username}`]
     ) {
       state.GitHub = {
         Username: currentConn.value!.Username,

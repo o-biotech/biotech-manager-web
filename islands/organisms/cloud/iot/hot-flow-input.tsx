@@ -1,7 +1,7 @@
 import { ComponentChildren, JSX } from "preact";
 import { useRef, useState } from "preact/hooks";
 import { IS_BROWSER } from "$fresh/runtime.ts";
-import { classSet, Input } from "@fathym/atomic";
+import { Action, ActionStyleTypes, classSet, Input } from "@fathym/atomic";
 import { RenewIcon } from "$fathym/atomic-icons";
 import { GitHubAccessAction } from "../../../molecules/GitHubAccessAction.tsx";
 
@@ -45,6 +45,19 @@ export function HotFlowInput(props: HotFlowInputProps) {
               return <option value={org}>{org}</option>;
             })}
           </select>
+
+          <p>
+            Don't see the organization your looking for? Add organizations by
+            installing the{" "}
+            <Action
+              actionStyle={ActionStyleTypes.Link | ActionStyleTypes.Rounded}
+              class="inline-block text-blue-500 hover:text-white py-0 px-1"
+              href="https://github.com/apps/open-biotech-web-manager"
+              target="_blank"
+            >
+              OpenBiotech App
+            </Action>
+          </p>
         </div>
 
         <div class="w-full">
