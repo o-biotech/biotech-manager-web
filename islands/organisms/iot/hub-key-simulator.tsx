@@ -39,7 +39,11 @@ export function IoTHubKeySimulatorDisplay(
   const devices = selectedDevices;
 
   const simCmd = selectedKey
-    ? `docker run -it -e "IotHubConnectionString=${connStr}" -e Template="{ \\\"deviceId\\\": \\\"$.DeviceId\\\", \\\"rand_int\\\": $.Temp, \\\"rand_double\\\": 10, \\\"Ticks\\\": $.Ticks, \\\"Counter\\\": $.Counter, \\\"time\\\": \\\"$.Time\\\" }" -e Variables="[{name: \\\"Temp\\\", \\\"random\\\": true, \\\"max\\\": 25, \\\"min\\\": 23}, {\\\"name\\\":\\\"Counter\\\", \\\"min\\\":100, \\\"max\\\":102} ]" -e DeviceList="${
+    // ? `docker run -it -e "IotHubConnectionString=${connStr}" -e Template="{ \\\"deviceId\\\": \\\"$.DeviceId\\\", \\\"rand_int\\\": $.Temp, \\\"rand_double\\\": 10, \\\"Ticks\\\": $.Ticks, \\\"Counter\\\": $.Counter, \\\"time\\\": \\\"$.Time\\\" }" -e Variables="[{name: \\\"Temp\\\", \\\"random\\\": true, \\\"max\\\": 25, \\\"min\\\": 23}, {\\\"name\\\":\\\"Counter\\\", \\\"min\\\":100, \\\"max\\\":102} ]" -e DeviceList="${
+    //   devices.join(
+    //     ",",
+    //   )
+    ? `docker run -it -e "IotHubConnectionString=${connStr}" -e DeviceList="${
       devices.join(
         ",",
       )
