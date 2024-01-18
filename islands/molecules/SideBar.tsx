@@ -115,13 +115,13 @@ export default function SideBar(props: SideBarProps) {
         class="flex-1 pt-12 overflow-auto transition-opacity delay-150 duration-300 ease-out-in px-1 h-screen text-sm data-[closedstate='false']:block data-[closedstate='true']:hidden data-[closedstate='false']:opacity-100 data-[closedstate='true']:opacity-0"
       >
         <div class="mx-2 uppercase text-md">
-          {currentMenuSettings.Title || currentMenu}
+          {currentMenuSettings?.Title || currentMenu}
         </div>
 
         <div class="mx-2 border-b-[1px] border-dotted border-slate-400 dark:border-slate-700">
         </div>
 
-        <div class="mx-2">{currentMenuSettings.Display}</div>
+        <div class="mx-2">{currentMenuSettings?.Display}</div>
       </div>
     </div>
   );
