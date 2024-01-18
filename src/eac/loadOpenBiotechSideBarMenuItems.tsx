@@ -47,83 +47,85 @@ export function loadOoenBiotechSideBarSettings(
   state: OpenBiotechManagerState,
   menuItemNames: string[],
 ): Record<string, SideBarMenuItemSettings> {
-  const settings: Record<string, SideBarMenuItemSettings> = menuItemNames
-    .reduce((prev, menuItemName) => {
-      const data = state.EaC![menuItemName] || {};
+  const settings: Record<string, SideBarMenuItemSettings> = state.EaC
+    ? menuItemNames
+      .reduce((prev, menuItemName) => {
+        const data = state.EaC![menuItemName] || {};
 
-      switch (menuItemName) {
-        case "Clouds": {
-          prev[menuItemName] = {
-            Title: "Clouds",
-            Display: <EaCCloudsDisplay {...data} />,
-          };
-          break;
+        switch (menuItemName) {
+          case "Clouds": {
+            prev[menuItemName] = {
+              Title: "Clouds",
+              Display: <EaCCloudsDisplay {...data} />,
+            };
+            break;
+          }
+
+          case "Details": {
+            prev[menuItemName] = {
+              Title: "Enterprise Details",
+              Display: <EaCEnterpriseDetailsDisplay {...data} />,
+            };
+            break;
+          }
+
+          case "DevOpsActions": {
+            prev[menuItemName] = {
+              Title: "DevOps Actions Details",
+              Display: <EaCDevOpsActionsDisplay {...data} />,
+            };
+            break;
+          }
+
+          case "Handlers": {
+            prev[menuItemName] = {
+              Title: "EaC Handlers",
+              Display: <EaCHandlersDisplay {...data} />,
+            };
+            break;
+          }
+
+          case "IoT": {
+            prev[menuItemName] = {
+              Title: "IoT",
+              Display: <EaCIoTsDisplay {...data} />,
+            };
+            break;
+          }
+
+          case "Secrets": {
+            prev[menuItemName] = {
+              Title: "Secrets",
+              Display: <EaCSecretsDisplay {...data} />,
+            };
+            break;
+          }
+
+          case "SourceConnections": {
+            prev[menuItemName] = {
+              Title: "Source Connections",
+              Display: <EaCSourceConnectionsDisplay {...data} />,
+            };
+            break;
+          }
+
+          case "Sources": {
+            prev[menuItemName] = {
+              Title: "Sources",
+              Display: <EaCSourcesDisplay {...data} />,
+            };
+            break;
+          }
+
+          default: {
+            prev[menuItemName] = {};
+            break;
+          }
         }
 
-        case "Details": {
-          prev[menuItemName] = {
-            Title: "Enterprise Details",
-            Display: <EaCEnterpriseDetailsDisplay {...data} />,
-          };
-          break;
-        }
-
-        case "DevOpsActions": {
-          prev[menuItemName] = {
-            Title: "DevOps Actions Details",
-            Display: <EaCDevOpsActionsDisplay {...data} />,
-          };
-          break;
-        }
-
-        case "Handlers": {
-          prev[menuItemName] = {
-            Title: "EaC Handlers",
-            Display: <EaCHandlersDisplay {...data} />,
-          };
-          break;
-        }
-
-        case "IoT": {
-          prev[menuItemName] = {
-            Title: "IoT",
-            Display: <EaCIoTsDisplay {...data} />,
-          };
-          break;
-        }
-
-        case "Secrets": {
-          prev[menuItemName] = {
-            Title: "Secrets",
-            Display: <EaCSecretsDisplay {...data} />,
-          };
-          break;
-        }
-
-        case "SourceConnections": {
-          prev[menuItemName] = {
-            Title: "Source Connections",
-            Display: <EaCSourceConnectionsDisplay {...data} />,
-          };
-          break;
-        }
-
-        case "Sources": {
-          prev[menuItemName] = {
-            Title: "Sources",
-            Display: <EaCSourcesDisplay {...data} />,
-          };
-          break;
-        }
-
-        default: {
-          prev[menuItemName] = {};
-          break;
-        }
-      }
-
-      return prev;
-    }, {} as Record<string, SideBarMenuItemSettings>);
+        return prev;
+      }, {} as Record<string, SideBarMenuItemSettings>)
+    : {};
 
   return settings;
 }
