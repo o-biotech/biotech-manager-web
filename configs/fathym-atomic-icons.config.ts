@@ -17,6 +17,7 @@ export const curIconSetConfig: IconSetConfig = {
     loading: "https://api.iconify.design/line-md:loading-alt-loop.svg",
     menu: "https://api.iconify.design/ci:hamburger.svg",
     renew: "https://api.iconify.design/material-symbols:autorenew.svg",
+    settings: "https://api.iconify.design/material-symbols-light:settings.svg",
     user: "https://api.iconify.design/material-symbols:account-circle-full.svg",
     Clouds: "https://api.iconify.design/ic:baseline-cloud.svg",
     Details: "https://api.iconify.design/clarity:details-solid.svg",
@@ -26,7 +27,7 @@ export const curIconSetConfig: IconSetConfig = {
     SourceConnections: "https://api.iconify.design/mdi:connection.svg",
     DevOpsActions: "https://api.iconify.design/fluent-mdl2:set-action.svg",
     Secrets: "https://api.iconify.design/la:user-secret.svg",
-    Sources: "https://api.iconify.design/ic:baseline-code.svg",
+    Sources: "https://api.iconify.design/mdi:source-repository.svg",
     GettingStarted: "https://api.iconify.design/mdi:cast-tutorial.svg",
   },
 };

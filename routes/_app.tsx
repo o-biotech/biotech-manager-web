@@ -1,17 +1,17 @@
-import { Head } from '$fresh/runtime.ts';
-import { BasicLayout } from '@fathym/atomic';
+import { Head } from "$fresh/runtime.ts";
+import { BasicLayout } from "@fathym/atomic";
 
-import { PageProps } from '$fresh/server.ts';
-import { BiotechHeader } from '../components/organisms/BiotechHeader.tsx';
-import { BiotechFooter } from '../components/organisms/BiotechFooter.tsx';
-import { OpenBiotechManagerState } from '../src/OpenBiotechManagerState.tsx';
-import Theme from '../islands/atoms/Theme.tsx';
-import SideBar, { SideBarMenuItem } from '../islands/molecules/SideBar.tsx';
-import { loadOoenBiotechSideBarMenuItems } from '../src/eac/loadOpenBiotechSideBarMenuItems.tsx';
+import { PageProps } from "$fresh/server.ts";
+import { BiotechHeader } from "../components/organisms/BiotechHeader.tsx";
+import { BiotechFooter } from "../components/organisms/BiotechFooter.tsx";
+import { OpenBiotechManagerState } from "../src/OpenBiotechManagerState.tsx";
+import Theme from "../islands/atoms/Theme.tsx";
+import SideBar, { SideBarMenuItem } from "../islands/molecules/SideBar.tsx";
+import { loadOoenBiotechSideBarMenuItems } from "../src/eac/loadOpenBiotechSideBarMenuItems.tsx";
 
 export default function App(
   // deno-lint-ignore no-explicit-any
-  { Component, url, state }: PageProps<any, OpenBiotechManagerState>
+  { Component, url, state }: PageProps<any, OpenBiotechManagerState>,
 ) {
   const menuItems = loadOoenBiotechSideBarMenuItems(state);
 
