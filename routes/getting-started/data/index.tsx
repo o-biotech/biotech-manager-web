@@ -1,11 +1,11 @@
 import { Handlers, PageProps } from "$fresh/server.ts";
 import { DisplayStyleTypes, Hero, HeroStyleTypes } from "@fathym/atomic";
-import { DataStepsFeatures } from "../../components/organisms/features/DataStepsFeatures.tsx";
-import { DataPhaseTypes } from "../../src/DataPhaseTypes.tsx";
-import { OpenBiotechManagerState } from "../../src/OpenBiotechManagerState.tsx";
+import { DataStepsFeatures } from "../../../components/organisms/features/DataStepsFeatures.tsx";
+import { DataPhaseTypes } from "../../../src/DataPhaseTypes.tsx";
+import { OpenBiotechManagerState } from "../../../src/OpenBiotechManagerState.tsx";
 import { redirectRequest } from "@fathym/common";
-import { OpenBiotechEaC } from "../../src/eac/OpenBiotechEaC.ts";
-import { loadEaCSvc } from "../../configs/eac.ts";
+import { OpenBiotechEaC } from "../../../src/eac/OpenBiotechEaC.ts";
+import { loadEaCSvc } from "../../../configs/eac.ts";
 
 interface DataPageData {
   apiBase: string;

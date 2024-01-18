@@ -31,76 +31,23 @@ export function BiotechHeader(props: BiotechHeaderProps) {
 
   return (
     <Header
-      class={classSet(undefined, "bg-sky-500 sticky top-0")}
+      class={classSet(undefined, "z-50 bg-sky-500 sticky top-0")}
       logo={logo}
       nav={
         <InteractiveResponsiveSet toggleChildren="☰">
           <Action
-            href="/cloud"
+            href="/"
             actionStyle={ActionStyleTypes.Link}
             class={classSet(
               undefined,
               "text-xl mx-1",
-              props.currentUrl.pathname.startsWith("/cloud")
-                ? active.props.class
-                : "",
+              props.currentUrl.pathname === "/" ? active.props.class : "",
               props.hasEaC
                 ? "text-white"
                 : "pointer-events-none text-slate-400",
             )}
           >
-            Cloud
-          </Action>
-
-          <Action
-            href="/devices"
-            actionStyle={ActionStyleTypes.Link}
-            class={classSet(
-              undefined,
-              "text-xl mx-1",
-              props.currentUrl.pathname.startsWith("/devices")
-                ? active.props.class
-                : "",
-              props.setupPhase > 0
-                ? "text-white"
-                : "pointer-events-none text-slate-400",
-            )}
-          >
-            Devices
-          </Action>
-
-          <Action
-            href="/data"
-            actionStyle={ActionStyleTypes.Link}
-            class={classSet(
-              undefined,
-              "text-xl mx-1",
-              props.currentUrl.pathname.startsWith("/data")
-                ? active.props.class
-                : "",
-              props.setupPhase > 1
-                ? "text-white"
-                : "pointer-events-none text-slate-400",
-            )}
-          >
-            Data
-          </Action>
-
-          <Action
-            href="/applications"
-            actionStyle={ActionStyleTypes.Link}
-            class={classSet(
-              undefined,
-              "text-xl mx-1",
-              props.currentUrl.pathname.startsWith("/applications")
-                ? active.props.class
-                : "",
-              props.setupPhase > 2
-                ? "text-white"
-                : "pointer-events-none text-slate-400",
-            )}
-          >
-            Applications
+            Dashboard
           </Action>
 
           <ProfileMenu />

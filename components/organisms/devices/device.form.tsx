@@ -106,7 +106,8 @@ export function DeviceForm(props: DeviceFormProps) {
             Save Device
           </Action>
 
-          <Action
+          {
+            /* <Action
             href="./cloud/connect/acquire"
             class="m-2"
             actionStyle={ActionStyleTypes.Link |
@@ -114,7 +115,8 @@ export function DeviceForm(props: DeviceFormProps) {
               ActionStyleTypes.Rounded}
           >
             Acquire Device
-          </Action>
+          </Action> */
+          }
         </>
       </ActionGroup>
     </form>

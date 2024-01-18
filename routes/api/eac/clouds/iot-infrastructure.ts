@@ -258,11 +258,11 @@ export const handler: Handlers<any, OpenBiotechManagerState> = {
       status.Processing == EaCStatusProcessingTypes.QUEUED
     ) {
       return redirectRequest(
-        `/commit/${commitResp.CommitID}/status?successRedirect=/&errorRedirect=/cloud`,
+        `/commit/${commitResp.CommitID}/status?successRedirect=/&errorRedirect=/getting-started/cloud`,
       );
     } else {
       return redirectRequest(
-        `/cloud?error=${
+        `/getting-started/cloud?error=${
           encodeURIComponent(
             status.Messages["Error"] as string,
           )

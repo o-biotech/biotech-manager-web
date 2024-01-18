@@ -29,7 +29,7 @@ export function ApplicationsStepsFeatures(
           <ActionGroup class="[&>*]:mx-1 my-2 mt-8">
             <>
               <Action
-                href="./devices/connect/now"
+                href="./getting-started/devices/connect/now"
                 class={classSet(callToActionStyles.props, "m-2")}
               >
                 Connect Device

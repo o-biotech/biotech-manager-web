@@ -71,7 +71,7 @@ export const handler: Handlers<any, OpenBiotechManagerState> = {
       return redirectRequest(`/`);
     } else {
       return redirectRequest(
-        `/devices?error=${
+        `/getting-started/devices?error=${
           encodeURIComponent(
             status.Messages["Error"] as string,
           )

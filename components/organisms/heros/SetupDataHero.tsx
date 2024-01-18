@@ -23,7 +23,10 @@ export default function SetupDataHero(props: SetupDataHeroProps) {
       {...props}
     >
       {!props.hideAction && (
-        <Action href="/devices/flows" class="my-8 flex flex-row">
+        <Action
+          href="/getting-started/devices/flows"
+          class="my-8 flex flex-row"
+        >
           Setup Data Flow
           <ChevronRightIcon class="w-[24px] h-[24px]" />
         </Action>

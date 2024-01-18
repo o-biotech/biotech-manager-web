@@ -19,22 +19,23 @@ import * as $api_eac_iot_dashboards from "./routes/api/eac/iot/dashboards.ts";
 import * as $api_eac_iot_data_apis_jwt from "./routes/api/eac/iot/data-apis-jwt.ts";
 import * as $api_eac_iot_data_apis from "./routes/api/eac/iot/data-apis.ts";
 import * as $api_eac_iot_devices_ensure from "./routes/api/eac/iot/devices/ensure.ts";
-import * as $applications_index from "./routes/applications/index.tsx";
-import * as $cloud_middleware from "./routes/cloud/_middleware.tsx";
-import * as $cloud_index from "./routes/cloud/index.tsx";
 import * as $commit_commitId_status from "./routes/commit/[commitId]/status.tsx";
-import * as $dashboard_index from "./routes/dashboard/index.ts";
-import * as $data_index from "./routes/data/index.tsx";
-import * as $devices_index from "./routes/devices/index.tsx";
 import * as $enterprises from "./routes/enterprises.tsx";
+import * as $getting_started_applications_index from "./routes/getting-started/applications/index.tsx";
+import * as $getting_started_cloud_middleware from "./routes/getting-started/cloud/_middleware.tsx";
+import * as $getting_started_cloud_index from "./routes/getting-started/cloud/index.tsx";
+import * as $getting_started_data_index from "./routes/getting-started/data/index.tsx";
+import * as $getting_started_devices_index from "./routes/getting-started/devices/index.tsx";
 import * as $index from "./routes/index.tsx";
 import * as $atoms_InteractiveMenuIcon from "./islands/atoms/InteractiveMenuIcon.tsx";
 import * as $atoms_InteractiveSlideToggle from "./islands/atoms/InteractiveSlideToggle.tsx";
 import * as $atoms_Redirect from "./islands/atoms/Redirect.tsx";
+import * as $atoms_Theme from "./islands/atoms/Theme.tsx";
 import * as $common_ProfileMenu from "./islands/common/ProfileMenu.tsx";
 import * as $molecules_CopyInput from "./islands/molecules/CopyInput.tsx";
 import * as $molecules_GitHubAccessAction from "./islands/molecules/GitHubAccessAction.tsx";
 import * as $molecules_InteractiveResponsiveSet from "./islands/molecules/InteractiveResponsiveSet.tsx";
+import * as $molecules_SideBar from "./islands/molecules/SideBar.tsx";
 import * as $organisms_cloud_iot_hot_flow_input from "./islands/organisms/cloud/iot/hot-flow-input.tsx";
 import * as $organisms_data_explore_form from "./islands/organisms/data/explore-form.tsx";
 import * as $organisms_iot_device_data_flowing from "./islands/organisms/iot/device-data-flowing.tsx";
@@ -64,25 +65,29 @@ const manifest = {
     "./routes/api/eac/iot/data-apis-jwt.ts": $api_eac_iot_data_apis_jwt,
     "./routes/api/eac/iot/data-apis.ts": $api_eac_iot_data_apis,
     "./routes/api/eac/iot/devices/ensure.ts": $api_eac_iot_devices_ensure,
-    "./routes/applications/index.tsx": $applications_index,
-    "./routes/cloud/_middleware.tsx": $cloud_middleware,
-    "./routes/cloud/index.tsx": $cloud_index,
     "./routes/commit/[commitId]/status.tsx": $commit_commitId_status,
-    "./routes/dashboard/index.ts": $dashboard_index,
-    "./routes/data/index.tsx": $data_index,
-    "./routes/devices/index.tsx": $devices_index,
     "./routes/enterprises.tsx": $enterprises,
+    "./routes/getting-started/applications/index.tsx":
+      $getting_started_applications_index,
+    "./routes/getting-started/cloud/_middleware.tsx":
+      $getting_started_cloud_middleware,
+    "./routes/getting-started/cloud/index.tsx": $getting_started_cloud_index,
+    "./routes/getting-started/data/index.tsx": $getting_started_data_index,
+    "./routes/getting-started/devices/index.tsx":
+      $getting_started_devices_index,
     "./routes/index.tsx": $index,
   },
   islands: {
     "./islands/atoms/InteractiveMenuIcon.tsx": $atoms_InteractiveMenuIcon,
     "./islands/atoms/InteractiveSlideToggle.tsx": $atoms_InteractiveSlideToggle,
     "./islands/atoms/Redirect.tsx": $atoms_Redirect,
+    "./islands/atoms/Theme.tsx": $atoms_Theme,
     "./islands/common/ProfileMenu.tsx": $common_ProfileMenu,
     "./islands/molecules/CopyInput.tsx": $molecules_CopyInput,
     "./islands/molecules/GitHubAccessAction.tsx": $molecules_GitHubAccessAction,
     "./islands/molecules/InteractiveResponsiveSet.tsx":
       $molecules_InteractiveResponsiveSet,
+    "./islands/molecules/SideBar.tsx": $molecules_SideBar,
     "./islands/organisms/cloud/iot/hot-flow-input.tsx":
       $organisms_cloud_iot_hot_flow_input,
     "./islands/organisms/data/explore-form.tsx": $organisms_data_explore_form,

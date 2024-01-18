@@ -18,6 +18,16 @@ export const curIconSetConfig: IconSetConfig = {
     menu: "https://api.iconify.design/ci:hamburger.svg",
     renew: "https://api.iconify.design/material-symbols:autorenew.svg",
     user: "https://api.iconify.design/material-symbols:account-circle-full.svg",
+    Clouds: "https://api.iconify.design/ic:baseline-cloud.svg",
+    Details: "https://api.iconify.design/clarity:details-solid.svg",
+    Handlers:
+      "https://api.iconify.design/fluent:protocol-handler-16-filled.svg",
+    IoT: "https://api.iconify.design/fluent:iot-20-filled.svg",
+    SourceConnections: "https://api.iconify.design/mdi:connection.svg",
+    DevOpsActions: "https://api.iconify.design/fluent-mdl2:set-action.svg",
+    Secrets: "https://api.iconify.design/la:user-secret.svg",
+    Sources: "https://api.iconify.design/ic:baseline-code.svg",
+    GettingStarted: "https://api.iconify.design/mdi:cast-tutorial.svg",
   },
 };
 

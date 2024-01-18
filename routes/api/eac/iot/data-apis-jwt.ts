@@ -16,6 +16,6 @@ export const handler: Handlers<any, OpenBiotechManagerState> = {
 
     await denoKv.set(["User", username, "EaC", entLookup, "JWT"], jwt);
 
-    return redirectRequest("/devices");
+    return redirectRequest("/getting-started/devices");
   },
 };

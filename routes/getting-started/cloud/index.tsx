@@ -2,13 +2,13 @@ import { Handlers, PageProps } from "$fresh/server.ts";
 import { Location, Subscription } from "npm:@azure/arm-subscriptions";
 import { mergeWithArrays, redirectRequest } from "@fathym/common";
 import { EaCServiceDefinitions } from "@fathym/eac";
-import CloudConnectHero from "../../components/organisms/heros/CloudConnectHero.tsx";
-import CloudStepsFeatures from "../../components/organisms/cloud/CloudStepsFeatures.tsx";
-import { CloudPhaseTypes } from "../../src/CloudPhaseTypes.tsx";
-import { OpenBiotechManagerState } from "../../src/OpenBiotechManagerState.tsx";
-import { msalAuthProvider } from "../../configs/msal.config.ts";
-import { OpenBiotechEaC } from "../../src/eac/OpenBiotechEaC.ts";
-import { loadEaCAzureSvc, loadEaCSvc } from "../../configs/eac.ts";
+import CloudConnectHero from "../../../components/organisms/heros/CloudConnectHero.tsx";
+import CloudStepsFeatures from "../../../components/organisms/cloud/CloudStepsFeatures.tsx";
+import { CloudPhaseTypes } from "../../../src/CloudPhaseTypes.tsx";
+import { OpenBiotechManagerState } from "../../../src/OpenBiotechManagerState.tsx";
+import { msalAuthProvider } from "../../../configs/msal.config.ts";
+import { OpenBiotechEaC } from "../../../src/eac/OpenBiotechEaC.ts";
+import { loadEaCAzureSvc, loadEaCSvc } from "../../../configs/eac.ts";
 
 interface CloudPageData {
   cloudLookup?: string;

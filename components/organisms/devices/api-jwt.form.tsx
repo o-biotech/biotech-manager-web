@@ -53,7 +53,7 @@ export function APIJWTForm(props: APIJWTFormProps) {
           </Action>
 
           <Action
-            href="./devices"
+            href="./getting-started/devices"
             class="m-2"
             actionStyle={ActionStyleTypes.Link |
               ActionStyleTypes.Outline |

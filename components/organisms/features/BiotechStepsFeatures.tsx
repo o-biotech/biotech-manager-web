@@ -28,7 +28,7 @@ export function BiotechStepsFeatures(props: BiotechStepsFeaturesProps) {
           <ActionGroup class="[&>*]:mx-1 my-2 mt-8">
             <>
               <Action
-                href="./cloud"
+                href="./getting-started/cloud"
                 class={classSet(
                   callToActionStyles.props,
                   "flex flex-row",
@@ -49,7 +49,7 @@ export function BiotechStepsFeatures(props: BiotechStepsFeaturesProps) {
           <ActionGroup class="[&>*]:mx-1 my-2 mt-8">
             <>
               <Action
-                href="./devices"
+                href="./getting-started/devices"
                 class={classSet(
                   callToActionStyles.props,
                   "flex flex-row",
@@ -70,7 +70,7 @@ export function BiotechStepsFeatures(props: BiotechStepsFeaturesProps) {
           <ActionGroup class="[&>*]:mx-1 my-2 mt-8">
             <>
               <Action
-                href="./data"
+                href="./getting-started/data"
                 class={classSet(
                   callToActionStyles.props,
                   "flex flex-row",
@@ -83,27 +83,27 @@ export function BiotechStepsFeatures(props: BiotechStepsFeaturesProps) {
             </>
           </ActionGroup>
         ),
-      }, {
-        title: "Create Applications",
-        description:
-          "Easily develop and securely share your data for collaboration and consumer products.",
-        children: (
-          <ActionGroup class="[&>*]:mx-1 my-2 mt-8">
-            <>
-              <Action
-                href="./applications"
-                class={classSet(
-                  callToActionStyles.props,
-                  "flex flex-row",
-                )}
-              >
-                Create Application
+        // }, {
+        //   title: "Create Applications",
+        //   description:
+        //     "Easily develop and securely share your data for collaboration and consumer products.",
+        //   children: (
+        //     <ActionGroup class="[&>*]:mx-1 my-2 mt-8">
+        //       <>
+        //         <Action
+        //           href="./applications"
+        //           class={classSet(
+        //             callToActionStyles.props,
+        //             "flex flex-row",
+        //           )}
+        //         >
+        //           Create Application
 
-                <ChevronRightIcon class="w-[24px] h-[24px]" />
-              </Action>
-            </>
-          </ActionGroup>
-        ),
+        //           <ChevronRightIcon class="w-[24px] h-[24px]" />
+        //         </Action>
+        //       </>
+        //     </ActionGroup>
+        //   ),
       }]}
     </StepsFeatures>
   );

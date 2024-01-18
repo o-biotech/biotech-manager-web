@@ -40,7 +40,7 @@ export const msalPluginConfig: MSALPluginConfiguration = {
     Scopes: ["https://management.core.windows.net//.default"],
     // Scopes: ["https://management.core.windows.net//user_impersonation"],
     RedirectURI: MSAL_REDIRECT_URI,
-    SuccessRedirect: "/cloud",
+    SuccessRedirect: "/getting-started/cloud",
   },
   MSALSignOutOptions: {
     ClearSession: false,

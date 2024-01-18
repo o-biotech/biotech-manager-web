@@ -1,6 +1,6 @@
-import { msalPluginConfig } from "../../configs/msal.config.ts";
+import { msalPluginConfig } from "../../../configs/msal.config.ts";
 import { buildIsConnectedCheckMiddleware } from "@fathym/msal";
-import { OpenBiotechManagerState } from "../../src/OpenBiotechManagerState.tsx";
+import { OpenBiotechManagerState } from "../../../src/OpenBiotechManagerState.tsx";
 
 export const handler = [
   // buildIsConnectedCheckMiddleware<OpenBiotechManagerState>(

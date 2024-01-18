@@ -14,6 +14,6 @@ export const handler: Handlers<any, OpenBiotechManagerState> = {
 
     await denoKv.set(["EaC", entLookup, "Current", "Explored"], explored);
 
-    return redirectRequest("/data");
+    return redirectRequest("/getting-started/data");
   },
 };

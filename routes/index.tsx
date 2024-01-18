@@ -4,7 +4,6 @@ import { EaCCreateForm } from "@fathym/atomic";
 import CloudConnectHero from "../components/organisms/heros/CloudConnectHero.tsx";
 import ConnectDevicesHero from "../components/organisms/heros/ConnectDevicesHero.tsx";
 import SetupDataHero from "../components/organisms/heros/SetupDataHero.tsx";
-import CreateApplicationsHero from "../components/organisms/heros/CreateApplicationsHero.tsx";
 import { BiotechStepsFeatures } from "../components/organisms/features/BiotechStepsFeatures.tsx";
 import { SetupPhaseTypes } from "../src/SetupPhaseTypes.tsx";
 import { OpenBiotechManagerState } from "../src/OpenBiotechManagerState.tsx";
@@ -28,7 +27,7 @@ export const handler: Handlers<HomePageData | null, OpenBiotechManagerState> = {
 export default function Home({
   data,
   state,
-}: PageProps<HomePageData | null, OpenBiotechManagerState>) {
+}: PageProps<HomePageData, OpenBiotechManagerState>) {
   let currentHero: JSX.Element | undefined = undefined;
 
   let initialSteps: JSX.Element | undefined = undefined;
@@ -51,10 +50,6 @@ export default function Home({
 
       case SetupPhaseTypes.Data:
         currentHero = <SetupDataHero />;
-        break;
-
-      case SetupPhaseTypes.Applications:
-        currentHero = <CreateApplicationsHero />;
         break;
 
       case SetupPhaseTypes.Complete:

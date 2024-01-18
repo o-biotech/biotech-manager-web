@@ -23,7 +23,7 @@ export default function CloudConnectHero(props: CloudConnectHeroProps) {
       {...props}
     >
       {!props.hideAction && (
-        <Action href="./cloud" class="my-8 flex flex-row">
+        <Action href="./getting-started/cloud" class="my-8 flex flex-row">
           Connect Now
           <ChevronRightIcon class="w-[24px] h-[24px]" />
         </Action>

@@ -2,10 +2,9 @@ import { type Config } from "tailwindcss";
 import * as colors from "tailwindcss/colors.js";
 import { buildTailwindComponentsConfigs } from "@fathym/common";
 import BiotechAtomicTailwindComponents from "@fathym/atomic/tailwind.components.ts";
+// import ;
 
-const tailwindComponents = [
-  ...BiotechAtomicTailwindComponents,
-];
+const tailwindComponents = [...BiotechAtomicTailwindComponents];
 
 await buildTailwindComponentsConfigs(tailwindComponents);
 
@@ -14,6 +13,7 @@ export default {
     "{routes,islands,components}/**/*.{ts,tsx}",
     "build/tailwind-components.config",
   ],
+  plugins: [],
   theme: {
     extend: {
       backgroundImage: {
