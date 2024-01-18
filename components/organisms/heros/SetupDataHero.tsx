@@ -24,7 +24,7 @@ export default function SetupDataHero(props: SetupDataHeroProps) {
     >
       {!props.hideAction && (
         <Action
-          href="/getting-started/devices/flows"
+          href="/getting-started/data"
           class="my-8 flex flex-row"
         >
           Setup Data Flow

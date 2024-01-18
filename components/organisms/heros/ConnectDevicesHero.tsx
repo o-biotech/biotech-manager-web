@@ -24,7 +24,7 @@ export default function ConnectDevicesHero(props: ConnectDevicesHeroProps) {
     >
       {!props.hideAction && (
         <Action
-          href="/getting-started/devices/flows"
+          href="/getting-started/devices"
           class="my-8 flex flex-row"
         >
           Create Device Flow
