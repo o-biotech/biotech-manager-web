@@ -43,6 +43,14 @@ export default function SideBar(props: SideBarProps) {
 
   const [isClosed, setIsClosed] = useState(isSideBarClosed());
 
+  const curMenuCheck = props.menuItems.find(
+    (mi) => mi.Name === localStorage.SideBarCurrentMenu,
+  );
+
+  if (!curMenuCheck) {
+    delete localStorage.SideBarCurrentMenu;
+  }
+
   const [currentMenu, setCurrentMenu] = useState(
     localStorage.SideBarCurrentMenu || props.menuItems[0]?.Name || "",
   );
