@@ -41,11 +41,10 @@ export default function App(
           class="top-[68px] left-0"
           menuItems={menuItems}
           state={state}
-        />
-
-        <div class="ml-12">
+          // disableToggle={true}
+        >
           <Component />
-        </div>
+        </SideBar>
       </BasicLayout>
     </>
   );
