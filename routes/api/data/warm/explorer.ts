@@ -35,4 +35,31 @@ export const handler: Handlers<any, OpenBiotechManagerAPIState> = {
 
     return respond(JSON.stringify(queryResp));
   },
+
+  async POST(req, ctx) {
+    const entLookup = ctx.state.EnterpriseLookup;
+
+    const _username = ctx.state.Username;
+
+    const cloudLookup = ctx.state.CloudLookup;
+
+    const resGroupLookup = ctx.state.ResourceGroupLookup;
+
+    const resLookups = ["iot-flow", "iot-flow-warm"];
+
+    const expReq: ExplorerRequest = await req.json();
+
+    const eacExplorerSvc = await loadEaCExplorerSvc(ctx.state.EaCJWT!);
+
+    const queryResp = await eacExplorerSvc.Query(
+      entLookup,
+      cloudLookup,
+      resGroupLookup,
+      resLookups,
+      "Telemetry",
+      expReq,
+    );
+
+    return respond(JSON.stringify(queryResp));
+  },
 };
