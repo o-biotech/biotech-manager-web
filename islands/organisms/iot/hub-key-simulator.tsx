@@ -30,8 +30,13 @@ export function IoTHubKeySimulatorDisplay(
     setSelectedDevices(devices);
   };
 
+  const shortName = props.resGroupLookup
+    .split("-")
+    .map((p) => p.charAt(0))
+    .join("");
+
   const connStr = selectedKey
-    ? `HostName=${props.resGroupLookup}-iot-hub.azure-devices.net;SharedAccessKeyName=${selectedKey};SharedAccessKey=${
+    ? `HostName=${shortName}-iot-hub.azure-devices.net;SharedAccessKeyName=${selectedKey};SharedAccessKey=${
       props.iotHubKeys[selectedKey]
     }`
     : "";

@@ -11,10 +11,9 @@ import { DataPhaseTypes } from "../../../src/DataPhaseTypes.tsx";
 import { callToActionStyles } from "../../styles/actions.tsx";
 import { DataFlowForm } from "../data/flow.form.tsx";
 import { DataExploreForm } from "../../../islands/organisms/data/explore-form.tsx";
+import { DataDevelopForm } from "../data/develop.form.tsx";
 
 export interface DataStepsFeaturesProps extends StepsFeaturesProps {
-  apiBase: string;
-
   dashboardTypes: string[];
 
   dataPhase?: DataPhaseTypes;
@@ -40,7 +39,6 @@ export function DataStepsFeatures(props: DataStepsFeaturesProps) {
       currentForm = (
         <DataFlowForm
           class="px-4"
-          apiBase={props.apiBase}
           deviceKeys={props.deviceKeys}
           iotHubKeys={props.iotHubKeys}
           jwt={props.jwt}
@@ -62,9 +60,7 @@ export function DataStepsFeatures(props: DataStepsFeaturesProps) {
       break;
 
     case DataPhaseTypes.Develop:
-      // currentForm = (
-      //   <DevicesDashboardForm class="px-4" iotLookup={props.iotLookup} />
-      // );
+      currentForm = <DataDevelopForm jwt={props.jwt} class="px-4" />;
       break;
   }
 

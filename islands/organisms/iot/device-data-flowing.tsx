@@ -6,8 +6,6 @@ import { IconProps, RenewIcon } from "$fathym/atomic-icons";
 import { classSet } from "@fathym/atomic";
 
 export type DeviceDataFlowingProps = IconProps & {
-  apiBase: string;
-
   children: ComponentChildren;
 
   jwt: string;

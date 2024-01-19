@@ -11,6 +11,7 @@ import * as $api_eac_clouds_index from "./routes/api/eac/clouds/index.ts";
 import * as $api_eac_clouds_iot_infrastructure from "./routes/api/eac/clouds/iot-infrastructure.ts";
 import * as $api_eac_clouds_resource_groups from "./routes/api/eac/clouds/resource-groups.ts";
 import * as $api_eac_connections from "./routes/api/eac/connections.ts";
+import * as $api_eac_data_develop from "./routes/api/eac/data/develop.ts";
 import * as $api_eac_data_explore from "./routes/api/eac/data/explore.ts";
 import * as $api_eac_data_flow from "./routes/api/eac/data/flow.ts";
 import * as $api_eac_github_user from "./routes/api/eac/github/user.ts";
@@ -37,6 +38,7 @@ import * as $molecules_GitHubAccessAction from "./islands/molecules/GitHubAccess
 import * as $molecules_InteractiveResponsiveSet from "./islands/molecules/InteractiveResponsiveSet.tsx";
 import * as $molecules_SideBar from "./islands/molecules/SideBar.tsx";
 import * as $organisms_cloud_iot_hot_flow_input from "./islands/organisms/cloud/iot/hot-flow-input.tsx";
+import * as $organisms_data_api_develop_form from "./islands/organisms/data/api-develop-form.tsx";
 import * as $organisms_data_explore_form from "./islands/organisms/data/explore-form.tsx";
 import * as $organisms_iot_device_data_flowing from "./islands/organisms/iot/device-data-flowing.tsx";
 import * as $organisms_iot_hub_device_connection from "./islands/organisms/iot/hub-device-connection.tsx";
@@ -57,6 +59,7 @@ const manifest = {
     "./routes/api/eac/clouds/resource-groups.ts":
       $api_eac_clouds_resource_groups,
     "./routes/api/eac/connections.ts": $api_eac_connections,
+    "./routes/api/eac/data/develop.ts": $api_eac_data_develop,
     "./routes/api/eac/data/explore.ts": $api_eac_data_explore,
     "./routes/api/eac/data/flow.ts": $api_eac_data_flow,
     "./routes/api/eac/github/user.ts": $api_eac_github_user,
@@ -90,6 +93,8 @@ const manifest = {
     "./islands/molecules/SideBar.tsx": $molecules_SideBar,
     "./islands/organisms/cloud/iot/hot-flow-input.tsx":
       $organisms_cloud_iot_hot_flow_input,
+    "./islands/organisms/data/api-develop-form.tsx":
+      $organisms_data_api_develop_form,
     "./islands/organisms/data/explore-form.tsx": $organisms_data_explore_form,
     "./islands/organisms/iot/device-data-flowing.tsx":
       $organisms_iot_device_data_flowing,

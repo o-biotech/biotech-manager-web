@@ -6,8 +6,6 @@ import { IoTHubKeySimulatorDisplay } from "../../../islands/organisms/iot/hub-ke
 import { DeviceDataFlowing } from "../../../islands/organisms/iot/device-data-flowing.tsx";
 
 export type DataFlowFormProps = JSX.HTMLAttributes<HTMLFormElement> & {
-  apiBase: string;
-
   deviceKeys: Record<string, string>;
 
   iotHubKeys: Record<string, string>;
@@ -49,7 +47,6 @@ export function DataFlowForm(props: DataFlowFormProps) {
       </div>
 
       <DeviceDataFlowing
-        apiBase={props.apiBase}
         jwt={props.jwt}
         waitingText="Waiting for device data (this can take several minutes after posting your data)..."
         class="w-20 h-20"

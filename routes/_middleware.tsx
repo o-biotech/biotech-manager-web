@@ -201,8 +201,7 @@ async function currentState(
         const iotResGroup = resGroups[state.Cloud.ResourceGroupLookup!];
 
         if ("iot-flow" in (iotResGroup.Resources || {})) {
-          // TODO: Re-enable
-          // state.Cloud.Phase = CloudPhaseTypes.Complete;
+          state.Cloud.Phase = CloudPhaseTypes.Complete;
 
           state.Phase = SetupPhaseTypes.Devices;
 
@@ -263,6 +262,17 @@ async function currentState(
 
                     if (currentExplored.value) {
                       state.Data.Phase = DataPhaseTypes.Develop;
+
+                      const currentDeveloped = await denoKv.get<boolean>([
+                        "EaC",
+                        entLookup,
+                        "Current",
+                        "Developed",
+                      ]);
+
+                      if (currentDeveloped.value) {
+                        state.Data.Phase = DataPhaseTypes.Complete;
+                      }
                     }
                   }
                 }
@@ -283,6 +293,10 @@ async function currentState(
         }
       }
     }
+  }
+
+  if (state.Data && state.Data.Phase > 2) {
+    state.Phase = SetupPhaseTypes.Complete;
   }
 
   if (ctx.state.Username) {

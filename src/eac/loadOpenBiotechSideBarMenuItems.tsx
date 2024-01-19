@@ -13,14 +13,16 @@ import { EaCDevOpsActionsDisplay } from "../../components/organisms/eac/displays
 import { EaCSecretsDisplay } from "../../components/organisms/eac/displays/EaCSecretsDisplay.tsx";
 import { EaCSourcesDisplay } from "../../components/organisms/eac/displays/EaCSourcesDisplay.tsx";
 import { EaCIoTsDisplay } from "../../components/organisms/eac/displays/EaCIoTsDisplay.tsx";
+import { OpenBiotechEaC } from "./OpenBiotechEaC.ts";
+import { EaCGettingStartedDisplay } from "../../components/organisms/eac/displays/EaCGettingStartedDisplay.tsx";
 
 export function loadOoenBiotechSideBarMenuItems(
   state: OpenBiotechManagerState,
 ): SideBarMenuItem[] {
-  const { EnterpriseLookup, ParentEnterpriseLookup, ...eac } = state.EaC || {};
+  const eac: OpenBiotechEaC = { ...(state.EaC || {}) };
 
-  console.log(EnterpriseLookup);
-  console.log(ParentEnterpriseLookup);
+  delete eac.EnterpriseLookup;
+  delete eac.ParentEnterpriseLookup;
 
   const eacKeys = Object.keys(eac);
 
@@ -128,6 +130,7 @@ export function loadOoenBiotechSideBarSettings(
 
   settings["GettingStarted"] = {
     Title: "Getting Started",
+    Display: <EaCGettingStartedDisplay {...state} />,
   };
 
   return settings;

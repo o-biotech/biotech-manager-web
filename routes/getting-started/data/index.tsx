@@ -8,8 +8,6 @@ import { OpenBiotechEaC } from "../../../src/eac/OpenBiotechEaC.ts";
 import { loadEaCSvc } from "../../../configs/eac.ts";
 
 interface DataPageData {
-  apiBase: string;
-
   dashboardTypes: string[];
 
   dataPhase: DataPhaseTypes;
@@ -64,9 +62,12 @@ export const handler: Handlers<DataPageData | null, OpenBiotechManagerState> = {
 
     const resKeys = iotFlowResource.Keys as Record<string, unknown>;
 
+    const shortName = ctx.state.Cloud.ResourceGroupLookup!.split("-")
+      .map((p) => p.charAt(0))
+      .join("");
+
     const iotHubKeys = resKeys[
-      `Microsoft.Devices/IotHubs/${ctx.state.Cloud
-        .ResourceGroupLookup!}-iot-hub`
+      `Microsoft.Devices/IotHubs/${shortName}-iot-hub`
     ] as Record<string, string>;
 
     const deviceLookups = Object.keys(
@@ -85,10 +86,6 @@ export const handler: Handlers<DataPageData | null, OpenBiotechManagerState> = {
     const resLocations = iotFlowResource.Resources!["iot-flow-warm"]
       .Locations as Record<string, string>;
 
-    const shortName = ctx.state.Cloud.ResourceGroupLookup!.split("-")
-      .map((p) => p.charAt(0))
-      .join("");
-
     const kustoCluster = `${shortName}-data-explorer`;
 
     const kustoLocation =
@@ -106,7 +103,6 @@ export const handler: Handlers<DataPageData | null, OpenBiotechManagerState> = {
     });
 
     const data: DataPageData = {
-      apiBase: Deno.env.get("LOCAL_API_BASE")!,
       dashboardTypes: dashboardTypes,
       dataPhase: ctx.state.Data.Phase,
       deviceKeys: deviceKeys,
@@ -135,7 +131,6 @@ export default function Data({
       />
 
       <DataStepsFeatures
-        apiBase={data!.apiBase}
         dashboardTypes={data!.dashboardTypes}
         dataPhase={data!.dataPhase}
         deviceKeys={data!.deviceKeys}

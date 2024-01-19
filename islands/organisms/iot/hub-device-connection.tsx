@@ -39,6 +39,11 @@ export function IoTHubDeviceConnectionDisplay(
     props.deviceChanged(selectedDevices);
   }
 
+  const shortName = props.resGroupLookup
+    .split("-")
+    .map((p) => p.charAt(0))
+    .join("");
+
   return (
     <>
       <div class="w-full">
@@ -88,7 +93,7 @@ export function IoTHubDeviceConnectionDisplay(
 
         {selectedDevices.map((selectedDevice) => {
           const deviceConnStr =
-            `HostName=${props.resGroupLookup}-iot-hub.azure-devices.net;DeviceId=${selectedDevice};SharedAccessKey=${
+            `HostName=${shortName}-iot-hub.azure-devices.net;DeviceId=${selectedDevice};SharedAccessKey=${
               props.deviceKeys[selectedDevice]
             }`;
 
