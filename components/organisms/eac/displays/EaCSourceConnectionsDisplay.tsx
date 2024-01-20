@@ -15,7 +15,7 @@ export function EaCSourceConnectionsDisplay(
           <>
             <Action
               actionStyle={ActionStyleTypes.Link | ActionStyleTypes.Rounded}
-              class="text-sm text-white text-left w-full"
+              class="text-sm text-left w-full"
             >
               {srcConn.Details!.Name}
             </Action>

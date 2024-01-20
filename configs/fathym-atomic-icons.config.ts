@@ -2,7 +2,10 @@ import { IconSetConfig, IconSetGenerateConfig } from "@fathym/atomic-icons";
 
 export const curIconSetConfig: IconSetConfig = {
   IconMap: {
+    add: "https://api.iconify.design/gg:add.svg",
     check: "https://api.iconify.design/lets-icons:check-fill.svg",
+    begin: "https://api.iconify.design/fe:beginner.svg",
+    delete: "https://api.iconify.design/material-symbols-light:delete.svg",
     "chevron-right":
       "https://api.iconify.design/material-symbols:chevron-right-rounded.svg",
     "chevron-down": "https://api.iconify.design/mdi:chevron-down.svg",
