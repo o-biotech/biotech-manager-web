@@ -15,28 +15,27 @@ export function EntepriseManagementItem(props: EntepriseManagementItemProps) {
   const deleteEnterprise = (e: JSX.TargetedEvent<HTMLFormElement, Event>) => {
     e.preventDefault();
 
-    // if (
-    //   confirm(
-    //     `Are you sure you want to delete ${props.enterprise.EnterpriseName}?`,
-    //   )
-    // ) {
-    //   // deleteFormRef.
-    //   fetch("", {
-    //     method: "DELETE",
-    //     body: JSON.stringify({
-    //       EnterpriseLookup: props.enterprise.EnterpriseLookup,
-    //     }),
-    //   }).then((response) => {
-    //     response.json().then((status: EaCStatus) => {
-    //       if (status.Processing === EaCStatusProcessingTypes.COMPLETE) {
-    //         location.reload();
-    //       } else {
-    //         console.log(status);
-    //         alert(status.Messages["Error"]);
-    //       }
-    //     });
-    //   });
-    // }
+    if (
+      confirm(
+        `Are you sure you want to delete ${props.enterprise.EnterpriseName}?`,
+      )
+    ) {
+      fetch("", {
+        method: "DELETE",
+        body: JSON.stringify({
+          EnterpriseLookup: props.enterprise.EnterpriseLookup,
+        }),
+      }).then((response) => {
+        // response.json().then((status: EaCStatus) => {
+        //   if (status.Processing === EaCStatusProcessingTypes.COMPLETE) {
+        //     location.reload();
+        //   } else {
+        //     console.log(status);
+        //     alert(status.Messages["Error"]);
+        //   }
+        // });
+      });
+    }
   };
 
   const setActiveEnterprise = (
@@ -44,28 +43,27 @@ export function EntepriseManagementItem(props: EntepriseManagementItemProps) {
   ) => {
     e.preventDefault();
 
-    // if (
-    //   confirm(
-    //     `Are you sure you want to set ${props.enterprise.EnterpriseName} as active?`,
-    //   )
-    // ) {
-    //   // deleteFormRef.
-    //   fetch("", {
-    //     method: "PUT",
-    //     body: JSON.stringify({
-    //       EnterpriseLookup: props.enterprise.EnterpriseLookup,
-    //     }),
-    //   }).then((response) => {
-    //     response.json().then((status: EaCStatus) => {
-    //       if (status.Processing === EaCStatusProcessingTypes.COMPLETE) {
-    //         location.reload();
-    //       } else {
-    //         console.log(status);
-    //         alert(status.Messages["Error"]);
-    //       }
-    //     });
-    //   });
-    // }
+    if (
+      confirm(
+        `Are you sure you want to set ${props.enterprise.EnterpriseName} as active?`,
+      )
+    ) {
+      fetch("", {
+        method: "PUT",
+        body: JSON.stringify({
+          EnterpriseLookup: props.enterprise.EnterpriseLookup,
+        }),
+      }).then((response) => {
+        // response.json().then((status: EaCStatus) => {
+        //   if (status.Processing === EaCStatusProcessingTypes.COMPLETE) {
+        //     location.reload();
+        //   } else {
+        //     console.log(status);
+        //     alert(status.Messages["Error"]);
+        //   }
+        // });
+      });
+    }
   };
 
   return (
