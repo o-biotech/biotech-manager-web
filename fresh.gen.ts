@@ -34,6 +34,7 @@ import * as $atoms_Redirect from "./islands/atoms/Redirect.tsx";
 import * as $atoms_Theme from "./islands/atoms/Theme.tsx";
 import * as $common_ProfileMenu from "./islands/common/ProfileMenu.tsx";
 import * as $molecules_CopyInput from "./islands/molecules/CopyInput.tsx";
+import * as $molecules_EntepriseManagementItem from "./islands/molecules/EntepriseManagementItem.tsx";
 import * as $molecules_GitHubAccessAction from "./islands/molecules/GitHubAccessAction.tsx";
 import * as $molecules_InteractiveResponsiveSet from "./islands/molecules/InteractiveResponsiveSet.tsx";
 import * as $molecules_SideBar from "./islands/molecules/SideBar.tsx";
@@ -87,6 +88,8 @@ const manifest = {
     "./islands/atoms/Theme.tsx": $atoms_Theme,
     "./islands/common/ProfileMenu.tsx": $common_ProfileMenu,
     "./islands/molecules/CopyInput.tsx": $molecules_CopyInput,
+    "./islands/molecules/EntepriseManagementItem.tsx":
+      $molecules_EntepriseManagementItem,
     "./islands/molecules/GitHubAccessAction.tsx": $molecules_GitHubAccessAction,
     "./islands/molecules/InteractiveResponsiveSet.tsx":
       $molecules_InteractiveResponsiveSet,
