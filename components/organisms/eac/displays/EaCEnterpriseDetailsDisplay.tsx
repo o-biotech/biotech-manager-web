@@ -29,6 +29,7 @@ export function EaCEnterpriseDetailsDisplay(
               ActionStyleTypes.Rounded |
               ActionStyleTypes.Icon}
             class="flex-none px-1 py-1 text-white"
+            href="/enterprises"
           >
             <AddIcon class="w-4 h-4" />
           </Action>

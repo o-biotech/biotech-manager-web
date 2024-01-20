@@ -1,5 +1,5 @@
 import { JSX } from "preact";
-import { Action, ActionStyleTypes, ActionGroup, Input } from "@fathym/atomic";
+import { Action, ActionGroup, ActionStyleTypes, Input } from "@fathym/atomic";
 import {
   EaCStatus,
   EaCStatusProcessingTypes,
@@ -8,6 +8,8 @@ import {
 import { BeginIcon, DeleteIcon } from "$fathym/atomic-icons";
 
 export type EntepriseManagementItemProps = {
+  completeStatus: EaCStatusProcessingTypes;
+
   enterprise: UserEaCRecord;
 };
 
@@ -26,13 +28,14 @@ export function EntepriseManagementItem(props: EntepriseManagementItemProps) {
           EnterpriseLookup: props.enterprise.EnterpriseLookup,
         }),
       }).then((response) => {
+        // Why does EaCStatusProcessingTypes.COMPLETE break everything? Some issue with enums in island?
         response.json().then((status: EaCStatus) => {
-          // if (status.Processing === EaCStatusProcessingTypes.COMPLETE) {
-          //   location.reload();
-          // } else {
-          //   console.log(status);
-          //   alert(status.Messages["Error"]);
-          // }
+          if (status.Processing === props.completeStatus) {
+            location.reload();
+          } else {
+            console.log(status);
+            alert(status.Messages["Error"]);
+          }
         });
       });
     }
@@ -55,12 +58,13 @@ export function EntepriseManagementItem(props: EntepriseManagementItemProps) {
         }),
       }).then((response) => {
         response.json().then((status: EaCStatus) => {
-          // if (status.Processing === EaCStatusProcessingTypes.COMPLETE) {
-          //   location.reload();
-          // } else {
-          //   console.log(status);
-          //   alert(status.Messages["Error"]);
-          // }
+          // Why does EaCStatusProcessingTypes.COMPLETE break everything? Some issue with enums from library in island?
+          if (status.Processing === props.completeStatus) {
+            location.reload();
+          } else {
+            console.log(status);
+            alert(status.Messages["Error"]);
+          }
         });
       });
     }

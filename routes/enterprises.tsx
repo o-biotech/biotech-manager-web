@@ -1,17 +1,17 @@
-import { JSX } from 'preact';
-import { Handlers, PageProps } from '$fresh/server.ts';
-import { EaCCreateForm } from '@fathym/atomic';
-import { OpenBiotechManagerState } from '../src/OpenBiotechManagerState.tsx';
-import CreateEaCHero from '../components/organisms/heros/CreateEaCHero.tsx';
+import { JSX } from "preact";
+import { Handlers, PageProps } from "$fresh/server.ts";
+import { EaCCreateForm } from "@fathym/atomic";
+import { OpenBiotechManagerState } from "../src/OpenBiotechManagerState.tsx";
+import CreateEaCHero from "../components/organisms/heros/CreateEaCHero.tsx";
 import {
   EaCStatusProcessingTypes,
   EverythingAsCode,
   UserEaCRecord,
   waitForStatus,
-} from '@fathym/eac';
-import { denoKv } from '../configs/deno-kv.config.ts';
-import { respond } from '@fathym/common';
-import { EntepriseManagementItem } from '../islands/molecules/EntepriseManagementItem.tsx';
+} from "@fathym/eac";
+import { denoKv } from "../configs/deno-kv.config.ts";
+import { respond } from "@fathym/common";
+import { EntepriseManagementItem } from "../islands/molecules/EntepriseManagementItem.tsx";
 import { loadEaCSvc } from "../configs/eac.ts";
 
 export type EnterprisesPageData = {
@@ -33,17 +33,26 @@ export const handler: Handlers<EnterprisesPageData, OpenBiotechManagerState> = {
     const eac: EverythingAsCode = await req.json();
 
     await denoKv.set(
-      ['User', ctx.state.Username!, 'Current', 'EaC'],
-      eac.EnterpriseLookup
+      ["User", ctx.state.Username!, "Current", "EaC"],
+      eac.EnterpriseLookup,
     );
 
     return respond({ Processing: EaCStatusProcessingTypes.COMPLETE });
   },
-  
+
   async DELETE(req, ctx) {
     const eac: EverythingAsCode = await req.json();
 
-    const eacSvc = await loadEaCSvc(ctx.state.EaCJWT!);
+    const parentEaCSvc = await loadEaCSvc();
+
+    const username = ctx.state.Username;
+
+    const jwt = await parentEaCSvc.JWT(
+      eac.EnterpriseLookup,
+      username,
+    );
+
+    const eacSvc = await loadEaCSvc(jwt.Token);
 
     const deleteResp = await eacSvc.Delete(eac, true, 60);
 
@@ -71,7 +80,12 @@ export default function Home({
       <div>
         {data.enterprises &&
           data.enterprises.map((enterprise) => {
-            return <EntepriseManagementItem enterprise={enterprise} />;
+            return (
+              <EntepriseManagementItem
+                enterprise={enterprise}
+                completeStatus={EaCStatusProcessingTypes.COMPLETE}
+              />
+            );
           })}
       </div>
     </>

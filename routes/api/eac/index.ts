@@ -25,7 +25,7 @@ export const handler: Handlers<any, OpenBiotechManagerState> = {
       },
     };
 
-    const parentEaCSvc = await loadEaCSvc(ctx.state.EaCJWT!);
+    const parentEaCSvc = await loadEaCSvc();
 
     const createResp = await parentEaCSvc.Create<OpenBiotechEaC>(
       newEaC,
