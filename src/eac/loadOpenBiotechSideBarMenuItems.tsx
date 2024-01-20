@@ -40,6 +40,13 @@ export function loadOoenBiotechSideBarMenuItems(
       Icon: "GettingStarted",
       Name: "GettingStarted",
     });
+
+    if (state.EaC) {
+      menuItems.push({
+        Icon: "Details",
+        Name: "Details",
+      });
+    }
   }
 
   return menuItems;
@@ -65,7 +72,13 @@ export function loadOoenBiotechSideBarSettings(
         case "Details": {
           prev[menuItemName] = {
             Title: "Enterprise Details",
-            Display: <EaCEnterpriseDetailsDisplay {...data} />,
+            Display: (
+              <EaCEnterpriseDetailsDisplay
+                {...data}
+                entLookup={state.EaC!.EnterpriseLookup!}
+                userEaCs={state.UserEaCs}
+              />
+            ),
           };
           break;
         }

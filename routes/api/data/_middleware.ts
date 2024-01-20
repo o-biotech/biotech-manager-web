@@ -1,4 +1,4 @@
-import { MiddlewareHandlerContext } from "$fresh/server.ts";
+import { FreshContext } from "$fresh/server.ts";
 import { buildJwtValidationHandler, loadJwtConfig } from "@fathym/eac";
 import { OpenBiotechAPIJWTPayload } from "../../../src/api/OpenBiotechAPIJWTPayload.ts";
 import { loadEaCSvc } from "../../../configs/eac.ts";
@@ -8,7 +8,7 @@ export const handler = [
   buildJwtValidationHandler<OpenBiotechAPIJWTPayload>(loadJwtConfig()),
   async function handler(
     _req: Request,
-    ctx: MiddlewareHandlerContext<OpenBiotechManagerAPIState>,
+    ctx: FreshContext<OpenBiotechManagerAPIState>,
   ) {
     const parentEaCSvc = await loadEaCSvc();
 

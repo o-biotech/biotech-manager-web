@@ -1,6 +1,6 @@
 import { decode } from "@djwt";
 import { cookieSession, redisSession } from "$fresh/session";
-import { MiddlewareHandlerContext } from "$fresh/server.ts";
+import { FreshContext } from "$fresh/server.ts";
 import { redirectRequest, respond } from "@fathym/common";
 import {
   EaCSourceConnectionDetails,
@@ -23,7 +23,7 @@ import { loadEaCSvc } from "../configs/eac.ts";
 
 async function loggedInCheck(
   req: Request,
-  ctx: MiddlewareHandlerContext<OpenBiotechManagerState>,
+  ctx: FreshContext<OpenBiotechManagerState>,
 ) {
   const url = new URL(req.url);
 
@@ -111,8 +111,12 @@ async function loggedInCheck(
 
 async function currentEaC(
   req: Request,
-  ctx: MiddlewareHandlerContext<OpenBiotechManagerState>,
+  ctx: FreshContext<OpenBiotechManagerState>,
 ) {
+  if (ctx.destination !== "route") {
+    return await ctx.next();
+  }
+
   const url = new URL(req.url);
 
   const { pathname } = url;
@@ -145,7 +149,9 @@ async function currentEaC(
     if (eac?.EnterpriseLookup) {
       ctx.state.EaC = eac;
 
-      ctx.state.UserEaCs = await eacSvc.ListForUser();
+      ctx.state.UserEaCs = await eacSvc.ListForUser(
+        ctx.state.EaC!.ParentEnterpriseLookup,
+      );
     }
   }
 
@@ -154,9 +160,13 @@ async function currentEaC(
 
 async function currentState(
   req: Request,
-  ctx: MiddlewareHandlerContext<OpenBiotechManagerState>,
+  ctx: FreshContext<OpenBiotechManagerState>,
 ) {
-  const isAuthenticated = ctx.state.session.get("isMsalAuthenticated");
+  if (ctx.destination !== "route") {
+    return await ctx.next();
+  }
+
+  // const isAuthenticated = ctx.state.session.get("isMsalAuthenticated");
 
   // Call to get state
   const state: OpenBiotechManagerState = {
@@ -326,10 +336,7 @@ async function currentState(
 
 const session = cookieSession();
 
-function userSession(
-  req: Request,
-  ctx: MiddlewareHandlerContext<OpenBiotechManagerState>,
-) {
+function userSession(req: Request, ctx: FreshContext<OpenBiotechManagerState>) {
   return session(req, ctx);
 }
 
