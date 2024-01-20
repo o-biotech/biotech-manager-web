@@ -26,14 +26,14 @@ export function EntepriseManagementItem(props: EntepriseManagementItemProps) {
           EnterpriseLookup: props.enterprise.EnterpriseLookup,
         }),
       }).then((response) => {
-        // response.json().then((status: EaCStatus) => {
-        //   if (status.Processing === EaCStatusProcessingTypes.COMPLETE) {
-        //     location.reload();
-        //   } else {
-        //     console.log(status);
-        //     alert(status.Messages["Error"]);
-        //   }
-        // });
+        response.json().then((status: EaCStatus) => {
+          // if (status.Processing === EaCStatusProcessingTypes.COMPLETE) {
+          //   location.reload();
+          // } else {
+          //   console.log(status);
+          //   alert(status.Messages["Error"]);
+          // }
+        });
       });
     }
   };
@@ -54,14 +54,14 @@ export function EntepriseManagementItem(props: EntepriseManagementItemProps) {
           EnterpriseLookup: props.enterprise.EnterpriseLookup,
         }),
       }).then((response) => {
-        // response.json().then((status: EaCStatus) => {
-        //   if (status.Processing === EaCStatusProcessingTypes.COMPLETE) {
-        //     location.reload();
-        //   } else {
-        //     console.log(status);
-        //     alert(status.Messages["Error"]);
-        //   }
-        // });
+        response.json().then((status: EaCStatus) => {
+          // if (status.Processing === EaCStatusProcessingTypes.COMPLETE) {
+          //   location.reload();
+          // } else {
+          //   console.log(status);
+          //   alert(status.Messages["Error"]);
+          // }
+        });
       });
     }
   };
