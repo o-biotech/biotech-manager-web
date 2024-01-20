@@ -7,10 +7,12 @@ import {
   EaCStatusProcessingTypes,
   EverythingAsCode,
   UserEaCRecord,
+  waitForStatus,
 } from '@fathym/eac';
 import { denoKv } from '../configs/deno-kv.config.ts';
 import { respond } from '@fathym/common';
 import { EntepriseManagementItem } from '../islands/molecules/EntepriseManagementItem.tsx';
+import { loadEaCSvc } from "../configs/eac.ts";
 
 export type EnterprisesPageData = {
   enterprises: UserEaCRecord[];
@@ -36,6 +38,22 @@ export const handler: Handlers<EnterprisesPageData, OpenBiotechManagerState> = {
     );
 
     return respond({ Processing: EaCStatusProcessingTypes.COMPLETE });
+  },
+  
+  async DELETE(req, ctx) {
+    const eac: EverythingAsCode = await req.json();
+
+    const eacSvc = await loadEaCSvc(ctx.state.EaCJWT!);
+
+    const deleteResp = await eacSvc.Delete(eac, true, 60);
+
+    const status = await waitForStatus(
+      eacSvc,
+      eac.EnterpriseLookup!,
+      deleteResp.CommitID,
+    );
+
+    return respond(status);
   },
 };
 
