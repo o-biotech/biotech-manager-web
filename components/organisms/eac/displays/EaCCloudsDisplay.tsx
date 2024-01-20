@@ -13,7 +13,7 @@ export function EaCCloudsDisplay(clouds: Record<string, EaCCloudAsCode>) {
           <>
             <Action
               actionStyle={ActionStyleTypes.Link | ActionStyleTypes.Rounded}
-              class="text-sm text-white text-left w-full"
+              class="text-sm text-left w-full"
             >
               {cloud.Details!.Name}
             </Action>

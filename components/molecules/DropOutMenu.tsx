@@ -18,11 +18,16 @@ export function DropOutMenu(props: DropOutMenuProps) {
     <div {...props} class={classSet(props, "flex flex-wrap items-center")}>
       <input type="checkbox" id={key} class="peer sr-only" />
 
-      <ChevronRightIcon class="flex-none w-4 h-4 transition-all duration-200 peer-checked:rotate-90" />
+      <label
+        for={key}
+        class="flex-none items-center peer-checked:font-bold cursor-pointer"
+      >
+        <ChevronRightIcon class="w-4 h-4 transition-all duration-200 peer-checked:rotate-90" />
+      </label>
 
       <label
         for={key}
-        class="flex-1 flex flex-row items-center peer-checked:font-bold cursor-pointer grow"
+        class="flex-1 peer-checked:font-bold cursor-pointer grow"
       >
         <span class="text-sm">{props.title}</span>
       </label>
