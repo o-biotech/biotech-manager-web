@@ -20,9 +20,9 @@ export function DropOutMenu(props: DropOutMenuProps) {
 
       <label
         for={key}
-        class="flex-none items-center peer-checked:font-bold cursor-pointer"
+        class="flex-none items-center peer-checked:font-bold cursor-pointer transition-all duration-200 peer-checked:rotate-90"
       >
-        <ChevronRightIcon class="w-4 h-4 transition-all duration-200 peer-checked:rotate-90" />
+        <ChevronRightIcon class="w-4 h-4" />
       </label>
 
       <label

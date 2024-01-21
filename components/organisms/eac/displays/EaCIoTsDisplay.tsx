@@ -1,7 +1,7 @@
 import { EaCIoTAsCode } from "@fathym/eac";
 import { Action, ActionStyleTypes } from "@fathym/atomic";
 import { DropOutMenu } from "../../../molecules/DropOutMenu.tsx";
-import { SettingsIcon } from "$fathym/atomic-icons";
+import { AddIcon, EditIcon, SettingsIcon } from "$fathym/atomic-icons";
 
 export function EaCIoTsDisplay(iots: Record<string, EaCIoTAsCode>) {
   const iotLookups = Object.keys(iots);
@@ -44,14 +44,28 @@ export function EaCIoTsDisplay(iots: Record<string, EaCIoTAsCode>) {
                     <Action
                       actionStyle={ActionStyleTypes.Link |
                         ActionStyleTypes.Rounded}
-                      class="text-sm text-left w-full"
+                      class="ml-2 flex flex-row items-center text-sm text-left w-full"
                     >
-                      {device.Details!.Name}
+                      <span class="flex-1">{device.Details!.Name}</span>
+
+                      <EditIcon class="flex-none w-4 h-4" />
                     </Action>
                   );
                 })}
 
-                <div class="ml-2 mt-1 uppercase text-sm">Dashboards</div>
+                <div class="ml-2 mt-2 border-b-[1px] border-dotted border-slate-400 dark:border-slate-700">
+                </div>
+
+                <Action
+                  actionStyle={ActionStyleTypes.Link | ActionStyleTypes.Rounded}
+                  class="ml-2 flex flex-row items-center text-sm text-left w-full"
+                >
+                  <span class="flex-1">Create Device</span>
+
+                  <AddIcon class="flex-none w-4 h-4" />
+                </Action>
+
+                <div class="ml-2 mt-4 uppercase text-sm">Dashboards</div>
 
                 <div class="ml-2 border-b-[1px] border-dotted border-slate-400 dark:border-slate-700">
                 </div>
@@ -63,12 +77,26 @@ export function EaCIoTsDisplay(iots: Record<string, EaCIoTAsCode>) {
                     <Action
                       actionStyle={ActionStyleTypes.Link |
                         ActionStyleTypes.Rounded}
-                      class="text-sm text-left w-full"
+                      class="ml-2 flex flex-row items-center text-sm text-left w-full"
                     >
-                      {dashboard.Details!.Name}
+                      <span class="flex-1">{dashboard.Details!.Name}</span>
+
+                      <EditIcon class="flex-none w-4 h-4" />
                     </Action>
                   );
                 })}
+
+                <div class="ml-2 mt-2 border-b-[1px] border-dotted border-slate-400 dark:border-slate-700">
+                </div>
+
+                <Action
+                  actionStyle={ActionStyleTypes.Link | ActionStyleTypes.Rounded}
+                  class="ml-2 flex flex-row items-center text-sm text-left w-full"
+                >
+                  <span class="flex-1">Create Dashboard</span>
+
+                  <AddIcon class="flex-none w-4 h-4" />
+                </Action>
               </DropOutMenu>
             </div>
           );
