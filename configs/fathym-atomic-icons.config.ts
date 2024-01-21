@@ -3,19 +3,20 @@ import { IconSetConfig, IconSetGenerateConfig } from "@fathym/atomic-icons";
 export const curIconSetConfig: IconSetConfig = {
   IconMap: {
     add: "https://api.iconify.design/gg:add.svg",
-    check: "https://api.iconify.design/lets-icons:check-fill.svg",
     begin: "https://api.iconify.design/fe:beginner.svg",
-    delete: "https://api.iconify.design/material-symbols-light:delete.svg",
+    check: "https://api.iconify.design/lets-icons:check-fill.svg",
+    "chevron-down": "https://api.iconify.design/mdi:chevron-down.svg",
     "chevron-right":
       "https://api.iconify.design/material-symbols:chevron-right-rounded.svg",
-    "chevron-down": "https://api.iconify.design/mdi:chevron-down.svg",
-    "emulated-device":
-      "https://api.iconify.design/material-symbols:android-find-my-device-outline.svg",
     "connected-devices":
       "https://api.iconify.design/material-symbols:cast-connected-outline.svg",
     copy: "https://api.iconify.design/solar:copy-outline.svg",
+    delete: "https://api.iconify.design/material-symbols-light:delete.svg",
     "device-telemetry":
       "https://api.iconify.design/material-symbols:query-stats.svg",
+    edit: "https://api.iconify.design/mdi:edit.svg",
+    "emulated-device":
+      "https://api.iconify.design/material-symbols:android-find-my-device-outline.svg",
     error: "https://api.iconify.design/material-symbols:error.svg",
     loading: "https://api.iconify.design/line-md:loading-alt-loop.svg",
     menu: "https://api.iconify.design/ci:hamburger.svg",

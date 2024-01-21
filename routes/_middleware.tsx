@@ -25,6 +25,10 @@ async function loggedInCheck(
   req: Request,
   ctx: FreshContext<OpenBiotechManagerState>,
 ) {
+  if (ctx.destination !== "route" && ctx.destination !== "notFound") {
+    return await ctx.next();
+  }
+
   const url = new URL(req.url);
 
   const { origin, pathname, search, searchParams } = url;

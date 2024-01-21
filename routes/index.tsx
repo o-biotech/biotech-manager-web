@@ -1,6 +1,6 @@
 import { JSX } from "preact";
 import { Handlers, PageProps } from "$fresh/server.ts";
-import { EaCCreateForm } from "@fathym/atomic";
+import { EaCManageForm } from "@fathym/atomic";
 import CloudConnectHero from "../components/organisms/heros/CloudConnectHero.tsx";
 import ConnectDevicesHero from "../components/organisms/heros/ConnectDevicesHero.tsx";
 import SetupDataHero from "../components/organisms/heros/SetupDataHero.tsx";
@@ -35,7 +35,7 @@ export default function Home({
   if (!state.EaC) {
     currentHero = <CreateEaCHero isFirst={state.UserEaCs!.length > 0} />;
 
-    initialSteps = <EaCCreateForm />;
+    initialSteps = <EaCManageForm />;
   } else {
     initialSteps = <BiotechStepsFeatures setupPhase={data!.setupPhase} />;
 

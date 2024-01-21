@@ -1,6 +1,6 @@
 import { EaCEnterpriseDetails, UserEaCRecord } from "@fathym/eac";
 import { Action, ActionStyleTypes } from "@fathym/atomic";
-import { AddIcon } from "$fathym/atomic-icons";
+import { AddIcon, ChevronRightIcon, EditIcon } from "$fathym/atomic-icons";
 
 export function EaCEnterpriseDetailsDisplay(
   details: EaCEnterpriseDetails & {
@@ -15,13 +15,25 @@ export function EaCEnterpriseDetailsDisplay(
   return (
     <>
       <div class="ml-2">
-        <h2 class="text-lg font-bold">{details.Name}</h2>
+        <h2 class="flex flex-row items-center text-lg font-bold">
+          <span class="flex-1">{details.Name}</span>
+
+          <Action
+            actionStyle={ActionStyleTypes.Link |
+              ActionStyleTypes.Rounded |
+              ActionStyleTypes.Icon}
+            class="flex-none px-1 py-1 text-white"
+            href={`/enterprises/${details.entLookup}`}
+          >
+            <EditIcon class="w-4 h-4" />
+          </Action>
+        </h2>
 
         <p class="text-sm">{details.Description}</p>
       </div>
 
       <div>
-        <div class="flex flex-row items-center mt-2 uppercase text-md">
+        <div class="flex flex-row items-center mt-4 uppercase text-md">
           <span class="flex-1">Enterprise Options</span>
 
           <Action
@@ -40,7 +52,23 @@ export function EaCEnterpriseDetailsDisplay(
 
         <div class="ml-2">
           {otherEaCs && otherEaCs.length > 0
-            ? <span>{JSON.stringify(otherEaCs)}</span>
+            ? (
+              otherEaCs.map((eac) => {
+                return (
+                  <Action
+                    actionStyle={ActionStyleTypes.Link |
+                      ActionStyleTypes.Rounded |
+                      ActionStyleTypes.Icon}
+                    class="flex flex-row items-center px-1 py-1"
+                    href={`/enterprises/${eac.EnterpriseLookup}`}
+                  >
+                    <span class="flex-1">{eac.EnterpriseName}</span>
+
+                    <EditIcon class="flex-none w-4 h-4" />
+                  </Action>
+                );
+              })
+            )
             : <h3 class="text-md">No other enterprises available</h3>}
         </div>
       </div>
