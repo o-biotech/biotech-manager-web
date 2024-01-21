@@ -119,8 +119,8 @@ export default function Enterprises({
 
       <EaCManageForm
         entLookup={data.manageEaC?.EnterpriseLookup}
-        entName={data.manageEaC?.Details?.Name}
-        entDescription={data.manageEaC?.Details?.Description}
+        entName={data.manageEaC?.Details?.Name || undefined}
+        entDescription={data.manageEaC?.Details?.Description || undefined}
       />
 
       <div class="max-w-sm m-auto">
@@ -137,7 +137,6 @@ export default function Enterprises({
                   active={data.currentEaC?.EnterpriseLookup ===
                     enterprise.EnterpriseLookup}
                   enterprise={enterprise}
-                  completeStatus={EaCStatusProcessingTypes.COMPLETE}
                 />
               )
               : undefined;

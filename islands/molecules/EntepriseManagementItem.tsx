@@ -10,8 +10,6 @@ import { BeginIcon, DeleteIcon } from "$fathym/atomic-icons";
 export type EntepriseManagementItemProps = {
   active: boolean;
 
-  completeStatus: EaCStatusProcessingTypes;
-
   enterprise: UserEaCRecord;
 };
 
@@ -32,7 +30,7 @@ export function EntepriseManagementItem(props: EntepriseManagementItemProps) {
       }).then((response) => {
         // Why does EaCStatusProcessingTypes.COMPLETE break everything? Some issue with enums in island?
         response.json().then((status: EaCStatus) => {
-          if (status.Processing === props.completeStatus) {
+          if (status.Processing === 3) {
             location.reload();
           } else {
             console.log(status);
@@ -61,7 +59,7 @@ export function EntepriseManagementItem(props: EntepriseManagementItemProps) {
       }).then((response) => {
         response.json().then((status: EaCStatus) => {
           // Why does EaCStatusProcessingTypes.COMPLETE break everything? Some issue with enums from library in island?
-          if (status.Processing === props.completeStatus) {
+          if (status.Processing === 3) {
             location.reload();
           } else {
             console.log(status);

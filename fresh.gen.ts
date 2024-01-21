@@ -22,6 +22,7 @@ import * as $api_eac_iot_data_apis from "./routes/api/eac/iot/data-apis.ts";
 import * as $api_eac_iot_devices_ensure from "./routes/api/eac/iot/devices/ensure.ts";
 import * as $commit_commitId_status from "./routes/commit/[commitId]/status.tsx";
 import * as $enterprises_entLookup_index from "./routes/enterprises/[[entLookup]]/index.tsx";
+import * as $enterprises_handlers_handlerLookup_index from "./routes/enterprises/handlers/[[handlerLookup]]/index.tsx";
 import * as $getting_started_applications_index from "./routes/getting-started/applications/index.tsx";
 import * as $getting_started_cloud_middleware from "./routes/getting-started/cloud/_middleware.tsx";
 import * as $getting_started_cloud_index from "./routes/getting-started/cloud/index.tsx";
@@ -34,6 +35,7 @@ import * as $atoms_Redirect from "./islands/atoms/Redirect.tsx";
 import * as $atoms_Theme from "./islands/atoms/Theme.tsx";
 import * as $common_ProfileMenu from "./islands/common/ProfileMenu.tsx";
 import * as $molecules_CopyInput from "./islands/molecules/CopyInput.tsx";
+import * as $molecules_DeleteAction from "./islands/molecules/DeleteAction.tsx";
 import * as $molecules_EntepriseManagementItem from "./islands/molecules/EntepriseManagementItem.tsx";
 import * as $molecules_GitHubAccessAction from "./islands/molecules/GitHubAccessAction.tsx";
 import * as $molecules_InteractiveResponsiveSet from "./islands/molecules/InteractiveResponsiveSet.tsx";
@@ -72,6 +74,8 @@ const manifest = {
     "./routes/commit/[commitId]/status.tsx": $commit_commitId_status,
     "./routes/enterprises/[[entLookup]]/index.tsx":
       $enterprises_entLookup_index,
+    "./routes/enterprises/handlers/[[handlerLookup]]/index.tsx":
+      $enterprises_handlers_handlerLookup_index,
     "./routes/getting-started/applications/index.tsx":
       $getting_started_applications_index,
     "./routes/getting-started/cloud/_middleware.tsx":
@@ -89,6 +93,7 @@ const manifest = {
     "./islands/atoms/Theme.tsx": $atoms_Theme,
     "./islands/common/ProfileMenu.tsx": $common_ProfileMenu,
     "./islands/molecules/CopyInput.tsx": $molecules_CopyInput,
+    "./islands/molecules/DeleteAction.tsx": $molecules_DeleteAction,
     "./islands/molecules/EntepriseManagementItem.tsx":
       $molecules_EntepriseManagementItem,
     "./islands/molecules/GitHubAccessAction.tsx": $molecules_GitHubAccessAction,

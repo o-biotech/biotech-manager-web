@@ -11,6 +11,7 @@ export function EaCHandlersDisplay(handlers: EaCHandlers) {
         <Action
           actionStyle={ActionStyleTypes.Link | ActionStyleTypes.Rounded}
           class="ml-2 flex flex-row items-center text-sm text-left w-full"
+          href={`/enterprises/handlers/${handlerLookup}`}
         >
           <span class="flex-1">{handlerLookup}</span>
 
@@ -24,6 +25,7 @@ export function EaCHandlersDisplay(handlers: EaCHandlers) {
       <Action
         actionStyle={ActionStyleTypes.Link | ActionStyleTypes.Rounded}
         class="ml-2 flex flex-row items-center text-sm text-left w-full"
+        href="/enterprises/handlers"
       >
         <span class="flex-1">Create Handler</span>
 
