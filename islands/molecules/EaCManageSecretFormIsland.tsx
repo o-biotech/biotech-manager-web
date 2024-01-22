@@ -1,6 +1,6 @@
 import { EaCManageSecretForm, EaCManageSecretFormProps } from "@fathym/atomic";
 
-export default function EaCManageSecretFormIsland(
+export function EaCManageSecretFormIsland(
   props: EaCManageSecretFormProps,
 ) {
   return <EaCManageSecretForm {...props} />;

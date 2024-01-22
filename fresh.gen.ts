@@ -25,6 +25,7 @@ import * as $enterprises_entLookup_index from "./routes/enterprises/[[entLookup]
 import * as $enterprises_devops_actions_doaLookup_index from "./routes/enterprises/devops-actions/[[doaLookup]]/index.tsx";
 import * as $enterprises_handlers_handlerLookup_index from "./routes/enterprises/handlers/[[handlerLookup]]/index.tsx";
 import * as $enterprises_secrets_secretLookup_index from "./routes/enterprises/secrets/[[secretLookup]]/index.tsx";
+import * as $enterprises_source_connections_srcConnLookup_index from "./routes/enterprises/source-connections/[[srcConnLookup]]/index.tsx";
 import * as $getting_started_applications_index from "./routes/getting-started/applications/index.tsx";
 import * as $getting_started_cloud_middleware from "./routes/getting-started/cloud/_middleware.tsx";
 import * as $getting_started_cloud_index from "./routes/getting-started/cloud/index.tsx";
@@ -83,6 +84,8 @@ const manifest = {
       $enterprises_handlers_handlerLookup_index,
     "./routes/enterprises/secrets/[[secretLookup]]/index.tsx":
       $enterprises_secrets_secretLookup_index,
+    "./routes/enterprises/source-connections/[[srcConnLookup]]/index.tsx":
+      $enterprises_source_connections_srcConnLookup_index,
     "./routes/getting-started/applications/index.tsx":
       $getting_started_applications_index,
     "./routes/getting-started/cloud/_middleware.tsx":

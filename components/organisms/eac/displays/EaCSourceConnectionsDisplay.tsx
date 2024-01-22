@@ -17,6 +17,9 @@ export function EaCSourceConnectionsDisplay(
             <Action
               actionStyle={ActionStyleTypes.Link | ActionStyleTypes.Rounded}
               class="ml-2 flex flex-row items-center text-sm text-left w-full"
+              href={`/enterprises/source-connections/${
+                encodeURIComponent(srcConnLookup)
+              }`}
             >
               <span class="flex-1">{srcConn.Details!.Name}</span>
 
@@ -32,6 +35,7 @@ export function EaCSourceConnectionsDisplay(
       <Action
         actionStyle={ActionStyleTypes.Link | ActionStyleTypes.Rounded}
         class="ml-2 flex flex-row items-center text-sm text-left w-full"
+        href="/enterprises/source-connections"
       >
         <span class="flex-1">Create Connection</span>
 

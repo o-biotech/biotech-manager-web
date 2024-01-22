@@ -1,13 +1,7 @@
 import { Handlers, PageProps } from "$fresh/server.ts";
-import {
-  DisplayStyleTypes,
-  EaCManageDevOpsActionForm,
-  Hero,
-  HeroStyleTypes,
-} from "@fathym/atomic";
+import { DisplayStyleTypes, Hero, HeroStyleTypes } from "@fathym/atomic";
 import { redirectRequest, respond } from "@fathym/common";
 import {
-  EaCDevOpsActionAsCode,
   EaCSecretAsCode,
   EaCStatusProcessingTypes,
   waitForStatus,
@@ -16,7 +10,7 @@ import { OpenBiotechManagerState } from "../../../../src/OpenBiotechManagerState
 import { loadEaCSvc } from "../../../../configs/eac.ts";
 import { OpenBiotechEaC } from "../../../../src/eac/OpenBiotechEaC.ts";
 import { DeleteAction } from "../../../../islands/molecules/DeleteAction.tsx";
-import EaCManageSecretFormIsland from "../../../../islands/molecules/EaCManageSecretFormIsland.tsx";
+import { EaCManageSecretFormIsland } from "../../../../islands/molecules/EaCManageSecretFormIsland.tsx";
 
 export type EaCSecretsPageData = {
   cloudOptions: { cloudLookup: string; cloudName: string }[];

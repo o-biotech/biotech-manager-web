@@ -13,7 +13,7 @@ export function GitHubAccessAction(props: ActionProps) {
   useEffect(() => {
     console.log(location);
 
-    const successUrl = location.href;
+    const successUrl = encodeURI(location.href);
 
     const href = `/github/access/signin?success_url=${successUrl}`;
 
