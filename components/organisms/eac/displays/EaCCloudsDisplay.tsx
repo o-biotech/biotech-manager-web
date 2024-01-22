@@ -1,6 +1,6 @@
 import { EaCCloudAsCode } from "@fathym/eac";
-import { Action, ActionStyleTypes } from "@fathym/atomic";
-import { AddIcon, EditIcon } from "$fathym/atomic-icons";
+import { Action, ActionGroup, ActionStyleTypes } from "@fathym/atomic";
+import { AddIcon, EditIcon, SettingsIcon } from "$fathym/atomic-icons";
 
 export function EaCCloudsDisplay(clouds: Record<string, EaCCloudAsCode>) {
   const cloudLookups = Object.keys(clouds);
@@ -11,16 +11,27 @@ export function EaCCloudsDisplay(clouds: Record<string, EaCCloudAsCode>) {
         const cloud = clouds[cloudLookup];
 
         return (
-          <>
-            <Action
-              actionStyle={ActionStyleTypes.Link | ActionStyleTypes.Rounded}
-              class="ml-2 flex flex-row items-center text-sm text-left w-full"
-            >
-              <span class="flex-1">{cloud.Details!.Name}</span>
+          <ActionGroup class="flex flex-row items-center">
+            <>
+              <Action
+                actionStyle={ActionStyleTypes.Link | ActionStyleTypes.Rounded}
+                class="flex-1 flex flex-row items-center text-sm text-left"
+              >
+                <span class="flex-1">{cloud.Details!.Name}</span>
 
-              <EditIcon class="flex-none w-4 h-4" />
-            </Action>
-          </>
+                <EditIcon class="flex-none w-4 h-4" />
+              </Action>
+
+              <Action
+                actionStyle={ActionStyleTypes.Link |
+                  ActionStyleTypes.Rounded |
+                  ActionStyleTypes.Icon}
+                class="flex-none text-sm text-left"
+              >
+                <SettingsIcon class="w-4 h-4" />
+              </Action>
+            </>
+          </ActionGroup>
         );
       })}
 

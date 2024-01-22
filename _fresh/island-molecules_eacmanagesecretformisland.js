@@ -1,1 +1,1 @@
-import{h as a}from"./chunk-JB7CRVBN.js";import"./chunk-2GUEMEWN.js";import"./chunk-IN5SKDVW.js";import{a as r}from"./chunk-BRQEXE2C.js";import"./chunk-BV6DNIGX.js";import"./chunk-DQW7DUIU.js";function t(e){return r(a,{...e})}export{t as EaCManageSecretFormIsland};
+import{i as a}from"./chunk-Z7JG5HDW.js";import"./chunk-2GUEMEWN.js";import"./chunk-IN5SKDVW.js";import{a as r}from"./chunk-BRQEXE2C.js";import"./chunk-BV6DNIGX.js";import"./chunk-DQW7DUIU.js";function t(e){return r(a,{...e})}export{t as EaCManageSecretFormIsland};

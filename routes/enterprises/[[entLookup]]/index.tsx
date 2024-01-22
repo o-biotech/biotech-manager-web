@@ -124,6 +124,14 @@ export default function Enterprises({
       />
 
       <div class="max-w-sm m-auto">
+        <label
+          for="subscription-plan"
+          class="block uppercase tracking-wide font-bold mb-2 text-xl text-center"
+        >
+          Enterprise{" "}
+          {data.manageEaC?.EnterpriseLookup ? "Management" : "Options"}
+        </label>
+
         <div class="border-b-[1px] border-dotted border-slate-400 dark:border-slate-700">
         </div>
 
@@ -137,6 +145,8 @@ export default function Enterprises({
                   active={data.currentEaC?.EnterpriseLookup ===
                     enterprise.EnterpriseLookup}
                   enterprise={enterprise}
+                  manage={data.manageEaC?.EnterpriseLookup ===
+                    enterprise.EnterpriseLookup}
                 />
               )
               : undefined;

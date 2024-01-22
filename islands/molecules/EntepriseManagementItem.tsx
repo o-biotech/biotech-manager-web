@@ -5,12 +5,14 @@ import {
   EaCStatusProcessingTypes,
   UserEaCRecord,
 } from "@fathym/eac";
-import { BeginIcon, DeleteIcon } from "$fathym/atomic-icons";
+import { BeginIcon, DeleteIcon, EditIcon } from "$fathym/atomic-icons";
 
 export type EntepriseManagementItemProps = {
   active: boolean;
 
   enterprise: UserEaCRecord;
+
+  manage: boolean;
 };
 
 export function EntepriseManagementItem(props: EntepriseManagementItemProps) {
@@ -76,9 +78,21 @@ export function EntepriseManagementItem(props: EntepriseManagementItemProps) {
 
       <ActionGroup class="flex-none">
         <>
+          {!props.manage && (
+            <Action
+              actionStyle={ActionStyleTypes.Link | ActionStyleTypes.Rounded}
+              class="px-1 py-1"
+              href={`/enterprises/${props.enterprise.EnterpriseLookup}`}
+            >
+              <EditIcon class="w-6 h-6 text-blue-500" />
+            </Action>
+          )}
+
           {!props.active && (
             <form onSubmit={(e) => setActiveEnterprise(e)}>
-              <Action actionStyle={ActionStyleTypes.Link}>
+              <Action
+                actionStyle={ActionStyleTypes.Link | ActionStyleTypes.Rounded}
+              >
                 <BeginIcon class="w-6 h-6 text-sky-500" />
               </Action>
             </form>

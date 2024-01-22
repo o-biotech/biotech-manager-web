@@ -22,8 +22,13 @@ import * as $api_eac_iot_data_apis from "./routes/api/eac/iot/data-apis.ts";
 import * as $api_eac_iot_devices_ensure from "./routes/api/eac/iot/devices/ensure.ts";
 import * as $commit_commitId_status from "./routes/commit/[commitId]/status.tsx";
 import * as $enterprises_entLookup_index from "./routes/enterprises/[[entLookup]]/index.tsx";
+import * as $enterprises_clouds_cloudLookup_index from "./routes/enterprises/clouds/[[cloudLookup]]/index.tsx";
+import * as $enterprises_clouds_cloudLookup_settings from "./routes/enterprises/clouds/[[cloudLookup]]/settings.tsx";
 import * as $enterprises_devops_actions_doaLookup_index from "./routes/enterprises/devops-actions/[[doaLookup]]/index.tsx";
 import * as $enterprises_handlers_handlerLookup_index from "./routes/enterprises/handlers/[[handlerLookup]]/index.tsx";
+import * as $enterprises_iot_iotLookup_dashboards_dashboardLookup_index from "./routes/enterprises/iot/[[iotLookup]]/dashboards/[[dashboardLookup]]/index.tsx";
+import * as $enterprises_iot_iotLookup_devices_deviceLookup_index from "./routes/enterprises/iot/[[iotLookup]]/devices/[[deviceLookup]]/index.tsx";
+import * as $enterprises_iot_iotLookup_index from "./routes/enterprises/iot/[[iotLookup]]/index.tsx";
 import * as $enterprises_secrets_secretLookup_index from "./routes/enterprises/secrets/[[secretLookup]]/index.tsx";
 import * as $enterprises_source_connections_srcConnLookup_index from "./routes/enterprises/source-connections/[[srcConnLookup]]/index.tsx";
 import * as $getting_started_applications_index from "./routes/getting-started/applications/index.tsx";
@@ -39,6 +44,7 @@ import * as $atoms_Theme from "./islands/atoms/Theme.tsx";
 import * as $common_ProfileMenu from "./islands/common/ProfileMenu.tsx";
 import * as $molecules_CopyInput from "./islands/molecules/CopyInput.tsx";
 import * as $molecules_DeleteAction from "./islands/molecules/DeleteAction.tsx";
+import * as $molecules_EaCManageIoTFormIsland from "./islands/molecules/EaCManageIoTFormIsland.tsx";
 import * as $molecules_EaCManageSecretFormIsland from "./islands/molecules/EaCManageSecretFormIsland.tsx";
 import * as $molecules_EntepriseManagementItem from "./islands/molecules/EntepriseManagementItem.tsx";
 import * as $molecules_GitHubAccessAction from "./islands/molecules/GitHubAccessAction.tsx";
@@ -78,10 +84,20 @@ const manifest = {
     "./routes/commit/[commitId]/status.tsx": $commit_commitId_status,
     "./routes/enterprises/[[entLookup]]/index.tsx":
       $enterprises_entLookup_index,
+    "./routes/enterprises/clouds/[[cloudLookup]]/index.tsx":
+      $enterprises_clouds_cloudLookup_index,
+    "./routes/enterprises/clouds/[[cloudLookup]]/settings.tsx":
+      $enterprises_clouds_cloudLookup_settings,
     "./routes/enterprises/devops-actions/[[doaLookup]]/index.tsx":
       $enterprises_devops_actions_doaLookup_index,
     "./routes/enterprises/handlers/[[handlerLookup]]/index.tsx":
       $enterprises_handlers_handlerLookup_index,
+    "./routes/enterprises/iot/[[iotLookup]]/dashboards/[[dashboardLookup]]/index.tsx":
+      $enterprises_iot_iotLookup_dashboards_dashboardLookup_index,
+    "./routes/enterprises/iot/[[iotLookup]]/devices/[[deviceLookup]]/index.tsx":
+      $enterprises_iot_iotLookup_devices_deviceLookup_index,
+    "./routes/enterprises/iot/[[iotLookup]]/index.tsx":
+      $enterprises_iot_iotLookup_index,
     "./routes/enterprises/secrets/[[secretLookup]]/index.tsx":
       $enterprises_secrets_secretLookup_index,
     "./routes/enterprises/source-connections/[[srcConnLookup]]/index.tsx":
@@ -104,6 +120,8 @@ const manifest = {
     "./islands/common/ProfileMenu.tsx": $common_ProfileMenu,
     "./islands/molecules/CopyInput.tsx": $molecules_CopyInput,
     "./islands/molecules/DeleteAction.tsx": $molecules_DeleteAction,
+    "./islands/molecules/EaCManageIoTFormIsland.tsx":
+      $molecules_EaCManageIoTFormIsland,
     "./islands/molecules/EaCManageSecretFormIsland.tsx":
       $molecules_EaCManageSecretFormIsland,
     "./islands/molecules/EntepriseManagementItem.tsx":

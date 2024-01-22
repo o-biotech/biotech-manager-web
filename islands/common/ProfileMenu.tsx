@@ -26,7 +26,7 @@ export default function ProfileMenu(props: ProfileMenuProps) {
     >
       <>
         <Action
-          onClick={() => alert("Sign out")}
+          href="/signout"
           actionStyle={ActionStyleTypes.Outline | ActionStyleTypes.Solid}
           class="w-full"
         >

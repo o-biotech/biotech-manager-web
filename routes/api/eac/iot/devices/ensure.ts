@@ -24,6 +24,10 @@ export const handler: Handlers<any, OpenBiotechManagerState> = {
       EnterpriseLookup: ctx.state.EaC!.EnterpriseLookup,
       IoT: {
         [iotLookup]: {
+          Details: {
+            Name: "IoT Flow",
+            Description: "Main IoT flow for use in collecting device data.",
+          },
           CloudLookup: cloudLookup,
           ResourceGroupLookup: resGroupLookup,
           Devices: {
