@@ -184,6 +184,9 @@ export const handler: Handlers<any, OpenBiotechManagerState> = {
 
       eac.Secrets![secretLookup] = {
         Details: {
+          Name: "IoT Devices Flow - Publish Profile",
+          Description:
+            "The publish profile to use for deploying the IoT devices flow.",
           Value:
             `$connections:$.eac.Clouds['${cloudLookup}'].ResourceGroups['${resGroupLookup}'].Resources['${resLookup}'].Resources['${resLookup}-hot'].Profiles['Microsoft.Web/sites/${shortName}-iot-devices-flow']['_']`,
         },

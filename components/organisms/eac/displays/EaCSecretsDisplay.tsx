@@ -13,6 +13,7 @@ export function EaCSecretsDisplay(secrets: Record<string, EaCSecretAsCode>) {
             <Action
               actionStyle={ActionStyleTypes.Link | ActionStyleTypes.Rounded}
               class="ml-2 flex flex-row items-center text-sm text-left w-full"
+              href={`/enterprises/secrets/${secretLookup}`}
             >
               <span class="flex-1">{secretLookup}</span>
 
@@ -28,6 +29,7 @@ export function EaCSecretsDisplay(secrets: Record<string, EaCSecretAsCode>) {
       <Action
         actionStyle={ActionStyleTypes.Link | ActionStyleTypes.Rounded}
         class="ml-2 flex flex-row items-center text-sm text-left w-full"
+        href="/enterprises/secrets"
       >
         <span class="flex-1">Create Secret</span>
 

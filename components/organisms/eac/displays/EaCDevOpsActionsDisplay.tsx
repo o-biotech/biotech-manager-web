@@ -17,6 +17,7 @@ export function EaCDevOpsActionsDisplay(
             <Action
               actionStyle={ActionStyleTypes.Link | ActionStyleTypes.Rounded}
               class="ml-2 flex flex-row items-center text-sm text-left w-full"
+              href={`/enterprises/devops-actions/${devOpsActionLookup}`}
             >
               <span class="flex-1">{devOpsAction.Details!.Name}</span>
 
@@ -32,6 +33,7 @@ export function EaCDevOpsActionsDisplay(
       <Action
         actionStyle={ActionStyleTypes.Link | ActionStyleTypes.Rounded}
         class="ml-2 flex flex-row items-center text-sm text-left w-full"
+        href="/enterprises/devops-actions"
       >
         <span class="flex-1">Create Action</span>
 
