@@ -1,5 +1,5 @@
 {
-  "build_id": "89b753f56180d083439fe829cf8a2a4ed0e063cc",
+  "build_id": "d22727d31f29f882e3c91d14cc0ee3481c3c9060",
   "files": {
     "island-organisms_cloud_iot_hot_flow_input.js": [
       "chunk-XWQPNUPC.js",
@@ -14,7 +14,19 @@
     "island-organisms_data_api_develop_form.js": [
       "chunk-7TLEBYSO.js",
       "chunk-GRAJADRK.js",
-      "chunk-NBM6TZ27.js",
+      "chunk-POZO77GS.js",
+      "chunk-L2HAACAO.js",
+      "chunk-Z7JG5HDW.js",
+      "chunk-2GUEMEWN.js",
+      "chunk-IN5SKDVW.js",
+      "chunk-BRQEXE2C.js",
+      "chunk-BV6DNIGX.js",
+      "chunk-DQW7DUIU.js"
+    ],
+    "island-organisms_data_dashboard_display.js": [
+      "chunk-GY5VXYBX.js",
+      "chunk-GRAJADRK.js",
+      "chunk-POZO77GS.js",
       "chunk-L2HAACAO.js",
       "chunk-Z7JG5HDW.js",
       "chunk-2GUEMEWN.js",
@@ -24,9 +36,10 @@
       "chunk-DQW7DUIU.js"
     ],
     "island-organisms_data_explore_form.js": [
+      "chunk-GY5VXYBX.js",
       "chunk-KDZBTB6T.js",
       "chunk-GRAJADRK.js",
-      "chunk-NBM6TZ27.js",
+      "chunk-POZO77GS.js",
       "chunk-L2HAACAO.js",
       "chunk-Z7JG5HDW.js",
       "chunk-2GUEMEWN.js",
@@ -35,9 +48,17 @@
       "chunk-BV6DNIGX.js",
       "chunk-DQW7DUIU.js"
     ],
+    "chunk-GY5VXYBX.js": [
+      "chunk-POZO77GS.js",
+      "chunk-L2HAACAO.js",
+      "chunk-Z7JG5HDW.js",
+      "chunk-IN5SKDVW.js",
+      "chunk-BRQEXE2C.js",
+      "chunk-BV6DNIGX.js"
+    ],
     "island-organisms_iot_device_data_flowing.js": [
       "chunk-GRAJADRK.js",
-      "chunk-NBM6TZ27.js",
+      "chunk-POZO77GS.js",
       "chunk-L2HAACAO.js",
       "chunk-Z7JG5HDW.js",
       "chunk-2GUEMEWN.js",
@@ -172,7 +193,7 @@
     ],
     "island-molecules_sidebar.js": [
       "chunk-GRAJADRK.js",
-      "chunk-NBM6TZ27.js",
+      "chunk-POZO77GS.js",
       "chunk-L2HAACAO.js",
       "chunk-Z7JG5HDW.js",
       "chunk-2GUEMEWN.js",
@@ -185,12 +206,12 @@
       "chunk-BV6DNIGX.js"
     ],
     "main.js": [
-      "chunk-NBM6TZ27.js",
+      "chunk-POZO77GS.js",
       "chunk-2GUEMEWN.js",
       "chunk-BV6DNIGX.js",
       "chunk-DQW7DUIU.js"
     ],
-    "chunk-NBM6TZ27.js": [],
+    "chunk-POZO77GS.js": [],
     "deserializer.js": [
       "chunk-DQW7DUIU.js"
     ],

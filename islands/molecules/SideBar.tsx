@@ -72,14 +72,20 @@ export default function SideBar(props: SideBarProps) {
   };
 
   const selectMenu = (menu: string) => {
-    localStorage.SideBarCurrentMenu = menu;
-
-    setCurrentMenu(localStorage.SideBarCurrentMenu);
-
-    setCurrentMenuSettings(menuItemsSettings[localStorage.SideBarCurrentMenu]);
-
-    if (isClosed) {
+    if (localStorage.SideBarCurrentMenu === menu) {
       toggleMenu();
+    } else {
+      localStorage.SideBarCurrentMenu = menu;
+
+      setCurrentMenu(localStorage.SideBarCurrentMenu);
+
+      setCurrentMenuSettings(
+        menuItemsSettings[localStorage.SideBarCurrentMenu],
+      );
+
+      if (isClosed) {
+        toggleMenu();
+      }
     }
   };
 
@@ -149,12 +155,7 @@ export default function SideBar(props: SideBarProps) {
         </div>
       </div>
 
-      <div
-        class={classSet(
-          undefined,
-          props.disableToggle ? "ml-64" : "ml-12",
-        )}
-      >
+      <div class={classSet(undefined, props.disableToggle ? "ml-64" : "ml-12")}>
         {props.children}
       </div>
     </>

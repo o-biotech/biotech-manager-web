@@ -10,9 +10,8 @@ import {
 } from "@fathym/atomic";
 import { RenewIcon } from "$fathym/atomic-icons";
 import { callToActionStyles } from "../../../components/styles/actions.tsx";
-import { DashboardDisplay } from "./dashboard-display.tsx";
 
-export type DataExploreFormProps = {
+export type DashboardDisplayProps = {
   dashboardTypes: string[];
 
   jwt: string;
@@ -22,12 +21,22 @@ export type DataExploreFormProps = {
   kustoLocation: string;
 } & JSX.HTMLAttributes<HTMLFormElement>;
 
-export function DataExploreForm(props: DataExploreFormProps) {
-  if (!IS_BROWSER) return <></>;
+export function DashboardDisplay(props: DashboardDisplayProps) {
+  if (!IS_BROWSER) {
+    return (
+      <>
+        <RenewIcon class="w-20 h-20 text-blue-500 animate-spin inline-block m-4" />
+      </>
+    );
+  }
 
   const iframeRef = useRef<HTMLIFrameElement>(null);
 
   const [isLoaded, setIsLoaded] = useState(false);
+
+  const [currentDashboard, setCurrentDashboard] = useState(
+    props.dashboardTypes[0] || "",
+  );
 
   if (props.dashboardTypes.includes("AzureDataExplorer")) {
     const mapScope = (scope: string) => {
@@ -99,6 +108,22 @@ export function DataExploreForm(props: DataExploreFormProps) {
         <RenewIcon class="w-20 h-20 text-blue-500 animate-spin inline-block m-4" />
       )}
 
+      {isLoaded && (
+        <p>
+          If you receive an error about failure to read 'localStorage' visit
+          {" "}
+          <Action
+            class="inline-block !text-black hover:!text-white"
+            actionStyle={ActionStyleTypes.Link}
+            href="https://www.chromium.org/for-testers/bug-reporting-guidelines/uncaught-securityerror-failed-to-read-the-localstorage-property-from-window-access-is-denied-for-this-document/#:~:text=This%20exception%20is%20thrown%20when,the%20fourth%20item%20under%20Cookies."
+            target="_blank"
+          >
+            this
+          </Action>{" "}
+          page to fix.
+        </p>
+      )}
+
       <iframe
         class="w-full h-[600px]"
         ref={iframeRef}
@@ -108,49 +133,51 @@ export function DataExploreForm(props: DataExploreFormProps) {
     </>
   );
 
+  const dashboardDisplay = currentDashboard === "AzureDataExplorer"
+    ? kustoIframe
+    : currentDashboard === "Freeboard"
+    ? <div>Freeboard coming soon</div>
+    : <div>No dashboards configured</div>;
+
   return (
-    <form
-      method="post"
-      action="/api/eac/data/explore"
-      {...props}
-      class={classSet(props, "w-full mx-auto p-3 mt-8")}
-    >
-      <div class="flex flex-wrap -mx-3 mb-4 text-left">
-        <div class="w-full p-3">
-          <Input id="explored" name="explored" type="hidden" value="true" />
+    <>
+      <ul class="flex flex-wrap text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400">
+        {props.dashboardTypes.some((dt) => dt === "AzureDataExplorer") && (
+          <li class="me-2">
+            <a
+              onClick={() => setCurrentDashboard("AzureDataExplorer")}
+              aria-current="page"
+              class="inline-block p-4 text-blue-600 bg-gray-100 rounded-t-lg active dark:bg-gray-800 dark:text-blue-500"
+            >
+              Azure Data Explorer
+            </a>
+          </li>
+        )}
 
-          <label class="block uppercase tracking-wide font-bold mb-2 text-xl">
-            Explore Data
-          </label>
+        {props.dashboardTypes.some((dt) => dt === "Freeboard") && (
+          <li class="me-2">
+            <a
+              onClick={() => setCurrentDashboard("Freeboard")}
+              aria-current="page"
+              class="inline-block p-4 text-blue-600 bg-gray-100 rounded-t-lg active dark:bg-gray-800 dark:text-blue-500"
+            >
+              Freeboard
+            </a>
+          </li>
+        )}
+        {
+          /* <li class="me-2">
+        <a
+          href="#"
+          class="inline-block p-4 rounded-t-lg hover:text-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 dark:hover:text-gray-300"
+        >
+          Dashboard
+        </a>
+      </li> */
+        }
+      </ul>
 
-          <p class="block text-md mb-8">
-            Now that data is flowing, the next step is to explore the dashboards
-            you configured previously, or skip ahead to see what other
-            development you can implement with your data.
-          </p>
-
-          <DashboardDisplay
-            dashboardTypes={props.dashboardTypes}
-            jwt={props.jwt}
-            kustoCluster={props.kustoCluster}
-            kustoLocation={props.kustoLocation}
-          />
-        </div>
-      </div>
-
-      <ActionGroup class="mt-8 flex-col">
-        <>
-          <Action
-            type="submit"
-            class={classSet(
-              callToActionStyles.props,
-              "w-full md:w-auto text-white font-bold m-1 py-2 px-4 rounded focus:outline-none shadow-lg",
-            )}
-          >
-            Move to Develop Solutions
-          </Action>
-        </>
-      </ActionGroup>
-    </form>
+      {dashboardDisplay}
+    </>
   );
 }

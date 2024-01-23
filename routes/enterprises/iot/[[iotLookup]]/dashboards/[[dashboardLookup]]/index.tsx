@@ -1,5 +1,13 @@
 import { Handlers, PageProps } from "$fresh/server.ts";
-import { DisplayStyleTypes, Hero, HeroStyleTypes } from "@fathym/atomic";
+import {
+  Action,
+  ActionGroup,
+  classSet,
+  DisplayStyleTypes,
+  Hero,
+  HeroStyleTypes,
+  Input,
+} from "@fathym/atomic";
 import { redirectRequest, respond } from "@fathym/common";
 import {
   EaCDashboardAsCode,
@@ -10,11 +18,23 @@ import { OpenBiotechManagerState } from "../../../../../../src/OpenBiotechManage
 import { loadEaCSvc } from "../../../../../../configs/eac.ts";
 import { OpenBiotechEaC } from "../../../../../../src/eac/OpenBiotechEaC.ts";
 import { DeleteAction } from "../../../../../../islands/molecules/DeleteAction.tsx";
+import { callToActionStyles } from "../../../../../../components/styles/actions.tsx";
+import { DashboardDisplay } from "../../../../../../islands/organisms/data/dashboard-display.tsx";
 
 export type EaCIoTDashboardPageData = {
+  dashboardOptions: { name: string; lookup: string }[];
+
+  dashboardTypes: string[];
+
   entLookup: string;
 
   iotLookup: string;
+
+  jwt: string;
+
+  kustoCluster: string;
+
+  kustoLocation: string;
 
   manageDashboard?: EaCDashboardAsCode;
 
@@ -25,28 +45,89 @@ export const handler: Handlers<
   EaCIoTDashboardPageData,
   OpenBiotechManagerState
 > = {
-  GET(_, ctx) {
+  async GET(_, ctx) {
     const iotLookup: string = ctx.params.iotLookup;
 
     const manageDashboardLookup: string = ctx.params.dashboardLookup;
 
     let manageDashboard: EaCDashboardAsCode | undefined = undefined;
 
+    let dashboardTypes: string[] = [];
+
+    let kustoCluster = "";
+
+    let kustoLocation = "";
+
     if (manageDashboardLookup) {
-      manageDashboard = ctx.state.EaC!.IoT![iotLookup]!
-        .Dashboards![manageDashboardLookup]!;
+      const iot = ctx.state.EaC!.IoT![iotLookup]!;
+
+      manageDashboard = iot.Dashboards![manageDashboardLookup]!;
 
       if (!manageDashboard) {
         return redirectRequest(`/enterprises/iot/${iotLookup}/dashboards`);
       }
+
+      const eacSvc = await loadEaCSvc(ctx.state.EaCJWT!);
+
+      const eacConnections = await eacSvc.Connections<OpenBiotechEaC>({
+        EnterpriseLookup: ctx.state.EaC!.EnterpriseLookup!,
+        Clouds: {
+          [iot.CloudLookup!]: {
+            ResourceGroups: {
+              [iot.ResourceGroupLookup!]: {
+                Resources: {
+                  ["iot-flow"]: {
+                    Resources: {},
+                  },
+                },
+              },
+            },
+          },
+        },
+      });
+
+      const iotFlowResource =
+        eacConnections.Clouds![iot.CloudLookup!].ResourceGroups![
+          iot.ResourceGroupLookup!
+        ].Resources!["iot-flow"];
+
+      const resKeys = iotFlowResource.Keys as Record<string, unknown>;
+
+      const shortName = iot
+        .ResourceGroupLookup!.split("-")
+        .map((p) => p.charAt(0))
+        .join("");
+
+      const resLocations = iotFlowResource.Resources!["iot-flow-warm"]
+        .Locations as Record<string, string>;
+
+      kustoCluster = `${shortName}-data-explorer`;
+
+      kustoLocation = resLocations[`Microsoft.Kusto/clusters/${kustoCluster}`];
+
+      dashboardTypes = [manageDashboard.Details!.Type];
     }
 
     const data: EaCIoTDashboardPageData = {
+      dashboardOptions: [],
+      dashboardTypes: dashboardTypes,
       entLookup: ctx.state.EaC!.EnterpriseLookup!,
       iotLookup: iotLookup,
+      jwt: ctx.state.Devices.JWT,
+      kustoCluster: kustoCluster,
+      kustoLocation: kustoLocation,
       manageDashboard: manageDashboard,
       manageDashboardLookup: manageDashboardLookup,
     };
+
+    data.dashboardOptions = [
+      { name: "Freeboard", lookup: "freeboard" },
+      { name: "Azure Data Explorer", lookup: "azure-data-explorer" },
+    ].filter(
+      (d) => !(d.lookup in (ctx.state.EaC!.IoT![iotLookup]!.Dashboards || {})),
+    );
+    // data.dashboardOptions = [""].filter((do) => ture);
+    // Array.from([""]).forEach((do) => true);
 
     return ctx.render(data);
   },
@@ -64,11 +145,17 @@ export const handler: Handlers<
         [iotLookup]: {
           Dashboards: {
             [dashboardLookup]: {
-              Details: {
-                Name: formData.get("name") as string,
-                Description: formData.get("description") as string,
-                Type: formData.get("type") as string,
-              },
+              Details: dashboardLookup === "freeboard"
+                ? {
+                  Name: "Freeboard",
+                  Description: "The embeded instance of freeboard.",
+                  Type: "Freeboard",
+                }
+                : {
+                  Name: "Azure Data Explorer",
+                  Description: "The embeded instance of azure data explorer.",
+                  Type: "AzureDataExplorer",
+                },
             },
           },
         },
@@ -150,18 +237,88 @@ export default function EaCIoTDashboard({
             ? `Manage the '${data.manageDashboard.Details?.Name}' IoT dashboard`
             : "Create new dashboard"}
         </h1>
-
-        TODO: Add non existing dashboards
       </div>
 
+      {!data.manageDashboard &&
+        (data.dashboardOptions.length > 0
+          ? (
+            <form method="post" class="mx-auto max-w-sm">
+              <div class="w-full mb-2">
+                <Input
+                  id="entLookup"
+                  name="entLookup"
+                  type="hidden"
+                  value={data.entLookup}
+                />
+
+                <Input
+                  id="iotLookup"
+                  name="iotLookup"
+                  type="hidden"
+                  value={data.iotLookup}
+                />
+
+                <label
+                  for="dashboardLookup"
+                  class="block uppercase tracking-wide font-bold mb-2 text-sm"
+                >
+                  Dashboard Type
+                </label>
+
+                <select
+                  id="dashboardLookup"
+                  name="dashboardLookup"
+                  required
+                  class="appearance-none block w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 rounded-lg shadow-sm focus:outline-none focus:shadow-lg focus:border-blue-500 placeholder-gray-500"
+                >
+                  <option>-- Select Dashboard --</option>
+                  {data.dashboardOptions.map((d) => {
+                    return <option value={d.lookup}>{d.name}</option>;
+                  })}
+                </select>
+              </div>
+
+              <ActionGroup class="mt-8 flex-col">
+                <>
+                  <Action
+                    type="submit"
+                    class={classSet(
+                      callToActionStyles.props,
+                      "w-full text-white font-bold m-1 py-2 px-4 rounded focus:outline-none shadow-lg",
+                    )}
+                  >
+                    Add Dashboard
+                  </Action>
+                </>
+              </ActionGroup>
+            </form>
+          )
+          : (
+            <h1 class="text-lg mx-auto max-w-sm">
+              All dashboard types are added, no dashboards available to add
+            </h1>
+          ))}
+
       {data.manageDashboardLookup && (
-        <div class="max-w-sm mx-auto mb-4">
-          <DeleteAction
-            message={`Are you sure you want to delete EaC IoT Dashboard '${data.manageDashboard?.Details?.Name}?`}
-          >
-            Delete EaC IoT Dashboard
-          </DeleteAction>
-        </div>
+        <>
+          <div class="flex flex-wrap mx-3 mb-4 text-left">
+            <div class="w-full p-3">
+              <DashboardDisplay
+                dashboardTypes={data.dashboardTypes}
+                jwt={data.jwt}
+                kustoCluster={data.kustoCluster}
+                kustoLocation={data.kustoLocation}
+              />
+            </div>
+          </div>
+          <div class="max-w-sm mx-auto mb-4">
+            <DeleteAction
+              message={`Are you sure you want to delete EaC IoT Dashboard '${data.manageDashboard?.Details?.Name}?`}
+            >
+              Delete EaC IoT Dashboard
+            </DeleteAction>
+          </div>
+        </>
       )}
     </>
   );

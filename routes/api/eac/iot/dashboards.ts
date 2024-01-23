@@ -17,7 +17,7 @@ export const handler: Handlers<any, OpenBiotechManagerState> = {
 
     const iotLookup = formData.get("iotLookup") as string;
 
-    const dataExplorer = !!(formData.get("dataExplorer") as string);
+    const dataExplorer = !!(formData.get("azure-data-explorer") as string);
 
     // const fathymDataDashboard =
     //   !!(formData.get("fathymDataDashboard") as string);
