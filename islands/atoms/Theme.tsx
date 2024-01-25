@@ -17,7 +17,7 @@ export default function Theme() {
 
   useEffect(() => {
     const isDarkTheme = !("theme" in localStorage) &&
-      window.matchMedia(darkMedia).matches;
+      matchMedia(darkMedia).matches;
 
     if (localStorage.theme === "dark" || isDarkTheme) {
       setDark();
@@ -25,7 +25,7 @@ export default function Theme() {
       setLight();
     }
 
-    window.matchMedia(darkMedia).addEventListener("change", ({ matches }) => {
+    matchMedia(darkMedia).addEventListener("change", ({ matches }) => {
       if (matches) {
         setDark();
       } else {

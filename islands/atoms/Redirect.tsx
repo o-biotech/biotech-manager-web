@@ -6,11 +6,11 @@ export type RedirectProps = {
 
 export function Redirect(props: RedirectProps) {
   setTimeout(() => {
-    if (window.location) {
+    if (location) {
       if (props.redirect) {
-        window.location.href = props.redirect;
+        location.href = props.redirect;
       } else {
-        window.location.reload();
+        location.reload();
       }
     }
   }, props.interval);

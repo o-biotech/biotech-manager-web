@@ -1,1 +1,1 @@
-import{a as r}from"./chunk-BRQEXE2C.js";import{d as i}from"./chunk-BV6DNIGX.js";import"./chunk-DQW7DUIU.js";function t(e){return setTimeout(()=>{window.location&&(e.redirect?window.location.href=e.redirect:window.location.reload())},e.interval),r(i,{})}export{t as Redirect};
+import{a as t}from"./chunk-BRQEXE2C.js";import{d as r}from"./chunk-BV6DNIGX.js";import"./chunk-DQW7DUIU.js";function i(e){return setTimeout(()=>{location&&(e.redirect?location.href=e.redirect:location.reload())},e.interval),t(r,{})}export{i as Redirect};
