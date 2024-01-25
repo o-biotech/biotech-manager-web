@@ -6,7 +6,7 @@ import {
   StepsFeaturesProps,
 } from "@fathym/atomic";
 import { CloudPhaseTypes } from "../../../src/CloudPhaseTypes.tsx";
-import CloudIoTForm from "./iot.form.tsx";
+import { CloudIoTForm } from "./iot.form.tsx";
 import { CloudConnectForms } from "./CloudConnectForms.tsx";
 
 export type CloudStepsFeaturesProps = StepsFeaturesProps & {
@@ -46,6 +46,7 @@ export default function CloudStepsFeatures(props: CloudStepsFeaturesProps) {
     case CloudPhaseTypes.Infrastucture:
       currentForm = (
         <CloudIoTForm
+          action="/api/eac/clouds/iot-infrastructure"
           class="px-4"
           cloudLookup={props.cloudLookup!}
           hasGitHubAuth={props.hasGitHubAuth}

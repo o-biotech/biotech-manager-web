@@ -1,6 +1,7 @@
 import { EaCSourceAsCode } from "@fathym/eac";
 import { Action, ActionStyleTypes } from "@fathym/atomic";
 import { AddIcon, EditIcon } from "$fathym/atomic-icons";
+import { DropOutMenu } from "../../../molecules/DropOutMenu.tsx";
 
 export function EaCSourcesDisplay(sources: Record<string, EaCSourceAsCode>) {
   const sourceLookups = Object.keys(sources);
@@ -10,16 +11,75 @@ export function EaCSourcesDisplay(sources: Record<string, EaCSourceAsCode>) {
       {sourceLookups.map((sourceLookup) => {
         const source = sources[sourceLookup];
 
+        const artifactLookups = Object.keys(source.Artifacts || {});
+
         return (
           <>
-            <Action
-              actionStyle={ActionStyleTypes.Link | ActionStyleTypes.Rounded}
-              class="ml-2 flex flex-row items-center text-sm text-left w-full"
-            >
-              <span class="flex-1">{source.Details!.Name}</span>
+            <div class="ml-2">
+              <DropOutMenu
+                title={source.Details!.Name!}
+                class="my-1"
+                storagePath={`source-sidebar-openstate-${sourceLookup}`}
+                action={
+                  <Action
+                    actionStyle={ActionStyleTypes.Link |
+                      ActionStyleTypes.Rounded |
+                      ActionStyleTypes.Icon}
+                    class="px-1 py-1 text-white"
+                    href={`/enterprises/sources/${
+                      encodeURIComponent(
+                        sourceLookup,
+                      )
+                    }`}
+                  >
+                    <EditIcon class="w-4 h-4" />
+                  </Action>
+                }
+              >
+                <div class="ml-2 mt-1 uppercase text-sm">Artifacts</div>
 
-              <EditIcon class="flex-none w-4 h-4" />
-            </Action>
+                <div class="ml-2 border-b-[1px] border-dotted border-slate-400 dark:border-slate-700">
+                </div>
+
+                {artifactLookups.map((artifactLookup) => {
+                  const artifact = source.Artifacts![artifactLookup];
+
+                  return (
+                    <Action
+                      actionStyle={ActionStyleTypes.Link |
+                        ActionStyleTypes.Rounded}
+                      class="ml-2 flex flex-row items-center text-sm text-left w-full"
+                      href={`/enterprises/sources/${
+                        encodeURIComponent(
+                          sourceLookup,
+                        )
+                      }/artifacts/${artifactLookup}`}
+                    >
+                      <span class="flex-1">{artifact.Details!.Name}</span>
+
+                      <EditIcon class="flex-none w-4 h-4" />
+                    </Action>
+                  );
+                })}
+
+                <div class="ml-2 mt-2 border-b-[1px] border-dotted border-slate-400 dark:border-slate-700">
+                </div>
+
+                <Action
+                  actionStyle={ActionStyleTypes.Link | ActionStyleTypes.Rounded}
+                  class="ml-2 flex flex-row items-center text-sm text-left w-full"
+                  href={`/enterprises/sources/${
+                    encodeURIComponent(
+                      sourceLookup,
+                    )
+                  }/artifacts`}
+                >
+                  <span class="flex-1">Create Artifact</span>
+
+                  <AddIcon class="flex-none w-4 h-4" />
+                </Action>
+              </DropOutMenu>
+            </div>
           </>
         );
       })}
@@ -30,6 +90,7 @@ export function EaCSourcesDisplay(sources: Record<string, EaCSourceAsCode>) {
       <Action
         actionStyle={ActionStyleTypes.Link | ActionStyleTypes.Rounded}
         class="ml-2 flex flex-row items-center text-sm text-left w-full"
+        href={`/enterprises/sources`}
       >
         <span class="flex-1">Create Source</span>
 

@@ -1,4 +1,5 @@
 import { ComponentChildren, JSX } from "preact";
+import { useState } from "preact/hooks";
 import { snakeCase } from "$case";
 import { ChevronRightIcon } from "$fathym/atomic-icons";
 import { classSet } from "@fathym/atomic";
@@ -8,15 +9,43 @@ export type DropOutMenuProps = {
 
   children: ComponentChildren;
 
+  storagePath: string;
+
   title: string;
 } & JSX.HTMLAttributes<HTMLDivElement>;
 
 export function DropOutMenu(props: DropOutMenuProps) {
+  const getMenuOpenLocalStorage = (): boolean => {
+    return JSON.parse(localStorage.getItem(props.storagePath) || "false");
+  };
+
+  const setMenuOpenLocalStorage = (open: boolean) => {
+    localStorage.setItem(props.storagePath, JSON.stringify(open));
+  };
+
+  const [menuOpen, setMenuOpen] = useState(getMenuOpenLocalStorage());
+
   const key = snakeCase(props.title);
+
+  const setMenuOpenState = (e: JSX.TargetedEvent<HTMLInputElement, Event>) => {
+    e.preventDefault();
+
+    const open = e.currentTarget.checked;
+
+    setMenuOpenLocalStorage(open);
+
+    setMenuOpen(open);
+  };
 
   return (
     <div {...props} class={classSet(props, "flex flex-wrap items-center")}>
-      <input type="checkbox" id={key} class="peer sr-only" />
+      <input
+        type="checkbox"
+        id={key}
+        class="peer sr-only"
+        checked={menuOpen}
+        onChange={setMenuOpenState}
+      />
 
       <label
         for={key}

@@ -40,11 +40,8 @@ export function BiotechHeader(props: BiotechHeaderProps) {
             actionStyle={ActionStyleTypes.Link}
             class={classSet(
               undefined,
-              "text-xl mx-1",
+              "text-xl mx-1 text-white",
               props.currentUrl.pathname === "/" ? active.props.class : "",
-              props.hasEaC
-                ? "text-white"
-                : "pointer-events-none text-slate-400",
             )}
           >
             Dashboard

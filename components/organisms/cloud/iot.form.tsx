@@ -16,11 +16,10 @@ export type CloudIoTFormProps = JSX.HTMLAttributes<HTMLFormElement> & {
   resLookup?: string;
 };
 
-export default function CloudIoTForm(props: CloudIoTFormProps) {
+export function CloudIoTForm(props: CloudIoTFormProps) {
   return (
     <form
       method="post"
-      action="/api/eac/clouds/iot-infrastructure"
       {...props}
       class={classSet(props, "w-full max-w-sm md:max-w-md mx-auto p-3 mt-8")}
     >

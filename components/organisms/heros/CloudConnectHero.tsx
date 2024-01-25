@@ -22,12 +22,14 @@ export default function CloudConnectHero(props: CloudConnectHeroProps) {
       displayStyle={DisplayStyleTypes.Center | DisplayStyleTypes.Large}
       {...props}
     >
-      {!props.hideAction && (
+      {
+        /* {!props.hideAction && (
         <Action href="./getting-started/cloud" class="my-8 flex flex-row">
           Connect Now
           <ChevronRightIcon class="w-[24px] h-[24px]" />
         </Action>
-      )}
+      )} */
+      }
     </Hero>
   );
 }

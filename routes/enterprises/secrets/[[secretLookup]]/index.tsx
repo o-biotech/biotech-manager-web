@@ -1,5 +1,10 @@
 import { Handlers, PageProps } from "$fresh/server.ts";
-import { DisplayStyleTypes, Hero, HeroStyleTypes } from "@fathym/atomic";
+import {
+  DataLookup,
+  DisplayStyleTypes,
+  Hero,
+  HeroStyleTypes,
+} from "@fathym/atomic";
 import { redirectRequest, respond } from "@fathym/common";
 import {
   EaCSecretAsCode,
@@ -13,12 +18,12 @@ import { DeleteAction } from "../../../../islands/molecules/DeleteAction.tsx";
 import { EaCManageSecretFormIsland } from "../../../../islands/molecules/EaCManageSecretFormIsland.tsx";
 
 export type EaCSecretsPageData = {
-  cloudOptions: { cloudLookup: string; cloudName: string }[];
+  cloudOptions: DataLookup[];
 
   entLookup: string;
 
   keyVaultOptions: {
-    [cloudLookup: string]: { keyVaultName: string; keyVaultLookup: string }[];
+    [cloudLookup: string]: DataLookup[];
   };
 
   manageSecret?: EaCSecretAsCode;
@@ -52,8 +57,8 @@ export const handler: Handlers<EaCSecretsPageData, OpenBiotechManagerState> = {
       const cloud = ctx.state.EaC!.Clouds![cloudLookup];
 
       data.cloudOptions.push({
-        cloudLookup: cloudLookup,
-        cloudName: cloud.Details!.Name!,
+        Lookup: cloudLookup,
+        Name: cloud.Details!.Name!,
       });
 
       data.keyVaultOptions[cloudLookup] = [];
@@ -67,8 +72,8 @@ export const handler: Handlers<EaCSecretsPageData, OpenBiotechManagerState> = {
           .join("");
 
         data.keyVaultOptions[cloudLookup].push({
-          keyVaultLookup: `${shortName}-key-vault`,
-          keyVaultName: resGroup.Details!.Name!,
+          Lookup: `${shortName}-key-vault`,
+          Name: resGroup.Details!.Name!,
         });
       }
     }

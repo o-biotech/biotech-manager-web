@@ -1,7 +1,7 @@
 import { EaCIoTAsCode } from "@fathym/eac";
-import { Action, ActionStyleTypes } from "@fathym/atomic";
+import { Action, ActionGroup, ActionStyleTypes } from "@fathym/atomic";
 import { DropOutMenu } from "../../../molecules/DropOutMenu.tsx";
-import { AddIcon, EditIcon } from "$fathym/atomic-icons";
+import { AddIcon, EditIcon, SettingsIcon } from "$fathym/atomic-icons";
 
 export function EaCIoTsDisplay(iots: Record<string, EaCIoTAsCode>) {
   const iotLookups = Object.keys(iots);
@@ -21,16 +21,31 @@ export function EaCIoTsDisplay(iots: Record<string, EaCIoTAsCode>) {
               <DropOutMenu
                 title={iotLookup}
                 class="my-1"
+                storagePath={`iot-sidebar-openstate-${iotLookup}`}
                 action={
-                  <Action
-                    actionStyle={ActionStyleTypes.Link |
-                      ActionStyleTypes.Rounded |
-                      ActionStyleTypes.Icon}
-                    class="px-1 py-1 text-white"
-                    href={`/enterprises/iot/${iotLookup}`}
-                  >
-                    <EditIcon class="w-4 h-4" />
-                  </Action>
+                  <ActionGroup class="flex flex-row items-center">
+                    <>
+                      <Action
+                        actionStyle={ActionStyleTypes.Link |
+                          ActionStyleTypes.Rounded |
+                          ActionStyleTypes.Icon}
+                        class="px-1 py-1 text-white"
+                        href={`/enterprises/iot/${iotLookup}`}
+                      >
+                        <EditIcon class="w-4 h-4" />
+                      </Action>
+
+                      <Action
+                        actionStyle={ActionStyleTypes.Link |
+                          ActionStyleTypes.Rounded |
+                          ActionStyleTypes.Icon}
+                        class="flex-none text-sm text-left"
+                        href={`/enterprises/iot/${iotLookup}/settings`}
+                      >
+                        <SettingsIcon class="w-4 h-4" />
+                      </Action>
+                    </>
+                  </ActionGroup>
                 }
               >
                 <div class="ml-2 mt-1 uppercase text-sm">Devices</div>

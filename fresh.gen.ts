@@ -23,14 +23,16 @@ import * as $api_eac_iot_devices_ensure from "./routes/api/eac/iot/devices/ensur
 import * as $commit_commitId_status from "./routes/commit/[commitId]/status.tsx";
 import * as $enterprises_entLookup_index from "./routes/enterprises/[[entLookup]]/index.tsx";
 import * as $enterprises_clouds_cloudLookup_index from "./routes/enterprises/clouds/[[cloudLookup]]/index.tsx";
-import * as $enterprises_clouds_cloudLookup_settings from "./routes/enterprises/clouds/[[cloudLookup]]/settings.tsx";
 import * as $enterprises_devops_actions_doaLookup_index from "./routes/enterprises/devops-actions/[[doaLookup]]/index.tsx";
 import * as $enterprises_handlers_handlerLookup_index from "./routes/enterprises/handlers/[[handlerLookup]]/index.tsx";
 import * as $enterprises_iot_iotLookup_dashboards_dashboardLookup_index from "./routes/enterprises/iot/[[iotLookup]]/dashboards/[[dashboardLookup]]/index.tsx";
 import * as $enterprises_iot_iotLookup_devices_deviceLookup_index from "./routes/enterprises/iot/[[iotLookup]]/devices/[[deviceLookup]]/index.tsx";
 import * as $enterprises_iot_iotLookup_index from "./routes/enterprises/iot/[[iotLookup]]/index.tsx";
+import * as $enterprises_iot_iotLookup_settings from "./routes/enterprises/iot/[[iotLookup]]/settings.tsx";
 import * as $enterprises_secrets_secretLookup_index from "./routes/enterprises/secrets/[[secretLookup]]/index.tsx";
 import * as $enterprises_source_connections_srcConnLookup_index from "./routes/enterprises/source-connections/[[srcConnLookup]]/index.tsx";
+import * as $enterprises_sources_srcLookup_artifacts_artifactLookup_index from "./routes/enterprises/sources/[[srcLookup]]/artifacts/[[artifactLookup]]/index.tsx";
+import * as $enterprises_sources_srcLookup_index from "./routes/enterprises/sources/[[srcLookup]]/index.tsx";
 import * as $getting_started_applications_index from "./routes/getting-started/applications/index.tsx";
 import * as $getting_started_cloud_middleware from "./routes/getting-started/cloud/_middleware.tsx";
 import * as $getting_started_cloud_index from "./routes/getting-started/cloud/index.tsx";
@@ -46,11 +48,13 @@ import * as $molecules_CopyInput from "./islands/molecules/CopyInput.tsx";
 import * as $molecules_DeleteAction from "./islands/molecules/DeleteAction.tsx";
 import * as $molecules_EaCManageIoTFormIsland from "./islands/molecules/EaCManageIoTFormIsland.tsx";
 import * as $molecules_EaCManageSecretFormIsland from "./islands/molecules/EaCManageSecretFormIsland.tsx";
+import * as $molecules_EaCManageSourceFormIsland from "./islands/molecules/EaCManageSourceFormIsland.tsx";
 import * as $molecules_EntepriseManagementItem from "./islands/molecules/EntepriseManagementItem.tsx";
 import * as $molecules_GitHubAccessAction from "./islands/molecules/GitHubAccessAction.tsx";
 import * as $molecules_InteractiveResponsiveSet from "./islands/molecules/InteractiveResponsiveSet.tsx";
 import * as $molecules_SideBar from "./islands/molecules/SideBar.tsx";
 import * as $organisms_cloud_iot_hot_flow_input from "./islands/organisms/cloud/iot/hot-flow-input.tsx";
+import * as $organisms_cloud_iot_res_group_iot_settings from "./islands/organisms/cloud/iot/res-group-iot-settings.tsx";
 import * as $organisms_data_api_develop_form from "./islands/organisms/data/api-develop-form.tsx";
 import * as $organisms_data_dashboard_display from "./islands/organisms/data/dashboard-display.tsx";
 import * as $organisms_data_explore_form from "./islands/organisms/data/explore-form.tsx";
@@ -87,8 +91,6 @@ const manifest = {
       $enterprises_entLookup_index,
     "./routes/enterprises/clouds/[[cloudLookup]]/index.tsx":
       $enterprises_clouds_cloudLookup_index,
-    "./routes/enterprises/clouds/[[cloudLookup]]/settings.tsx":
-      $enterprises_clouds_cloudLookup_settings,
     "./routes/enterprises/devops-actions/[[doaLookup]]/index.tsx":
       $enterprises_devops_actions_doaLookup_index,
     "./routes/enterprises/handlers/[[handlerLookup]]/index.tsx":
@@ -99,10 +101,16 @@ const manifest = {
       $enterprises_iot_iotLookup_devices_deviceLookup_index,
     "./routes/enterprises/iot/[[iotLookup]]/index.tsx":
       $enterprises_iot_iotLookup_index,
+    "./routes/enterprises/iot/[[iotLookup]]/settings.tsx":
+      $enterprises_iot_iotLookup_settings,
     "./routes/enterprises/secrets/[[secretLookup]]/index.tsx":
       $enterprises_secrets_secretLookup_index,
     "./routes/enterprises/source-connections/[[srcConnLookup]]/index.tsx":
       $enterprises_source_connections_srcConnLookup_index,
+    "./routes/enterprises/sources/[[srcLookup]]/artifacts/[[artifactLookup]]/index.tsx":
+      $enterprises_sources_srcLookup_artifacts_artifactLookup_index,
+    "./routes/enterprises/sources/[[srcLookup]]/index.tsx":
+      $enterprises_sources_srcLookup_index,
     "./routes/getting-started/applications/index.tsx":
       $getting_started_applications_index,
     "./routes/getting-started/cloud/_middleware.tsx":
@@ -125,6 +133,8 @@ const manifest = {
       $molecules_EaCManageIoTFormIsland,
     "./islands/molecules/EaCManageSecretFormIsland.tsx":
       $molecules_EaCManageSecretFormIsland,
+    "./islands/molecules/EaCManageSourceFormIsland.tsx":
+      $molecules_EaCManageSourceFormIsland,
     "./islands/molecules/EntepriseManagementItem.tsx":
       $molecules_EntepriseManagementItem,
     "./islands/molecules/GitHubAccessAction.tsx": $molecules_GitHubAccessAction,
@@ -133,6 +143,8 @@ const manifest = {
     "./islands/molecules/SideBar.tsx": $molecules_SideBar,
     "./islands/organisms/cloud/iot/hot-flow-input.tsx":
       $organisms_cloud_iot_hot_flow_input,
+    "./islands/organisms/cloud/iot/res-group-iot-settings.tsx":
+      $organisms_cloud_iot_res_group_iot_settings,
     "./islands/organisms/data/api-develop-form.tsx":
       $organisms_data_api_develop_form,
     "./islands/organisms/data/dashboard-display.tsx":

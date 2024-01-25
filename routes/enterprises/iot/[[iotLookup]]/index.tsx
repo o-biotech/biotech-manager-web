@@ -1,5 +1,10 @@
 import { Handlers, PageProps } from "$fresh/server.ts";
-import { DisplayStyleTypes, Hero, HeroStyleTypes } from "@fathym/atomic";
+import {
+  DataLookup,
+  DisplayStyleTypes,
+  Hero,
+  HeroStyleTypes,
+} from "@fathym/atomic";
 import { redirectRequest, respond } from "@fathym/common";
 import {
   EaCIoTAsCode,
@@ -13,12 +18,12 @@ import { DeleteAction } from "../../../../islands/molecules/DeleteAction.tsx";
 import { EaCManageIoTFormIsland } from "../../../../islands/molecules/EaCManageIoTFormIsland.tsx";
 
 export type EaCIoTPageData = {
-  cloudOptions: { cloudLookup: string; cloudName: string }[];
+  cloudOptions: DataLookup[];
 
   entLookup: string;
 
   resGroupOptions: {
-    [cloudLookup: string]: { resGroupName: string; resGroupLookup: string }[];
+    [cloudLookup: string]: DataLookup[];
   };
 
   manageIoT?: EaCIoTAsCode;
@@ -52,8 +57,8 @@ export const handler: Handlers<EaCIoTPageData, OpenBiotechManagerState> = {
       const cloud = ctx.state.EaC!.Clouds![cloudLookup];
 
       data.cloudOptions.push({
-        cloudLookup: cloudLookup,
-        cloudName: cloud.Details!.Name!,
+        Lookup: cloudLookup,
+        Name: cloud.Details!.Name!,
       });
 
       data.resGroupOptions[cloudLookup] = [];
@@ -62,8 +67,8 @@ export const handler: Handlers<EaCIoTPageData, OpenBiotechManagerState> = {
         const resGroup = cloud.ResourceGroups![resGroupLookup];
 
         data.resGroupOptions[cloudLookup].push({
-          resGroupLookup: resGroupLookup,
-          resGroupName: resGroup.Details!.Name!,
+          Lookup: resGroupLookup,
+          Name: resGroup.Details!.Name!,
         });
       }
     }

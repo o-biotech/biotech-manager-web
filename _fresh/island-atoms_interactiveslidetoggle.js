@@ -1,1 +1,1 @@
-import{d as o}from"./chunk-Z7JG5HDW.js";import"./chunk-2GUEMEWN.js";import"./chunk-IN5SKDVW.js";import{a as e}from"./chunk-BRQEXE2C.js";import"./chunk-BV6DNIGX.js";import"./chunk-DQW7DUIU.js";function g(l){return e(o,{...l})}export{g as default};
+import{d as o}from"./chunk-36P5HL4T.js";import"./chunk-2GUEMEWN.js";import"./chunk-IN5SKDVW.js";import{a as e}from"./chunk-BRQEXE2C.js";import"./chunk-BV6DNIGX.js";import"./chunk-DQW7DUIU.js";function g(l){return e(o,{...l})}export{g as default};

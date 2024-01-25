@@ -11,27 +11,15 @@ export function EaCCloudsDisplay(clouds: Record<string, EaCCloudAsCode>) {
         const cloud = clouds[cloudLookup];
 
         return (
-          <ActionGroup class="flex flex-row items-center">
-            <>
-              <Action
-                actionStyle={ActionStyleTypes.Link | ActionStyleTypes.Rounded}
-                class="flex-1 flex flex-row items-center text-sm text-left"
-              >
-                <span class="flex-1">{cloud.Details!.Name}</span>
+          <Action
+            actionStyle={ActionStyleTypes.Link | ActionStyleTypes.Rounded}
+            class="flex-1 flex flex-row items-center text-sm text-left"
+            href={`/enterprises/clouds/${cloudLookup}`}
+          >
+            <span class="flex-1">{cloud.Details!.Name}</span>
 
-                <EditIcon class="flex-none w-4 h-4" />
-              </Action>
-
-              <Action
-                actionStyle={ActionStyleTypes.Link |
-                  ActionStyleTypes.Rounded |
-                  ActionStyleTypes.Icon}
-                class="flex-none text-sm text-left"
-              >
-                <SettingsIcon class="w-4 h-4" />
-              </Action>
-            </>
-          </ActionGroup>
+            <EditIcon class="flex-none w-4 h-4" />
+          </Action>
         );
       })}
 
@@ -41,6 +29,7 @@ export function EaCCloudsDisplay(clouds: Record<string, EaCCloudAsCode>) {
       <Action
         actionStyle={ActionStyleTypes.Link | ActionStyleTypes.Rounded}
         class="ml-2 flex flex-row items-center text-sm text-left w-full"
+        href={`/enterprises/clouds`}
       >
         <span class="flex-1">Create Cloud</span>
 
