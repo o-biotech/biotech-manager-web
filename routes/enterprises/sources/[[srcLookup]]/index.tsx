@@ -149,11 +149,7 @@ export const handler: Handlers<EaCSourcesPageData, OpenBiotechManagerState> = {
       return redirectRequest("/enterprises/sources");
     } else {
       return redirectRequest(
-        `/enterprises/sources?error=${
-          encodeURIComponent(
-            status.Messages["Error"] as string,
-          )
-        }&commitId=${commitResp.CommitID}`,
+        `/enterprises/sources?commitId=${commitResp.CommitID}`,
       );
     }
   },

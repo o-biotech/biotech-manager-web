@@ -65,6 +65,7 @@ export function loadOoenBiotechSideBarSettings(
           prev[menuItemName] = {
             Title: "Clouds",
             Display: <EaCCloudsDisplay {...data} />,
+            Order: 300,
           };
           break;
         }
@@ -79,6 +80,7 @@ export function loadOoenBiotechSideBarSettings(
                 userEaCs={state.UserEaCs}
               />
             ),
+            Order: 100,
           };
           break;
         }
@@ -87,6 +89,7 @@ export function loadOoenBiotechSideBarSettings(
           prev[menuItemName] = {
             Title: "DevOps Actions Details",
             Display: <EaCDevOpsActionsDisplay {...data} />,
+            Order: 600,
           };
           break;
         }
@@ -95,6 +98,7 @@ export function loadOoenBiotechSideBarSettings(
           prev[menuItemName] = {
             Title: "EaC Handlers",
             Display: <EaCHandlersDisplay {...data} />,
+            Order: 800,
           };
           break;
         }
@@ -103,6 +107,7 @@ export function loadOoenBiotechSideBarSettings(
           prev[menuItemName] = {
             Title: "IoT",
             Display: <EaCIoTsDisplay {...data} />,
+            Order: 200,
           };
           break;
         }
@@ -111,6 +116,7 @@ export function loadOoenBiotechSideBarSettings(
           prev[menuItemName] = {
             Title: "Secrets",
             Display: <EaCSecretsDisplay {...data} />,
+            Order: 700,
           };
           break;
         }
@@ -119,6 +125,7 @@ export function loadOoenBiotechSideBarSettings(
           prev[menuItemName] = {
             Title: "Source Connections",
             Display: <EaCSourceConnectionsDisplay {...data} />,
+            Order: 400,
           };
           break;
         }
@@ -127,12 +134,15 @@ export function loadOoenBiotechSideBarSettings(
           prev[menuItemName] = {
             Title: "Sources",
             Display: <EaCSourcesDisplay {...data} />,
+            Order: 500,
           };
           break;
         }
 
         default: {
-          prev[menuItemName] = {};
+          prev[menuItemName] = {
+            Order: 900,
+          };
           break;
         }
       }
@@ -144,6 +154,7 @@ export function loadOoenBiotechSideBarSettings(
   settings["GettingStarted"] = {
     Title: "Getting Started",
     Display: <EaCGettingStartedDisplay {...state} />,
+    Order: 50,
   };
 
   return settings;

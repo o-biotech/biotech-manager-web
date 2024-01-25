@@ -88,11 +88,7 @@ export const handler: Handlers<
       return redirectRequest("/enterprises/clouds");
     } else {
       return redirectRequest(
-        `/enterprises/clouds?error=${
-          encodeURIComponent(
-            status.Messages["Error"] as string,
-          )
-        }&commitId=${commitResp.CommitID}`,
+        `/enterprises/clouds?commitId=${commitResp.CommitID}`,
       );
     }
   },

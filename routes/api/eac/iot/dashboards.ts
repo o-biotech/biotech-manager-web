@@ -71,11 +71,7 @@ export const handler: Handlers<any, OpenBiotechManagerState> = {
       return redirectRequest(`/`);
     } else {
       return redirectRequest(
-        `/getting-started/devices?error=${
-          encodeURIComponent(
-            status.Messages["Error"] as string,
-          )
-        }&commitId=${commitResp.CommitID}`,
+        `/getting-started/devices?commitId=${commitResp.CommitID}`,
       );
     }
   },

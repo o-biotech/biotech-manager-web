@@ -176,11 +176,7 @@ export const handler: Handlers<
       return redirectRequest(`/enterprises/iot/${iotLookup}/dashboards`);
     } else {
       return redirectRequest(
-        `/enterprises/iot/${iotLookup}/dashboards?error=${
-          encodeURIComponent(
-            status.Messages["Error"] as string,
-          )
-        }&commitId=${commitResp.CommitID}`,
+        `/enterprises/iot/${iotLookup}/dashboards?commitId=${commitResp.CommitID}`,
       );
     }
   },

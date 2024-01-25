@@ -92,11 +92,7 @@ export const handler: Handlers<EaCIoTDevicePageData, OpenBiotechManagerState> =
         return redirectRequest(`/enterprises/iot/${iotLookup}/devices`);
       } else {
         return redirectRequest(
-          `/enterprises/iot/${iotLookup}/devices?error=${
-            encodeURIComponent(
-              status.Messages["Error"] as string,
-            )
-          }&commitId=${commitResp.CommitID}`,
+          `/enterprises/iot/${iotLookup}/devices?commitId=${commitResp.CommitID}`,
         );
       }
     },

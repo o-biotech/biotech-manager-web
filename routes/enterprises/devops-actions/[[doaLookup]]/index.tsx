@@ -83,11 +83,7 @@ export const handler: Handlers<
       return redirectRequest("/enterprises/devops-actions");
     } else {
       return redirectRequest(
-        `/enterprises/devops-actions?error=${
-          encodeURIComponent(
-            status.Messages["Error"] as string,
-          )
-        }&commitId=${commitResp.CommitID}`,
+        `/enterprises/devops-actions?commitId=${commitResp.CommitID}`,
       );
     }
   },

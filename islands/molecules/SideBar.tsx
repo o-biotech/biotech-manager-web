@@ -16,6 +16,8 @@ export type SideBarMenuItem = {
 export type SideBarMenuItemSettings = {
   Display?: ComponentChildren;
 
+  Order: number;
+
   Title?: string;
 };
 
@@ -89,6 +91,10 @@ export default function SideBar(props: SideBarProps) {
     }
   };
 
+  const orderedMenuItems = props.menuItems.sort(
+    (a, b) => menuItemsSettings[a.Name].Order - menuItemsSettings[b.Name].Order,
+  );
+
   return (
     <>
       <div
@@ -117,7 +123,7 @@ export default function SideBar(props: SideBarProps) {
             </div>
           )}
 
-          {props.menuItems.map((menuItem, index) => (
+          {orderedMenuItems.map((menuItem) => (
             <div
               onClick={() => selectMenu(menuItem.Name)}
               data-menu={menuItem.Name}

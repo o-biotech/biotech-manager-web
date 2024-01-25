@@ -137,11 +137,7 @@ export const handler: Handlers<
       );
     } else {
       return redirectRequest(
-        `/enterprises/iot/${cloudLookup}/settings?error=${
-          encodeURIComponent(
-            status.Messages["Error"] as string,
-          )
-        }&commitId=${commitResp.CommitID}`,
+        `/enterprises/iot/${cloudLookup}/settings?commitId=${commitResp.CommitID}`,
       );
     }
   },
