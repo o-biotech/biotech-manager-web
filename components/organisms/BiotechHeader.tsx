@@ -31,18 +31,16 @@ export function BiotechHeader(props: BiotechHeaderProps) {
 
   return (
     <Header
-      class={classSet(undefined, "z-50 bg-sky-500 sticky top-0")}
       logo={logo}
       nav={
         <InteractiveResponsiveSet toggleChildren="☰">
           <Action
             href="/"
             actionStyle={ActionStyleTypes.Link}
-            class={classSet(
-              undefined,
+            class={classSet([
               "text-xl mx-1 text-white",
               props.currentUrl.pathname === "/" ? active.props.class : "",
-            )}
+            ])}
           >
             Dashboard
           </Action>
@@ -51,6 +49,7 @@ export function BiotechHeader(props: BiotechHeaderProps) {
         </InteractiveResponsiveSet>
       }
       {...props}
+      class={classSet(["-:z-50 -:bg-sky-500 -:sticky -:top-0"], props)}
     />
   );
 }

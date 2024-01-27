@@ -23,8 +23,8 @@ export function DeviceDataFlowing(props: DeviceDataFlowingProps) {
       <RenewIcon
         {...props}
         class={classSet(
+          ["-:w-6 -:h-6 -:text-blue-500 -:animate-spin -:inline-block -:m-4"],
           props,
-          "w-6 h-6 text-blue-500 animate-spin inline-block m-4",
         )}
       />
     </>

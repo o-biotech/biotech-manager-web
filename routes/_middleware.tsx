@@ -233,7 +233,7 @@ async function currentState(
             const deviceLookups = Object.keys(devices);
 
             if (deviceLookups.length > 0) {
-              state.Devices.Phase = DevicesPhaseTypes.APIs;
+              state.Devices.Phase = DevicesPhaseTypes.Dashboards;
 
               const currentJwt = await denoKv.get<string>([
                 "User",
@@ -244,52 +244,7 @@ async function currentState(
               ]);
 
               if (currentJwt.value) {
-                state.Devices.Phase = DevicesPhaseTypes.Dashboards;
-
                 state.Devices.JWT = currentJwt.value;
-
-                const dashboards = iot.Dashboards || {};
-
-                const dashboardLookups = Object.keys(dashboards);
-
-                if (dashboardLookups.length > 0) {
-                  state.Devices.Phase = DevicesPhaseTypes.Complete;
-
-                  state.Phase = SetupPhaseTypes.Data;
-
-                  const currentFlowing = await denoKv.get<boolean>([
-                    "EaC",
-                    entLookup,
-                    "Current",
-                    "Flowing",
-                  ]);
-
-                  if (currentFlowing.value) {
-                    state.Data.Phase = DataPhaseTypes.Explore;
-
-                    const currentExplored = await denoKv.get<boolean>([
-                      "EaC",
-                      entLookup,
-                      "Current",
-                      "Explored",
-                    ]);
-
-                    if (currentExplored.value) {
-                      state.Data.Phase = DataPhaseTypes.Develop;
-
-                      const currentDeveloped = await denoKv.get<boolean>([
-                        "EaC",
-                        entLookup,
-                        "Current",
-                        "Developed",
-                      ]);
-
-                      if (currentDeveloped.value) {
-                        state.Data.Phase = DataPhaseTypes.Complete;
-                      }
-                    }
-                  }
-                }
               } else {
                 const jwt = await loadJwtConfig().Create({
                   EnterpriseLookup: state.EaC!.EnterpriseLookup!,
@@ -299,6 +254,54 @@ async function currentState(
                 });
 
                 state.Devices.JWT = jwt;
+
+                await denoKv.set(
+                  ["User", username, "EaC", entLookup, "JWT"],
+                  jwt,
+                );
+              }
+
+              const dashboards = iot.Dashboards || {};
+
+              const dashboardLookups = Object.keys(dashboards);
+
+              if (dashboardLookups.length > 0) {
+                state.Devices.Phase = DevicesPhaseTypes.Complete;
+
+                state.Phase = SetupPhaseTypes.Data;
+
+                const currentFlowing = await denoKv.get<boolean>([
+                  "EaC",
+                  entLookup,
+                  "Current",
+                  "Flowing",
+                ]);
+
+                if (currentFlowing.value) {
+                  state.Data.Phase = DataPhaseTypes.Explore;
+
+                  const currentExplored = await denoKv.get<boolean>([
+                    "EaC",
+                    entLookup,
+                    "Current",
+                    "Explored",
+                  ]);
+
+                  if (currentExplored.value) {
+                    state.Data.Phase = DataPhaseTypes.Develop;
+
+                    const currentDeveloped = await denoKv.get<boolean>([
+                      "EaC",
+                      entLookup,
+                      "Current",
+                      "Developed",
+                    ]);
+
+                    if (currentDeveloped.value) {
+                      state.Data.Phase = DataPhaseTypes.Complete;
+                    }
+                  }
+                }
               }
             }
           } else {

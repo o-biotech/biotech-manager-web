@@ -1,13 +1,7 @@
 import { JSX } from "preact";
 import { useRef, useState } from "preact/hooks";
 import { IS_BROWSER } from "$fresh/runtime.ts";
-import {
-  Action,
-  ActionGroup,
-  ActionStyleTypes,
-  classSet,
-  Input,
-} from "@fathym/atomic";
+import { Action, ActionGroup, ActionStyleTypes, Input } from "@fathym/atomic";
 import { RenewIcon } from "$fathym/atomic-icons";
 import { callToActionStyles } from "../../../components/styles/actions.tsx";
 

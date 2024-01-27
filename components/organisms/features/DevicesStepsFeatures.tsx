@@ -35,9 +35,9 @@ export function DevicesStepsFeatures(props: DevicesStepsFeaturesProps) {
       );
       break;
 
-    case DevicesPhaseTypes.APIs:
-      currentForm = <APIJWTForm class="px-4" jwt={props.jwt} />;
-      break;
+    // case DevicesPhaseTypes.APIs:
+    //   currentForm = <APIJWTForm class="px-4" jwt={props.jwt} />;
+    //   break;
 
     case DevicesPhaseTypes.Dashboards:
       currentForm = (
@@ -65,12 +65,12 @@ export function DevicesStepsFeatures(props: DevicesStepsFeaturesProps) {
             "Bring your own device or select from a curated list of Biotech devices for your specific needs.",
           children: smCurrentForm,
         },
-        {
-          title: "Configure Data APIs",
-          description:
-            "Get familiar with and control access to your data APIs.",
-          children: smCurrentForm,
-        },
+        // {
+        //   title: "Configure Data APIs",
+        //   description:
+        //     "Get familiar with and control access to your data APIs.",
+        //   children: smCurrentForm,
+        // },
         {
           title: "Setup Data Dashboards",
           description:

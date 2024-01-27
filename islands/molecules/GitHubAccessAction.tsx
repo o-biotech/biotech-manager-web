@@ -28,8 +28,10 @@ export function GitHubAccessAction(props: ActionProps) {
       {...props}
       href={signInHref}
       class={classSet(
+        [
+          "w-full md:w-auto text-white text-xs font-bold m-1 py-1 px-2 rounded focus:outline-none shadow-lg",
+        ],
         callToActionStyles.props,
-        "w-full md:w-auto text-white text-xs font-bold m-1 py-1 px-2 rounded focus:outline-none shadow-lg",
       )}
     />
   );

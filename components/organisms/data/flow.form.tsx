@@ -21,7 +21,10 @@ export function DataFlowForm(props: DataFlowFormProps) {
       method="post"
       action="/api/eac/data/flow"
       {...props}
-      class={classSet(props, "w-full max-w-sm md:max-w-md mx-auto p-3 mt-8")}
+      class={classSet(
+        ["-:w-full -:max-w-sm -:md:max-w-md -:mx-auto -:p-3 -:mt-8"],
+        props,
+      )}
     >
       <div class="flex flex-wrap -mx-3 mb-4 text-left">
         <Input id="flowing" name="flowing" type="hidden" value="true" />
@@ -56,8 +59,10 @@ export function DataFlowForm(props: DataFlowFormProps) {
             <Action
               type="submit"
               class={classSet(
+                [
+                  "w-full md:w-auto text-white font-bold m-1 py-2 px-4 rounded focus:outline-none shadow-lg",
+                ],
                 callToActionStyles.props,
-                "w-full md:w-auto text-white font-bold m-1 py-2 px-4 rounded focus:outline-none shadow-lg",
               )}
             >
               Move to Explore Data

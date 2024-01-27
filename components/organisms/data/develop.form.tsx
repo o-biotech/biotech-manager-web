@@ -14,7 +14,10 @@ export function DataDevelopForm(props: DataDevelopFormProps) {
       method="post"
       action="/api/eac/data/develop"
       {...props}
-      class={classSet(props, "w-full max-w-sm md:max-w-md mx-auto p-3 mt-8")}
+      class={classSet(
+        ["-:w-full -:max-w-sm -:md:max-w-md -:mx-auto -:p-3 -:mt-8"],
+        props,
+      )}
     >
       <div class="flex flex-wrap -mx-3 mb-4 text-left">
         <Input id="developed" name="developed" type="hidden" value="true" />
@@ -38,8 +41,10 @@ export function DataDevelopForm(props: DataDevelopFormProps) {
           <Action
             type="submit"
             class={classSet(
+              [
+                "w-full md:w-auto text-white font-bold m-1 py-2 px-4 rounded focus:outline-none shadow-lg",
+              ],
               callToActionStyles.props,
-              "w-full md:w-auto text-white font-bold m-1 py-2 px-4 rounded focus:outline-none shadow-lg",
             )}
           >
             Complete Getting Started Setup

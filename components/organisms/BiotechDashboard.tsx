@@ -9,7 +9,7 @@ export type BiotechDashboardProps = JSX.HTMLAttributes<HTMLDivElement>;
 export function BiotechDashboard(props: BiotechDashboardProps) {
   return (
     <>
-      <div {...props} class={classSet(props, "p-2 md:p-4")}>
+      <div {...props} class={classSet(["-:p-2 -:md:p-4"], props)}>
         <EmulatedDevices class="mb-8 md:mb-16" />
 
         <div class="flex flex-col md:flex-row mt-2 gap-8 md:gap-16">

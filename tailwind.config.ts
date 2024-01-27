@@ -1,5 +1,6 @@
 import { type Config } from "tailwindcss";
 import * as colors from "tailwindcss/colors.js";
+import unimportant from "npm:tailwindcss-unimportant";
 import { buildTailwindComponentsConfigs } from "@fathym/common";
 import BiotechAtomicTailwindComponents from "@fathym/atomic/tailwind.components.ts";
 // import ;
@@ -13,7 +14,7 @@ export default {
     "{routes,islands,components}/**/*.{ts,tsx}",
     "build/tailwind-components.config",
   ],
-  plugins: [],
+  plugins: [unimportant],
   theme: {
     extend: {
       backgroundImage: {

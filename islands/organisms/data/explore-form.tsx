@@ -113,7 +113,7 @@ export function DataExploreForm(props: DataExploreFormProps) {
       method="post"
       action="/api/eac/data/explore"
       {...props}
-      class={classSet(props, "w-full mx-auto p-3 mt-8")}
+      class={classSet(["-:w-full -:mx-auto -:p-3 -:mt-8"], props)}
     >
       <div class="flex flex-wrap -mx-3 mb-4 text-left">
         <div class="w-full p-3">
@@ -143,8 +143,10 @@ export function DataExploreForm(props: DataExploreFormProps) {
           <Action
             type="submit"
             class={classSet(
+              [
+                "w-full md:w-auto text-white font-bold m-1 py-2 px-4 rounded focus:outline-none shadow-lg",
+              ],
               callToActionStyles.props,
-              "w-full md:w-auto text-white font-bold m-1 py-2 px-4 rounded focus:outline-none shadow-lg",
             )}
           >
             Move to Develop Solutions

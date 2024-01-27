@@ -38,7 +38,10 @@ export function DropOutMenu(props: DropOutMenuProps) {
   };
 
   return (
-    <div {...props} class={classSet(props, "flex flex-wrap items-center")}>
+    <div
+      {...props}
+      class={classSet(["-:flex -:flex-wrap -:items-center"], props)}
+    >
       <input
         type="checkbox"
         id={key}

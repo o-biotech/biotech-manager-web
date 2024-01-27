@@ -17,23 +17,21 @@ export type ChecklistProps = {
 
 export function Checklist(props: ChecklistProps) {
   return (
-    <div {...props} class={classSet(props, "")}>
+    <div {...props}>
       {props.items.map((item) => {
         return (
           <>
             <h1
-              class={classSet(
-                undefined,
+              class={classSet([
                 "flex flex-row items-center text-sm my-1",
                 item.Complete ? "text-slate-500" : "text-white",
-              )}
+              ])}
             >
               <CheckIcon
-                class={classSet(
-                  undefined,
+                class={classSet([
                   "w-4 h-4 flex-none",
                   item.Complete ? "text-green-500" : undefined,
-                )}
+                ])}
               />
 
               <span class="flex-1 ml-1">{item.Title}</span>

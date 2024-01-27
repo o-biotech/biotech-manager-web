@@ -5,7 +5,7 @@ export function BiotechFooter(props: FooterProps) {
     <Footer
       companyName="Fathym OpenBiotech"
       companyDescription="Deliver Biotech applications with ease, share with the masses."
-      class={classSet(props, "![&_a]:text-white")}
+      class={classSet(["![&_a]:text-white"], props)}
       nav={[
         {
           href: "/",

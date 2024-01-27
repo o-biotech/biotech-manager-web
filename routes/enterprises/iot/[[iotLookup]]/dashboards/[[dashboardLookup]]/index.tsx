@@ -279,8 +279,10 @@ export default function EaCIoTDashboard({
                   <Action
                     type="submit"
                     class={classSet(
+                      [
+                        "w-full text-white font-bold m-1 py-2 px-4 rounded focus:outline-none shadow-lg",
+                      ],
                       callToActionStyles.props,
-                      "w-full text-white font-bold m-1 py-2 px-4 rounded focus:outline-none shadow-lg",
                     )}
                   >
                     Add Dashboard

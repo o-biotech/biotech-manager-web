@@ -100,11 +100,13 @@ export default function SideBar(props: SideBarProps) {
       <div
         data-closedstate={isClosed}
         class={classSet(
+          [
+            "-:fixed -:z-40 -:transition-all -:data-[closedstate='false']:w-64 -:h-screen -:dark:bg-slate-950 -:bg-slate-100 -:border -:border-collapse -:border-r-[1px] -:border-slate-400 -:dark:border-slate-700 -:text-slate-700 -:dark:text-white -:flex -:flex-row",
+            props.disableToggle
+              ? "-:data-[closedstate='true']:w-64"
+              : "-:data-[closedstate='true']:w-12",
+          ],
           props,
-          "fixed z-40 transition-all data-[closedstate='false']:w-64  h-screen dark:bg-slate-950 bg-slate-100 border border-collapse border-r-[1px] border-slate-400 dark:border-slate-700 text-slate-700 dark:text-white flex flex-row",
-          props.disableToggle
-            ? "data-[closedstate='true']:w-64"
-            : "data-[closedstate='true']:w-12",
         )}
       >
         <div class="flex-none">
@@ -113,11 +115,10 @@ export default function SideBar(props: SideBarProps) {
               onClick={() => toggleMenu()}
               data-current-menu={currentMenu}
               title="Toggle Open"
-              class={classSet(
-                undefined,
+              class={classSet([
                 "mt-2 mx-2 px-1 py-1 hover:bg-slate-200 dark:hover:bg-slate-800 hover:text-blue-500 dark:hover:text-blue-500",
                 "cursor-pointer rounded-sm",
-              )}
+              ])}
             >
               <MenuIcon class="w-6 h-6" />
             </div>
@@ -128,14 +129,13 @@ export default function SideBar(props: SideBarProps) {
               onClick={() => selectMenu(menuItem.Name)}
               data-menu={menuItem.Name}
               title={menuItem.Name}
-              class={classSet(
-                undefined,
+              class={classSet([
                 "mt-2 mx-2 px-1 py-1 hover:bg-slate-200 dark:hover:bg-slate-800 hover:text-blue-500 dark:hover:text-blue-500",
                 currentMenu == menuItem.Name
                   ? "bg-blue-700 text-white dark:bg-blue-600"
                   : "",
                 "cursor-pointer rounded-sm",
-              )}
+              ])}
             >
               <Icon
                 class="w-6 h-6"
@@ -161,7 +161,7 @@ export default function SideBar(props: SideBarProps) {
         </div>
       </div>
 
-      <div class={classSet(undefined, props.disableToggle ? "ml-64" : "ml-12")}>
+      <div class={classSet([props.disableToggle ? "ml-64" : "ml-12"])}>
         {props.children}
       </div>
     </>

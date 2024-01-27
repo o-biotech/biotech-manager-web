@@ -1,5 +1,3 @@
-import { CheckIcon } from "$fathym/atomic-icons";
-import { classSet } from "@fathym/atomic";
 import { OpenBiotechManagerState } from "../../../../src/OpenBiotechManagerState.tsx";
 import { Checklist, ChecklistItem } from "../../../molecules/Checklist.tsx";
 
@@ -38,10 +36,10 @@ export function EaCGettingStartedDisplay(state: OpenBiotechManagerState) {
           Title: "Connect a Device",
           Complete: state.Devices.Phase > 0,
         },
-        {
-          Title: "Configure Data APIs",
-          Complete: state.Devices.Phase > 1,
-        },
+        // {
+        //   Title: "Configure Data APIs",
+        //   Complete: state.Devices.Phase > 1,
+        // },
         {
           Title: "Setup Data Dashboards",
           Complete: state.Devices.Phase > 2,
