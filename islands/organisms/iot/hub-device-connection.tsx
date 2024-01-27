@@ -64,7 +64,7 @@ export function IoTHubDeviceConnectionDisplay(
           required
           multiple
           {...props}
-          class="appearance-none block w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 my-2 rounded-lg shadow-sm focus:outline-none focus:shadow-lg focus:border-blue-500 placeholder-gray-500"
+          class="appearance-none block w-full bg-white text-black border border-gray-400 hover:border-gray-500 px-4 py-2 my-2 rounded-lg shadow-sm focus:outline-none focus:shadow-lg focus:border-blue-500 placeholder-gray-500"
           ref={selectRef}
           onChange={onDeviceChange}
         >
