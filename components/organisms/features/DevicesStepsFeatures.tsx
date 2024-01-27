@@ -63,6 +63,8 @@ export function DevicesStepsFeatures(props: DevicesStepsFeaturesProps) {
           title: "Connect a Device",
           description:
             "Bring your own device or select from a curated list of Biotech devices for your specific needs.",
+          class:
+            "bg-slate-50 dark:bg-slate-800 shadow-slate-500 dark:shadow-black",
           children: smCurrentForm,
         },
         // {
@@ -75,6 +77,8 @@ export function DevicesStepsFeatures(props: DevicesStepsFeaturesProps) {
           title: "Setup Data Dashboards",
           description:
             "Collect and consume your device data with pre-configured dashboards.",
+          class:
+            "bg-slate-50 dark:bg-slate-800 shadow-slate-500 dark:shadow-black",
           children: smCurrentForm,
         },
       ]}

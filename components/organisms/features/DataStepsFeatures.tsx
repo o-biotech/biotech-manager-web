@@ -74,18 +74,24 @@ export function DataStepsFeatures(props: DataStepsFeaturesProps) {
           title: "Confirm Data Flowing",
           description:
             "We'll make sure that you can get data flowing to your created devices using a device simulator or your real physical devices.",
+          class:
+            "bg-slate-50 dark:bg-slate-800 shadow-slate-500 dark:shadow-black",
           children: smCurrentForm,
         },
         {
           title: "Explore Data",
           description:
             "Now that data is flowing, explore your data through configured dashboards and APIs.",
+          class:
+            "bg-slate-50 dark:bg-slate-800 shadow-slate-500 dark:shadow-black",
           children: smCurrentForm,
         },
         {
           title: "Develop Solutions",
           description:
             "Connect with a variety of solutions to make the best of your data.",
+          class:
+            "bg-slate-50 dark:bg-slate-800 shadow-slate-500 dark:shadow-black",
           children: smCurrentForm,
         },
       ]}
