@@ -28,7 +28,7 @@ export default function App(
       <Theme />
 
       <BasicLayout
-        class="bg-white dark:bg-white"
+        class="basic-layout bg-slate-50 dark:bg-slate-900 text-black dark:text-white"
         header={
           <BiotechHeader
             currentUrl={url}

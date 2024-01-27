@@ -59,7 +59,7 @@ export function APIJWTForm(props: APIJWTFormProps) {
 
           <Action
             href="./getting-started/devices"
-            class="m-2 !text-black hover:!text-white"
+            class="m-2"
             actionStyle={ActionStyleTypes.Link |
               ActionStyleTypes.Outline |
               ActionStyleTypes.Rounded}

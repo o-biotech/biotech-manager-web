@@ -24,7 +24,7 @@ export function Checklist(props: ChecklistProps) {
             <h1
               class={classSet([
                 "flex flex-row items-center text-sm my-1",
-                item.Complete ? "text-slate-500" : "text-white",
+                item.Complete ? "text-slate-500" : "",
               ])}
             >
               <CheckIcon
