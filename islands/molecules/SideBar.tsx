@@ -101,7 +101,7 @@ export default function SideBar(props: SideBarProps) {
         data-closedstate={isClosed}
         class={classSet(
           [
-            "-:fixed -:z-40 -:transition-all -:data-[closedstate='false']:w-64 -:h-screen -:dark:bg-slate-950 -:bg-slate-100 -:border -:border-collapse -:border-r-[1px] -:border-slate-400 -:dark:border-slate-700 -:text-slate-700 -:dark:text-white -:flex -:flex-row",
+            "-:fixed -:z-40 -:transition-all -:data-[closedstate='false']:w-64 -:h-screen -:dark:bg-slate-950 -:bg-slate-100 -:border -:border-collapse -:border-r-[1px] -:border-slate-400 -:dark:border-slate-700 -:text-slate-700 -:dark:text-white -:flex -:flex-row -:shadow-lg -:shadow-slate-500 -:dark:shadow-black",
             props.disableToggle
               ? "-:data-[closedstate='true']:w-64"
               : "-:data-[closedstate='true']:w-12",
@@ -109,7 +109,7 @@ export default function SideBar(props: SideBarProps) {
           props,
         )}
       >
-        <div class="flex-none">
+        <div class="flex-none pb-[80px] overflow-auto">
           {!props.disableToggle && (
             <div
               onClick={() => toggleMenu()}
@@ -148,7 +148,7 @@ export default function SideBar(props: SideBarProps) {
 
         <div
           data-closedstate={isClosed}
-          class="flex-1 pt-12 overflow-auto transition-opacity delay-150 duration-300 ease-out-in px-1 h-screen text-sm data-[closedstate='false']:block data-[closedstate='true']:hidden data-[closedstate='false']:opacity-100 data-[closedstate='true']:opacity-0"
+          class="flex-1 pt-12 pb-[80px] overflow-auto transition-opacity delay-150 duration-300 ease-out-in px-1 h-screen text-sm data-[closedstate='false']:block data-[closedstate='true']:hidden data-[closedstate='false']:opacity-100 data-[closedstate='true']:opacity-0"
         >
           <div class="mx-2 uppercase text-md">
             {currentMenuSettings?.Title || currentMenu}

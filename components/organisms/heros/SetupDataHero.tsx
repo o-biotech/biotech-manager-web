@@ -22,7 +22,8 @@ export default function SetupDataHero(props: SetupDataHeroProps) {
       displayStyle={DisplayStyleTypes.Center | DisplayStyleTypes.Large}
       {...props}
     >
-      {!props.hideAction && (
+      {
+        /* {!props.hideAction && (
         <Action
           href="/getting-started/data"
           class="my-8 flex flex-row"
@@ -30,7 +31,8 @@ export default function SetupDataHero(props: SetupDataHeroProps) {
           Setup Data Flow
           <ChevronRightIcon class="w-[24px] h-[24px]" />
         </Action>
-      )}
+      )} */
+      }
     </Hero>
   );
 }

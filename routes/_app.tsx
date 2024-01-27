@@ -28,10 +28,13 @@ export default function App(
         {/* TODO: Open something in issues with fresh that allow this to be added to the head */}
         <Theme />
       </head>
+
       <body class="bg-slate-50 dark:bg-slate-900 text-black dark:text-white">
         <BasicLayout
+          class="min-h-[100vh]"
           header={
             <BiotechHeader
+              class="h-[64px]"
               currentUrl={url}
               setupPhase={state.Phase}
               hasEaC={!!state.EaC}
@@ -40,7 +43,7 @@ export default function App(
           footer={<BiotechFooter />}
         >
           <SideBar
-            class="top-[68px] left-0"
+            class="top-[64px] left-0"
             menuItems={menuItems}
             state={state}
             // disableToggle={true}
