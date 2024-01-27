@@ -25,7 +25,7 @@ export function EaCSourcesDisplay(sources: Record<string, EaCSourceAsCode>) {
                     actionStyle={ActionStyleTypes.Link |
                       ActionStyleTypes.Rounded |
                       ActionStyleTypes.Icon}
-                    class="px-1 py-1 text-white"
+                    class="px-1 py-1"
                     href={`/enterprises/sources/${
                       encodeURIComponent(
                         sourceLookup,

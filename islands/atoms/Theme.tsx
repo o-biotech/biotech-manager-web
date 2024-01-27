@@ -1,6 +1,9 @@
+// deno-lint-ignore-file ban-types
 import { useEffect, useState } from "preact/hooks";
 
-export default function Theme() {
+export type ThemeProps = {};
+
+export default function Theme(props: ThemeProps) {
   const darkMedia = "(prefers-color-scheme: dark)";
 
   const setDark = () => {
