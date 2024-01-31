@@ -57,8 +57,7 @@ export function EaCEnterpriseDetailsDisplay(
                 return (
                   <Action
                     actionStyle={ActionStyleTypes.Link |
-                      ActionStyleTypes.Rounded |
-                      ActionStyleTypes.Icon}
+                      ActionStyleTypes.Rounded}
                     class="flex flex-row items-center px-1 py-1"
                     href={`/enterprises/${eac.EnterpriseLookup}`}
                   >

@@ -73,15 +73,16 @@ export function EntepriseManagementItem(props: EntepriseManagementItemProps) {
   };
 
   return (
-    <div class="flex flex-row justify-center items-center hover:bg-slate-300 hover:opactity-80">
+    <div class="flex flex-row justify-center items-center hover:bg-slate-700 hover:text-slate-300 dark:hover:bg-slate-300 dark:hover:text-slate-700 hover:opactity-80 px-2 py-1">
       <h1 class="flex-1 text-lg ml-1">{props.enterprise.EnterpriseName}</h1>
 
       <ActionGroup class="flex-none">
         <>
           {!props.manage && (
             <Action
-              actionStyle={ActionStyleTypes.Link | ActionStyleTypes.Rounded}
-              class="px-1 py-1"
+              actionStyle={ActionStyleTypes.Link |
+                ActionStyleTypes.Rounded |
+                ActionStyleTypes.Icon}
               href={`/enterprises/${props.enterprise.EnterpriseLookup}`}
             >
               <EditIcon class="w-6 h-6 text-blue-500" />
@@ -91,7 +92,9 @@ export function EntepriseManagementItem(props: EntepriseManagementItemProps) {
           {!props.active && (
             <form onSubmit={(e) => setActiveEnterprise(e)}>
               <Action
-                actionStyle={ActionStyleTypes.Link | ActionStyleTypes.Rounded}
+                actionStyle={ActionStyleTypes.Link |
+                  ActionStyleTypes.Rounded |
+                  ActionStyleTypes.Icon}
               >
                 <BeginIcon class="w-6 h-6 text-sky-500" />
               </Action>
@@ -99,7 +102,12 @@ export function EntepriseManagementItem(props: EntepriseManagementItemProps) {
           )}
 
           <form onSubmit={(e) => deleteEnterprise(e)}>
-            <Action type="submit" actionStyle={ActionStyleTypes.Link}>
+            <Action
+              type="submit"
+              actionStyle={ActionStyleTypes.Link |
+                ActionStyleTypes.Rounded |
+                ActionStyleTypes.Icon}
+            >
               <DeleteIcon class="w-6 h-6 text-red-500" />
             </Action>
           </form>

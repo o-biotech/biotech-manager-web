@@ -1,9 +1,11 @@
 import { ComponentChildren, JSX } from "preact";
 import { snakeCase } from "$case";
 import { CheckIcon, ChevronRightIcon } from "$fathym/atomic-icons";
-import { classSet } from "@fathym/atomic";
+import { Action, ActionStyleTypes, classSet } from "@fathym/atomic";
 
 export type ChecklistItem = {
+  ActionPath: string;
+
   Complete: boolean;
 
   SubList?: ChecklistItem[];
@@ -19,23 +21,37 @@ export function Checklist(props: ChecklistProps) {
   return (
     <div {...props}>
       {props.items.map((item) => {
+        const itemDisplay = item.Complete ? <h1></h1> : (
+          <Action
+            href={item.ActionPath}
+            actionStyle={ActionStyleTypes.Link |
+              ActionStyleTypes.Rounded |
+              ActionStyleTypes.Icon}
+          >
+          </Action>
+        );
+
+        itemDisplay.props.class = classSet([
+          "flex flex-row items-center text-sm px-2 py-[1px] text-left",
+          item.Complete ? "text-slate-500" : "",
+        ]);
+
+        itemDisplay.props.children = (
+          <>
+            <CheckIcon
+              class={classSet([
+                "w-4 h-4 flex-none",
+                item.Complete ? "text-green-500" : undefined,
+              ])}
+            />
+
+            <span class="flex-1 ml-1">{item.Title}</span>
+          </>
+        );
+
         return (
           <>
-            <h1
-              class={classSet([
-                "flex flex-row items-center text-sm my-1",
-                item.Complete ? "text-slate-500" : "",
-              ])}
-            >
-              <CheckIcon
-                class={classSet([
-                  "w-4 h-4 flex-none",
-                  item.Complete ? "text-green-500" : undefined,
-                ])}
-              />
-
-              <span class="flex-1 ml-1">{item.Title}</span>
-            </h1>
+            {itemDisplay}
 
             {item.SubList && (
               <div class="ml-5">

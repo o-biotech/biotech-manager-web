@@ -106,8 +106,8 @@ export default function CommitStatus({
         } (${date.toLocaleString()})`;
       }
       return (
-        <div class={`text-lg my-2 ml-${2 * level}`}>
-          <span class="font-bold">{key}:</span> {data}
+        <div class={`text-lg my-2 ml-${2 * level + 2}`}>
+          <span class={`font-bold ml-${2 * level}`}>{key}:</span> {data}
         </div>
       );
     }
