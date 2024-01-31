@@ -21,11 +21,7 @@ import { IoTHubKeySimulatorDisplay } from "../../../../islands/organisms/iot/hub
 export type EaCIoTPageData = {
   cloudOptions: DataLookup[];
 
-  deviceKeys: Record<string, string>;
-
   entLookup: string;
-
-  iotHubKeys: Record<string, string>;
 
   resGroupOptions: {
     [cloudLookup: string]: DataLookup[];
