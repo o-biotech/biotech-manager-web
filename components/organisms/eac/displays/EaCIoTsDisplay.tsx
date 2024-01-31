@@ -29,7 +29,6 @@ export function EaCIoTsDisplay(iots: Record<string, EaCIoTAsCode>) {
                         actionStyle={ActionStyleTypes.Link |
                           ActionStyleTypes.Rounded |
                           ActionStyleTypes.Icon}
-                        class="px-1 py-1"
                         href={`/enterprises/iot/${iotLookup}`}
                       >
                         <EditIcon class="w-4 h-4" />

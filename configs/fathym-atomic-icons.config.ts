@@ -20,6 +20,7 @@ export const curIconSetConfig: IconSetConfig = {
     error: "https://api.iconify.design/material-symbols:error.svg",
     loading: "https://api.iconify.design/line-md:loading-alt-loop.svg",
     menu: "https://api.iconify.design/ci:hamburger.svg",
+    notification: "https://api.iconify.design/mdi:notifications.svg",
     renew: "https://api.iconify.design/material-symbols:autorenew.svg",
     settings: "https://api.iconify.design/material-symbols-light:settings.svg",
     user: "https://api.iconify.design/material-symbols:account-circle-full.svg",

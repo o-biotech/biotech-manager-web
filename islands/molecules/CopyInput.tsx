@@ -16,7 +16,7 @@ export function CopyInput(props: JSX.HTMLAttributes<HTMLInputElement>) {
         {...props}
         class={classSet(
           [
-            "-:inline-block -:appearance-none -:w-[80%] -:bg-white -:border -:border-gray-400 -:hover:border-gray-500 -:px-4 -:py-2 -:rounded -:leading-tight -:focus:outline-none -:focus:border-blue-500",
+            "-:inline-block -:appearance-none -:w-[80%] -:bg-white -:text-black -:border -:border-gray-400 -:hover:border-gray-500 -:px-4 -:py-2 -:rounded -:leading-tight -:focus:outline-none -:focus:border-blue-500",
           ],
           props,
         )}

@@ -16,11 +16,16 @@ import { loadEaCSvc } from "../../../../configs/eac.ts";
 import { OpenBiotechEaC } from "../../../../src/eac/OpenBiotechEaC.ts";
 import { DeleteAction } from "../../../../islands/molecules/DeleteAction.tsx";
 import { EaCManageIoTFormIsland } from "../../../../islands/molecules/EaCManageIoTFormIsland.tsx";
+import { IoTHubKeySimulatorDisplay } from "../../../../islands/organisms/iot/hub-key-simulator.tsx";
 
 export type EaCIoTPageData = {
   cloudOptions: DataLookup[];
 
+  deviceKeys: Record<string, string>;
+
   entLookup: string;
+
+  iotHubKeys: Record<string, string>;
 
   resGroupOptions: {
     [cloudLookup: string]: DataLookup[];

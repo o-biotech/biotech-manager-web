@@ -18,17 +18,19 @@ export default function ProfileMenu(props: ProfileMenuProps) {
       menuStyle={MenuButtonStyleTypes.Responsive}
       toggleChildren={
         <>
-          <UserIcon class="w-[24px] h-[24px]" />
+          <UserIcon class="w-6 h-6" />
 
-          <ChevronDownIcon class="w-[24px] h-[24px]" />
+          {/* <ChevronDownIcon class="w-[24px] h-[24px]" /> */}
         </>
       }
     >
       <>
         <Action
           href="/signout"
-          actionStyle={ActionStyleTypes.Outline | ActionStyleTypes.Solid}
-          class="w-full"
+          class="mx-2"
+          actionStyle={ActionStyleTypes.Link |
+            ActionStyleTypes.Rounded |
+            ActionStyleTypes.Icon}
         >
           Sign Out
         </Action>

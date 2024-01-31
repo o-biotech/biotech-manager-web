@@ -8,6 +8,7 @@ import {
   HeaderProps,
   ResponsiveSet,
 } from "@fathym/atomic";
+import { NotificationIcon } from "$fathym/atomic-icons";
 import ProfileMenu from "../../islands/common/ProfileMenu.tsx";
 import InteractiveResponsiveSet from "../../islands/molecules/InteractiveResponsiveSet.tsx";
 import { SetupPhaseTypes } from "../../src/SetupPhaseTypes.tsx";
@@ -22,7 +23,9 @@ export type BiotechHeaderProps = HeaderProps & {
 };
 
 export function BiotechHeader(props: BiotechHeaderProps) {
-  const active = <span class="bg-sky-700 bg-opacity-80 text-white"></span>;
+  const active = (
+    <span class="bg-slate-700 bg-opacity-80 text-white shadow-inner"></span>
+  );
 
   return (
     <Header
@@ -35,16 +38,27 @@ export function BiotechHeader(props: BiotechHeaderProps) {
         </Action>
       }
       nav={
-        <InteractiveResponsiveSet toggleChildren="☰">
+        <InteractiveResponsiveSet class="flex-1" toggleChildren="☰">
           <Action
             href="/"
             actionStyle={ActionStyleTypes.Link}
             class={classSet([
-              "text-xl mx-1",
+              "text-lg mx-1",
               props.currentUrl.pathname === "/" ? active.props.class : "",
             ])}
           >
             Dashboard
+          </Action>
+
+          <div class="flex-1"></div>
+
+          <Action
+            class="mx-2"
+            actionStyle={ActionStyleTypes.Link |
+              ActionStyleTypes.Rounded |
+              ActionStyleTypes.Icon}
+          >
+            <NotificationIcon class="w-6 h-6" />
           </Action>
 
           <ProfileMenu />
