@@ -1,6 +1,6 @@
 export enum DevicesPhaseTypes {
   Connect = 0,
-  APIs = 1,
-  Dashboards = 2,
-  Complete = 3,
+  // APIs = 1,
+  Dashboards = 1,
+  Complete = 2,
 }
