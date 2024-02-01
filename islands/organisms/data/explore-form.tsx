@@ -79,7 +79,7 @@ export function DataExploreForm(props: DataExploreFormProps) {
     };
 
     self.addEventListener("message", (event) => {
-      console.log(event.data.type);
+      console.log(event.data);
       if (
         event.data.signature === "queryExplorer" &&
         event.data.type === "getToken"
