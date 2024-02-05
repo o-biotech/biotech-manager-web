@@ -161,7 +161,7 @@ export default function SideBar(props: SideBarProps) {
         </div>
       </div>
 
-      <div class={classSet([props.disableToggle ? "ml-64" : "ml-12"])}>
+      <div class={classSet([props.disableToggle ? "ml-64" : "ml-14"])}>
         {props.children}
       </div>
     </>

@@ -60,6 +60,7 @@ import * as $organisms_data_api_develop_form from "./islands/organisms/data/api-
 import * as $organisms_data_dashboard_display from "./islands/organisms/data/dashboard-display.tsx";
 import * as $organisms_data_explore_form from "./islands/organisms/data/explore-form.tsx";
 import * as $organisms_iot_device_data_flowing from "./islands/organisms/iot/device-data-flowing.tsx";
+import * as $organisms_iot_devices_dashboard_controls from "./islands/organisms/iot/devices-dashboard-controls.tsx";
 import * as $organisms_iot_hub_device_connection from "./islands/organisms/iot/hub-device-connection.tsx";
 import * as $organisms_iot_hub_key_connection from "./islands/organisms/iot/hub-key-connection.tsx";
 import * as $organisms_iot_hub_key_simulator from "./islands/organisms/iot/hub-key-simulator.tsx";
@@ -154,6 +155,8 @@ const manifest = {
     "./islands/organisms/data/explore-form.tsx": $organisms_data_explore_form,
     "./islands/organisms/iot/device-data-flowing.tsx":
       $organisms_iot_device_data_flowing,
+    "./islands/organisms/iot/devices-dashboard-controls.tsx":
+      $organisms_iot_devices_dashboard_controls,
     "./islands/organisms/iot/hub-device-connection.tsx":
       $organisms_iot_hub_device_connection,
     "./islands/organisms/iot/hub-key-connection.tsx":

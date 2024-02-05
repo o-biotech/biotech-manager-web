@@ -9,14 +9,20 @@ import { SetupPhaseTypes } from "../src/SetupPhaseTypes.tsx";
 import { OpenBiotechManagerState } from "../src/OpenBiotechManagerState.tsx";
 import { BiotechDashboard } from "../components/organisms/BiotechDashboard.tsx";
 import CreateEaCHero from "../components/organisms/heros/CreateEaCHero.tsx";
+import { EaCDeviceAsCode, EaCIoTAsCode, loadJwtConfig } from "@fathym/eac";
 
 interface HomePageData {
+  devices: Record<string, EaCDeviceAsCode>;
+  jwt: string;
+
   setupPhase: SetupPhaseTypes;
 }
 
 export const handler: Handlers<HomePageData | null, OpenBiotechManagerState> = {
   GET(_, ctx) {
     const data: HomePageData = {
+      devices: ctx.state.EaC!.IoT!["iot-flow"].Devices!,
+      jwt: ctx.state.Devices.JWT,
       setupPhase: ctx.state.Phase,
     };
 
@@ -53,6 +59,28 @@ export default function Home({
         break;
 
       case SetupPhaseTypes.Complete:
+        currentHero = (
+          <>
+            <div class="flex flex-col md:flex-row items-start md:items-center divide-y-4 md:divide-x-4 md:divide-y-0 divide-[#4a918e]">
+              <div class="flex-none md:w-100 px-5 py-10 mx-5 md:py-10 md:px-20 md:my-10 text-2xl md:text-3xl">
+                <h1 class="text-[#4a918e]">Welcome to</h1>
+
+                <h1 class="">Open Biotech</h1>
+              </div>
+
+              <div class="flex-1 px-5 py-10 mx-5 md:py-10 md:px-20 md:my-10">
+                <h2 class="text-xl md:text-2xl text-[#4a918e]">
+                  IoT Dashboard
+                </h2>
+
+                <h3 class="md:text-lg">
+                  Emulate, simulate, and connect your devices to unlock the
+                  power of your IoT applications.
+                </h3>
+              </div>
+            </div>
+          </>
+        );
         break;
     }
   }
@@ -61,9 +89,11 @@ export default function Home({
     <>
       {currentHero}
 
-      {initialSteps}
+      {state.Phase < 3 && initialSteps}
 
-      {/* {state.Phase > 1 ? <BiotechDashboard /> : <></>} */}
+      {state.Phase > 2
+        ? <BiotechDashboard class="m-4" devices={data.devices} jwt={data.jwt} />
+        : <></>}
     </>
   );
 }
