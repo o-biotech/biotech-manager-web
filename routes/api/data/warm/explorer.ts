@@ -4,6 +4,7 @@ import { respond } from "@fathym/common";
 import { ExplorerRequest } from "@fathym/eac";
 import { OpenBiotechManagerAPIState } from "../../../../src/api/OpenBiotechManagerAPIState.ts";
 import { loadEaCExplorerSvc } from "../../../../configs/eac.ts";
+import { delay } from "$std/async/delay.ts";
 
 export const handler: Handlers<any, OpenBiotechManagerAPIState> = {
   async GET(_req, ctx) {
@@ -59,6 +60,8 @@ export const handler: Handlers<any, OpenBiotechManagerAPIState> = {
       "Telemetry",
       expReq,
     );
+
+    await delay(5000);
 
     return respond(JSON.stringify(queryResp));
   },

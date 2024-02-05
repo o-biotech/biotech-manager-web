@@ -16,6 +16,9 @@ export default {
   plugins: [unimportant],
   theme: {
     extend: {
+      animation: {
+        progress: "progress 1s infinite linear",
+      },
       backgroundImage: {
         "hero-pattern":
           "linear-gradient(rgba(0, 0, 40, 0.85),rgba(0, 0, 40, 0.85)), url('./hero-bg-1.webp')",
@@ -34,6 +37,16 @@ export default {
         info: colors.blue,
         error: colors.red,
         warning: colors.yellow,
+      },
+      keyframes: {
+        progress: {
+          "0%": { transform: " translateX(0) scaleX(0)" },
+          "40%": { transform: "translateX(0) scaleX(0.4)" },
+          "100%": { transform: "translateX(100%) scaleX(0.5)" },
+        },
+      },
+      transformOrigin: {
+        "left-right": "0% 50%",
       },
     },
   },

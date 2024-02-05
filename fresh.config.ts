@@ -1,5 +1,6 @@
-import { defineConfig, FreshContext } from "$fresh/server.ts";
+import { defineConfig, FreshContext, PluginIslands } from "$fresh/server.ts";
 import tailwind from "$fresh/plugins/tailwind.ts";
+import { islandsConfig as biotechIslandsConfig } from "@fathym/atomic";
 import { iconSetPlugin } from "@fathym/atomic-icons";
 import { curIconSetGenerateConfig } from "./configs/fathym-atomic-icons.config.ts";
 import { gitHubAccessPlugin } from "@fathym/eac";
@@ -34,5 +35,9 @@ export default defineConfig({
       },
       RootPath: "/github/access",
     }),
+    {
+      name: "biotech_islands",
+      islands: (await biotechIslandsConfig()).map((i) => i as PluginIslands),
+    },
   ],
 });

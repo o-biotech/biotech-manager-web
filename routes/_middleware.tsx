@@ -51,33 +51,39 @@ async function loggedInCheck(
 
       const oldSessionId = await azureOBiotechOAuth.getSessionId(req);
 
-      const { response, tokens, sessionId } = await azureOBiotechOAuth
-        .handleCallback(req);
+      try {
+        const { response, tokens, sessionId } = await azureOBiotechOAuth
+          .handleCallback(req);
 
-      const { accessToken, refreshToken, expiresIn } = tokens;
+        const { accessToken, refreshToken, expiresIn } = tokens;
 
-      const [header, payload, signature] = await decode(accessToken);
+        const [header, payload, signature] = await decode(accessToken);
 
-      const primaryEmail = (payload as Record<string, string>).emails[0];
+        const primaryEmail = (payload as Record<string, string>).emails[0];
 
-      await denoKv.set(
-        ["User", sessionId, "Current", "Username"],
-        {
-          Username: primaryEmail!,
-          ExpiresAt: now + expiresIn! * 1000,
-          Token: accessToken,
-          RefreshToken: refreshToken,
-        } as UserOAuthConnection,
-        {
-          expireIn: expiresIn! * 1000,
-        },
-      );
+        await denoKv.set(
+          ["User", sessionId, "Current", "Username"],
+          {
+            Username: primaryEmail!,
+            ExpiresAt: now + expiresIn! * 1000,
+            Token: accessToken,
+            RefreshToken: refreshToken,
+          } as UserOAuthConnection,
+          {
+            expireIn: expiresIn! * 1000,
+          },
+        );
 
-      if (oldSessionId) {
-        await denoKv.delete(["User", oldSessionId, "Current", "Username"]);
+        if (oldSessionId) {
+          await denoKv.delete(["User", oldSessionId, "Current", "Username"]);
+        }
+
+        return response;
+      } catch (error) {
+        console.error(error);
+
+        return redirectRequest("/signin");
       }
-
-      return response;
     }
 
     case "/signout": {

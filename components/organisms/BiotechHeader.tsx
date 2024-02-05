@@ -6,11 +6,13 @@ import {
   Header,
   HeaderLogo,
   HeaderProps,
+  MenuButton,
+  MenuButtonStyleTypes,
   ResponsiveSet,
 } from "@fathym/atomic";
-import { NotificationIcon } from "$fathym/atomic-icons";
+import { NotificationIcon, UserIcon } from "$fathym/atomic-icons";
 import ProfileMenu from "../../islands/common/ProfileMenu.tsx";
-import InteractiveResponsiveSet from "../../islands/molecules/InteractiveResponsiveSet.tsx";
+// import InteractiveResponsiveSet from "../../islands/molecules/InteractiveResponsiveSet.tsx";
 import { SetupPhaseTypes } from "../../src/SetupPhaseTypes.tsx";
 import { Logo } from "../atoms/Logo.tsx";
 
@@ -38,7 +40,7 @@ export function BiotechHeader(props: BiotechHeaderProps) {
         </Action>
       }
       nav={
-        <InteractiveResponsiveSet class="flex-1" toggleChildren="☰">
+        <ResponsiveSet class="flex-1" toggleChildren="☰">
           <Action
             href="/"
             actionStyle={ActionStyleTypes.Link}
@@ -62,7 +64,7 @@ export function BiotechHeader(props: BiotechHeaderProps) {
           </Action>
 
           <ProfileMenu />
-        </InteractiveResponsiveSet>
+        </ResponsiveSet>
       }
       {...props}
       class={classSet(["-:z-50 -:sticky -:top-0 -:drop-shadow-md"], props)}

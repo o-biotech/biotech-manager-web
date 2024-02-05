@@ -1,22 +1,22 @@
-import { classSet } from "@fathym/atomic";
+import { classSet, Display } from "@fathym/atomic";
 import { JSX } from "preact";
 import EmulatedDevices from "./devices/EmulatedDevices.tsx";
 import ConnectedDevices from "./devices/ConnectedDevices.tsx";
 import DevicesTelemetry from "./devices/DevicesTelemetry.tsx";
+import { DevicesDashboardControls } from "../../islands/organisms/iot/devices-dashboard-controls.tsx";
+import { EaCDeviceAsCode } from "@fathym/eac";
 
-export type BiotechDashboardProps = JSX.HTMLAttributes<HTMLDivElement>;
+export type BiotechDashboardProps = {
+  devices: Record<string, EaCDeviceAsCode>;
+
+  jwt: string;
+} & JSX.HTMLAttributes<HTMLDivElement>;
 
 export function BiotechDashboard(props: BiotechDashboardProps) {
   return (
     <>
       <div {...props} class={classSet(["-:p-2 -:md:p-4"], props)}>
-        <EmulatedDevices class="mb-8 md:mb-16" />
-
-        <div class="flex flex-col md:flex-row mt-2 gap-8 md:gap-16">
-          <ConnectedDevices class="w-full md:w-1/3" />
-
-          <DevicesTelemetry class="w-full md:w-2/3" />
-        </div>
+        <DevicesDashboardControls devices={props.devices} jwt={props.jwt} />
       </div>
 
       <div>
