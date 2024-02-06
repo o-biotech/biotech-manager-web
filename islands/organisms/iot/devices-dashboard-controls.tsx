@@ -122,10 +122,16 @@ ${dataReq.Query}
     }
   }, [devices, isDeviceDataActive]);
 
-  const rawDeviceDisplay = <pre>{JSON.stringify(deviceData, null, 2)}</pre>;
+  const rawDeviceDisplay = (
+    <div class="h-full relative overflow-hidden">
+      <div class="h-full relative overflow-auto">
+        <pre>{JSON.stringify(deviceData, null, 2)}</pre>
+      </div>
+    </div>
+  );
 
   const payloadsDeviceDisplay = (
-    <div class="flex flex-col divide-y divide-gray-300 dark:divide-gray-700">
+    <div class="flex flex-col divide-y divide-gray-300 dark:divide-gray-700 h-full relative overflow-hidden">
       <div class="flex-1 flex flex-row p-2">
         <div class="flex-none w-40 underline">Device ID</div>
 
@@ -134,58 +140,60 @@ ${dataReq.Query}
         <div class="flex-none w-40 underline"></div>
       </div>
 
-      {deviceData.map(
-        (dd: {
-          DeviceID: string;
+      <div class="flex flex-col divide-y divide-gray-300 dark:divide-gray-700 h-full relative overflow-auto">
+        {deviceData.map(
+          (dd: {
+            DeviceID: string;
 
-          EnqueuedTime: string;
+            EnqueuedTime: string;
 
-          RawData: any;
-        }) => {
-          const enqueuedTime = intlFormat(
-            new Date(Date.parse(dd.EnqueuedTime)),
-            {
-              timeZoneName: "longOffset",
-              year: "numeric",
-              month: "numeric",
-              day: "numeric",
-              hour: "numeric",
-              minute: "numeric",
-              second: "numeric",
-              fractionalSecondDigits: 3,
-            } as Intl.DateTimeFormatOptions,
-          );
+            RawData: any;
+          }) => {
+            const enqueuedTime = intlFormat(
+              new Date(Date.parse(dd.EnqueuedTime)),
+              {
+                timeZoneName: "longOffset",
+                year: "numeric",
+                month: "numeric",
+                day: "numeric",
+                hour: "numeric",
+                minute: "numeric",
+                second: "numeric",
+                fractionalSecondDigits: 3,
+              } as Intl.DateTimeFormatOptions,
+            );
 
-          const rawData = JSON.stringify(dd.RawData, null, 2);
+            const rawData = JSON.stringify(dd.RawData, null, 2);
 
-          const uniqueKey = dd.DeviceID + dd.EnqueuedTime + "-open";
+            const uniqueKey = dd.DeviceID + dd.EnqueuedTime + "-open";
 
-          return (
-            <div class="flex-1 flex flex-wrap items-center p-2">
-              <div class="flex-none w-40">{dd.DeviceID}</div>
+            return (
+              <div class="flex-1 flex flex-wrap items-center p-2">
+                <div class="flex-none w-40">{dd.DeviceID}</div>
 
-              <div class="flex-1">{enqueuedTime}</div>
+                <div class="flex-1">{enqueuedTime}</div>
 
-              <div class="flex-none">
-                <CopyInput class="hidden" value={rawData} />
+                <div class="flex-none">
+                  <CopyInput class="hidden" value={rawData} />
+                </div>
+
+                <input id={uniqueKey} type="checkbox" class="sr-only peer" />
+
+                <label
+                  for={uniqueKey}
+                  class="cursor-pointer transition-all duration-200 peer-checked:rotate-[-180deg]"
+                >
+                  <ChevronDownIcon class="w-6 h-6" />
+                </label>
+
+                <div class="hidden peer-checked:block w-full m-2 p-2 shadow shadow-inner bg-gray-200 dark:bg-gray-700">
+                  <pre>{rawData}</pre>
+                </div>
               </div>
-
-              <input id={uniqueKey} type="checkbox" class="sr-only peer" />
-
-              <label
-                for={uniqueKey}
-                class="cursor-pointer transition-all duration-200 peer-checked:rotate-[-180deg]"
-              >
-                <ChevronDownIcon class="w-6 h-6" />
-              </label>
-
-              <div class="hidden peer-checked:block w-full m-2 p-2 shadow shadow-inner bg-gray-200 dark:bg-gray-700">
-                <pre>{rawData}</pre>
-              </div>
-            </div>
-          );
-        },
-      )}
+            );
+          },
+        )}
+      </div>
     </div>
   );
 
@@ -224,7 +232,7 @@ ${dataReq.Query}
         })}
       </Display>
 
-      <Display class="flex-1 p-4 bg-slate-100 dark:bg-slate-800 shadow shadow-slate-500 dark:shadow-black max-h-[100vh] relative overflow-hidden">
+      <Display class="flex-1 p-4 bg-slate-100 dark:bg-slate-800 shadow shadow-slate-500 dark:shadow-black">
         <ul class="flex flex-wrap text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400">
           <li class="me-2">
             <a
@@ -281,7 +289,7 @@ ${dataReq.Query}
           </div>
         )}
 
-        <div class="m-2 h-full overflow-auto relative">{deviceDisplay}</div>
+        <div class="m-2 max-h-[100vh] h-full">{deviceDisplay}</div>
       </Display>
     </div>
   );
