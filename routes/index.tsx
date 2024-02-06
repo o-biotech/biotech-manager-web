@@ -12,8 +12,9 @@ import CreateEaCHero from "../components/organisms/heros/CreateEaCHero.tsx";
 import { EaCDeviceAsCode, EaCIoTAsCode, loadJwtConfig } from "@fathym/eac";
 
 interface HomePageData {
-  devices: Record<string, EaCDeviceAsCode>;
-  jwt: string;
+  devices?: Record<string, EaCDeviceAsCode>;
+
+  jwt?: string;
 
   setupPhase: SetupPhaseTypes;
 }
@@ -21,8 +22,10 @@ interface HomePageData {
 export const handler: Handlers<HomePageData | null, OpenBiotechManagerState> = {
   GET(_, ctx) {
     const data: HomePageData = {
-      devices: ctx.state.EaC!.IoT!["iot-flow"].Devices!,
-      jwt: ctx.state.Devices.JWT,
+      devices: ctx.state.EaC?.IoT
+        ? ctx.state.EaC.IoT!["iot-flow"]!.Devices!
+        : undefined,
+      jwt: ctx.state.Devices?.JWT,
       setupPhase: ctx.state.Phase,
     };
 
