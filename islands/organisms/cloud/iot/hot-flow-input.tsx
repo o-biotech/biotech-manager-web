@@ -1,7 +1,13 @@
 import { ComponentChildren, JSX } from "preact";
 import { useRef, useState } from "preact/hooks";
 import { IS_BROWSER } from "$fresh/runtime.ts";
-import { Action, ActionStyleTypes, Input } from "@fathym/atomic";
+import {
+  Action,
+  ActionStyleTypes,
+  Input,
+  InputProps,
+  Select,
+} from "@fathym/atomic";
 import { RenewIcon } from "$fathym/atomic-icons";
 import { GitHubAccessAction } from "../../../molecules/GitHubAccessAction.tsx";
 
@@ -11,18 +17,18 @@ export type HotFlowInputProps = {
   hasGitHubAuth: boolean;
 
   organizations?: string[];
-} & JSX.HTMLAttributes<HTMLInputElement>;
+} & InputProps;
 
 export function HotFlowInput(props: HotFlowInputProps) {
   // if (!IS_BROWSER) return <></>;
 
-  const { children, organizations, ...inputProps } = props;
+  const { children, hasGitHubAuth, organizations, ...inputProps } = props;
 
   const inputRef = useRef<HTMLInputElement>(null);
 
   const [isChecked, setIsChecked] = useState(!!props.checked);
 
-  const hotFlowGitHub = isChecked && props.hasGitHubAuth
+  const hotFlowGitHub = isChecked && hasGitHubAuth
     ? (
       <>
         <div class="w-full mb-2">
@@ -33,18 +39,17 @@ export function HotFlowInput(props: HotFlowInputProps) {
             GitHub Organization for Devices Flow
           </label>
 
-          <select
+          <Select
             id="gitHubOrg"
             name="gitHubOrg"
             required
-            class="appearance-none block w-full bg-white text-black border border-gray-400 hover:border-gray-500 px-4 py-2 rounded-lg shadow-sm focus:outline-none focus:shadow-lg focus:border-blue-500 placeholder-gray-500"
           >
             <option value="">-- Select an organization --</option>
 
             {props.organizations?.map((org) => {
               return <option value={org}>{org}</option>;
             })}
-          </select>
+          </Select>
 
           <p>
             Don't see the organization your looking for? Add organizations by
@@ -75,7 +80,6 @@ export function HotFlowInput(props: HotFlowInputProps) {
             required
             placeholder="Enter new repository name"
             value="iot-ensemble-device-flow"
-            class="appearance-none block w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 rounded leading-tight focus:outline-none focus:border-blue-500"
           />
         </div>
       </>

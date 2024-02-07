@@ -71,7 +71,6 @@ export function DeviceForm(props: DeviceFormProps) {
             required
             disabled={!!props.deviceLookup}
             placeholder="Enter new device name"
-            class="appearance-none block w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 rounded leading-tight focus:outline-none focus:border-blue-500"
           />
         </div>
 

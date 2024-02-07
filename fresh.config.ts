@@ -37,7 +37,13 @@ export default defineConfig({
     }),
     {
       name: "biotech_islands",
-      islands: (await biotechIslandsConfig()).map((i) => i as PluginIslands),
+      islands: biotechIslandsConfig().map((i) => {
+        const isl = i as PluginIslands;
+
+        //         isl.paths = isl.paths.filter(p => !p.includes('MenuButton'));
+        // console.log(isl)
+        return isl;
+      }),
     },
   ],
 });
