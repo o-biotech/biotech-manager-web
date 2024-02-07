@@ -22,6 +22,7 @@ import * as $api_eac_iot_data_apis from "./routes/api/eac/iot/data-apis.ts";
 import * as $api_eac_iot_devices_ensure from "./routes/api/eac/iot/devices/ensure.ts";
 import * as $api_eac_stati from "./routes/api/eac/stati.ts";
 import * as $commit_commitId_status from "./routes/commit/[commitId]/status.tsx";
+import * as $develop_index from "./routes/develop/index.tsx";
 import * as $enterprises_entLookup_index from "./routes/enterprises/[[entLookup]]/index.tsx";
 import * as $enterprises_clouds_cloudLookup_index from "./routes/enterprises/clouds/[[cloudLookup]]/index.tsx";
 import * as $enterprises_devops_actions_doaLookup_index from "./routes/enterprises/devops-actions/[[doaLookup]]/index.tsx";
@@ -90,6 +91,7 @@ const manifest = {
     "./routes/api/eac/iot/devices/ensure.ts": $api_eac_iot_devices_ensure,
     "./routes/api/eac/stati.ts": $api_eac_stati,
     "./routes/commit/[commitId]/status.tsx": $commit_commitId_status,
+    "./routes/develop/index.tsx": $develop_index,
     "./routes/enterprises/[[entLookup]]/index.tsx":
       $enterprises_entLookup_index,
     "./routes/enterprises/clouds/[[cloudLookup]]/index.tsx":

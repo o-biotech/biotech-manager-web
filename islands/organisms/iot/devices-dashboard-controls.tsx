@@ -235,7 +235,7 @@ ${customFilter}`;
             type="number"
             value={takeRows}
             ref={takeRowsRef}
-            class="hidden peer-checked:block flex-1 bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 rounded leading-tight focus:outline-none focus:border-blue-500"
+            class="hidden peer-checked:block flex-1"
           />
         </div>
 
@@ -274,7 +274,6 @@ ${customFilter}`;
             value={customFilter}
             ref={customFilterRef}
             multiline
-            class="appearance-none block w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 rounded leading-tight focus:outline-none focus:border-blue-500"
           />
 
           <div class="flex flex-row">
