@@ -19,6 +19,8 @@ import { Logo } from "../atoms/Logo.tsx";
 export type BiotechHeaderProps = HeaderProps & {
   currentUrl: URL;
 
+  hasDevelop: boolean;
+
   hasEaC: boolean;
 
   setupPhase: SetupPhaseTypes;
@@ -57,18 +59,35 @@ export function BiotechHeader(props: BiotechHeaderProps) {
               Dashboard
             </Action>
 
-            <Action
-              href="/develop"
-              actionStyle={ActionStyleTypes.Link}
-              class={classSet([
-                "text-lg mx-1",
-                props.currentUrl.pathname.startsWith("/develop")
-                  ? active.props.class
-                  : "",
-              ])}
-            >
-              Develop
-            </Action>
+            {props.hasDevelop && (
+              <Action
+                href="/develop"
+                actionStyle={ActionStyleTypes.Link}
+                class={classSet([
+                  "text-lg mx-1",
+                  props.currentUrl.pathname.startsWith("/develop")
+                    ? active.props.class
+                    : "",
+                ])}
+              >
+                Develop
+              </Action>
+            )}
+
+            {props.hasEaC && (
+              <Action
+                href="/teams"
+                actionStyle={ActionStyleTypes.Link}
+                class={classSet([
+                  "text-lg mx-1",
+                  props.currentUrl.pathname.startsWith("/teams")
+                    ? active.props.class
+                    : "",
+                ])}
+              >
+                Teams
+              </Action>
+            )}
 
             <div class="flex-1"></div>
 
