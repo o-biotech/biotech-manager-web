@@ -9,7 +9,7 @@ import {
 // import {
 //   MenuButtonLocal,
 // } from '../move-back/MenuButtonLocal.tsx';
-import { ChevronDownIcon, UserIcon } from "$fathym/atomic-icons";
+import { ChevronDownIcon, LogOutIcon, UserIcon } from "$fathym/atomic-icons";
 
 export type ProfileMenuProps = Omit<MenuButtonProps, "toggleChildren"> & {
   toggleChildren?: ComponentChildren | undefined;
@@ -43,6 +43,7 @@ export default function ProfileMenu(props: ProfileMenuProps) {
             class="flex-none ml-2"
             actionStyle={ActionStyleTypes.Link | ActionStyleTypes.Rounded}
           >
+            <LogOutIcon class="w-6 h-6 inline-block" />
             Sign Out
           </Action>
 
@@ -51,6 +52,7 @@ export default function ProfileMenu(props: ProfileMenuProps) {
             class="flex-none"
             actionStyle={ActionStyleTypes.Link | ActionStyleTypes.Rounded}
           >
+            <LogOutIcon class="w-6 h-6 inline-block" />
             Everywhere
           </Action>
         </div>

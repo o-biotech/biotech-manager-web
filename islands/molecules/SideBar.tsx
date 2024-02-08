@@ -67,6 +67,24 @@ export default function SideBar(props: SideBarProps) {
     menuItemsSettings[currentMenu],
   );
 
+  const sideBarCloseCheck = (eTarget: HTMLDivElement) => {
+    if (!eTarget!.closest(".sidebar-wrapper") && !isSideBarClosed()) {
+      toggleMenu();
+    }
+  };
+
+  const outsideClickHandler = () => {
+    const eventHandler = (e: MouseEvent) => {
+      sideBarCloseCheck(e.target as HTMLDivElement);
+    };
+
+    window.document.addEventListener("click", eventHandler);
+
+    return () => {
+      window.document.removeEventListener("click", eventHandler);
+    };
+  };
+
   const toggleMenu = () => {
     localStorage.IsSideBarClosed = !isSideBarClosed();
 
@@ -95,12 +113,15 @@ export default function SideBar(props: SideBarProps) {
     (a, b) => menuItemsSettings[a.Name].Order - menuItemsSettings[b.Name].Order,
   );
 
+  useEffect(outsideClickHandler, []);
+
   return (
     <>
       <div
         data-closedstate={isClosed}
         class={classSet(
           [
+            "sidebar-wrapper",
             "-:fixed -:z-40 -:transition-all -:data-[closedstate='false']:w-64 -:h-screen -:dark:bg-slate-950 -:bg-slate-100 -:border -:border-collapse -:border-r-[1px] -:border-slate-400 -:dark:border-slate-700 -:text-slate-700 -:dark:text-white -:flex -:flex-row -:shadow-lg -:shadow-slate-500 -:dark:shadow-black",
             props.disableToggle
               ? "-:data-[closedstate='true']:w-64"
