@@ -15,7 +15,7 @@ export interface CloudConnectHeroProps extends HeroProps {
 export default function CloudConnectHero(props: CloudConnectHeroProps) {
   return (
     <Hero
-      title="Connect to Azure"
+      title="Cloud Configuration"
       callToAction="Connect to Azure and select cloud automation options."
       class="[&_*]:mx-auto [&>*>*]:w-full bg-hero-pattern text-center"
       heroStyle={HeroStyleTypes.None}
