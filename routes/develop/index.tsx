@@ -34,7 +34,7 @@ export const handler: Handlers<
   },
 };
 
-export default function Home({
+export default function Develop({
   data,
   state,
 }: PageProps<DevelopPageData, OpenBiotechManagerState>) {
