@@ -19,6 +19,7 @@ export const curIconSetConfig: IconSetConfig = {
       "https://api.iconify.design/material-symbols:android-find-my-device-outline.svg",
     error: "https://api.iconify.design/material-symbols:error.svg",
     loading: "https://api.iconify.design/line-md:loading-alt-loop.svg",
+    "log-out": "https://api.iconify.design/ic:sharp-logout.svg",
     menu: "https://api.iconify.design/ci:hamburger.svg",
     notification: "https://api.iconify.design/mdi:notifications.svg",
     renew: "https://api.iconify.design/material-symbols:autorenew.svg",
