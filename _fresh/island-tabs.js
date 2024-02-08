@@ -1,1 +1,1 @@
-import{a}from"./chunk-XGSVQ7RF.js";import"./chunk-NWQNIYVZ.js";import"./chunk-F4TDH6VI.js";import"./chunk-7CC3ABIV.js";import"./chunk-2GUEMEWN.js";import"./chunk-EEB6LQGP.js";import"./chunk-DQW7DUIU.js";export{a as Tabs};
+import{a}from"./chunk-PB56H5ER.js";import"./chunk-7DO6M3U7.js";import"./chunk-F4TDH6VI.js";import"./chunk-7CC3ABIV.js";import"./chunk-2GUEMEWN.js";import"./chunk-EEB6LQGP.js";import"./chunk-DQW7DUIU.js";export{a as Tabs};

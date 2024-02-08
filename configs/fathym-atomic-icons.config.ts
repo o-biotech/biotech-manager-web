@@ -23,6 +23,7 @@ export const curIconSetConfig: IconSetConfig = {
     notification: "https://api.iconify.design/mdi:notifications.svg",
     renew: "https://api.iconify.design/material-symbols:autorenew.svg",
     settings: "https://api.iconify.design/material-symbols-light:settings.svg",
+    sync: "https://api.iconify.design/ic:baseline-sync.svg",
     user: "https://api.iconify.design/material-symbols:account-circle-full.svg",
     Clouds: "https://api.iconify.design/ic:baseline-cloud.svg",
     Details: "https://api.iconify.design/clarity:details-solid.svg",

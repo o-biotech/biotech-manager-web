@@ -309,6 +309,7 @@ export default function EaCIoTDashboard({
               />
             </div>
           </div>
+
           <div class="max-w-sm mx-auto mb-4">
             <DeleteAction
               message={`Are you sure you want to delete EaC IoT Dashboard '${data.manageDashboard?.Details?.Name}?`}

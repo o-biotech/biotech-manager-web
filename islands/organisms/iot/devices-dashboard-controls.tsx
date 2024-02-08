@@ -4,7 +4,15 @@ import { useEffect, useRef, useState } from "preact/hooks";
 import { IS_BROWSER } from "$fresh/runtime.ts";
 import { intlFormat } from "npm:date-fns";
 import { ChevronDownIcon, IconProps, RenewIcon } from "$fathym/atomic-icons";
-import { Action, classSet, Display, Input, SlideToggle } from "@fathym/atomic";
+import {
+  Action,
+  classSet,
+  Display,
+  Input,
+  InputWrapper,
+  numMaxLengthShield,
+  SlideToggle,
+} from "@fathym/atomic";
 import { EaCDeviceAsCode, ExplorerRequest } from "@fathym/eac";
 import { CopyInput } from "../../molecules/CopyInput.tsx";
 
@@ -33,6 +41,10 @@ export function DevicesDashboardControls(props: DevicesDashboardControlsProps) {
 
   const customFilterRef = useRef<HTMLTextAreaElement>(null);
 
+  const enableRefreshRef = useRef<HTMLInputElement>(null);
+
+  const refreshRateRef = useRef<HTMLInputElement>(null);
+
   const takeRowsRef = useRef<HTMLInputElement>(null);
 
   const takeRowsEnabledRef = useRef<HTMLInputElement>(null);
@@ -45,13 +57,16 @@ export function DevicesDashboardControls(props: DevicesDashboardControlsProps) {
 
   const [customFilter, setCustomFilter] = useState("");
 
-  const [isDeviceDataActive, setIsDeviceDataActive] = useState(true);
+  const [refresh, setRefresh] = useState({
+    EnableRefresh: true,
+    RefreshRate: 30,
+  });
 
-  const [takeRows, setTakeRows] = useState(100);
-
-  const [takeRowsEnabled, setTakeRowsEnabled] = useState(true);
-
-  const [useDescending, setUseDescending] = useState(true);
+  const [settings, setSettings] = useState({
+    TakeRows: 100,
+    TakeRowsEnabled: true,
+    UseDescending: true,
+  });
 
   const [devices, setDevices] = useState(
     Object.keys(props.devices).map((deviceId) => {
@@ -90,11 +105,16 @@ export function DevicesDashboardControls(props: DevicesDashboardControlsProps) {
   const handleOnApplySettingsFilterClick = (
     e: JSX.TargetedMouseEvent<HTMLButtonElement>,
   ) => {
-    setTakeRows(Number.parseInt(takeRowsRef.current!.value));
+    setRefresh({
+      EnableRefresh: enableRefreshRef.current!.checked,
+      RefreshRate: Number.parseInt(refreshRateRef.current!.value),
+    });
 
-    setTakeRowsEnabled(takeRowsEnabledRef.current!.checked);
-
-    setUseDescending(useDescendingRef.current!.checked);
+    setSettings({
+      TakeRows: Number.parseInt(takeRowsRef.current!.value),
+      TakeRowsEnabled: takeRowsEnabledRef.current!.checked,
+      UseDescending: useDescendingRef.current!.checked,
+    });
   };
 
   const loadDeviceData = async (): Promise<void> => {
@@ -131,7 +151,7 @@ export function DevicesDashboardControls(props: DevicesDashboardControlsProps) {
 
   useEffect(() => {
     let query = `Devices
-| order by EnqueuedTime ${useDescending ? "desc" : "asc"}`;
+| order by EnqueuedTime ${settings.UseDescending ? "desc" : "asc"}`;
 
     if (!devices.every((d) => !d.Active)) {
       const activeDevices = devices.filter((d) => d.Active);
@@ -150,36 +170,31 @@ ${query}
 ${customFilter}`;
     }
 
-    if (takeRowsEnabled) {
+    if (settings.TakeRowsEnabled) {
       query = `${query}
-| take ${takeRows}`;
+| take ${settings.TakeRows}`;
     }
 
     setKQLQuery(query);
-  }, [
-    customFilter,
-    devices,
-    isDeviceDataActive,
-    takeRows,
-    takeRowsEnabled,
-    useDescending,
-  ]);
+  }, [customFilter, devices, settings]);
 
   const checkCall = () => {
     loadDeviceData().then();
   };
 
   useEffect(() => {
-    if (isDeviceDataActive && kqlQuery) {
+    if (kqlQuery) {
       if (intervalTracking) {
         clearInterval(intervalTracking);
       }
 
-      setIntervalTracking(setInterval(checkCall, 30000));
+      if (refresh.EnableRefresh) {
+        setIntervalTracking(setInterval(checkCall, refresh.RefreshRate * 1000));
+      }
 
       checkCall();
     }
-  }, [kqlQuery]);
+  }, [refresh, kqlQuery]);
 
   const devicesFilterDisplay = (
     <div class="h-full relative overflow-hidden">
@@ -211,37 +226,70 @@ ${customFilter}`;
 
   const settingsFilterDisplay = (
     <div class="h-full relative overflow-hidden">
-      <div class="h-full relative overflow-auto">
-        <div class="flex flex-row items-center mt-2">
-          <Input
-            id="takeRowsEnabled"
-            name="takeRowsEnabled"
-            type="checkbox"
-            checked={takeRowsEnabled}
+      <div class="flex flex-col gap-2 h-full relative overflow-auto divide-y divide-gray-500">
+        <div class="flex flex-row gap-2 items-center my-2">
+          <SlideToggle
+            class="after:top-[7px]"
             ref={takeRowsEnabledRef}
-            class="peer flex-none mt-1 w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-          />
-
-          <label
-            for="takeRowsEnabled"
-            class="ml-2 flex-1 text-lg peer-checked:font-bold"
+            checked={settings.TakeRowsEnabled}
           >
-            Use Take Rows
-          </label>
+            <span class="flex-1 md:flex-none ml-2 h-[34px] leading-[34px]">
+              Use Take Rows
+            </span>
 
-          <Input
-            id="takeRows"
-            name="takeRows"
-            type="number"
-            value={takeRows}
-            ref={takeRowsRef}
-            class="hidden peer-checked:block flex-1"
-          />
+            <InputWrapper
+              text="rows"
+              isNumber={true}
+              class="w-full mt-2 md:flex-1 md:w-auto md:mt-auto hidden peer-checked:block ml-2 after:leading-[34px]"
+            >
+              <Input
+                type="number"
+                value={settings.TakeRows}
+                ref={takeRowsRef}
+                maxlength={6}
+                onKeyPress={numMaxLengthShield}
+                class="p-1"
+              />
+            </InputWrapper>
+          </SlideToggle>
         </div>
 
-        <div class="flex flex-row items-center m-2">
-          <SlideToggle ref={useDescendingRef} checked={useDescending}>
-            Use Descending Order
+        <div class="flex flex-row gap-2 items-center pt-2">
+          <SlideToggle
+            class="after:top-[7px]"
+            ref={useDescendingRef}
+            checked={settings.UseDescending}
+          >
+            <span class="ml-2 h-[34px] leading-[34px]">
+              Use Descending Order
+            </span>
+          </SlideToggle>
+        </div>
+
+        <div class="flex flex-row gap-2 items-center pt-2 mb-2">
+          <SlideToggle
+            class="after:top-[7px]"
+            ref={enableRefreshRef}
+            checked={refresh.EnableRefresh}
+          >
+            <span class="flex-1 md:flex-none ml-2 h-[34px] leading-[34px]">
+              Enable Auto Refresh
+            </span>
+
+            <InputWrapper
+              text="sec"
+              isNumber={true}
+              class="w-full mt-2 md:flex-1 md:w-auto md:mt-auto hidden peer-checked:block ml-2 after:leading-[34px]"
+            >
+              <Input
+                type="number"
+                value={refresh.RefreshRate}
+                ref={refreshRateRef}
+                maxlength={6}
+                onKeyPress={numMaxLengthShield}
+                class="p-1"
+              />
+            </InputWrapper>
           </SlideToggle>
         </div>
 
@@ -403,7 +451,7 @@ ${customFilter}`;
       <h1 class="text-4xl">Device Data</h1>
 
       <div class="flex flex-col md:flex-row gap-4 pt-4 relative">
-        <Display class="flex-none w-[25%] p-4 bg-slate-50 dark:bg-slate-800 shadow shadow-slate-500 dark:shadow-black">
+        <Display class="md:w-[25%] md:flex-none p-4 bg-slate-50 dark:bg-slate-800 shadow shadow-slate-500 dark:shadow-black">
           <h1 class="text-2xl mb-1">Filters</h1>
 
           <ul class="flex flex-wrap text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400">
