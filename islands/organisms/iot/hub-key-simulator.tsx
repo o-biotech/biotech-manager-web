@@ -92,7 +92,7 @@ export function IoTHubKeySimulatorDisplay(
 
         <p class="block text-md mb-2">
           The simulator can be used to create and customize IoT Hub data. You
-          will need docker installed, and then tweak (if desired) and then run
+          will need Docker Desktop installed, tweak (if desired) and then run
           the following command.
         </p>
 

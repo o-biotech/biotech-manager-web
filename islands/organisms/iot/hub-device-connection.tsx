@@ -88,7 +88,8 @@ export function IoTHubDeviceConnectionDisplay(
         </label>
 
         <p class="block text-md mb-2">
-          Instructions on using the device connection string.
+          Copy the device connection string to send a message from your device
+          to IoT Hub and establish connection.
         </p>
 
         {selectedDevices.map((selectedDevice) => {

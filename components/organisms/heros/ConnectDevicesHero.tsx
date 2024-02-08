@@ -16,7 +16,7 @@ export default function ConnectDevicesHero(props: ConnectDevicesHeroProps) {
   return (
     <Hero
       title="Connect Devices"
-      callToAction="You don't have any device flows created, let's get your first one setup."
+      callToAction="Let's continue by setting up your first device flow."
       class="[&_*]:mx-auto [&>*>*]:w-full bg-hero-pattern text-center"
       heroStyle={HeroStyleTypes.None}
       displayStyle={DisplayStyleTypes.Center | DisplayStyleTypes.Large}

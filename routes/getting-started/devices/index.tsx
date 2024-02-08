@@ -51,8 +51,8 @@ export default function Devices({
   return (
     <div>
       <Hero
-        title="Devices & Data Flows"
-        callToAction="Connect devices, define data flows and access your data."
+        title="Device Configuration"
+        callToAction="Register a device and select dashboard services."
         class="[&_*]:mx-auto [&>*>*]:w-full bg-hero-pattern text-center"
         heroStyle={HeroStyleTypes.None}
         displayStyle={DisplayStyleTypes.Center | DisplayStyleTypes.Large}

@@ -52,7 +52,7 @@ export function EaCGettingStartedDisplay(state: OpenBiotechManagerState) {
         //   ActionPath: '/getting-started/devices',
         // },
         {
-          Title: "Setup Data Dashboards",
+          Title: "Set Up Data Dashboards",
           Complete: state.Devices.Phase > 2,
           ActionPath: "/getting-started/devices",
         },
@@ -61,7 +61,7 @@ export function EaCGettingStartedDisplay(state: OpenBiotechManagerState) {
   });
 
   checklist.push({
-    Title: "Setup Data",
+    Title: "Set Up Data",
     Complete: state.Phase > 2,
     ActionPath: "/",
     SubList: state.Data

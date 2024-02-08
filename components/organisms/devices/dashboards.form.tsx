@@ -32,9 +32,9 @@ export default function DevicesDashboardForm(props: DevicesDashboardFormProps) {
           </label>
 
           <p class="block text-md mb-8">
-            Configuring default data dashboards will help you get started
-            quickly visualizing your data so you know what it is and can
-            brainstorm what to do with it.
+            Configuring default dashboard services enables you to immediately
+            stream, view and query device data without sending data downstream
+            to external analytics or ML services.
           </p>
 
           <div class="flex items-center mb-2">

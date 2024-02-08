@@ -19,7 +19,7 @@ export function APIDevelopForm(props: APIDevelopFormProps) {
       </label>
 
       <p class="block text-md mb-8">
-        The following is information you can use to call your warm data API.
+        Use the following to call your warm data API.
       </p>
 
       <div class="w-full mb-8">

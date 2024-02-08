@@ -21,7 +21,7 @@ export function BiotechStepsFeatures(props: BiotechStepsFeaturesProps) {
         {
           title: "Connect to Cloud",
           description:
-            "Bring your own Azure Cloud connection or get started with a Fathym Managed Azure Subscription.",
+            "Bring your own Azure cloud subscription or get started with an OpenBiotech managed Azure subscription.",
           class:
             "bg-slate-50 dark:bg-slate-800 shadow-slate-500 dark:shadow-black",
           children: (
@@ -31,7 +31,7 @@ export function BiotechStepsFeatures(props: BiotechStepsFeaturesProps) {
                   href="./getting-started/cloud"
                   class={classSet(["flex flex-row"], callToActionStyles.props)}
                 >
-                  Connect Now
+                  Connect Cloud
                   <ChevronRightIcon class="w-[24px] h-[24px]" />
                 </Action>
               </>
@@ -41,7 +41,7 @@ export function BiotechStepsFeatures(props: BiotechStepsFeaturesProps) {
         {
           title: "Connect Devices",
           description:
-            "Deploy your first device data flow and connect (or emulate) your first devices.",
+            "Register your first device and configure default dashboard services.",
           class:
             "bg-slate-50 dark:bg-slate-800 shadow-slate-500 dark:shadow-black",
           children: (
@@ -59,9 +59,9 @@ export function BiotechStepsFeatures(props: BiotechStepsFeaturesProps) {
           ),
         },
         {
-          title: "Setup Data",
+          title: "Set Up Data",
           description:
-            "Collect and consume your device data anywhere you need it.",
+            "Flow real or simulated device data to the cloud and access it through data dashboards and APIs.",
           class:
             "bg-slate-50 dark:bg-slate-800 shadow-slate-500 dark:shadow-black",
           children: (
@@ -71,7 +71,7 @@ export function BiotechStepsFeatures(props: BiotechStepsFeaturesProps) {
                   href="./getting-started/data"
                   class={classSet(["flex flex-row"], callToActionStyles.props)}
                 >
-                  Setup Data
+                  Set Up Data
                   <ChevronRightIcon class="w-[24px] h-[24px]" />
                 </Action>
               </>
