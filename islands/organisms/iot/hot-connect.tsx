@@ -88,8 +88,8 @@ export function HotConnect(props: HotConnectProps) {
   }, [running]);
 
   return (
-    <div class="flex flex-col divide-y divide-gray-300 dark:divide-gray-700 h-full relative overflow-auto relative">
-      <Action class="my-4 p-1 fixed" onClick={() => setRunning(!running)}>
+    <div class="flex flex-col divide-y divide-gray-300 dark:divide-gray-700 h-full relative overflow-auto">
+      <Action class="my-4 p-1" onClick={() => setRunning(!running)}>
         {running ? "Pause" : "Continue"}
       </Action>
 
