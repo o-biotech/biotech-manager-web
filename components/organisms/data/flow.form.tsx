@@ -35,10 +35,16 @@ export function DataFlowForm(props: DataFlowFormProps) {
           </label>
 
           <p class="block text-md mb-8">
-            With everything setup, the next step is to ensure data is flowing.
-            The following will help you connect a real device or allow you to
-            start sending emulated data. Once verified we'll move on to look at
-            the data in the configured dashboards.
+            Now that the infrastructure is in place, you can start flowing
+            device telemetry to Azure IoT Hub. <br />
+
+            If you have a physical device at hand, there are instructions on
+            using a connection string to establish device-to-cloud telemetry and
+            start flowing real device data to the cloud. If you don't have a
+            device or prefer to test the system with simulated data first, there
+            are instructions on using Docker to generate simulated IoT Hub data.
+            Once data is verified, use the dashboard services in the next step
+            to view and query data.
           </p>
         </div>
 

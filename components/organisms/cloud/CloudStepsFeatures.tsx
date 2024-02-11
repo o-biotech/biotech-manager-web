@@ -73,7 +73,7 @@ export default function CloudStepsFeatures(props: CloudStepsFeaturesProps) {
         {
           title: "Connect to Azure",
           description:
-            "Bring your own Azure Cloud connection or get started with a Fathym Managed Azure Subscription.",
+            "Bring your own Azure cloud subscription or get started with an OpenBiotech managed Azure subscription.",
           class:
             "bg-slate-50 dark:bg-slate-800 shadow-slate-500 dark:shadow-black",
           children: smCurrentForm,
@@ -81,7 +81,7 @@ export default function CloudStepsFeatures(props: CloudStepsFeaturesProps) {
         {
           title: "Cloud Landing Zone",
           description:
-            "Deploy Fathym's Composable Application Landing Zone (CALZ) to prepare your cloud for devices and applications.",
+            "Deploy a Composable Application Landing Zone (CALZ) to prepare your cloud for devices and applications.",
           class:
             "bg-slate-50 dark:bg-slate-800 shadow-slate-500 dark:shadow-black",
           children: smCurrentForm,
@@ -89,7 +89,7 @@ export default function CloudStepsFeatures(props: CloudStepsFeaturesProps) {
         {
           title: "IoT Infrastructure",
           description:
-            "Establish the foundation of your IoT infrastructure for the creation of device flows and data access.",
+            "Configure IoT cloud infrastructure options for processing, storing and accessing device data.",
           class:
             "bg-slate-50 dark:bg-slate-800 shadow-slate-500 dark:shadow-black",
           children: smCurrentForm,

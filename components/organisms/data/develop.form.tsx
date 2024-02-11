@@ -28,8 +28,8 @@ export function DataDevelopForm(props: DataDevelopFormProps) {
           </label>
 
           <p class="block text-md mb-8">
-            Use the following information to develop custom solutions, connect
-            to 3rd party services, and more.
+            Connect and send data downstream to any third-party system or
+            assemble and deploy custom applications powered by device data.
           </p>
         </div>
 

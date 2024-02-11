@@ -15,8 +15,8 @@ export interface SetupDataHeroProps extends HeroProps {
 export default function SetupDataHero(props: SetupDataHeroProps) {
   return (
     <Hero
-      title="Setup Data"
-      callToAction="Collect and consume your device data anywhere you need it."
+      title="Set Up Data"
+      callToAction="Flow real or simulated device data to the cloud and access it through data dashboards and APIs."
       class="[&_*]:mx-auto [&>*>*]:w-full bg-hero-pattern text-center"
       heroStyle={HeroStyleTypes.None}
       displayStyle={DisplayStyleTypes.Center | DisplayStyleTypes.Large}
@@ -28,7 +28,7 @@ export default function SetupDataHero(props: SetupDataHeroProps) {
           href="/getting-started/data"
           class="my-8 flex flex-row"
         >
-          Setup Data Flow
+          Set Up Data Flow
           <ChevronRightIcon class="w-[24px] h-[24px]" />
         </Action>
       )} */

@@ -123,8 +123,8 @@ export default function Data({
   return (
     <div>
       <Hero
-        title="Data, APIs, and Dashboards"
-        callToAction="Get eyes on your data, share with downstream analytics and ML services, all with turnkey dashboarding capabilities."
+        title="Data Flows, Dashboards and APIs"
+        callToAction="Get device data flowing, explore through default dashboards and share with downstream analytics, alerts or ML services."
         class="[&_*]:mx-auto [&>*>*]:w-full bg-hero-pattern text-center"
         heroStyle={HeroStyleTypes.None}
         displayStyle={DisplayStyleTypes.Center | DisplayStyleTypes.Large}
