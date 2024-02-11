@@ -65,7 +65,7 @@ export function loadOoenBiotechSideBarSettings(
           prev[menuItemName] = {
             Title: "Clouds",
             Display: <EaCCloudsDisplay {...data} />,
-            Order: 300,
+            Order: 200,
           };
           break;
         }
@@ -80,7 +80,7 @@ export function loadOoenBiotechSideBarSettings(
                 userEaCs={state.UserEaCs}
               />
             ),
-            Order: 100,
+            Order: 800,
           };
           break;
         }
@@ -89,7 +89,7 @@ export function loadOoenBiotechSideBarSettings(
           prev[menuItemName] = {
             Title: "DevOps Actions Details",
             Display: <EaCDevOpsActionsDisplay {...data} />,
-            Order: 600,
+            Order: 500,
           };
           break;
         }
@@ -98,7 +98,7 @@ export function loadOoenBiotechSideBarSettings(
           prev[menuItemName] = {
             Title: "EaC Handlers",
             Display: <EaCHandlersDisplay {...data} />,
-            Order: 800,
+            Order: 700,
           };
           break;
         }
@@ -107,7 +107,7 @@ export function loadOoenBiotechSideBarSettings(
           prev[menuItemName] = {
             Title: "IoT",
             Display: <EaCIoTsDisplay {...data} />,
-            Order: 200,
+            Order: 100,
           };
           break;
         }
@@ -116,7 +116,7 @@ export function loadOoenBiotechSideBarSettings(
           prev[menuItemName] = {
             Title: "Secrets",
             Display: <EaCSecretsDisplay {...data} />,
-            Order: 700,
+            Order: 600,
           };
           break;
         }
@@ -125,7 +125,7 @@ export function loadOoenBiotechSideBarSettings(
           prev[menuItemName] = {
             Title: "Source Connections",
             Display: <EaCSourceConnectionsDisplay {...data} />,
-            Order: 400,
+            Order: 300,
           };
           break;
         }
@@ -134,7 +134,7 @@ export function loadOoenBiotechSideBarSettings(
           prev[menuItemName] = {
             Title: "Sources",
             Display: <EaCSourcesDisplay {...data} />,
-            Order: 500,
+            Order: 400,
           };
           break;
         }

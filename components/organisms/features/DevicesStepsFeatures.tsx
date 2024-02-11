@@ -61,8 +61,7 @@ export function DevicesStepsFeatures(props: DevicesStepsFeaturesProps) {
       {[
         {
           title: "Connect a Device",
-          description:
-            "Bring your own device or select from a curated list of Biotech devices for your specific needs.",
+          description: "Register a device name to Azure IoT Hub.",
           class:
             "bg-slate-50 dark:bg-slate-800 shadow-slate-500 dark:shadow-black",
           children: smCurrentForm,
@@ -74,9 +73,9 @@ export function DevicesStepsFeatures(props: DevicesStepsFeaturesProps) {
         //   children: smCurrentForm,
         // },
         {
-          title: "Setup Data Dashboards",
+          title: "Set Up Data Dashboards",
           description:
-            "Collect and consume your device data with pre-configured dashboards.",
+            "Select default dashboard services to explore device data.",
           class:
             "bg-slate-50 dark:bg-slate-800 shadow-slate-500 dark:shadow-black",
           children: smCurrentForm,

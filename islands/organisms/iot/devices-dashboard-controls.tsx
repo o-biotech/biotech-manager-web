@@ -15,6 +15,7 @@ import {
 } from "@fathym/atomic";
 import { EaCDeviceAsCode, ExplorerRequest } from "@fathym/eac";
 import { CopyInput } from "../../molecules/CopyInput.tsx";
+import { HotConnect } from "./hot-connect.tsx";
 
 export type DevicesDashboardControlsProps = IconProps & {
   devices: Record<string, EaCDeviceAsCode>;
@@ -344,14 +345,6 @@ ${customFilter}`;
     ? customFilterDisplay
     : undefined;
 
-  const rawDeviceDisplay = (
-    <div class="h-full relative overflow-hidden">
-      <div class="h-full relative overflow-auto">
-        <pre>{JSON.stringify(deviceData, null, 2)}</pre>
-      </div>
-    </div>
-  );
-
   const payloadsDeviceDisplay = (
     <div class="flex flex-col divide-y divide-gray-300 dark:divide-gray-700 h-full relative overflow-hidden">
       <div class="flex-1 flex flex-row p-2">
@@ -428,6 +421,18 @@ ${customFilter}`;
 
   const streamingDeviceDisplay = <h1 class="text-2xl">Coming Soon</h1>;
 
+  const rawDeviceDisplay = (
+    <div class="h-full relative overflow-hidden">
+      <div class="h-full relative overflow-auto">
+        <pre>{JSON.stringify(deviceData, null, 2)}</pre>
+      </div>
+    </div>
+  );
+
+  const hotFlowDisplay = (
+    <HotConnect jwt={props.jwt} takeRows={settings.TakeRows} />
+  );
+
   const queryDeviceDisplay = (
     <div class="h-full relative overflow-hidden">
       <div class="h-full relative overflow-auto">
@@ -442,6 +447,8 @@ ${customFilter}`;
     ? payloadsDeviceDisplay
     : currentDeviceDisplay === "streaming"
     ? streamingDeviceDisplay
+    : currentDeviceDisplay === "hot-flow"
+    ? hotFlowDisplay
     : currentDeviceDisplay === "query"
     ? queryDeviceDisplay
     : undefined;
@@ -548,6 +555,21 @@ ${customFilter}`;
                 ])}
               >
                 Raw JSON
+              </a>
+            </li>
+
+            <li class="me-2">
+              <a
+                onClick={() => setCurrentDeviceDisplay("hot-flow")}
+                aria-current="page"
+                class={classSet([
+                  "inline-block p-4 rounded-t-lg cursor-pointer",
+                  currentDeviceDisplay === "hot-flow"
+                    ? "active bg-gray-700 dark:bg-gray-300 text-blue-300 dark:text-blue-700"
+                    : "bg-gray-300 dark:bg-gray-700 text-blue-700 dark:text-blue-300",
+                ])}
+              >
+                Hot Flow
               </a>
             </li>
 

@@ -28,7 +28,7 @@
     "$fathym/atomic-icons": "./build/iconset/icons/_exports.ts",
     "@fathym/common": "https://deno.land/x/fathym_common@v0.0.137/mod.ts",
     "__@fathym/eac": "../../fathym-deno/everything-as-code/mod.ts",
-    "@fathym/eac": "https://deno.land/x/fathym_everything_as_code@v0.0.277-integration/mod.ts",
+    "@fathym/eac": "https://deno.land/x/fathym_everything_as_code@v0.0.281-integration/mod.ts",
     "__@fathym/msal": "../../fathym-deno/msal/mod.ts",
     "@fathym/msal": "https://deno.land/x/msal@v0.0.24/mod.ts",
     "$deepsignal": "https://esm.sh/deepsignal@1.3.4",

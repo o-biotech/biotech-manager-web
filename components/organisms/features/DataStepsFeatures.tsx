@@ -73,7 +73,7 @@ export function DataStepsFeatures(props: DataStepsFeaturesProps) {
         {
           title: "Confirm Data Flowing",
           description:
-            "We'll make sure that you can get data flowing to your created devices using a device simulator or your real physical devices.",
+            "Simulate device data or connect a physical device to the device previously registered on Azure IoT Hub.",
           class:
             "bg-slate-50 dark:bg-slate-800 shadow-slate-500 dark:shadow-black",
           children: smCurrentForm,
@@ -81,7 +81,7 @@ export function DataStepsFeatures(props: DataStepsFeaturesProps) {
         {
           title: "Explore Data",
           description:
-            "Now that data is flowing, explore your data through configured dashboards and APIs.",
+            "Explore flowing device data through default dashboard services.",
           class:
             "bg-slate-50 dark:bg-slate-800 shadow-slate-500 dark:shadow-black",
           children: smCurrentForm,
@@ -89,7 +89,7 @@ export function DataStepsFeatures(props: DataStepsFeaturesProps) {
         {
           title: "Develop Solutions",
           description:
-            "Connect with a variety of solutions to make the best of your data.",
+            "Use APIs to call device data, combine with third-party services or assemble custom apps.",
           class:
             "bg-slate-50 dark:bg-slate-800 shadow-slate-500 dark:shadow-black",
           children: smCurrentForm,

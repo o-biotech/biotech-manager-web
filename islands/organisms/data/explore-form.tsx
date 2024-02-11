@@ -124,9 +124,10 @@ export function DataExploreForm(props: DataExploreFormProps) {
           </label>
 
           <p class="block text-md mb-8">
-            Now that data is flowing, the next step is to explore the dashboards
-            you configured previously, or skip ahead to see what other
-            development you can implement with your data.
+            Now that data is flowing into the system, this step provides initial
+            access to the dashboard services configured earlier in the workflow.
+            You can start exploring the device data that is now flowing into
+            these services or continue to the next step.
           </p>
 
           <DashboardDisplay

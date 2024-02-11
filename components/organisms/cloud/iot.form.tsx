@@ -54,11 +54,13 @@ export function CloudIoTForm(props: CloudIoTFormProps) {
           </label>
 
           <p class="block text-md mb-8">
-            Your storage flows determine how your data can be accessed. Cold
-            flows allow for long term storage with slower querying performance.
-            Warm flows allow for shorter term storage with better querying
-            performance. Hot flows provide data immediately with no storage; you
-            manage the storage.
+            Data storage flows determine how device data can be processed and
+            accessed.<br />
+
+            Cold flows enable long term storage with slower querying
+            performance. Warm flows enable shorter term storage with better
+            querying performance. Hot flows provide near real-time data (with no
+            storage) and sync with your GitHub.
           </p>
 
           <div class="flex items-center mb-2">

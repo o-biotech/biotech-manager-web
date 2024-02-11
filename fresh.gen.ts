@@ -6,6 +6,9 @@ import * as $_app from "./routes/_app.tsx";
 import * as $_middleware from "./routes/_middleware.tsx";
 import * as $api_data_middleware from "./routes/api/data/_middleware.ts";
 import * as $api_data_clouds_auth_token from "./routes/api/data/clouds/auth-token.ts";
+import * as $api_data_hot_connect_negotiate from "./routes/api/data/hot/connect/negotiate.ts";
+import * as $api_data_hot_stream from "./routes/api/data/hot/stream.ts";
+import * as $api_data_hot_stream2 from "./routes/api/data/hot/stream2.ts";
 import * as $api_data_warm_explorer from "./routes/api/data/warm/explorer.ts";
 import * as $api_eac_clouds_index from "./routes/api/eac/clouds/index.ts";
 import * as $api_eac_clouds_iot_infrastructure from "./routes/api/eac/clouds/iot-infrastructure.ts";
@@ -64,6 +67,7 @@ import * as $organisms_data_dashboard_display from "./islands/organisms/data/das
 import * as $organisms_data_explore_form from "./islands/organisms/data/explore-form.tsx";
 import * as $organisms_iot_device_data_flowing from "./islands/organisms/iot/device-data-flowing.tsx";
 import * as $organisms_iot_devices_dashboard_controls from "./islands/organisms/iot/devices-dashboard-controls.tsx";
+import * as $organisms_iot_hot_connect from "./islands/organisms/iot/hot-connect.tsx";
 import * as $organisms_iot_hub_device_connection from "./islands/organisms/iot/hub-device-connection.tsx";
 import * as $organisms_iot_hub_key_connection from "./islands/organisms/iot/hub-key-connection.tsx";
 import * as $organisms_iot_hub_key_simulator from "./islands/organisms/iot/hub-key-simulator.tsx";
@@ -76,6 +80,10 @@ const manifest = {
     "./routes/_middleware.tsx": $_middleware,
     "./routes/api/data/_middleware.ts": $api_data_middleware,
     "./routes/api/data/clouds/auth-token.ts": $api_data_clouds_auth_token,
+    "./routes/api/data/hot/connect/negotiate.ts":
+      $api_data_hot_connect_negotiate,
+    "./routes/api/data/hot/stream.ts": $api_data_hot_stream,
+    "./routes/api/data/hot/stream2.ts": $api_data_hot_stream2,
     "./routes/api/data/warm/explorer.ts": $api_data_warm_explorer,
     "./routes/api/eac/clouds/index.ts": $api_eac_clouds_index,
     "./routes/api/eac/clouds/iot-infrastructure.ts":
@@ -164,6 +172,7 @@ const manifest = {
       $organisms_iot_device_data_flowing,
     "./islands/organisms/iot/devices-dashboard-controls.tsx":
       $organisms_iot_devices_dashboard_controls,
+    "./islands/organisms/iot/hot-connect.tsx": $organisms_iot_hot_connect,
     "./islands/organisms/iot/hub-device-connection.tsx":
       $organisms_iot_hub_device_connection,
     "./islands/organisms/iot/hub-key-connection.tsx":
