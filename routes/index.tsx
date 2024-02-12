@@ -77,8 +77,7 @@ export default function Home({
                 </h2>
 
                 <h3 class="md:text-lg">
-                  Emulate, simulate, and connect your devices to unlock the
-                  power of your IoT applications.
+                  Stream, view and query your device data.
                 </h3>
               </div>
             </div>

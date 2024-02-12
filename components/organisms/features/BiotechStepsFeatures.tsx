@@ -21,7 +21,7 @@ export function BiotechStepsFeatures(props: BiotechStepsFeaturesProps) {
         {
           title: "Connect to Cloud",
           description:
-            "Bring your own Azure cloud subscription or get started with an OpenBiotech managed Azure subscription.",
+            "Bring your own Azure cloud subscription or get started with a Fathym managed Azure subscription.",
           class:
             "bg-slate-50 dark:bg-slate-800 shadow-slate-500 dark:shadow-black",
           children: (
