@@ -1,1 +1,1 @@
-import './workshop/bench.ts';
+import "./workshop/bench.ts";

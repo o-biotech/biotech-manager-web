@@ -1,9 +1,9 @@
 // deno-lint-ignore-file no-explicit-any
-import { JSX } from 'preact';
-import { useEffect, useRef, useState } from 'preact/hooks';
-import { IS_BROWSER } from '$fresh/runtime.ts';
-import { intlFormat } from 'npm:date-fns';
-import { ChevronDownIcon, IconProps, RenewIcon } from '$fathym/atomic-icons';
+import { JSX } from "preact";
+import { useEffect, useRef, useState } from "preact/hooks";
+import { IS_BROWSER } from "$fresh/runtime.ts";
+import { intlFormat } from "npm:date-fns";
+import { ChevronDownIcon, IconProps, RenewIcon } from "$fathym/atomic-icons";
 import {
   Action,
   classSet,
@@ -12,10 +12,10 @@ import {
   InputWrapper,
   numMaxLengthShield,
   SlideToggle,
-} from '@fathym/atomic';
-import { EaCDeviceAsCode, ExplorerRequest } from '@fathym/eac';
-import { CopyInput } from '../../molecules/CopyInput.tsx';
-import { HotConnect } from './hot-connect.tsx';
+} from "@fathym/atomic";
+import { EaCDeviceAsCode, ExplorerRequest } from "@fathym/eac";
+import { CopyInput } from "../../molecules/CopyInput.tsx";
+import { HotConnect } from "./hot-connect.tsx";
 
 export type DevicesDashboardControlsProps = IconProps & {
   devices: Record<string, EaCDeviceAsCode>;
@@ -31,8 +31,8 @@ export function DevicesDashboardControls(props: DevicesDashboardControlsProps) {
       <RenewIcon
         {...props}
         class={classSet(
-          ['-:w-6 -:h-6 -:text-blue-500 -:animate-spin -:inline-block -:m-4'],
-          props
+          ["-:w-6 -:h-6 -:text-blue-500 -:animate-spin -:inline-block -:m-4"],
+          props,
         )}
       />
     </>
@@ -52,11 +52,11 @@ export function DevicesDashboardControls(props: DevicesDashboardControlsProps) {
 
   const useDescendingRef = useRef<HTMLInputElement>(null);
 
-  const [currentFilterDisplay, setCurrentFilterDisplay] = useState('devices');
+  const [currentFilterDisplay, setCurrentFilterDisplay] = useState("devices");
 
-  const [currentDeviceDisplay, setCurrentDeviceDisplay] = useState('payloads');
+  const [currentDeviceDisplay, setCurrentDeviceDisplay] = useState("payloads");
 
-  const [customFilter, setCustomFilter] = useState('');
+  const [customFilter, setCustomFilter] = useState("");
 
   const [refresh, setRefresh] = useState({
     EnableRefresh: true,
@@ -76,17 +76,17 @@ export function DevicesDashboardControls(props: DevicesDashboardControlsProps) {
         Active: false,
         Details: props.devices[deviceId].Details!,
       };
-    })
+    }),
   );
 
-  const [kqlQuery, setKQLQuery] = useState('');
+  const [kqlQuery, setKQLQuery] = useState("");
 
   const [deviceData, setDeviceData] = useState([]);
 
   const [isLoadingData, setIsLoadingData] = useState(false);
 
   const [intervalTracking, setIntervalTracking] = useState<number | undefined>(
-    undefined
+    undefined,
   );
 
   const handleOnDeviceClick = (e: JSX.TargetedMouseEvent<HTMLInputElement>) => {
@@ -98,13 +98,13 @@ export function DevicesDashboardControls(props: DevicesDashboardControlsProps) {
   };
 
   const handleOnApplyCustomFilterClick = (
-    e: JSX.TargetedMouseEvent<HTMLButtonElement>
+    e: JSX.TargetedMouseEvent<HTMLButtonElement>,
   ) => {
     setCustomFilter(customFilterRef.current!.value);
   };
 
   const handleOnApplySettingsFilterClick = (
-    e: JSX.TargetedMouseEvent<HTMLButtonElement>
+    e: JSX.TargetedMouseEvent<HTMLButtonElement>,
   ) => {
     setRefresh({
       EnableRefresh: enableRefreshRef.current!.checked,
@@ -130,7 +130,7 @@ export function DevicesDashboardControls(props: DevicesDashboardControlsProps) {
     console.log(dataReq);
 
     const response = await fetch(dataUrl, {
-      method: 'POST',
+      method: "POST",
       headers: {
         Authorization: `Bearer ${props.jwt}`,
       },
@@ -152,14 +152,14 @@ export function DevicesDashboardControls(props: DevicesDashboardControlsProps) {
 
   useEffect(() => {
     let query = `Devices
-| order by EnqueuedTime ${settings.UseDescending ? 'desc' : 'asc'}`;
+| order by EnqueuedTime ${settings.UseDescending ? "desc" : "asc"}`;
 
     if (!devices.every((d) => !d.Active)) {
       const activeDevices = devices.filter((d) => d.Active);
 
       const activeDeviceList = activeDevices
         .map((d) => `'${d.DeviceID}'`)
-        .join(',');
+        .join(",");
 
       query = `let deviceIds = dynamic([${activeDeviceList}]);
 ${query}
@@ -345,16 +345,15 @@ ${customFilter}`;
     </div>
   );
 
-  const filterDisplay =
-    currentFilterDisplay === 'devices'
-      ? devicesFilterDisplay
-      : currentFilterDisplay === 'settings'
-      ? settingsFilterDisplay
-      : currentFilterDisplay === 'custom'
-      ? customFilterDisplay
-      : currentFilterDisplay === 'ai'
-      ? aiFilterDisplay
-      : undefined;
+  const filterDisplay = currentFilterDisplay === "devices"
+    ? devicesFilterDisplay
+    : currentFilterDisplay === "settings"
+    ? settingsFilterDisplay
+    : currentFilterDisplay === "custom"
+    ? customFilterDisplay
+    : currentFilterDisplay === "ai"
+    ? aiFilterDisplay
+    : undefined;
 
   const payloadsDeviceDisplay = (
     <div class="flex flex-col divide-y divide-gray-300 dark:divide-gray-700 h-full relative overflow-hidden">
@@ -380,15 +379,15 @@ ${customFilter}`;
             const enqueuedTime = intlFormat(
               new Date(Date.parse(dd.EnqueuedTime)),
               {
-                timeZoneName: 'longOffset',
-                year: 'numeric',
-                month: 'numeric',
-                day: 'numeric',
-                hour: 'numeric',
-                minute: 'numeric',
-                second: 'numeric',
+                timeZoneName: "longOffset",
+                year: "numeric",
+                month: "numeric",
+                day: "numeric",
+                hour: "numeric",
+                minute: "numeric",
+                second: "numeric",
                 fractionalSecondDigits: 3,
-              } as Intl.DateTimeFormatOptions
+              } as Intl.DateTimeFormatOptions,
             );
 
             const rawData = JSON.stringify(dd.RawData, null, 2);
@@ -424,7 +423,7 @@ ${customFilter}`;
                 </div>
               </div>
             );
-          }
+          },
         )}
       </div>
     </div>
@@ -452,18 +451,17 @@ ${customFilter}`;
     </div>
   );
 
-  const deviceDisplay =
-    currentDeviceDisplay === 'raw'
-      ? rawDeviceDisplay
-      : currentDeviceDisplay === 'payloads'
-      ? payloadsDeviceDisplay
-      : currentDeviceDisplay === 'streaming'
-      ? streamingDeviceDisplay
-      : currentDeviceDisplay === 'hot-flow'
-      ? hotFlowDisplay
-      : currentDeviceDisplay === 'query'
-      ? queryDeviceDisplay
-      : undefined;
+  const deviceDisplay = currentDeviceDisplay === "raw"
+    ? rawDeviceDisplay
+    : currentDeviceDisplay === "payloads"
+    ? payloadsDeviceDisplay
+    : currentDeviceDisplay === "streaming"
+    ? streamingDeviceDisplay
+    : currentDeviceDisplay === "hot-flow"
+    ? hotFlowDisplay
+    : currentDeviceDisplay === "query"
+    ? queryDeviceDisplay
+    : undefined;
 
   return (
     <div class="flex flex-col gap-4 divide-y-4 divide-[#4a918e]">
@@ -476,13 +474,13 @@ ${customFilter}`;
           <ul class="flex flex-wrap text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400">
             <li class="me-2">
               <a
-                onClick={() => setCurrentFilterDisplay('devices')}
+                onClick={() => setCurrentFilterDisplay("devices")}
                 aria-current="page"
                 class={classSet([
-                  'inline-block p-2 rounded-t-lg cursor-pointer',
-                  currentFilterDisplay === 'devices'
-                    ? 'active bg-gray-700 dark:bg-gray-300 text-blue-300 dark:text-blue-700'
-                    : 'bg-gray-300 dark:bg-gray-700 text-blue-700 dark:text-blue-300',
+                  "inline-block p-2 rounded-t-lg cursor-pointer",
+                  currentFilterDisplay === "devices"
+                    ? "active bg-gray-700 dark:bg-gray-300 text-blue-300 dark:text-blue-700"
+                    : "bg-gray-300 dark:bg-gray-700 text-blue-700 dark:text-blue-300",
                 ])}
               >
                 Devices
@@ -491,13 +489,13 @@ ${customFilter}`;
 
             <li class="me-2">
               <a
-                onClick={() => setCurrentFilterDisplay('settings')}
+                onClick={() => setCurrentFilterDisplay("settings")}
                 aria-current="page"
                 class={classSet([
-                  'inline-block p-2 rounded-t-lg cursor-pointer',
-                  currentFilterDisplay === 'settings'
-                    ? 'active bg-gray-700 dark:bg-gray-300 text-blue-300 dark:text-blue-700'
-                    : 'bg-gray-300 dark:bg-gray-700 text-blue-700 dark:text-blue-300',
+                  "inline-block p-2 rounded-t-lg cursor-pointer",
+                  currentFilterDisplay === "settings"
+                    ? "active bg-gray-700 dark:bg-gray-300 text-blue-300 dark:text-blue-700"
+                    : "bg-gray-300 dark:bg-gray-700 text-blue-700 dark:text-blue-300",
                 ])}
               >
                 Settings
@@ -506,20 +504,21 @@ ${customFilter}`;
 
             <li class="me-2">
               <a
-                onClick={() => setCurrentFilterDisplay('custom')}
+                onClick={() => setCurrentFilterDisplay("custom")}
                 aria-current="page"
                 class={classSet([
-                  'inline-block p-2 rounded-t-lg cursor-pointer',
-                  currentFilterDisplay === 'custom'
-                    ? 'active bg-gray-700 dark:bg-gray-300 text-blue-300 dark:text-blue-700'
-                    : 'bg-gray-300 dark:bg-gray-700 text-blue-700 dark:text-blue-300',
+                  "inline-block p-2 rounded-t-lg cursor-pointer",
+                  currentFilterDisplay === "custom"
+                    ? "active bg-gray-700 dark:bg-gray-300 text-blue-300 dark:text-blue-700"
+                    : "bg-gray-300 dark:bg-gray-700 text-blue-700 dark:text-blue-300",
                 ])}
               >
                 Custom
               </a>
             </li>
 
-            {/* <li class="me-2">
+            {
+              /* <li class="me-2">
               <a
                 onClick={() => setCurrentFilterDisplay('ai')}
                 aria-current="page"
@@ -532,7 +531,8 @@ ${customFilter}`;
               >
                 Thinky
               </a>
-            </li> */}
+            </li> */
+            }
           </ul>
 
           {filterDisplay}
@@ -542,13 +542,13 @@ ${customFilter}`;
           <ul class="flex flex-wrap text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400">
             <li class="me-2">
               <a
-                onClick={() => setCurrentDeviceDisplay('payloads')}
+                onClick={() => setCurrentDeviceDisplay("payloads")}
                 aria-current="page"
                 class={classSet([
-                  'inline-block p-4 rounded-t-lg cursor-pointer',
-                  currentDeviceDisplay === 'payloads'
-                    ? 'active bg-gray-700 dark:bg-gray-300 text-blue-300 dark:text-blue-700'
-                    : 'bg-gray-300 dark:bg-gray-700 text-blue-700 dark:text-blue-300',
+                  "inline-block p-4 rounded-t-lg cursor-pointer",
+                  currentDeviceDisplay === "payloads"
+                    ? "active bg-gray-700 dark:bg-gray-300 text-blue-300 dark:text-blue-700"
+                    : "bg-gray-300 dark:bg-gray-700 text-blue-700 dark:text-blue-300",
                 ])}
               >
                 Payloads
@@ -557,13 +557,13 @@ ${customFilter}`;
 
             <li class="me-2">
               <a
-                onClick={() => setCurrentDeviceDisplay('streaming')}
+                onClick={() => setCurrentDeviceDisplay("streaming")}
                 aria-current="page"
                 class={classSet([
-                  'inline-block p-4 rounded-t-lg cursor-pointer',
-                  currentDeviceDisplay === 'streaming'
-                    ? 'active bg-gray-700 dark:bg-gray-300 text-blue-300 dark:text-blue-700'
-                    : 'bg-gray-300 dark:bg-gray-700 text-blue-700 dark:text-blue-300',
+                  "inline-block p-4 rounded-t-lg cursor-pointer",
+                  currentDeviceDisplay === "streaming"
+                    ? "active bg-gray-700 dark:bg-gray-300 text-blue-300 dark:text-blue-700"
+                    : "bg-gray-300 dark:bg-gray-700 text-blue-700 dark:text-blue-300",
                 ])}
               >
                 Streaming
@@ -572,13 +572,13 @@ ${customFilter}`;
 
             <li class="me-2">
               <a
-                onClick={() => setCurrentDeviceDisplay('raw')}
+                onClick={() => setCurrentDeviceDisplay("raw")}
                 aria-current="page"
                 class={classSet([
-                  'inline-block p-4 rounded-t-lg cursor-pointer',
-                  currentDeviceDisplay === 'raw'
-                    ? 'active bg-gray-700 dark:bg-gray-300 text-blue-300 dark:text-blue-700'
-                    : 'bg-gray-300 dark:bg-gray-700 text-blue-700 dark:text-blue-300',
+                  "inline-block p-4 rounded-t-lg cursor-pointer",
+                  currentDeviceDisplay === "raw"
+                    ? "active bg-gray-700 dark:bg-gray-300 text-blue-300 dark:text-blue-700"
+                    : "bg-gray-300 dark:bg-gray-700 text-blue-700 dark:text-blue-300",
                 ])}
               >
                 Raw JSON
@@ -587,13 +587,13 @@ ${customFilter}`;
 
             <li class="me-2">
               <a
-                onClick={() => setCurrentDeviceDisplay('hot-flow')}
+                onClick={() => setCurrentDeviceDisplay("hot-flow")}
                 aria-current="page"
                 class={classSet([
-                  'inline-block p-4 rounded-t-lg cursor-pointer',
-                  currentDeviceDisplay === 'hot-flow'
-                    ? 'active bg-gray-700 dark:bg-gray-300 text-blue-300 dark:text-blue-700'
-                    : 'bg-gray-300 dark:bg-gray-700 text-blue-700 dark:text-blue-300',
+                  "inline-block p-4 rounded-t-lg cursor-pointer",
+                  currentDeviceDisplay === "hot-flow"
+                    ? "active bg-gray-700 dark:bg-gray-300 text-blue-300 dark:text-blue-700"
+                    : "bg-gray-300 dark:bg-gray-700 text-blue-700 dark:text-blue-300",
                 ])}
               >
                 Hot Flow
@@ -602,13 +602,13 @@ ${customFilter}`;
 
             <li class="me-2">
               <a
-                onClick={() => setCurrentDeviceDisplay('query')}
+                onClick={() => setCurrentDeviceDisplay("query")}
                 aria-current="page"
                 class={classSet([
-                  'inline-block p-4 rounded-t-lg cursor-pointer',
-                  currentDeviceDisplay === 'query'
-                    ? 'active bg-gray-700 dark:bg-gray-300 text-blue-300 dark:text-blue-700'
-                    : 'bg-gray-300 dark:bg-gray-700 text-blue-700 dark:text-blue-300',
+                  "inline-block p-4 rounded-t-lg cursor-pointer",
+                  currentDeviceDisplay === "query"
+                    ? "active bg-gray-700 dark:bg-gray-300 text-blue-300 dark:text-blue-700"
+                    : "bg-gray-300 dark:bg-gray-700 text-blue-700 dark:text-blue-300",
                 ])}
               >
                 Current Query
@@ -619,7 +619,8 @@ ${customFilter}`;
           {isLoadingData && (
             <div class="w-full">
               <div class="h-1.5 w-full bg-sky-100 overflow-hidden">
-                <div class="animate-progress w-full h-full bg-sky-500 origin-left-right"></div>
+                <div class="animate-progress w-full h-full bg-sky-500 origin-left-right">
+                </div>
               </div>
             </div>
           )}
