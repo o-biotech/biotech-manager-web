@@ -57,7 +57,7 @@ export function CloudIoTForm(props: CloudIoTFormProps) {
             Data storage flows determine how device data can be processed and
             accessed.<br />
 
-            Cold flows enable long term storage with slower querying
+            <br /> Cold flows enable long term storage with slower querying
             performance. Warm flows enable shorter term storage with better
             querying performance. Hot flows provide near real-time data (with no
             storage) and sync with your GitHub.

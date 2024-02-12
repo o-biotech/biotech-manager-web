@@ -38,7 +38,7 @@ export function DataFlowForm(props: DataFlowFormProps) {
             Now that the infrastructure is in place, you can start flowing
             device telemetry to Azure IoT Hub. <br />
 
-            If you have a physical device at hand, there are instructions on
+            <br /> If you have a physical device at hand, there are instructions on
             using a connection string to establish device-to-cloud telemetry and
             start flowing real device data to the cloud. If you don't have a
             device or prefer to test the system with simulated data first, there

@@ -16,7 +16,7 @@ export default function SetupDataHero(props: SetupDataHeroProps) {
   return (
     <Hero
       title="Set Up Data"
-      callToAction="Flow real or simulated device data to the cloud and access it through data dashboards and APIs."
+      callToAction="Let's complete setup by flowing device data to the cloud and accessing it through dashboards and APIs."
       class="[&_*]:mx-auto [&>*>*]:w-full bg-hero-pattern text-center"
       heroStyle={HeroStyleTypes.None}
       displayStyle={DisplayStyleTypes.Center | DisplayStyleTypes.Large}
