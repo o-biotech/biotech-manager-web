@@ -3,11 +3,15 @@ import { Handlers } from "$fresh/server.ts";
 import { OpenBiotechManagerAPIState } from "../../../../../src/api/OpenBiotechManagerAPIState.ts";
 
 export const handler: Handlers<any, OpenBiotechManagerAPIState> = {
-  async GET(req, _ctx) {
+  async GET(req, ctx) {
     const origin = req.headers.get("Origin") || "*";
 
+    const shortName = ctx.state.ResourceGroupLookup.split("-")
+      .map((p) => p.charAt(0))
+      .join("");
+
     const negResp = await fetch(
-      "https://fr1-iot-devices-flow.azurewebsites.net/api/negotiate",
+      `https://${shortName}-iot-devices-flow.azurewebsites.net/api/negotiate`,
     );
 
     const text = await negResp.text();
