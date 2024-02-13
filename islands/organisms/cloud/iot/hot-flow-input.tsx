@@ -52,7 +52,7 @@ export function HotFlowInput(props: HotFlowInputProps) {
           </Select>
 
           <p>
-            Don't see the organization your looking for? Add organizations by
+            Don't see the organization you're looking for? Add organizations by
             installing the{" "}
             <Action
               actionStyle={ActionStyleTypes.Link | ActionStyleTypes.Rounded}
