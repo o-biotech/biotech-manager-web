@@ -73,7 +73,7 @@ export default function Home({
 
               <div class="flex-1 px-5 py-10 mx-5 md:py-10 md:px-20 md:my-10">
                 <h2 class="text-xl md:text-2xl text-[#4a918e]">
-                  IoT Dashboard
+                  Device Data Dashboard
                 </h2>
 
                 <h3 class="md:text-lg">
