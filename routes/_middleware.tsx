@@ -45,7 +45,10 @@ async function loggedInCheck(
     case "/signin": {
       const host = req.headers.get("x-forwarded-host") || url.host;
 
-      const proto = req.headers.get("x-forwarded-proto") || url.protocol;
+      const proto =
+        req.headers.get("x-forwarded-proto") || host.startsWith("localhost:")
+          ? "http"
+          : url.protocol;
 
       return await azureOBiotechOAuth.signIn(req, {
         urlParams: {
