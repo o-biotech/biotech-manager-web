@@ -10,7 +10,7 @@
       "type": "node",
       "program": "${workspaceFolder}/dev.ts",
       "cwd": "${workspaceFolder}",
-      "runtimeExecutable": "C:\\ProgramData\\chocolatey\\lib\\deno\\deno.EXE",
+      "runtimeExecutable": "deno.exe",
       "runtimeArgs": [
         "run",
         "--config",
@@ -18,8 +18,7 @@
         "--inspect-wait",
         "--allow-all",
         "--unstable-kv"
-      ],
-      "attachSimplePort": 9229
+      ]
     }
   ]
 }

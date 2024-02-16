@@ -1,12 +1,11 @@
 // deno-lint-ignore-file no-explicit-any
 import { Handlers, PageProps } from "$fresh/server.ts";
 import { redirectRequest } from "@fathym/common";
-import { EaCStatus, EaCStatusProcessingTypes } from "@fathym/eac";
+import { EaCStatus, EaCStatusProcessingTypes, loadEaCSvc } from "@fathym/eac";
 import { intlFormatDistance } from "npm:date-fns";
 import { OpenBiotechManagerState } from "../../../src/OpenBiotechManagerState.tsx";
 import { Redirect } from "../../../islands/atoms/Redirect.tsx";
 import { CheckIcon, ErrorIcon, RenewIcon } from "$fathym/atomic-icons";
-import { loadEaCSvc } from "../../../configs/eac.ts";
 
 interface CommitStatusPageData {
   complete: boolean;

@@ -11,10 +11,10 @@ import {
   EaCCloudAsCode,
   EaCCloudAzureDetails,
   EaCStatusProcessingTypes,
+  loadEaCSvc,
   waitForStatus,
 } from "@fathym/eac";
 import { OpenBiotechManagerState } from "../../../../src/OpenBiotechManagerState.tsx";
-import { loadEaCSvc } from "../../../../configs/eac.ts";
 import { OpenBiotechEaC } from "../../../../src/eac/OpenBiotechEaC.ts";
 import { DeleteAction } from "../../../../islands/molecules/DeleteAction.tsx";
 

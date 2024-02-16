@@ -3,12 +3,11 @@ import tailwind from "$fresh/plugins/tailwind.ts";
 import { islandsConfig as biotechIslandsConfig } from "@fathym/atomic";
 import { iconSetPlugin } from "@fathym/atomic-icons";
 import { curIconSetGenerateConfig } from "./configs/fathym-atomic-icons.config.ts";
-import { gitHubAccessPlugin } from "@fathym/eac";
+import { gitHubAccessPlugin, loadEaCSvc } from "@fathym/eac";
 import { gitHubOAuth } from "./configs/oAuth.config.ts";
 import { msalPlugin } from "@fathym/msal";
 import { msalPluginConfig } from "./configs/msal.config.ts";
 import { denoKv } from "./configs/deno-kv.config.ts";
-import { loadEaCSvc } from "./configs/eac.ts";
 import { OpenBiotechManagerState } from "./src/OpenBiotechManagerState.tsx";
 
 export default defineConfig({

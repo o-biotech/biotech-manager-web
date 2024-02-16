@@ -93,7 +93,7 @@ export function DashboardDisplay(props: DashboardDisplayProps) {
   }
 
   const kustoQuery = props.dashboardTypes.includes("AzureDataExplorer")
-    ? `https://dataexplorer.azure.com/clusters/${props.kustoCluster}.${props.kustoLocation}/databases/Telemetry?f-IFrameAuth=true&f-UseMeControl=false&workspace=<guid>`
+    ? `https://dataexplorer.azure.com/clusters/${props.kustoCluster}.${props.kustoLocation}/databases/Telemetry?f-IFrameAuth=true&f-UseMeControl=false&workspace=<guid>&f-ShowConnectionButtons=false`
     : null;
 
   const kustoIframe = kustoQuery && (

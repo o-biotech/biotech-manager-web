@@ -6,12 +6,12 @@ import CreateEaCHero from "../../../components/organisms/heros/CreateEaCHero.tsx
 import {
   EaCStatusProcessingTypes,
   EverythingAsCode,
+  loadEaCSvc,
   UserEaCRecord,
   waitForStatus,
 } from "@fathym/eac";
 import { denoKv } from "../../../configs/deno-kv.config.ts";
 import { EntepriseManagementItem } from "../../../islands/molecules/EntepriseManagementItem.tsx";
-import { loadEaCSvc } from "../../../configs/eac.ts";
 import { OpenBiotechEaC } from "../../../src/eac/OpenBiotechEaC.ts";
 
 export type EnterprisesPageData = {

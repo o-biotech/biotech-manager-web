@@ -1,9 +1,8 @@
 // deno-lint-ignore-file no-explicit-any
 import { Handlers } from "$fresh/server.ts";
 import { respond } from "@fathym/common";
+import { EaCStatusProcessingTypes, loadEaCSvc } from "@fathym/eac";
 import { OpenBiotechManagerState } from "../../../src/OpenBiotechManagerState.tsx";
-import { loadEaCSvc } from "../../../configs/eac.ts";
-import { EaCStatusProcessingTypes } from "@fathym/eac";
 
 export const handler: Handlers<any, OpenBiotechManagerState> = {
   async GET(req, ctx) {

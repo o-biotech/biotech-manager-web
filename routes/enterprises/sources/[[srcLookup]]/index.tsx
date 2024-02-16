@@ -9,11 +9,11 @@ import { redirectRequest, respond } from "@fathym/common";
 import {
   EaCSourceAsCode,
   EaCStatusProcessingTypes,
+  loadEaCSvc,
   waitForStatus,
 } from "@fathym/eac";
 import { GitHubAccessAction } from "../../../../islands/molecules/GitHubAccessAction.tsx";
 import { OpenBiotechManagerState } from "../../../../src/OpenBiotechManagerState.tsx";
-import { loadEaCSvc } from "../../../../configs/eac.ts";
 import { DeleteAction } from "../../../../islands/molecules/DeleteAction.tsx";
 import { OpenBiotechEaC } from "../../../../src/eac/OpenBiotechEaC.ts";
 import { EaCManageSourceFormIsland } from "../../../../islands/molecules/EaCManageSourceFormIsland.tsx";

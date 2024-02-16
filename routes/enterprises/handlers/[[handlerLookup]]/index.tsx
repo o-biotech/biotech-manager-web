@@ -11,11 +11,10 @@ import CreateEaCHero from "../../../../components/organisms/heros/CreateEaCHero.
 import {
   EaCHandler,
   EaCStatusProcessingTypes,
-  EverythingAsCode,
+  loadEaCSvc,
   waitForStatus,
 } from "@fathym/eac";
 import { denoKv } from "../../../../configs/deno-kv.config.ts";
-import { loadEaCSvc } from "../../../../configs/eac.ts";
 import { OpenBiotechEaC } from "../../../../src/eac/OpenBiotechEaC.ts";
 import { DeleteAction } from "../../../../islands/molecules/DeleteAction.tsx";
 

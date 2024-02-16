@@ -4,12 +4,12 @@ import { redirectRequest, respond } from "@fathym/common";
 import {
   EaCCommitResponse,
   EaCStatusProcessingTypes,
+  loadEaCSvc,
   waitForStatusWithFreshJwt,
 } from "@fathym/eac";
 import { OpenBiotechEaC } from "../../../src/eac/OpenBiotechEaC.ts";
 import { OpenBiotechManagerState } from "../../../src/OpenBiotechManagerState.tsx";
 import { denoKv } from "../../../configs/deno-kv.config.ts";
-import { loadEaCSvc } from "../../../configs/eac.ts";
 
 export const handler: Handlers<any, OpenBiotechManagerState> = {
   GET(_req, ctx) {
@@ -66,9 +66,7 @@ export const handler: Handlers<any, OpenBiotechManagerState> = {
 
       return redirectRequest("/");
     } else {
-      return redirectRequest(
-        `/?commitId=${saveResp.CommitID}`,
-      );
+      return redirectRequest(`/?commitId=${saveResp.CommitID}`);
     }
   },
 };

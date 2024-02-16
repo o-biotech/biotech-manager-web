@@ -4,6 +4,7 @@ import { FreshContext } from "$fresh/server.ts";
 import { redirectRequest, respond } from "@fathym/common";
 import {
   EaCSourceConnectionDetails,
+  loadEaCSvc,
   loadJwtConfig,
   loadMainOctokit,
   UserOAuthConnection,
@@ -19,7 +20,6 @@ import { denoKv } from "../configs/deno-kv.config.ts";
 import { DevicesPhaseTypes } from "../src/DevicesPhaseTypes.tsx";
 import { DataPhaseTypes } from "../src/DataPhaseTypes.tsx";
 import { azureOBiotechOAuth } from "../configs/oAuth.config.ts";
-import { loadEaCSvc } from "../configs/eac.ts";
 
 async function loggedInCheck(
   req: Request,

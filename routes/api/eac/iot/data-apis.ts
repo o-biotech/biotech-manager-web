@@ -5,11 +5,11 @@ import {
   EaCCloudResourceAsCode,
   EaCCloudResourceFormatDetails,
   EaCStatusProcessingTypes,
+  loadEaCSvc,
   waitForStatus,
 } from "@fathym/eac";
 import { OpenBiotechManagerState } from "../../../../src/OpenBiotechManagerState.tsx";
 import { OpenBiotechEaC } from "../../../../src/eac/OpenBiotechEaC.ts";
-import { loadEaCSvc } from "../../../../configs/eac.ts";
 
 export const handler: Handlers<any, OpenBiotechManagerState> = {
   async POST(req, ctx) {

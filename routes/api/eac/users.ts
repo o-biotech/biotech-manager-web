@@ -1,9 +1,8 @@
 // deno-lint-ignore-file no-explicit-any
 import { Handlers } from "$fresh/server.ts";
 import { redirectRequest, respond } from "@fathym/common";
-import { UserEaCRecord } from "@fathym/eac";
+import { loadEaCSvc, UserEaCRecord } from "@fathym/eac";
 import { OpenBiotechManagerState } from "../../../src/OpenBiotechManagerState.tsx";
-import { loadEaCSvc } from "../../../configs/eac.ts";
 
 export const handler: Handlers<any, OpenBiotechManagerState> = {
   GET(_req, ctx) {

@@ -7,10 +7,8 @@ import {
   Hero,
   HeroStyleTypes,
 } from "@fathym/atomic";
-import { loadJwtConfig } from "@fathym/eac";
-import { APIDevelopForm } from "../../islands/organisms/data/api-develop-form.tsx";
+import { loadEaCSvc } from "@fathym/eac";
 import { InviteTeamMemberForm } from "../../islands/organisms/team/invite-team-member.tsx";
-import { loadEaCSvc } from "../../configs/eac.ts";
 
 interface TeamsPageData {
   members: string[];
