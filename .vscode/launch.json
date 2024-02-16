@@ -16,7 +16,6 @@
         "--config",
         "./deno.jsonc",
         "--inspect-wait",
-        "--allow-all",
         "--unstable-kv"
       ]
     }

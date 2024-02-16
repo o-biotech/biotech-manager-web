@@ -43,7 +43,15 @@ async function loggedInCheck(
 
   switch (pathname) {
     case "/signin": {
-      return await azureOBiotechOAuth.signIn(req);
+      const host = req.headers.get("x-forwarded-host") || url.host;
+
+      const proto = req.headers.get("x-forwarded-proto") || url.protocol;
+
+      return await azureOBiotechOAuth.signIn(req, {
+        urlParams: {
+          redirect_uri: `${proto}//${host}/signin/callback`,
+        },
+      });
     }
 
     case "/signin/callback": {
