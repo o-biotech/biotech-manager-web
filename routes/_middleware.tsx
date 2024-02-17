@@ -47,6 +47,14 @@ async function loggedInCheck(
 
       const proto = req.headers.get("x-forwarded-proto") || url.protocol;
 
+      console.log(
+        "***************************************************************************************************************************",
+      );
+      console.log(req);
+      console.log(
+        "***************************************************************************************************************************",
+      );
+
       return await azureOBiotechOAuth.signIn(req, {
         urlParams: {
           redirect_uri: `${proto}//${host}/signin/callback`,
