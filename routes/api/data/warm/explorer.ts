@@ -44,7 +44,11 @@ export const handler: Handlers<any, OpenBiotechManagerAPIState> = {
 
     const resLookups = ["iot-flow", "iot-flow-warm"];
 
-    const expReq: ExplorerRequest = await req.json();
+    const text = await req.text();
+
+    console.log(text);
+
+    const expReq: ExplorerRequest = JSON.parse(text); //await req.json();
 
     const eacExplorerSvc = await loadEaCExplorerSvc(ctx.state.EaCJWT!);
 
