@@ -13,6 +13,10 @@ export function EaCSourcesDisplay(sources: Record<string, EaCSourceAsCode>) {
 
         const artifactLookups = Object.keys(source.Artifacts || {});
 
+        const srcLookupPath = sourceLookup.replace("://", "/");
+
+        const managePath = `/enterprises/sources/${srcLookupPath}`;
+
         return (
           <>
             <div class="ml-2">
@@ -25,11 +29,7 @@ export function EaCSourcesDisplay(sources: Record<string, EaCSourceAsCode>) {
                     actionStyle={ActionStyleTypes.Link |
                       ActionStyleTypes.Rounded |
                       ActionStyleTypes.Icon}
-                    href={`/enterprises/sources/${
-                      encodeURIComponent(
-                        sourceLookup,
-                      )
-                    }`}
+                    href={managePath}
                   >
                     <EditIcon class="w-4 h-4" />
                   </Action>
@@ -48,11 +48,7 @@ export function EaCSourcesDisplay(sources: Record<string, EaCSourceAsCode>) {
                       actionStyle={ActionStyleTypes.Link |
                         ActionStyleTypes.Rounded}
                       class="ml-2 flex flex-row items-center text-sm text-left w-full"
-                      href={`/enterprises/sources/${
-                        encodeURIComponent(
-                          sourceLookup,
-                        )
-                      }/artifacts/${artifactLookup}`}
+                      href={`${managePath}/artifacts/${artifactLookup}`}
                     >
                       <span class="flex-1">{artifact.Details!.Name}</span>
 

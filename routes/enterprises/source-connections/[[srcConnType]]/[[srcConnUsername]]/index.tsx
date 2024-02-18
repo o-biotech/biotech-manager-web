@@ -6,9 +6,9 @@ import {
   loadEaCSvc,
   waitForStatus,
 } from "@fathym/eac";
-import { GitHubAccessAction } from "../../../../islands/molecules/GitHubAccessAction.tsx";
-import { OpenBiotechManagerState } from "../../../../src/OpenBiotechManagerState.tsx";
-import { DeleteAction } from "../../../../islands/molecules/DeleteAction.tsx";
+import { GitHubAccessAction } from "../../../../../islands/molecules/GitHubAccessAction.tsx";
+import { OpenBiotechManagerState } from "../../../../../src/OpenBiotechManagerState.tsx";
+import { DeleteAction } from "../../../../../islands/molecules/DeleteAction.tsx";
 
 export type EaCSourceConnectionsPageData = {
   manageSrcConn?: EaCSourceConnectionAsCode;
@@ -21,8 +21,8 @@ export const handler: Handlers<
   OpenBiotechManagerState
 > = {
   GET(_, ctx) {
-    const manageSrcConnLookup: string = ctx.params.srcConnLookup
-      ? decodeURIComponent(ctx.params.srcConnLookup)
+    const manageSrcConnLookup: string = ctx.params.srcConnType
+      ? `${ctx.params.srcConnType}://${ctx.params.srcConnUsername}`
       : "";
 
     let manageSrcConn: EaCSourceConnectionAsCode | undefined = undefined;

@@ -12,14 +12,17 @@ export function EaCSourceConnectionsDisplay(
       {srcConnLookups.map((srcConnLookup) => {
         const srcConn = srcConns[srcConnLookup];
 
+        const srcConnLookupPath = srcConnLookup.replace("://", "/");
+
+        const managePath =
+          `/enterprises/source-connections/${srcConnLookupPath}`;
+
         return (
           <>
             <Action
               actionStyle={ActionStyleTypes.Link | ActionStyleTypes.Rounded}
               class="ml-2 flex flex-row items-center text-sm text-left w-full"
-              href={`/enterprises/source-connections/${
-                encodeURIComponent(srcConnLookup)
-              }`}
+              href={managePath}
             >
               <span class="flex-1">{srcConn.Details!.Name}</span>
 

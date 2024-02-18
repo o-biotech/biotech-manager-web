@@ -12,11 +12,11 @@ import {
   loadEaCSvc,
   waitForStatus,
 } from "@fathym/eac";
-import { GitHubAccessAction } from "../../../../islands/molecules/GitHubAccessAction.tsx";
-import { OpenBiotechManagerState } from "../../../../src/OpenBiotechManagerState.tsx";
-import { DeleteAction } from "../../../../islands/molecules/DeleteAction.tsx";
-import { OpenBiotechEaC } from "../../../../src/eac/OpenBiotechEaC.ts";
-import { EaCManageSourceFormIsland } from "../../../../islands/molecules/EaCManageSourceFormIsland.tsx";
+import { GitHubAccessAction } from "../../../../../../islands/molecules/GitHubAccessAction.tsx";
+import { OpenBiotechManagerState } from "../../../../../../src/OpenBiotechManagerState.tsx";
+import { DeleteAction } from "../../../../../../islands/molecules/DeleteAction.tsx";
+import { OpenBiotechEaC } from "../../../../../../src/eac/OpenBiotechEaC.ts";
+import { EaCManageSourceFormIsland } from "../../../../../../islands/molecules/EaCManageSourceFormIsland.tsx";
 
 export type EaCSourcesPageData = {
   entLookup: string;
@@ -38,8 +38,8 @@ export type EaCSourcesPageData = {
 
 export const handler: Handlers<EaCSourcesPageData, OpenBiotechManagerState> = {
   async GET(_, ctx) {
-    const manageSrcLookup: string = ctx.params.srcLookup
-      ? decodeURIComponent(ctx.params.srcLookup)
+    const manageSrcLookup: string = ctx.params.srcType
+      ? `${ctx.params.srcType}://${ctx.params.srcOrg}/${ctx.params.srcRepo}`
       : "";
 
     let manageSrc: EaCSourceAsCode | undefined = undefined;

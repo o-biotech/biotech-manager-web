@@ -36,9 +36,10 @@ import * as $enterprises_iot_iotLookup_devices_deviceLookup_index from "./routes
 import * as $enterprises_iot_iotLookup_index from "./routes/enterprises/iot/[[iotLookup]]/index.tsx";
 import * as $enterprises_iot_iotLookup_settings from "./routes/enterprises/iot/[[iotLookup]]/settings.tsx";
 import * as $enterprises_secrets_secretLookup_index from "./routes/enterprises/secrets/[[secretLookup]]/index.tsx";
-import * as $enterprises_source_connections_srcConnLookup_index from "./routes/enterprises/source-connections/[[srcConnLookup]]/index.tsx";
+import * as $enterprises_source_connections_srcConnType_srcConnUsername_index from "./routes/enterprises/source-connections/[[srcConnType]]/[[srcConnUsername]]/index.tsx";
 import * as $enterprises_sources_srcLookup_artifacts_artifactLookup_index from "./routes/enterprises/sources/[[srcLookup]]/artifacts/[[artifactLookup]]/index.tsx";
-import * as $enterprises_sources_srcLookup_index from "./routes/enterprises/sources/[[srcLookup]]/index.tsx";
+import * as $enterprises_sources_srcType_srcOrg_srcRepo_artifacts_artifactLookup_index from "./routes/enterprises/sources/[[srcType]]/[[srcOrg]]/[[srcRepo]]/artifacts/[[artifactLookup]]/index.tsx";
+import * as $enterprises_sources_srcType_srcOrg_srcRepo_index from "./routes/enterprises/sources/[[srcType]]/[[srcOrg]]/[[srcRepo]]/index.tsx";
 import * as $getting_started_applications_index from "./routes/getting-started/applications/index.tsx";
 import * as $getting_started_cloud_middleware from "./routes/getting-started/cloud/_middleware.tsx";
 import * as $getting_started_cloud_index from "./routes/getting-started/cloud/index.tsx";
@@ -122,12 +123,14 @@ const manifest = {
       $enterprises_iot_iotLookup_settings,
     "./routes/enterprises/secrets/[[secretLookup]]/index.tsx":
       $enterprises_secrets_secretLookup_index,
-    "./routes/enterprises/source-connections/[[srcConnLookup]]/index.tsx":
-      $enterprises_source_connections_srcConnLookup_index,
+    "./routes/enterprises/source-connections/[[srcConnType]]/[[srcConnUsername]]/index.tsx":
+      $enterprises_source_connections_srcConnType_srcConnUsername_index,
     "./routes/enterprises/sources/[[srcLookup]]/artifacts/[[artifactLookup]]/index.tsx":
       $enterprises_sources_srcLookup_artifacts_artifactLookup_index,
-    "./routes/enterprises/sources/[[srcLookup]]/index.tsx":
-      $enterprises_sources_srcLookup_index,
+    "./routes/enterprises/sources/[[srcType]]/[[srcOrg]]/[[srcRepo]]/artifacts/[[artifactLookup]]/index.tsx":
+      $enterprises_sources_srcType_srcOrg_srcRepo_artifacts_artifactLookup_index,
+    "./routes/enterprises/sources/[[srcType]]/[[srcOrg]]/[[srcRepo]]/index.tsx":
+      $enterprises_sources_srcType_srcOrg_srcRepo_index,
     "./routes/getting-started/applications/index.tsx":
       $getting_started_applications_index,
     "./routes/getting-started/cloud/_middleware.tsx":
