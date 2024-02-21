@@ -43,8 +43,15 @@ async function loggedInCheck(
 
   switch (pathname) {
     case "/signin": {
+      console.log(
+        "****************************************************************",
+      );
+      console.log(req.headers);
+
       const host = req.headers.get("eac-forwarded-host") ||
         req.headers.get("x-forwarded-host") || url.host;
+
+      console.log(host);
 
       let proto = req.headers.get("eac-forwarded-proto") ||
         req.headers.get("x-forwarded-proto") || url.protocol;
@@ -52,6 +59,11 @@ async function loggedInCheck(
       if (!proto.endsWith(":")) {
         proto += ":";
       }
+
+      console.log(proto);
+      console.log(
+        "****************************************************************",
+      );
 
       return await azureOBiotechOAuth.signIn(req, {
         urlParams: {
