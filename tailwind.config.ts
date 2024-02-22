@@ -21,7 +21,7 @@ export default {
       },
       backgroundImage: {
         "hero-pattern":
-          "linear-gradient(rgba(0, 0, 40, 0.85),rgba(0, 0, 40, 0.85)), url('./hero-bg-1.webp')",
+          "linear-gradient(rgba(0, 0, 40, 0.85),rgba(0, 0, 40, 0.85))", //, url('./hero-bg-1-sm.webp')",
       },
       dropShadow: {
         md: ["0 20px 13px rgb(0 0 0 / 0.15)", "0 8px 5px rgb(0 0 0 / 0.4)"],
