@@ -125,7 +125,7 @@ export default function Data({
       <Hero
         title="Data Flows, Dashboards and APIs"
         callToAction="Get device data flowing, explore through default dashboards and share with downstream analytics, alerts or ML services."
-        class="[&_*]:mx-auto [&>*>*]:w-full bg-hero-pattern text-center"
+        class="[&_*]:mx-auto [&>*>*]:w-full bg-[#000028] text-center"
         heroStyle={HeroStyleTypes.None}
         displayStyle={DisplayStyleTypes.Center | DisplayStyleTypes.Large}
       />

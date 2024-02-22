@@ -198,7 +198,7 @@ export default function EaCIoTSettings({
       <Hero
         title="Manage EaC IoT Settings"
         callToAction="Determine the infrastructure to deploy to your IoT cloud resource groups."
-        class="[&_*]:mx-auto [&>*>*]:w-full bg-hero-pattern text-center"
+        class="[&_*]:mx-auto [&>*>*]:w-full bg-[#000028] text-center"
         heroStyle={HeroStyleTypes.None}
         displayStyle={DisplayStyleTypes.Center | DisplayStyleTypes.Large}
       >

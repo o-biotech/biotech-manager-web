@@ -122,7 +122,7 @@ export default function EaCDevOpsActions({
       <Hero
         title="Manage EaC DevOps Action"
         callToAction="Configure reusable DevOps Action profiles to manage build processes for your source control locations."
-        class="[&_*]:mx-auto [&>*>*]:w-full bg-hero-pattern text-center"
+        class="[&_*]:mx-auto [&>*>*]:w-full bg-[#000028] text-center"
         heroStyle={HeroStyleTypes.None}
         displayStyle={DisplayStyleTypes.Center | DisplayStyleTypes.Large}
       >

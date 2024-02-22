@@ -42,7 +42,7 @@ export default function Develop({
     <>
       <Hero
         title="Develop IoT Solutions"
-        class="[&_*]:mx-auto [&>*>*]:w-full bg-hero-pattern text-center"
+        class="[&_*]:mx-auto [&>*>*]:w-full bg-[#000028] text-center"
         heroStyle={HeroStyleTypes.None}
         displayStyle={DisplayStyleTypes.Center | DisplayStyleTypes.Large}
       >

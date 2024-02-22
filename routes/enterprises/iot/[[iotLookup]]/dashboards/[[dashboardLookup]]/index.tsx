@@ -222,7 +222,7 @@ export default function EaCIoTDashboard({
       <Hero
         title="Manage EaC IoT Dashboards"
         callToAction="Setup dashboard to visualize your IoT data out of the box."
-        class="[&_*]:mx-auto [&>*>*]:w-full bg-hero-pattern text-center"
+        class="[&_*]:mx-auto [&>*>*]:w-full bg-[#000028] text-center"
         heroStyle={HeroStyleTypes.None}
         displayStyle={DisplayStyleTypes.Center | DisplayStyleTypes.Large}
       >

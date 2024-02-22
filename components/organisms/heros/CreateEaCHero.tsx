@@ -19,7 +19,7 @@ export default function CreateEaCHero(props: CreateEaCHeroProps) {
     <Hero
       title="Create Enterprise"
       callToAction={cta}
-      class="[&_*]:mx-auto [&>*>*]:w-full bg-hero-pattern text-center"
+      class="[&_*]:mx-auto [&>*>*]:w-full bg-[#000028] text-center"
       heroStyle={HeroStyleTypes.None}
       displayStyle={DisplayStyleTypes.Center | DisplayStyleTypes.Large}
       {...props}

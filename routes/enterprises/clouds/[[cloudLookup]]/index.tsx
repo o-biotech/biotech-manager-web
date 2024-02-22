@@ -129,7 +129,7 @@ export default function EaCClouds({
       <Hero
         title="Manage EaC Clouds"
         callToAction="Configure clouds to enable connections to manage your cloud infrastructure."
-        class="[&_*]:mx-auto [&>*>*]:w-full bg-hero-pattern text-center"
+        class="[&_*]:mx-auto [&>*>*]:w-full bg-[#000028] text-center"
         heroStyle={HeroStyleTypes.None}
         displayStyle={DisplayStyleTypes.Center | DisplayStyleTypes.Large}
       >
