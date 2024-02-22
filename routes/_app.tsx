@@ -1,4 +1,4 @@
-import { Head } from "$fresh/runtime.ts";
+import { asset, Head } from "$fresh/runtime.ts";
 import { BasicLayout } from "@fathym/atomic";
 
 import { PageProps } from "$fresh/server.ts";
@@ -23,8 +23,12 @@ export default function App(
 
         <title>Fathym Open Biotech</title>
 
-        <link rel="shortcut icon" type="image/png" href="./thinky.png" />
-        <link rel="stylesheet" href="/styles.css" />
+        <link
+          rel="shortcut icon"
+          type="image/png"
+          href={asset("./thinky.png")}
+        />
+        <link rel="stylesheet" href={asset("/styles.css")} />
         {/* TODO: Open something in issues with fresh that allow this to be added to the head */}
         <Theme />
       </head>
