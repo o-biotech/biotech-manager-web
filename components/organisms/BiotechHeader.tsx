@@ -70,7 +70,7 @@ export function BiotechHeader(props: BiotechHeaderProps) {
                     : "",
                 ])}
               >
-                Develop
+                API
               </Action>
             )}
 
