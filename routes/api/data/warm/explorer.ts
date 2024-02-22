@@ -18,7 +18,8 @@ export const handler: Handlers<any, OpenBiotechManagerAPIState> = {
 
     const expReq: ExplorerRequest = {
       Query: `Devices
-      | where RawData != ""`,
+| order by EnqueuedTime desc
+| take 100`,
     };
 
     const eacExplorerSvc = await loadEaCExplorerSvc(ctx.state.EaCJWT!);
