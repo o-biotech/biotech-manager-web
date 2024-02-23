@@ -60,7 +60,7 @@ export default function APIs({
 
             <Action
               class="mt-2 text-center"
-              href="/api/data/cold/execute?resultType=true&download=true"
+              href={`/api/data/cold/execute?resultType=true&download=true&Authorization=${data.jwt}`}
               target="blank"
             >
               Download Last 7 Days of Data
