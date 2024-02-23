@@ -6,6 +6,7 @@ import * as $_app from "./routes/_app.tsx";
 import * as $_middleware from "./routes/_middleware.tsx";
 import * as $api_data_middleware from "./routes/api/data/_middleware.ts";
 import * as $api_data_clouds_auth_token from "./routes/api/data/clouds/auth-token.ts";
+import * as $api_data_cold_execute from "./routes/api/data/cold/execute.ts";
 import * as $api_data_hot_connect_negotiate from "./routes/api/data/hot/connect/negotiate.ts";
 import * as $api_data_hot_stream from "./routes/api/data/hot/stream.ts";
 import * as $api_data_hot_stream2 from "./routes/api/data/hot/stream2.ts";
@@ -25,8 +26,8 @@ import * as $api_eac_iot_data_apis from "./routes/api/eac/iot/data-apis.ts";
 import * as $api_eac_iot_devices_ensure from "./routes/api/eac/iot/devices/ensure.ts";
 import * as $api_eac_stati from "./routes/api/eac/stati.ts";
 import * as $api_eac_users from "./routes/api/eac/users.ts";
+import * as $apis_index from "./routes/apis/index.tsx";
 import * as $commit_commitId_status from "./routes/commit/[commitId]/status.tsx";
-import * as $develop_index from "./routes/develop/index.tsx";
 import * as $enterprises_entLookup_index from "./routes/enterprises/[[entLookup]]/index.tsx";
 import * as $enterprises_clouds_cloudLookup_index from "./routes/enterprises/clouds/[[cloudLookup]]/index.tsx";
 import * as $enterprises_devops_actions_doaLookup_index from "./routes/enterprises/devops-actions/[[doaLookup]]/index.tsx";
@@ -81,6 +82,7 @@ const manifest = {
     "./routes/_middleware.tsx": $_middleware,
     "./routes/api/data/_middleware.ts": $api_data_middleware,
     "./routes/api/data/clouds/auth-token.ts": $api_data_clouds_auth_token,
+    "./routes/api/data/cold/execute.ts": $api_data_cold_execute,
     "./routes/api/data/hot/connect/negotiate.ts":
       $api_data_hot_connect_negotiate,
     "./routes/api/data/hot/stream.ts": $api_data_hot_stream,
@@ -103,8 +105,8 @@ const manifest = {
     "./routes/api/eac/iot/devices/ensure.ts": $api_eac_iot_devices_ensure,
     "./routes/api/eac/stati.ts": $api_eac_stati,
     "./routes/api/eac/users.ts": $api_eac_users,
+    "./routes/apis/index.tsx": $apis_index,
     "./routes/commit/[commitId]/status.tsx": $commit_commitId_status,
-    "./routes/develop/index.tsx": $develop_index,
     "./routes/enterprises/[[entLookup]]/index.tsx":
       $enterprises_entLookup_index,
     "./routes/enterprises/clouds/[[cloudLookup]]/index.tsx":

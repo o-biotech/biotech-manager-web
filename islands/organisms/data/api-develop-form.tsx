@@ -2,26 +2,27 @@ import { JSX } from "preact";
 import { IS_BROWSER } from "$fresh/runtime.ts";
 import { Input } from "@fathym/atomic";
 import { CopyInput } from "../../../islands/molecules/CopyInput.tsx";
+import { LoadingIcon } from "$fathym/atomic-icons";
 
 export type APIDevelopFormProps = JSX.HTMLAttributes<HTMLFormElement> & {
+  apiPath: string;
+
   jwt: string;
 };
 
 export function APIDevelopForm(props: APIDevelopFormProps) {
-  if (!IS_BROWSER) return <></>;
+  if (!IS_BROWSER) {
+    return (
+      <>
+        <LoadingIcon class="w-20 h-20 text-blue-500 animate-spin inline-block m-auto" />
+      </>
+    );
+  }
 
-  const warmApi = `${location.origin}/api/data/warm/explorer`;
+  const apiPath = new URL(props.apiPath, location.origin);
 
   return (
     <div class="w-full p-3">
-      <label class="block uppercase tracking-wide font-bold mb-2 text-xl">
-        API Access
-      </label>
-
-      <p class="block text-md mb-8">
-        Use the following to call your warm data API.
-      </p>
-
       <div class="w-full mb-8">
         <label
           for="connStr"
@@ -30,7 +31,12 @@ export function APIDevelopForm(props: APIDevelopFormProps) {
           API URL
         </label>
 
-        <CopyInput id="warmApi" name="warmApi" type="text" value={warmApi} />
+        <CopyInput
+          id="warmApi"
+          name="warmApi"
+          type="text"
+          value={apiPath.href}
+        />
       </div>
 
       <div class="w-full mb-8">

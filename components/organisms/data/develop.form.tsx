@@ -33,7 +33,15 @@ export function DataDevelopForm(props: DataDevelopFormProps) {
           </p>
         </div>
 
-        <APIDevelopForm jwt={props.jwt} />
+        <label class="block uppercase tracking-wide font-bold mb-2 text-xl">
+          API Access
+        </label>
+
+        <p class="block text-md mb-8">
+          Use the following to call your warm data API.
+        </p>
+
+        <APIDevelopForm apiPath="/api/data/warm/explorer" jwt={props.jwt} />
       </div>
 
       <ActionGroup class="mt-8 flex-col">

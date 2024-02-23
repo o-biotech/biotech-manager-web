@@ -180,7 +180,7 @@ export const handler: Handlers<
       status.Processing == EaCStatusProcessingTypes.QUEUED
     ) {
       return redirectRequest(
-        `/commit/${commitResp.CommitID}/status?successRedirect=/enterprises/iot/${cloudLookup}&errorRedirect=/enterprises/iot/${cloudLookup}/settings`,
+        `/commit/${commitResp.CommitID}/status?successRedirect=/enterprises/iot/${resLookup}/settings&errorRedirect=/enterprises/iot/${resLookup}/settings`,
       );
     } else {
       return redirectRequest(

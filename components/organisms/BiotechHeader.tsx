@@ -19,7 +19,7 @@ import { Logo } from "../atoms/Logo.tsx";
 export type BiotechHeaderProps = HeaderProps & {
   currentUrl: URL;
 
-  hasDevelop: boolean;
+  hasApis: boolean;
 
   hasEaC: boolean;
 
@@ -59,18 +59,18 @@ export function BiotechHeader(props: BiotechHeaderProps) {
               Dashboard
             </Action>
 
-            {props.hasDevelop && (
+            {props.hasApis && (
               <Action
-                href="/develop"
+                href="/apis"
                 actionStyle={ActionStyleTypes.Link}
                 class={classSet([
                   "text-lg mx-1",
-                  props.currentUrl.pathname.startsWith("/develop")
+                  props.currentUrl.pathname.startsWith("/apis")
                     ? active.props.class
                     : "",
                 ])}
               >
-                API
+                APIs
               </Action>
             )}
 

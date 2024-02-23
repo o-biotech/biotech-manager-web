@@ -94,7 +94,13 @@ export default function Home({
       {state.Phase < 3 && initialSteps}
 
       {state.Phase > 2
-        ? <BiotechDashboard class="m-4" devices={data.devices} jwt={data.jwt} />
+        ? (
+          <BiotechDashboard
+            class="m-4"
+            devices={data.devices!}
+            jwt={data.jwt!}
+          />
+        )
         : <></>}
     </>
   );

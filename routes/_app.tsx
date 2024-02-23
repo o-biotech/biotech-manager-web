@@ -41,7 +41,7 @@ export default function App(
               class="h-[64px]"
               currentUrl={url}
               setupPhase={state.Phase}
-              hasDevelop={!!state.Cloud?.CloudLookup &&
+              hasApis={!!state.Cloud?.CloudLookup &&
                 !!state.Cloud?.ResourceGroupLookup}
               hasEaC={!!state.EaC}
               username={state.Username}

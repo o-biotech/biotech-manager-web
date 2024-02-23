@@ -40,6 +40,10 @@ export function DevicesDashboardControls(props: DevicesDashboardControlsProps) {
 
   if (!IS_BROWSER) return renewIcon;
 
+  const searchParams = new URLSearchParams(location.search);
+
+  const initTab = searchParams.get("tab") || "payloads";
+
   const customFilterRef = useRef<HTMLTextAreaElement>(null);
 
   const enableRefreshRef = useRef<HTMLInputElement>(null);
@@ -54,7 +58,7 @@ export function DevicesDashboardControls(props: DevicesDashboardControlsProps) {
 
   const [currentFilterDisplay, setCurrentFilterDisplay] = useState("devices");
 
-  const [currentDeviceDisplay, setCurrentDeviceDisplay] = useState("payloads");
+  const [currentDeviceDisplay, setCurrentDeviceDisplay] = useState(initTab);
 
   const [customFilter, setCustomFilter] = useState("");
 
@@ -357,6 +361,15 @@ ${customFilter}`;
 
   const payloadsDeviceDisplay = (
     <div class="flex flex-col divide-y divide-gray-300 dark:divide-gray-700 h-full relative overflow-hidden">
+      {isLoadingData && (
+        <div class="w-full">
+          <div class="h-1.5 w-full bg-sky-100 overflow-hidden">
+            <div class="animate-progress w-full h-full bg-sky-500 origin-left-right">
+            </div>
+          </div>
+        </div>
+      )}
+
       <div class="flex-1 flex flex-row p-2">
         <div class="flex-none w-40 underline">Device ID</div>
 
@@ -429,7 +442,9 @@ ${customFilter}`;
     </div>
   );
 
-  const streamingDeviceDisplay = <h1 class="text-2xl">Coming Soon</h1>;
+  const streamingDeviceDisplay = (
+    <HotConnect jwt={props.jwt} takeRows={settings.TakeRows} />
+  );
 
   const rawDeviceDisplay = (
     <div class="h-full relative overflow-hidden">
@@ -437,10 +452,6 @@ ${customFilter}`;
         <pre>{JSON.stringify(deviceData, null, 2)}</pre>
       </div>
     </div>
-  );
-
-  const hotFlowDisplay = (
-    <HotConnect jwt={props.jwt} takeRows={settings.TakeRows} />
   );
 
   const queryDeviceDisplay = (
@@ -457,8 +468,6 @@ ${customFilter}`;
     ? payloadsDeviceDisplay
     : currentDeviceDisplay === "streaming"
     ? streamingDeviceDisplay
-    : currentDeviceDisplay === "hot-flow"
-    ? hotFlowDisplay
     : currentDeviceDisplay === "query"
     ? queryDeviceDisplay
     : undefined;
@@ -587,21 +596,6 @@ ${customFilter}`;
 
             <li class="me-2">
               <a
-                onClick={() => setCurrentDeviceDisplay("hot-flow")}
-                aria-current="page"
-                class={classSet([
-                  "inline-block p-4 rounded-t-lg cursor-pointer",
-                  currentDeviceDisplay === "hot-flow"
-                    ? "active bg-gray-700 dark:bg-gray-300 text-blue-300 dark:text-blue-700"
-                    : "bg-gray-300 dark:bg-gray-700 text-blue-700 dark:text-blue-300",
-                ])}
-              >
-                Hot Flow
-              </a>
-            </li>
-
-            <li class="me-2">
-              <a
                 onClick={() => setCurrentDeviceDisplay("query")}
                 aria-current="page"
                 class={classSet([
@@ -615,15 +609,6 @@ ${customFilter}`;
               </a>
             </li>
           </ul>
-
-          {isLoadingData && (
-            <div class="w-full">
-              <div class="h-1.5 w-full bg-sky-100 overflow-hidden">
-                <div class="animate-progress w-full h-full bg-sky-500 origin-left-right">
-                </div>
-              </div>
-            </div>
-          )}
 
           <div class="m-2 h-[450px]">{deviceDisplay}</div>
         </Display>

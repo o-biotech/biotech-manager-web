@@ -45,9 +45,9 @@ export function setupEaCIoTFlow(
         Order: 1,
         Template: {
           Content:
-            "https://raw.githubusercontent.com/lowcodeunit/infrastructure/master/templates/o-biotech/iot/ref-arch/cold/template.jsonc",
+            "https://raw.githubusercontent.com/lowcodeunit/infrastructure/integration/templates/o-biotech/iot/ref-arch/cold/template.jsonc",
           Parameters:
-            "https://raw.githubusercontent.com/lowcodeunit/infrastructure/master/templates/o-biotech/iot/ref-arch/cold/parameters.jsonc",
+            "https://raw.githubusercontent.com/lowcodeunit/infrastructure/integration/templates/o-biotech/iot/ref-arch/cold/parameters.jsonc",
         },
         Data: {
           CloudLookup: cloudLookup,
@@ -55,6 +55,7 @@ export function setupEaCIoTFlow(
           Name: resGroupLookup,
           ParentResourceLookup: `${resLookup}`,
           ResourceLookup: `${resLookup}-cold`,
+          ServicePrincipalID: servicePrincipalId,
           ShortName: shortName,
         },
         Outputs: {},

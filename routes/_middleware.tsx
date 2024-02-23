@@ -44,12 +44,14 @@ async function loggedInCheck(
   switch (pathname) {
     case "/signin": {
       const host = req.headers.get("x-eac-forwarded-host") ||
-        req.headers.get("x-forwarded-host") || url.host;
+        req.headers.get("x-forwarded-host") ||
+        url.host;
 
       console.log(host);
 
       let proto = req.headers.get("x-eac-forwarded-proto") ||
-        req.headers.get("x-forwarded-proto") || url.protocol;
+        req.headers.get("x-forwarded-proto") ||
+        url.protocol;
 
       if (!proto.endsWith(":")) {
         proto += ":";
@@ -280,6 +282,9 @@ async function currentState(
                 await denoKv.set(
                   ["User", username, "EaC", entLookup, "JWT"],
                   jwt,
+                  {
+                    expireIn: 1000 * 60 * 60 * 24 * 365,
+                  },
                 );
               }
 
