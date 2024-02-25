@@ -37,6 +37,8 @@ async function loggedInCheck(
     return redirectRequest(`http://localhost:8000${pathname}${search}`);
   }
 
+  console.log(pathname);
+
   if (pathname.startsWith("/api/data/")) {
     return ctx.next();
   }
@@ -46,8 +48,6 @@ async function loggedInCheck(
       const host = req.headers.get("x-eac-forwarded-host") ||
         req.headers.get("x-forwarded-host") ||
         url.host;
-
-      console.log(host);
 
       let proto = req.headers.get("x-eac-forwarded-proto") ||
         req.headers.get("x-forwarded-proto") ||

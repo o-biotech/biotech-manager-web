@@ -11,15 +11,11 @@ export function GitHubAccessAction(props: ActionProps) {
   const [signInHref, setSignInHref] = useState("");
 
   useEffect(() => {
-    console.log(location);
-
     const successUrl = encodeURI(location.href);
 
     const href = `/github/access/signin?success_url=${successUrl}`;
 
     setSignInHref(href);
-
-    console.log(href);
   }, []);
 
   return (
