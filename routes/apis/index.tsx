@@ -89,7 +89,7 @@ export default function APIs({
           <h2 class="text-xl">Hot Storage APIs</h2>
 
           <p>
-            In order to connec to this API, use the following and connect with a
+            In order to connect to this API, use the following and connect with a
             SignalR client, in any language.
           </p>
 
