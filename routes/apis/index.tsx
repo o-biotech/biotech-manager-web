@@ -54,8 +54,7 @@ export default function APIs({
 
           <div class="w-full mb-8 px-8">
             <p>
-              Use this API to download cold storage data in CSV format." for the
-              cold API.
+              Use this API to download cold storage data in CSV format.
             </p>
 
             <Action
@@ -76,7 +75,7 @@ export default function APIs({
           <div class="w-full mb-8 px-8">
             <p>
               See this API in action in the 'Payloads' tab in the device data
-              dashboard." for the warm API.
+              dashboard.
             </p>
 
             <Action class="mt-2 text-center" href="/">
