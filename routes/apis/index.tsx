@@ -54,8 +54,8 @@ export default function APIs({
 
           <div class="w-full mb-8 px-8">
             <p>
-              Try this API out for downloading your cold storage data in csv
-              format.
+              Use this API to download cold storage data in CSV format." for the
+              cold API.
             </p>
 
             <Action
@@ -75,8 +75,8 @@ export default function APIs({
 
           <div class="w-full mb-8 px-8">
             <p>
-              See this API in action on your main dashboard, on the 'Payloads'
-              tab.
+              See this API in action in the 'Payloads' tab in the device data
+              dashboard." for the warm API.
             </p>
 
             <Action class="mt-2 text-center" href="/">
@@ -89,16 +89,16 @@ export default function APIs({
           <h2 class="text-xl">Hot Storage APIs</h2>
 
           <p>
-            In order to connect to this API, use the following and connect with a
-            SignalR client, in any language.
+            Use the following to call this API and connect to a SignalR client
+            in any language.
           </p>
 
           <APIDevelopForm apiPath="/api/data/hot/connect" jwt={data.jwt} />
 
           <div class="w-full mb-8 px-8">
             <p>
-              See this API in action on your main dashboard, on the 'Streaming'
-              tab.
+              See this API in action in the 'Streaming' tab in the device data
+              dashboard.
             </p>
 
             <Action class="mt-2 text-center" href="/?tab=streaming">
