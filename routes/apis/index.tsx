@@ -50,6 +50,10 @@ export default function APIs({
         <Display class="flex-1 p-2 bg-slate-50 dark:bg-slate-800 shadow-slate-500 dark:shadow-black">
           <h2 class="text-xl">Cold Storage APIs</h2>
 
+          <p>
+            Use the following to call this API.
+          </p>
+
           <APIDevelopForm apiPath="/api/data/cold/execute" jwt={data.jwt} />
 
           <div class="w-full mb-8 px-8">
@@ -69,6 +73,10 @@ export default function APIs({
 
         <Display class="flex-1 p-2 bg-slate-50 dark:bg-slate-800 shadow-slate-500 dark:shadow-black">
           <h2 class="text-xl">Warm Storage APIs</h2>
+
+          <p>
+            Use the following to call this API.
+          </p>
 
           <APIDevelopForm apiPath="/api/data/warm/explorer" jwt={data.jwt} />
 
