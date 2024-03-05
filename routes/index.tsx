@@ -68,7 +68,7 @@ export default function Home({
               <div class="flex-none md:w-100 px-5 py-10 mx-5 md:py-10 md:px-20 md:my-10 text-2xl md:text-3xl">
                 <h1 class="text-[#4a918e]">Welcome to</h1>
 
-                <h1 class="">Open Biotech</h1>
+                <h1 class="">OpenBiotech</h1>
               </div>
 
               <div class="flex-1 px-5 py-10 mx-5 md:py-10 md:px-20 md:my-10">
