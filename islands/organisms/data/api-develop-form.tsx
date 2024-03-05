@@ -47,7 +47,7 @@ export function APIDevelopForm(props: APIDevelopFormProps) {
           API Access Token
         </label>
 
-        <p>Set authorization header as 'Bearer (token)'</p>
+        <p>Set Authorization header as 'Bearer (token)'</p>
 
         <CopyInput
           id="jwt"
